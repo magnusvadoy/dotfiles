@@ -1,13 +1,10 @@
 # Shortcuts
-alias d="cd ~/Dropbox"
 alias g="git"
 alias v="vim"
 alias m="mate ."
-alias subl="~/bin/subl"
 alias o="open"
 alias oo="open ."
 alias t="/Users/Magnus/Dropbox/todo/todo.sh"
-alias todo="vim /Users/Magnus/Dropbox/todo/todo.txt"
 
 # Faster and easier navigation
 alias l="ls -Gl"
@@ -18,13 +15,6 @@ alias lsda='ls -Gla | grep "^d"'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-# Servers
-alias crunch="ssh root@192.168.80.59"
-alias vps="ssh root@m8ck.us.to"
-
-# Easier navigation
-
 
 # Get OS X Software Updates, update Homebrew itself, and upgrade installed Homebrew packages
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade'
