@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/Magnus/Sites/ci'
+let g:netrw_dirhist_2='/Users/Magnus/.oh-my-zsh'
+let g:netrw_dirhist_3='/Users/Magnus/Sites/ci'
+let g:netrw_dirhist_4='/Users/Magnus/bin/blog/_includes/themes/twitter'
+let g:netrw_dirhist_5='/Users/Magnus/Sites/test'
+let g:netrw_dirhist_6='/Users/Magnus/Sites/wp'
+let g:netrw_dirhist_7='/Users/Magnus/Sites/blog'
