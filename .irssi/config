@@ -22,25 +22,7 @@ servers = (
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
-  {
-    address = "192.168.80.59";
-    chatnet = "ZNC";
-    port = "5555";
-    password = "magnus:hafslo07";
-    use_ssl = "no";
-    ssl_verify = "no";
-    autoconnect = "yes";
-  },
-  {
-    address = "192.168.80.59";
-    chatnet = "ZNCc";
-    port = "5555";
-    password = "magnuz:hafslo07";
-    use_ssl = "no";
-    ssl_verify = "no";
-    autoconnect = "yes";
-  }
+  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
 );
 
 chatnets = {
