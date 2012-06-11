@@ -1,10 +1,13 @@
 # Shortcuts
+alias d="cd ~/Dropbox"
 alias g="git"
 alias v="vim"
 alias m="mate ."
+alias subl="~/bin/subl"
 alias o="open"
 alias oo="open ."
 alias t="/Users/Magnus/Dropbox/todo/todo.sh"
+alias todo="vim /Users/Magnus/Dropbox/todo/todo.txt"
 
 # Faster and easier navigation
 alias l="ls -Gl"
@@ -16,8 +19,9 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# Get OS X Software Updates, update Homebrew itself, and upgrade installed Homebrew packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade'
+# Servers
+alias crunch="ssh root@192.168.80.59"
+alias vps="ssh magnus@m8ck.us.to"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -34,16 +38,14 @@ type -t md5sum > /dev/null || alias md5sum="md5"
 # File size
 alias fs="stat -f \"%z bytes\""
 
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
-
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
 
 PATH="/usr/local/bin:$PATH"
+TERM=screen-256color
+
 # Make vim the default editor
 export EDITOR="vim"
 # Don’t clear the screen after quitting a manual page

@@ -13,26 +13,15 @@ set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
-
 "turn on syntax highlighting
 syntax on
 
 " Show the filename in the window titlebar                                       
 set title
 
-" mouse support
-set mouse=a
-
 " Theme and stuff
 set background=dark
-colorscheme railscasts
-
-" Map leader to ,
-let mapleader = ","
+colorscheme molokai
 
 " fixes for common typos
 :command WQ wq
@@ -65,7 +54,7 @@ set undofile
 
 " ================ Indentation ======================
 
-set autoindent
+" set autoindent
 set smartindent
 set smarttab
 set shiftwidth=4
@@ -75,9 +64,6 @@ set expandtab
 
 filetype plugin on
 filetype indent on
-
-" Display tabs and trailing spaces visually
-" set list listchars=tab:\ \ ,trail:·
 
 "set nowrap       "Don't wrap lines
 "set linebreak    "Wrap lines at convenient points
