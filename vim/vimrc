@@ -1,0 +1,69 @@
+call pathogen#infect()			" adding pathogen to vimrc
+
+filetype plugin indent on
+syntax enable
+set nocompatible            " choose no compatibility with legacy vi
+set encoding=utf-8
+set mouse=a                 " enable mouse support
+set number                  " show line numbers
+set scrolloff=4             " 4 lines above/below cursor when scrolling
+set history=1000
+set wildmenu
+set showmatch               " show matching bracket (briefly jump)
+set showmode                " show mode in status bar (insert/replace/...)
+set showcmd                 " show typed command in status bar
+set ruler                   " show cursor position in the status bar
+set title
+set laststatus=2            " use 2 lines for the status bar
+    
+"" Set the leader too ","
+let mapleader = ","
+let g:mapleader = ","
+
+"" Color Scheme
+set background=dark
+"colorscheme solarized
+colorscheme molokai
+
+"" Searching
+set hlsearch                        " highlight matches
+set incsearch                       " incremental searching
+set ignorecase                      " searches are case insensitive...
+set smartcase
+
+"" Tabs and intenting
+set autoindent
+set smartindent
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set softtabstop=4
+set backspace=indent,eol,start
+
+"" Mappings
+nmap <F8> :TagbarToggle<CR>			" map f8 to Tagbar
+nmap <F2> :NERDTreeToggle<CR>		" map f2 to NERDTree
+nnoremap <F5> :GundoToggle<CR>      " map f5 to Gundo
+nmap <C-P> :CtrlP<CR>				" map ctrl+p to CtrlP
+nmap <silent> <C-N> :silent noh<CR> " map ctrl+n to un highlight highlighted text from search
+nmap <leader>w :w!<cr> 				" Fast saving with <leader>+w
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Fugitive
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>ga :Gadd<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>gm :Gmove<cr>
+nnoremap <leader>gr :Gremove<cr>
+
+" Enable vim-powerline
+let g:Powerline_symbols = 'fancy'
