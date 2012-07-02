@@ -19,10 +19,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# Servers
-alias crunch="ssh root@192.168.80.59"
-alias vps="ssh magnus@m8ck.us.to"
-
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en1"
