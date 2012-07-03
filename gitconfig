@@ -3,3 +3,5 @@
 	email = magnus.f.vadoy@gmail.com
 [core]
 	excludesfile = /Users/Magnus/.gitignore
+[credential]
+	helper = cache --timeout=3600
