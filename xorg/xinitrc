@@ -1,10 +1,26 @@
+!/bin/bash
 dropboxd &
 mpd &
-compton -cGb &
+#compton -cGb &
 sh ./.fehbg &
 
-DEFAULT_SESSION=-spectrwm
+xsetroot -cursor_name left_ptr  
+setxkbmap -layout no 
+
+DEFAULT_SESSION=spectrwm
+
 case $1 in
-    spectrwm|startxfce4|openbox) exec $1 ;;
-    *) exec dbus-launch $DEFAULT_SESSION ;;
+spectrwm)
+    exec dbus-launch spectrwm
+    ;;
+xmonad)
+    compton -cGb &
+    exec ck-launch-session dbus-launch xmonad
+    ;;
+dwm)
+    exec dwm
+    ;;
+*)
+    exec $DEFAULT_SESSION
+    ;;
 esac
