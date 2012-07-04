@@ -1,6 +1,6 @@
 dropboxd &
 mpd &
-#compton -cGb &
+compton -cGb &
 sh ./.fehbg &
 
 DEFAULT_SESSION=-spectrwm
