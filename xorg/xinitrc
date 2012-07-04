@@ -1,0 +1,10 @@
+dropboxd &
+mpd &
+#compton -cGb &
+sh ./.fehbg &
+
+DEFAULT_SESSION=-spectrwm
+case $1 in
+    spectrwm|startxfce4|openbox) exec $1 ;;
+    *) exec dbus-launch $DEFAULT_SESSION ;;
+esac
