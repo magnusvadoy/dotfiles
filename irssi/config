@@ -114,8 +114,7 @@ channels = (
   { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#freevps"; chatnet = "d3vm"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#irssi"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#tmux"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#irssi"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -287,6 +286,6 @@ settings = {
     nick = "m8ck";
     timestamp_format = "%H:%M";
   };
-  "fe-common/core" = { theme = "xchat2"; };
+  "fe-common/core" = { theme = "agon"; };
   "irc/core" = { alternate_nick = "magfv"; };
 };
