@@ -27,7 +27,7 @@ let g:mapleader = ","
 
 "" Color Scheme
 set background=dark
-colorscheme badwolf 
+colorscheme superman 
 " colorscheme molokai
 
 "" Searching
@@ -37,12 +37,12 @@ set ignorecase                      " searches are case insensitive...
 set smartcase						
 
 "" Tabs and intenting
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set autoindent
 set smartindent
 " set expandtab
-set softtabstop=4
+set softtabstop=2
 set backspace=indent,eol,start
 
 "" Mappings

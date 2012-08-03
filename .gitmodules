@@ -49,3 +49,6 @@
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "vim/bundle/superman"]
+	path = vim/bundle/superman
+	url = https://github.com/tristen/superman
