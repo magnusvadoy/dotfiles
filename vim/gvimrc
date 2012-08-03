@@ -2,4 +2,4 @@
 if has("gui_running")
 	set guioptions=egmrt
 endif
-set gfn=Monaco\ for\ Powerline:h11
+set gfn=Menlo\ for\ Powerline:h12

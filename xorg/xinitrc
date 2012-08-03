@@ -1,7 +1,7 @@
 !/bin/bash
 dropboxd &
 mpd &
-#compton -cGb &
+compton -cGb &
 sh ./.fehbg &
 
 xsetroot -cursor_name left_ptr  
@@ -14,7 +14,6 @@ spectrwm)
     exec dbus-launch spectrwm
     ;;
 xmonad)
-    compton -cGb &
     exec ck-launch-session dbus-launch xmonad
     ;;
 dwm)
