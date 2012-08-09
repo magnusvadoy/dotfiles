@@ -68,11 +68,8 @@ set sidebar_width=20
 set sidebar_visible=no
 set sidebar_delim='|'
 
-# which mailboxes to list in the sidebar
-#mailboxes =inbox =ml
-
 # color of folders with new mail
-# color sidebar_new yellow default
+color sidebar_new yellow default
 
 bind index \CP sidebar-prev
 bind index \CN sidebar-next
@@ -87,9 +84,6 @@ macro pager b '<enter-command>toggle sidebar_visible<enter>'
 
 # Remap bounce-message function to "B"
 bind index B bounce-message
-
-bind index,pager \253 sidebar-prev
-bind index,pager \252 sidebar-next
 
 # SMTP Support
 source ~/.muttpw
