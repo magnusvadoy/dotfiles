@@ -1,10 +1,11 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="prose"
+#ZSH_THEME="prose"
+ZSH_THEME="steeef"
 
 #DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git brew pip sprunge zsh-syntax-highlighting)
+plugins=(git brew zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -14,6 +15,11 @@ alias t='python ~/Dropbox/scripts/t/t.py --task-dir ~/Dropbox/scripts/t/todo --l
 alias m="mvim ."
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias ping="ping -c 5"
+alias weechat="weechat-curses"
+alias serve_this="python -m SimpleHTTPServer"
+alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+alias o="open"
+alias oo="open ."
 
 # Show/hide hidden files in finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
