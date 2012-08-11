@@ -1,4 +1,3 @@
-!/bin/bash
 dropboxd &
 mpd &
 compton -cGb &
