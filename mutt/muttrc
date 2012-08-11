@@ -15,8 +15,8 @@ set postponed   = "+Gmail/[Gmail].Utkast"
 set editor      = "vim +:silent+?^$"                    # use vim and skip to last blank line
 
 source ~/.mutt/mailboxes
-source ~/.mutt/colors
-# source ~/.vim/bundle/badwolf/contrib/badwolf.muttrc
+# source ~/.mutt/colors
+source ~/.vim/bundle/badwolf/contrib/badwolf.muttrc
 
 # main options
 set send_charset="iso-8859-1:utf-8"
@@ -105,6 +105,7 @@ macro index S \
 # Sync email
 macro index O "<shell-escape>offlineimap -q -o<enter>"
 macro index o "<shell-escape>offlineimap -qf INBOX<enter>"
+macro index A "<shell-escape>offlineimap -qf Arch<enter>"
 
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"

@@ -37,13 +37,13 @@ set ignorecase                      " searches are case insensitive...
 set smartcase						
 
 "" Tabs and intenting
-set tabstop=2
-set shiftwidth=2
-set autoindent
-set smartindent
-" set expandtab
-set softtabstop=2
-set backspace=indent,eol,start
+" set tabstop=2
+" set shiftwidth=2
+" set autoindent
+" set smartindent
+" " set expandtab
+" set softtabstop=2
+" set backspace=indent,eol,start
 
 "" Mappings
 nmap <F8> :TagbarToggle<CR>			" map f8 to Tagbar
@@ -53,10 +53,8 @@ nmap <C-P> :CtrlP<CR>				" map ctrl+p to CtrlP
 nmap <silent> <C-N> :silent noh<CR> " map ctrl+n to un-highlight highlighted text from search
 nmap <leader>w :w!<cr> 				" Fast saving with <leader>+w
 
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+nmap <leader>ev :split $MYVIMRC<cr>         " mapping to edit my vimrc quickly
+nmap <leader>sv :source $MYVIMRC<cr>         " mapping to source my vimrc quickly
 
 " Enable vim-powerline
 let g:Powerline_symbols = 'fancy'
