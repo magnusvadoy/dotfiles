@@ -27,7 +27,7 @@ let g:mapleader = ","
 
 "" Color Scheme
 set background=dark
-colorscheme superman 
+colorscheme jellybeans
 " colorscheme molokai
 
 "" Searching

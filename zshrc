@@ -19,10 +19,14 @@ alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias o="open"
 alias oo="open ."
 
+# git + hub
+alias git="hub"
+
 # Show/hide hidden files in finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
 ### Environment ------------------------------------
+fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
 export EDITOR="vim"
 export PATH="/usr/local/bin:/usr/local/sbin:/Users/Magnus/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
