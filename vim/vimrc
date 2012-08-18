@@ -3,8 +3,6 @@ set nocompatible 		" choose no compatibility with legacy vi
 call pathogen#infect() 		" load pathogen
 call pathogen#helptags()        " load pathogen helptags
 let mapleader = ","             " change modifier key to space
-" let g:loaded_netrwPlugin=1      " disable netrw plugin
-let g:Powerline_symbols='fancy' " disable netrw plugin
 
 "" Misc
 set encoding=utf-8
@@ -14,9 +12,15 @@ set number                      " Shows line number
 set laststatus=2                " Show status line
 filetype plugin indent on       " load file type plugins + indentation
 syntax enable
+let g:loaded_netrwPlugin=1      " disable netrw plugin
+let g:Powerline_symbols='fancy' " enable powerline plugin
 
 "" Theme
 color jellybeans
+
+"" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 "" Whitespace
 set nowrap                      " don't wrap lines
