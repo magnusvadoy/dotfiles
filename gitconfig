@@ -1,0 +1,11 @@
+[user]
+	name = Magnus Furnes Vadøy
+	email = magnus.f.vadoy@gmail.com
+[core]
+	excludesfile = /Users/Magnus/.gitignore
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+[credential]
+	helper = osxkeychain
+[diff]
+	tool = vimdiff
