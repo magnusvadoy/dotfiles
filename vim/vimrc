@@ -1,60 +1,33 @@
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+"" Initialization
+set nocompatible 		" choose no compatibility with legacy vi
+call pathogen#infect() 		" load pathogen
+call pathogen#helptags()        " load pathogen helptags
+let mapleader = ","             " change modifier key to space
+" let g:loaded_netrwPlugin=1      " disable netrw plugin
+let g:Powerline_symbols='fancy' " disable netrw plugin
 
-" Enable pathogen
-call pathogen#infect()	
-
-filetype plugin indent on
-syntax enable				" enable syntax highlighting
+"" Misc
 set encoding=utf-8
-set mouse=a                 " enable mouse support
-set number                  " show line numbers
-set scrolloff=6             " 4 lines above/below cursor when scrolling
-set history=1000			" set the history to keep 1000 lines
-set wildmenu				" enable omnicompletion
-set showmatch               " show matching bracket (briefly jump)
-set showmode                " show mode in status bar (insert/replace/...)
-set showcmd                 " show typed command in status bar
-set ruler                   " show cursor position in the status bar
-set title					" set the terminal title
-set laststatus=2            " use 2 lines for the status bar
-set directory=~/.vimtmp     " don't litter my drive with .swp files
+set showcmd                     " display incomplete commands
+set hidden                      " Allows vim to handle multiple buffers more efficiently
+set number                      " Shows line number
+set laststatus=2                " Show status line
+filetype plugin indent on       " load file type plugins + indentation
+syntax enable
 
-"" Set the leader too ","
-let mapleader = ","
-let g:mapleader = ","
+"" Theme
+color jellybeans
 
-"" Color Scheme
-set background=dark
-colorscheme jellybeans
-" colorscheme molokai
+"" Whitespace
+set nowrap                      " don't wrap lines
+set backspace=indent,eol,start  " backspace through everything in insert mode
 
 "" Searching
-set hlsearch                        " highlight matches
-set incsearch                       " incremental searching
-set ignorecase                      " searches are case insensitive...
-set smartcase						
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
 
-"" Tabs and intenting
-" set tabstop=2
-" set shiftwidth=2
-" set autoindent
-" set smartindent
-" " set expandtab
-" set softtabstop=2
-" set backspace=indent,eol,start
-
-"" Mappings
-nmap <F8> :TagbarToggle<CR>			" map f8 to Tagbar
-nmap <F2> :NERDTreeToggle<CR>		" map f2 to NERDTree
-nnoremap <F5> :GundoToggle<CR>      " map f5 to Gundo
-nmap <C-P> :CtrlP<CR>				" map ctrl+p to CtrlP
-nmap <silent> <C-N> :silent noh<CR> " map ctrl+n to un-highlight highlighted text from search
-nmap <leader>w :w!<cr> 				" Fast saving with <leader>+w
-
-nmap <leader>ev :split $MYVIMRC<cr>         " mapping to edit my vimrc quickly
-nmap <leader>sv :source $MYVIMRC<cr>         " mapping to source my vimrc quickly
-
-" Enable vim-powerline
-let g:Powerline_symbols = 'fancy'
+"" GUI
+set guioptions-=T               " Toggle off toolbar
+set guifont=Monaco\ for\ Powerline:h13
