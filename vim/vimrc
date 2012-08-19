@@ -16,11 +16,14 @@ let g:loaded_netrwPlugin=1      " disable netrw plugin
 let g:Powerline_symbols='fancy' " enable powerline plugin
 
 "" Theme
-color jellybeans
+color jellybeans 
 
 "" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+"" Mappings
+map <F2> :NERDTreeToggle<CR>
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -34,4 +37,4 @@ set smartcase                   " ... unless they contain at least one capital l
 
 "" GUI
 set guioptions-=T               " Toggle off toolbar
-set guifont=Monaco\ for\ Powerline:h13
+set guifont=Monaco\ for\ Powerline:h12
