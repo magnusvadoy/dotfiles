@@ -47,7 +47,7 @@ set tilde
 unset markers
 
 auto_view text/html
-alternative_order text/plain text/html
+# alternative_order text/plain text/html
 
 # composing 
 set fcc_attach

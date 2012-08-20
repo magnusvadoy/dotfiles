@@ -9,7 +9,7 @@ plugins=(git brew zsh-syntax-highlighting-filetypes zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 ### Aliases --------------------------------------
-alias ls="gls --color"
+alias ls="gls -p --color"
 alias c="clear"
 alias t='python ~/Dropbox/scripts/t/t.py --task-dir ~/Dropbox/scripts/t/todo --list tasks'
 alias m="mvim ."
@@ -25,7 +25,7 @@ alias git="hub"
 # Useful git aliases
 alias gb='git branch -a -v'
 alias gs='git status'
-alias gd='git diff | mate'
+alias gd='git diff | opendiff'
 alias gca='git commit -av'
 alias gcia='git commit -v -a -i'
 alias grm='git ls-files --deleted | xargs git rm'

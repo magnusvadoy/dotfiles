@@ -8,4 +8,6 @@
 [credential]
 	helper = osxkeychain
 [diff]
-	tool = vimdiff
+	tool = opendiff
+[mergetool]
+	keepBackup = true

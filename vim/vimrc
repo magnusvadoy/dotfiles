@@ -12,18 +12,20 @@ set number                      " Shows line number
 set laststatus=2                " Show status line
 filetype plugin indent on       " load file type plugins + indentation
 syntax enable
+
 let g:loaded_netrwPlugin=1      " disable netrw plugin
 let g:Powerline_symbols='fancy' " enable powerline plugin
 
 "" Theme
-color jellybeans 
+colorscheme jellybeans 
 
 "" CtrlP
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 "" Mappings
-map <F2> :NERDTreeToggle<CR>
+map <F2> 	:NERDTreeToggle<CR>
+map <C-s> 	:Scratch<CR>
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -38,3 +40,5 @@ set smartcase                   " ... unless they contain at least one capital l
 "" GUI
 set guioptions-=T               " Toggle off toolbar
 set guifont=Monaco\ for\ Powerline:h12
+
+highlight SpellBad term=underline gui=undercurl guisp=Orange
