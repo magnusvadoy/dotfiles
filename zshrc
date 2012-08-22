@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="steeef"
+ZSH_THEME="prose"
 
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -9,7 +9,7 @@ plugins=(git brew zsh-syntax-highlighting-filetypes zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 ### Aliases --------------------------------------
-alias ls="gls -p --color"
+alias ls="gls --color"
 alias c="clear"
 alias t='python ~/Dropbox/scripts/t/t.py --task-dir ~/Dropbox/scripts/t/todo --list tasks'
 alias m="mvim ."
