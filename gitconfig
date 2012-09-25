@@ -8,7 +8,4 @@
 [credential]
 	helper = osxkeychain
 [diff]
-    tool = default-difftool
-
-[difftool "default-difftool"]
-    cmd = default-difftool.sh $LOCAL $REMOTE
+    tool = opendiff

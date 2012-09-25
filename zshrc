@@ -1,21 +1,21 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="prose"
+ZSH_THEME="clean"
 
-DISABLE_AUTO_UPDATE="true"
-COMPLETION_WAITING_DOTS="true"
+#DISABLE_AUTO_UPDATE="true"
 
-plugins=(git brew zsh-syntax-highlighting-filetypes zsh-syntax-highlighting)
+. /Users/Magnus/bin/z.sh
+
+#plugins=(git brew zsh-syntax-highlighting-filetypes zsh-syntax-highlighting)
+plugins=(git brew)
 
 source $ZSH/oh-my-zsh.sh
 
 ### Aliases --------------------------------------
-alias ls="gls --color"
 alias c="clear"
-alias t='python ~/Dropbox/scripts/t/t.py --task-dir ~/Dropbox/scripts/t/todo --list tasks'
 alias m="mvim ."
 alias vim="~/Applications/MacVim.app/Contents/MacOS/Vim"
-alias serve_this="python -m SimpleHTTPServer"
-alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+alias servethis="python -m SimpleHTTPServer"
+alias deployblog="rsync -avz _site/ magnus@m8ck.us.to:www/m8ck.us.to"
 alias o="open"
 alias oo="open ."
 
