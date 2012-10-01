@@ -15,11 +15,12 @@ syntax enable
 
 let g:loaded_netrwPlugin=1      " disable netrw plugin
 let g:Powerline_symbols='fancy' " enable powerline plugin
-let g:neocomplcache_enable_at_startup = 1
+let g:jekyll_path = "~/Dropbox/Projects/Blog"
+" let g:neocomplcache_enable_at_startup = 1
 
 "" Theme
-" colorscheme jellybeans 
-colorscheme molokai 
+colorscheme jellybeans 
+" colorscheme molokai 
 
 " Indenting
 set shiftwidth=2
@@ -44,4 +45,4 @@ set smartcase                   " ... unless they contain at least one capital l
 
 "" GUI
 set guioptions-=T               " Toggle off toolbar
-set guifont=Droid\ Sans\ Mono\ for\ Powerline:h13
+set guifont=Monaco\ for\ Powerline:h12

@@ -1,12 +1,13 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="clean"
+#ZSH_THEME="wedisagree"
+ZSH_THEME="sorin"
+ZSH_THEME="wezm"
 
-#DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 . /Users/Magnus/bin/z.sh
 
-#plugins=(git brew zsh-syntax-highlighting-filetypes zsh-syntax-highlighting)
-plugins=(git brew)
+plugins=(git brew zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -43,5 +44,7 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && kil
 
 ### Environment ------------------------------------
 fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
+#I don't like this feature. I think no one does. It corrects you, when you are trying to create new files, for example.
+unsetopt correctall
 export EDITOR="vim"
 export PATH="/usr/local/bin:/usr/local/sbin:/Users/Magnus/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
