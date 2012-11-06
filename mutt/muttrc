@@ -8,7 +8,7 @@ set tmpdir              = ~/.mutt/tmp
 
 # Maildir settings
 set mbox_type   = Maildir
-set folder      = ~/Mail
+set folder      = ~/.mail
 set spoolfile   = "+Gmail/INBOX"
 set mbox        = "+Gmail/[Gmail].All e-post"
 set postponed   = "+Gmail/[Gmail].Utkast"

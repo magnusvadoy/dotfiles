@@ -1,9 +1,10 @@
-ZSH=$HOME/.oh-my-zsh
+#ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="wedisagree"
-ZSH_THEME="sorin"
+#ZSH_THEME="sorin"
 ZSH_THEME="wezm"
 
 DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_TITLE="true" 
 
 . /Users/Magnus/bin/z.sh
 
