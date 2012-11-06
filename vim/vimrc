@@ -1,7 +1,7 @@
 "" Initialization
 set nocompatible 								" choose no compatibility with legacy vi
 call pathogen#infect() 					" load pathogen
-call pathogen#helptags() 				" load pathogen helptags
+" call pathogen#helptags() 				" load pathogen helptags
 let mapleader = "," 						" change modifier key to space
 
 "" Misc
@@ -13,10 +13,7 @@ set laststatus=2                " Show status line
 filetype plugin indent on       " load file type plugins + indentation
 syntax enable
 
-let g:loaded_netrwPlugin=1      " disable netrw plugin
 let g:Powerline_symbols='fancy' " enable powerline plugin
-let g:jekyll_path = "~/Dropbox/Projects/Blog"
-" let g:neocomplcache_enable_at_startup = 1
 
 "" Theme
 colorscheme jellybeans 

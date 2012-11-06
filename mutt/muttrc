@@ -66,6 +66,11 @@ hdr_order from: to: cc: date: subject: # and in this order
 # Remap bounce-message function to "B"
 bind index B bounce-message
 
+# Contacts
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+bind editor <Tab> complete-query
+bind editor ^T    complete
+
 # SMTP Support
 source ~/.muttpw
 set my_user=magnus.f.vadoy@gmail.com

@@ -45,7 +45,5 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && kil
 
 ### Environment ------------------------------------
 fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
-#I don't like this feature. I think no one does. It corrects you, when you are trying to create new files, for example.
-unsetopt correctall
 export EDITOR="vim"
 export PATH="/usr/local/bin:/usr/local/sbin:/Users/Magnus/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
