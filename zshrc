@@ -1,27 +1,36 @@
-#ZSH=$HOME/.oh-my-zsh
-#ZSH_THEME="wedisagree"
-#ZSH_THEME="sorin"
-ZSH_THEME="wezm"
+### Oh-my-zsh settings 	--------------------------
+ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="dstufft"
 
-DISABLE_AUTO_UPDATE="true"
-DISABLE_AUTO_TITLE="true" 
+# CASE_SENSITIVE="true"
+# DISABLE_AUTO_UPDATE="true"
+# DISABLE_LS_COLORS="true"
+DISABLE_AUTO_TITLE="true"
+# COMPLETION_WAITING_DOTS="true"
+
+### download all images from 4chan thread--------
+4chandl() {
+	wget -O - $1 |
+	grep -Eo 'images.4chan.org/[^"]+' |
+	uniq |
+	xargs wget
+}
+
+### z is the new j -------------------------------
 
 . /Users/Magnus/bin/z.sh
 
-plugins=(git brew zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
+function precmd () {
+	z --add "$(pwd -P)"
+}
 
 ### Aliases --------------------------------------
 alias c="clear"
-alias m="mvim ."
-alias vim="~/Applications/MacVim.app/Contents/MacOS/Vim"
+alias l="ls -l"
+#alias m="mvim ."
+#alias vim="~/Applications/MacVim.app/Contents/MacOS/Vim"
 alias servethis="python -m SimpleHTTPServer"
-alias deployblog="rsync -avz _site/ magnus@m8ck.us.to:www/m8ck.us.to"
-alias o="open"
-alias oo="open ."
-
-# git + hub
+alias deployblog="rsync -avz _site/ root@m8ck.us.to:/var/www/m8ck.us.to"
 alias git="hub"
 
 # Useful git aliases
@@ -38,12 +47,17 @@ alias pull='git pull --rebase'
 alias push='git push'
 alias gre='git rebase master'
 alias gitl='git log --pretty=format:"%h %Cblue %an %Cred %s"'
+alias gsa="git submodule add"
+alias gsi="git submodule init"
 
 # Show/hide hidden files in finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
-### Environment ------------------------------------
+plugins=(git brew)
+source $ZSH/oh-my-zsh.sh
+
 fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
 export EDITOR="vim"
-export PATH="/usr/local/bin:/usr/local/sbin:/Users/Magnus/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+#export EDITOR="mate -w"
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin
