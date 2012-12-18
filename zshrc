@@ -1,6 +1,6 @@
 ### Oh-my-zsh settings 	--------------------------
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="dstufft"
+ZSH_THEME="powerline-modified"
 
 # CASE_SENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
@@ -18,17 +18,12 @@ DISABLE_AUTO_TITLE="true"
 
 ### z is the new j -------------------------------
 
-. /Users/Magnus/bin/z.sh
-
-function precmd () {
-	z --add "$(pwd -P)"
-}
+. /Users/Magnus/dev/z/z.sh
 
 ### Aliases --------------------------------------
 alias c="clear"
 alias l="ls -l"
 #alias m="mvim ."
-#alias vim="~/Applications/MacVim.app/Contents/MacOS/Vim"
 alias servethis="python -m SimpleHTTPServer"
 alias deployblog="rsync -avz _site/ root@m8ck.us.to:/var/www/m8ck.us.to"
 alias git="hub"
@@ -58,6 +53,6 @@ plugins=(git brew)
 source $ZSH/oh-my-zsh.sh
 
 fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
-export EDITOR="vim"
+#export EDITOR="vim"
 #export EDITOR="mate -w"
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin
+export PATH=/bin:/usr/sbin:/sbin:/usr/bin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin:/usr/local/sbin
