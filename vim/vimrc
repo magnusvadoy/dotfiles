@@ -1,25 +1,32 @@
-" Intro 
 filetype off
 set nocompatible
-filetype plugin indent on
 
+" Vundle settings
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
+" Bundles
 Bundle 'gmarik/vundle'
-
-" My bundles
 Bundle 'tpope/vim-fugitive'
+Bundle 'tomasr/molokai'
 Bundle 'jellybeans.vim'
-
-" Remap leader
-let mapleader = ","
 
 " Tabs
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" automatically reload vimrc when it's saved
+augroup AutoReloadVimRC
+  au!
+  au BufWritePost $MYVIMRC so $MYVIMRC
+augroup END
 
 " Theming
 syntax on
