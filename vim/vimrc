@@ -1,0 +1,28 @@
+" Intro 
+filetype off
+set nocompatible
+filetype plugin indent on
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" My bundles
+Bundle 'tpope/vim-fugitive'
+Bundle 'jellybeans.vim'
+
+" Remap leader
+let mapleader = ","
+
+" Tabs
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Theming
+syntax on
+color jellybeans
+
+set guifont=Menlo\ for\ Powerline:h12
