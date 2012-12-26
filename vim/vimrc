@@ -6,6 +6,7 @@
 """ Basics
 filetype off
 set nocompatible
+filetype plugin indent on
 
 """ Setup Bundle Support
 set rtp+=~/.vim/bundle/vundle/
@@ -14,12 +15,15 @@ call vundle#rc()
 """ Bundles
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
-Bundle 'plasticboy/vim-markdown'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/tcomment_vim'
-Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'ervandew/supertab'
+Bundle 'msanders/snipmate.vim'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
-" Bundle 'ervandew/supertab'
-" Bundle 'scrooloose/syntastic'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'plasticboy/vim-markdown'
 
 " Color Schemes
 Bundle 'tomasr/molokai'
@@ -27,7 +31,9 @@ Bundle 'twerth/ir_black'
 Bundle 'jellybeans.vim'
 
 """ General
-set number
+set number                      " Show line numbers
+set laststatus=2                " Always show the statusline
+set encoding=utf-8              " Necessary to show Unicode glyphs
 set backspace=indent,eol,start	" backspace for dummys
 set linespace=0					" No extra spaces between rows
 set showmatch					" show matching brackets/parenthesis
@@ -44,8 +50,9 @@ set scrolloff=3 				" minimum lines to keep above and below cursor
 set foldenable  				" auto fold code
 
 syntax on
-color jellybeans 
+color molokai 
 set guifont=Monaco\ for\ Powerline:h11
+let g:Powerline_symbols = 'fancy' " enable vim-powerline
 
 set cursorline  				" highlight current line
 " hi cursorline guibg=#333333 	" highlight bg color of current line
@@ -74,6 +81,9 @@ let mapleader = ','
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Map NERDTree to F2
+nmap <silent> <F2> :NERDTreeToggle<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj

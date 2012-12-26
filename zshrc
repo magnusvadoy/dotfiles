@@ -34,8 +34,9 @@ function ns {
 
 ### Aliases --------------------------------------
 alias c="clear"
-alias l="ls -l"
 alias m="mvim ."
+alias t="~/Dropbox/Todo/todo.sh"
+alias vim-update="vim +BundleInstall +qall"
 alias servethis="python -m SimpleHTTPServer"
 alias deployblog="rsync -avz _site/ root@m8ck.us.to:/var/www/m8ck.us.to"
 alias git="hub"
