@@ -56,7 +56,7 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias ip="curl icanhazip.com"
 
 # list TODO/FIX lines from the current project
-alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"'gc
+alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
 # Quick way to rebuild the Launch Services database and get rid
 # of duplicates in the Open With submenu.
@@ -83,9 +83,8 @@ alias gsi="git submodule init"
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
-plugins=(git brew gem cloudapp)
+plugins=(git brew)
 source $ZSH/oh-my-zsh.sh
-
 
 #fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
 export EDITOR="vim"
