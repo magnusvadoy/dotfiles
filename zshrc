@@ -1,20 +1,13 @@
 ## Oh-my-zsh settings
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="crunch"
-#ZSH_THEME="myusuf3"
+ZSH_THEME="avit"
+#ZSH_THEME="crunch"
 
 # DISABLE_AUTO_UPDATE="true"
 # DISABLE_LS_COLORS="true"
 # DISABLE_AUTO_TITLE="true"
 # COMPLETION_WAITING_DOTS="true"
 
-## Show archey at launch
-~/bin/archey
-
-## z is the new j
-. /Users/Magnus/Github/z/z.sh
-
-###### Aliases ######
 # Shortcuts
 alias c="clear"
 alias o="open"
