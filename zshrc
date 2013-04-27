@@ -1,19 +1,21 @@
 ## Oh-my-zsh settings
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="avit"
-#ZSH_THEME="crunch"
+#ZSH_THEME="avit"
+ZSH_THEME="crunch"
 
 # DISABLE_AUTO_UPDATE="true"
 # DISABLE_LS_COLORS="true"
 # DISABLE_AUTO_TITLE="true"
 # COMPLETION_WAITING_DOTS="true"
 
+. /Users/Magnus/Github/z/z.sh
+
 # Shortcuts
 alias c="clear"
 alias o="open"
 alias oo="open ."
 alias m="mvim ."
-alias vim="/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/MacOS/Vim"
+# alias vim="/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/MacOS/Vim"
 
 # Python
 alias runserver='python manage.py runserver'
@@ -32,9 +34,6 @@ alias mem='top -o rsize' # memory
 # copy the working directory path
 alias cpwd='pwd|tr -d "\n"|pbcopy'
 
-# DNS (with update thanks to @blanco)
-alias flush="sudo killall -HUP mDNSResponder"
-
 # ls better
 alias la="ls -aF"
 alias ld="ls -ld"
@@ -47,13 +46,6 @@ alias stfu="osascript -e 'set volume output muted true'"
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
-
-# list TODO/FIX lines from the current project
-alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
-
-# Quick way to rebuild the Launch Services database and get rid
-# of duplicates in the Open With submenu.
-alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 
 ## Useful git aliases
 alias gb='git branch -a -v'
