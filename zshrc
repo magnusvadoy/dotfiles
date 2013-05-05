@@ -1,7 +1,6 @@
 ## Oh-my-zsh settings
 ZSH=$HOME/.oh-my-zsh
-#ZSH_THEME="avit"
-ZSH_THEME="crunch"
+ZSH_THEME="prose"
 
 # DISABLE_AUTO_UPDATE="true"
 # DISABLE_LS_COLORS="true"
@@ -70,7 +69,7 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && kil
 
 plugins=(git brew)
 source $ZSH/oh-my-zsh.sh
-
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 #fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
 export EDITOR="vim"
 export PATH=/bin:/usr/sbin:/sbin:/usr/bin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin:/usr/local/sbin
