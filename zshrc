@@ -7,6 +7,7 @@ ZSH_THEME="prose"
 # DISABLE_AUTO_TITLE="true"
 # COMPLETION_WAITING_DOTS="true"
 
+# z is the new j, yo
 . /Users/Magnus/Github/z/z.sh
 
 # Shortcuts
@@ -14,7 +15,14 @@ alias c="clear"
 alias o="open"
 alias oo="open ."
 alias m="mvim ."
-# alias vim="/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/MacOS/Vim"
+#alias vim="/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/MacOS/Vim"
+
+# ls better
+alias la="ls -aF"
+alias ld="ls -ld"
+alias ll="ls -l"
+alias lt='ls -At1 && echo "------Oldest--"'
+alias ltr='ls -Art1 && echo "------Newest--"'
 
 # Python
 alias runserver='python manage.py runserver'
@@ -32,16 +40,6 @@ alias mem='top -o rsize' # memory
 
 # copy the working directory path
 alias cpwd='pwd|tr -d "\n"|pbcopy'
-
-# ls better
-alias la="ls -aF"
-alias ld="ls -ld"
-alias ll="ls -l"
-alias lt='ls -At1 && echo "------Oldest--"'
-alias ltr='ls -Art1 && echo "------Newest--"'
-
-# mute the system volume
-alias stfu="osascript -e 'set volume output muted true'"
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
@@ -69,7 +67,8 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && kil
 
 plugins=(git brew)
 source $ZSH/oh-my-zsh.sh
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
-#fpath=(/usr/local/share/zsh-completions $fpath) # zsh completion
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
 export EDITOR="vim"
-export PATH=/bin:/usr/sbin:/sbin:/usr/bin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin:/usr/local/sbin
+export PATH=/bin:/usr/sbin:/sbin:/usr/bin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin:/usr/local/sbin:$PATH

@@ -3,3 +3,4 @@
 *.swp
 *.pyc
 .netrwhist
+/home/magnus/Dropbox/Projects/dotfiles/vim/bundle
