@@ -15,6 +15,7 @@ alias c="clear"
 alias o="open"
 alias oo="open ."
 alias m="mvim ."
+alias mutt 'cd ~/Desktop && mutt'
 #alias vim="/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/MacOS/Vim"
 
 # ls better
@@ -71,4 +72,5 @@ source $ZSH/oh-my-zsh.sh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export EDITOR="vim"
-export PATH=/bin:/usr/sbin:/sbin:/usr/bin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin:/usr/local/sbin:$PATH
+export LANG=en_US.UTF-8
+export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin:/usr/local/git/bin:/Users/Magnus/bin:/usr/local/sbin:$PATH
