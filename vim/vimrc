@@ -1,6 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""
-"""     m8ck's vimrc 
-"""     (c) many people on GitHub 
+"""     m8ck's vimrc
+"""     (c) many people on GitHub
 """""""""""""""""""""""""""""""""""""""""""""
 
 """ Basics
@@ -17,7 +17,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/tcomment_vim'
-Bundle 'Lokaltog/vim-powerline'
+"" Bundle 'Lokaltog/vim-powerline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'kien/ctrlp.vim'
@@ -35,7 +35,7 @@ set linespace=0					" No extra spaces between rows
 set showmatch					" show matching brackets/parenthesis
 set incsearch					" find as you type search
 set hlsearch					" highlight search terms
-set winminheight=0				" windows can be 0 line high 
+set winminheight=0				" windows can be 0 line high
 set ignorecase					" case insensitive search
 set smartcase					" case sensitive when uc present
 set wildmenu					" show list instead of just completing
@@ -46,7 +46,7 @@ set scrolloff=3 				" minimum lines to keep above and below cursor
 set foldenable  				" auto fold code
 
 syntax on
-color hybrid 
+color molokai
 set guifont=Monaco\ for\ Powerline:h11
 let g:Powerline_symbols = 'fancy' " enable vim-powerline
 
@@ -84,7 +84,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Stupid shift key fixes
-cmap W w 						
+cmap W w
 cmap WQ wq
 cmap wQ wq
 cmap Q q
