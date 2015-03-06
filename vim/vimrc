@@ -45,7 +45,7 @@ set scrolloff=3 				" minimum lines to keep above and below cursor
 set foldenable  				" auto fold code
 
 syntax on
-color molokai
+color hybrid 
 set guifont=Monaco:h12
 " let g:Powerline_symbols = 'fancy' " enable vim-powerline
 
