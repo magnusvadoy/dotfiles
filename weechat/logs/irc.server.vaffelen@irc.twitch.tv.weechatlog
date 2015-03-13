@@ -1,0 +1,9 @@
+2015-03-13 10:51:02	--	irc: connecting to server Vaffelen@irc.twitch.tv/6667...
+2015-03-13 10:51:02	=!=	irc: address "Vaffelen@irc.twitch.tv" not found
+2015-03-13 10:51:02	=!=	irc: error: Name or service not known
+2015-03-13 10:51:02	--	irc: reconnecting to server in 10 seconds
+2015-03-13 10:51:12	--	irc: reconnecting to server...
+2015-03-13 10:51:12	--	irc: connecting to server Vaffelen@irc.twitch.tv/6667...
+2015-03-13 10:51:12	=!=	irc: address "Vaffelen@irc.twitch.tv" not found
+2015-03-13 10:51:12	=!=	irc: error: Name or service not known
+2015-03-13 10:51:12	--	irc: reconnecting to server in 20 seconds
