@@ -25,6 +25,9 @@
 *.log
 *.sql
 *.sqlite
+*.weechatlog
+logs/*
+irc.*
 
 # OS generated files #
 ######################
