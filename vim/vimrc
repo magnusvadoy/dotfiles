@@ -46,7 +46,7 @@ set foldenable  				" auto fold code
 
 syntax on
 color molokai 
-set guifont=Monaco:h12
+set guifont=Menlo:h11
 " let g:Powerline_symbols = 'fancy' " enable vim-powerline
 
 set cursorline  				" highlight current line
