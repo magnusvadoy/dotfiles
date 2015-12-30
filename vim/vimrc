@@ -7,6 +7,7 @@
 filetype off
 set nocompatible
 filetype plugin indent on
+set shell=/bin/bash
 
 """ Setup Bundle Support
 set rtp+=~/.vim/bundle/vundle/
@@ -20,10 +21,11 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Valloric/YouCompleteMe'
 
 " Color Schemes
-" Bundle 'tomasr/molokai'
-" Bundle 'w0ng/vim-hybrid'
+Bundle 'tomasr/molokai'
+Bundle 'w0ng/vim-hybrid'
 
 """ General
 set number                      " Show line numbers
@@ -45,9 +47,9 @@ set scrolloff=3 				" minimum lines to keep above and below cursor
 set foldenable  				" auto fold code
 
 syntax on
-" color molokai 
+color molokai 
 " set cursorline  				" highlight current line
-set guifont=Menlo:h11
+set guifont=Menlo:h14
 
 if has('cmdline_info')
 	set ruler                  	" show the ruler
