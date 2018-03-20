@@ -69,36 +69,59 @@ endif
 
 " This function is based on one from FlatColor: https://github.com/MaxSt/FlatColor/
 " Which in turn was based on one found in hemisu: https://github.com/noahfrederick/vim-hemisu/
-function! s:h(group, style)
-  if g:onedark_terminal_italics == 0
-    if has_key(a:style, "cterm") && a:style["cterm"] == "italic"
-      unlet a:style.cterm
+let s:group_colors = {} " Cache of default highlight group settings, for later reference via `onedark#extend_highlight`
+function! s:h(group, style, ...)
+  if (a:0 > 0) " Will be true if we got here from onedark#extend_highlight
+    let a:highlight = s:group_colors[a:group]
+    for style_type in ["fg", "bg", "sp"]
+      if (has_key(a:style, style_type))
+        let l:default_style = (has_key(a:highlight, style_type) ? a:highlight[style_type] : { "cterm16": "NONE", "cterm": "NONE", "gui": "NONE" })
+        let a:highlight[style_type] = extend(l:default_style, a:style[style_type])
+      endif
+    endfor
+    if (has_key(a:style, "gui"))
+      let a:highlight.gui = a:style.gui
     endif
-    if has_key(a:style, "gui") && a:style["gui"] == "italic"
-      unlet a:style.gui
-    endif
-  endif
-  if g:onedark_termcolors == 16
-    let l:ctermfg = (has_key(a:style, "fg") ? a:style.fg.cterm16 : "NONE")
-    let l:ctermbg = (has_key(a:style, "bg") ? a:style.bg.cterm16 : "NONE")
   else
-    let l:ctermfg = (has_key(a:style, "fg") ? a:style.fg.cterm : "NONE")
-    let l:ctermbg = (has_key(a:style, "bg") ? a:style.bg.cterm : "NONE")
+    let a:highlight = a:style
+    let s:group_colors[a:group] = a:highlight " Cache default highlight group settings
   endif
+
+  if g:onedark_terminal_italics == 0
+    if has_key(a:highlight, "cterm") && a:highlight["cterm"] == "italic"
+      unlet a:highlight.cterm
+    endif
+    if has_key(a:highlight, "gui") && a:highlight["gui"] == "italic"
+      unlet a:highlight.gui
+    endif
+  endif
+
+  if g:onedark_termcolors == 16
+    let l:ctermfg = (has_key(a:highlight, "fg") ? a:highlight.fg.cterm16 : "NONE")
+    let l:ctermbg = (has_key(a:highlight, "bg") ? a:highlight.bg.cterm16 : "NONE")
+  else
+    let l:ctermfg = (has_key(a:highlight, "fg") ? a:highlight.fg.cterm : "NONE")
+    let l:ctermbg = (has_key(a:highlight, "bg") ? a:highlight.bg.cterm : "NONE")
+  endif
+
   execute "highlight" a:group
-    \ "guifg="   (has_key(a:style, "fg")    ? a:style.fg.gui   : "NONE")
-    \ "guibg="   (has_key(a:style, "bg")    ? a:style.bg.gui   : "NONE")
-    \ "guisp="   (has_key(a:style, "sp")    ? a:style.sp.gui   : "NONE")
-    \ "gui="     (has_key(a:style, "gui")   ? a:style.gui      : "NONE")
+    \ "guifg="   (has_key(a:highlight, "fg")    ? a:highlight.fg.gui   : "NONE")
+    \ "guibg="   (has_key(a:highlight, "bg")    ? a:highlight.bg.gui   : "NONE")
+    \ "guisp="   (has_key(a:highlight, "sp")    ? a:highlight.sp.gui   : "NONE")
+    \ "gui="     (has_key(a:highlight, "gui")   ? a:highlight.gui      : "NONE")
     \ "ctermfg=" . l:ctermfg
     \ "ctermbg=" . l:ctermbg
-    \ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
+    \ "cterm="   (has_key(a:highlight, "cterm") ? a:highlight.cterm    : "NONE")
 endfunction
 
 " public {{{
 
 function! onedark#set_highlight(group, style)
   call s:h(a:group, a:style)
+endfunction
+
+function! onedark#extend_highlight(group, style)
+  call s:h(a:group, a:style, 1)
 endfunction
 
 " }}}
@@ -170,14 +193,18 @@ call s:h("Todo", { "fg": s:purple }) " anything that needs extra attention; most
 
 " }}}
 
-" Highlighting Groups (descriptions and ordering from `:h hitest.vim`) {{{
-
+" Highlighting Groups (descriptions and ordering from `:h highlight-groups`) {{{
 call s:h("ColorColumn", { "bg": s:cursor_grey }) " used for the columns set with 'colorcolumn'
 call s:h("Conceal", {}) " placeholder characters substituted for concealed text (see 'conceallevel')
 call s:h("Cursor", { "fg": s:black, "bg": s:blue }) " the character under the cursor
 call s:h("CursorIM", {}) " like Cursor, but used when in IME mode
 call s:h("CursorColumn", { "bg": s:cursor_grey }) " the screen column that the cursor is in when 'cursorcolumn' is set
-call s:h("CursorLine", { "bg": s:cursor_grey }) " the screen line that the cursor is in when 'cursorline' is set
+if &diff
+  " Don't change the background color in diff mode
+  call s:h("CursorLine", { "gui": "underline" }) " the screen line that the cursor is in when 'cursorline' is set
+else
+  call s:h("CursorLine", { "bg": s:cursor_grey }) " the screen line that the cursor is in when 'cursorline' is set
+endif
 call s:h("Directory", { "fg": s:blue }) " directory names (and other special names in listings)
 call s:h("DiffAdd", { "bg": s:green, "fg": s:black }) " diff mode: Added line
 call s:h("DiffChange", { "bg": s:yellow, "fg": s:black }) " diff mode: Changed line
@@ -201,7 +228,8 @@ call s:h("PmenuSel", { "fg": s:black, "bg": s:blue }) " Popup menu: selected ite
 call s:h("PmenuSbar", { "bg": s:special_grey }) " Popup menu: scrollbar.
 call s:h("PmenuThumb", { "bg": s:white }) " Popup menu: Thumb of the scrollbar.
 call s:h("Question", { "fg": s:purple }) " hit-enter prompt and yes/no questions
-call s:h("Search", { "fg": s:black, "bg": s:yellow }) " Last search pattern highlighting (see 'hlsearch'). Also used for highlighting the current line in the quickfix window and similar items that need to stand out.
+call s:h("Search", { "fg": s:black, "bg": s:yellow }) " Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+call s:h("QuickFixLine", { "fg": s:black, "bg": s:yellow }) " Current quickfix item in the quickfix window.
 call s:h("SpecialKey", { "fg": s:special_grey }) " Meta and special keys listed with ":map", also for text used to show unprintable characters in the text, 'listchars'. Generally: text that is displayed differently from what it really is.
 call s:h("SpellBad", { "fg": s:red, "gui": "underline", "cterm": "underline" }) " Word that is not recognized by the spellchecker. This will be combined with the highlighting used otherwise.
 call s:h("SpellCap", { "fg": s:dark_yellow }) " Word that should start with a capital. This will be combined with the highlighting used otherwise.
@@ -454,6 +482,12 @@ call s:h("xmlTagName", { "fg": s:red })
 hi link GitGutterAdd    SignifySignAdd
 hi link GitGutterChange SignifySignChange
 hi link GitGutterDelete SignifySignDelete
+
+" easymotion/vim-easymotion
+call s:h("EasyMotionTarget", { "fg": s:red, "gui": "bold", "cterm": "bold" })
+call s:h("EasyMotionTarget2First", { "fg": s:yellow, "gui": "bold", "cterm": "bold" })
+call s:h("EasyMotionTarget2Second", { "fg": s:dark_yellow, "gui": "bold", "cterm": "bold" })
+call s:h("EasyMotionShade",  { "fg": s:comment_grey })
 
 " mhinz/vim-signify
 call s:h("SignifySignAdd", { "fg": s:green })

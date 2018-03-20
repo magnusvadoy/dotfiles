@@ -3,30 +3,33 @@
 """     (c) many people on GitHub
 """""""""""""""""""""""""""""""""""""""""""""
 
-""" Basics
-filetype off
-set nocompatible
-filetype plugin indent on
-set shell=/bin/bash
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-""" Setup Bundle Support
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+""" Set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-""" Bundles
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'kien/ctrlp.vim'
+""" Plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'joshdick/onedark.vim'
+" Plugin 'gmarik/vundle'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'tomtom/tcomment_vim'
+" Plugin 'cakebaker/scss-syntax.vim'
+" Plugin 'plasticboy/vim-markdown'
+" Plugin 'kien/ctrlp.vim'
 
 " Color Schemes
-Bundle 'tomasr/molokai'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'joshdick/onedark.vim'
+" Plugin 'tomasr/molokai'
+" Plugin 'w0ng/vim-hybrid'
 
+
+"""
+call vundle#end()
+filetype plugin indent on
+set shell=/bin/bash
 """ General
 set number                      " Show line numbers
 set laststatus=2                " Always show the statusline
