@@ -13,7 +13,6 @@ call vundle#begin()
 """ Plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'joshdick/onedark.vim'
-" Plugin 'gmarik/vundle'
 " Plugin 'tpope/vim-fugitive'
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'tomtom/tcomment_vim'
@@ -21,15 +20,10 @@ Plugin 'joshdick/onedark.vim'
 " Plugin 'plasticboy/vim-markdown'
 " Plugin 'kien/ctrlp.vim'
 
-" Color Schemes
-" Plugin 'tomasr/molokai'
-" Plugin 'w0ng/vim-hybrid'
-
-
-"""
 call vundle#end()
 filetype plugin indent on
 set shell=/bin/bash
+
 """ General
 set number                      " Show line numbers
 set laststatus=2                " Always show the statusline
