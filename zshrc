@@ -1,5 +1,8 @@
-source ~/Dropbox/Projects/dotfiles/antigen/antigen.zsh
-export PATH="/usr/local/opt/python/libexec/bin::$HOME/Library/Haskell/bin:$HOME/bin:/opt/apache-maven-3.5.2/bin:$PATH"
+export PATH=/home/magnus/bin/:$PATH
+alias open="xdg-open"
+alias zshconfig="vim ~/.zshrc"
+
+source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -8,13 +11,17 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle heroku
 antigen bundle command-not-found
+antigen bundle zsh-users/zsh-completions
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
 # antigen theme candy
-antigen theme refined
+# antigen theme clean
+# antigen theme jnrowe
+# antigen theme mh
+antigen theme geometry-zsh/geometry
 
 # Tell Antigen that you're done.
 antigen apply
