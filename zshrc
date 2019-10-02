@@ -4,6 +4,9 @@
 export PATH=/home/magnus/bin/:$PATH
 source ~/.fdir
 
+ZSH_CUSTOM=$HOME/.zsh_custom
+export DOCKER_HOST=tcp://0.0.0.0:2375
+
 ###################################
 ### MISC
 ###################################
@@ -20,9 +23,10 @@ antigen use oh-my-zsh
 
 # Load bundles
 antigen bundle git
-antigen bundle heroku
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle history-substring-search
 antigen bundle rupa/z
 
 # Apply the theme
@@ -31,4 +35,12 @@ antigen theme agnoster/agnoster-zsh-theme
 
 # Apply antigen setup
 antigen apply
-export DOCKER_HOST=tcp://0.0.0.0:2375
+
+# Set startup directory
+cd /mnt/d
+
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
