@@ -2,7 +2,9 @@
 ### ENV 
 ###################################
 source ~/.env
+
 export DOCKER_HOST=tcp://0.0.0.0:2375
+export PATH="$PATH:$HOME/.local/bin"
 
 ###################################
 ### MISC
@@ -25,10 +27,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle history-substring-search
 antigen bundle rupa/z
-
-# Apply the theme
-# antigen theme clean
-antigen theme agnoster/agnoster-zsh-theme
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 
 # Apply antigen setup
 antigen apply
