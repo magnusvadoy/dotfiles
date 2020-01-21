@@ -1,10 +1,7 @@
 ###################################
 ### ENV 
 ###################################
-export PATH=/home/magnus/bin/:$PATH
-source ~/.fdir
-
-ZSH_CUSTOM=$HOME/.zsh_custom
+source ~/.env
 export DOCKER_HOST=tcp://0.0.0.0:2375
 
 ###################################
@@ -35,9 +32,6 @@ antigen theme agnoster/agnoster-zsh-theme
 
 # Apply antigen setup
 antigen apply
-
-# Set startup directory
-cd /mnt/d
 
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
