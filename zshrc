@@ -1,20 +1,3 @@
-###################################
-### ENV 
-###################################
-source ~/.env
-
-export DOCKER_HOST=tcp://0.0.0.0:2375
-export PATH="$PATH:$HOME/.local/bin"
-
-###################################
-### MISC
-###################################
-# Fix for WSL
-unsetopt BG_NICE
-
-####################################
-## ANTIGEN
-####################################
 source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -22,6 +5,7 @@ antigen use oh-my-zsh
 
 # Load bundles
 antigen bundle git
+
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
