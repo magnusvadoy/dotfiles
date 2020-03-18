@@ -1,11 +1,13 @@
 source ~/dotfiles/antigen/antigen.zsh
 
+# Avoid background processes to not bother Windows
+unsetopt BG_NICE
+
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
 # Load bundles
 antigen bundle git
-
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
@@ -13,6 +15,7 @@ antigen bundle history-substring-search
 antigen bundle rupa/z
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
+antigen bundle lukechilds/zsh-nvm
 
 # Apply antigen setup
 antigen apply
