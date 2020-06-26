@@ -13,8 +13,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle history-substring-search
 antigen bundle rupa/z
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
+antigen bundle yardnsm/blox-zsh-theme
 antigen bundle lukechilds/zsh-nvm
 
 # Apply antigen setup
