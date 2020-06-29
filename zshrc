@@ -12,9 +12,9 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle history-substring-search
-antigen bundle rupa/z
-antigen bundle yardnsm/blox-zsh-theme
+antigen bundle agkozak/zsh-z
 antigen bundle lukechilds/zsh-nvm
+antigen bundle yardnsm/blox-zsh-theme
 
 # Apply antigen setup
 antigen apply
