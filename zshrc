@@ -8,10 +8,15 @@ antigen use oh-my-zsh
 
 # Load bundles
 antigen bundle git
+antigen bundle npm
+antigen bundle fzf
+antigen bundle command-not-found
+antigen bundle history-substring-search
+
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle history-substring-search
+
 antigen bundle agkozak/zsh-z
 antigen bundle lukechilds/zsh-nvm
 antigen bundle yardnsm/blox-zsh-theme
