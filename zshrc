@@ -1,4 +1,5 @@
 source ~/dotfiles/antigen/antigen.zsh
+source ~/.secrets
 
 # Avoid background processes to not bother Windows
 unsetopt BG_NICE
@@ -29,4 +30,6 @@ zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
-source ~/.secrets
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
