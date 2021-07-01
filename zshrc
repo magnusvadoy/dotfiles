@@ -13,9 +13,8 @@ antigen bundle command-not-found
 antigen bundle history-substring-search
 
 antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-
+antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle reegnz/jq-zsh-plugin
 antigen bundle agkozak/zsh-z
 antigen bundle yardnsm/blox-zsh-theme
