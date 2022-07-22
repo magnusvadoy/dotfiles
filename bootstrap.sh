@@ -1,13 +1,15 @@
 #!/bin/sh
-DOTFILES_DIR=$(dirname $(readlink -f $0))
+DIR=$pwd
 
-cd $DOTFILES_DIR
+cd $DIR
 
 git submodule init
 git submodule update
 
-ln -s $DOTFILES_DIR/zshrc ~/.zshrc
-ln -s $DOTFILES_DIR/tmux.conf ~/.tmux.conf
-ln -s $DOTFILES_DIR/gitignore ~/.gitignore
+touch ~/.env
+mkdir ~/.nvm
 
-touch ~/.secrets
+ln -s $DIR/zshrc ~/.zshrc
+ln -s $DIR/tmux.conf ~/.tmux.conf
+ln -s $DIR/gitignore ~/.gitignore
+ln -s $DIR/nvm/default-packages ~/.nvm/default-packages

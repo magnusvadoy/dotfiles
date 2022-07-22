@@ -4,14 +4,14 @@ source ~/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # Load bundles
-antigen bundle git
+antigen bundle gitfast
 antigen bundle npm
+antigen bundle mvn
 antigen bundle fzf
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle command-not-found
 antigen bundle history-substring-search
-
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zdharma/fast-syntax-highlighting
@@ -33,8 +33,20 @@ jdk() {
         export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
 }
 
+# File transfer from terminal
+transfer() {
+    curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename "$1") | tee /dev/null;
+    echo
+}
+
 # Load NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 source ~/.env
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/magnus/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
