@@ -1,3 +1,3 @@
 # Dotfiles
 
-Run bootstrap.sh to symlink files
+Run install.sh to symlink files
