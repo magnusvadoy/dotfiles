@@ -2,9 +2,6 @@
 -- Mappings
 --
 
--- Set leader to space
-vim.g.mapleader = ' '
-
 -- disable arrow keys and common typos...
 local key_mapper = function(mode, key, result)
   vim.api.nvim_set_keymap(

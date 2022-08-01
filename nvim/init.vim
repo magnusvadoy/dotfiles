@@ -21,4 +21,6 @@ set ttyfast                 " Speed up scrolling in Vim
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 call plug#end()
