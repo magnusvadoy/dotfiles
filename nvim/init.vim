@@ -4,6 +4,10 @@ set clipboard=unnamedplus   " use system clipboard
 set showmatch               " jumps to matching bracket
 set cursorline              " highlight current cursorline
 
+" Autocomplete
+" Always show popup menu (even if only 1 match), and don't preselect a match
+set completeopt=menu,menuone,noselect
+
 " Search
 set ignorecase              " ignore case in search patterns 
 set hlsearch                " highlights all matches of previous search pattern 
@@ -26,6 +30,19 @@ set ttyfast                 " Speed up scrolling in Vim
 
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
+
+" Language Server Protocol & Autocomplete
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" Snippets
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 " File Control / Navigating
 Plug 'nvim-lua/plenary.nvim'

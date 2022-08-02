@@ -34,8 +34,15 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # Aliases
-alias lg="lazygit"
+export EDITOR="nvim"
+
+alias vi="nvim"
 alias vim="nvim"
+alias cat="bat"
+
+# start with a space to be ignored in history
+alias zedit=" $EDITOR ~/.zshrc"
+alias viedit=" $EDITOR ~/.config/nvim/init.vim"
 
 # Functions
 # Allow switching between different JDKs
