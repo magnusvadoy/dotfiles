@@ -7,8 +7,8 @@ Run install.sh to setup folders and symlink files.
 The following tools needs to be installed: 
 
 - zsh
-- nvm
+- nvim
 - tmux
 - fzf
+- nvm
 - jq
-- vim
