@@ -41,7 +41,7 @@ require('telescope').load_extension('fzf')
 
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "lua", "typescript", "tsx", "json", "javascript" },
+  ensure_installed = { "typescript", "tsx", "json", "javascript" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -74,7 +74,7 @@ require('nvim-treesitter.configs').setup {
 -- LSP & Autocomplete
 --
 
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
   snippet = {
