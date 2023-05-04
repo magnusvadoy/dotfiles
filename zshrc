@@ -1,9 +1,11 @@
-source ~/dotfiles/antigen/antigen.zsh
+#######################################
+###     ANTIGEN 
+#######################################
 
 # Load the oh-my-zsh's library.
+source ~/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
-
-# Load bundles
+ 
 # Bundles from oh-my-zsh
 antigen bundle git # adds some useful aliases and functions
 antigen bundle gitfast # faster completion for git
@@ -24,36 +26,34 @@ antigen bundle agkozak/zsh-z # jump quickly to recent directories
 
 # Theme
 antigen bundle yardnsm/blox-zsh-theme
+BLOX_CONF__ONELINE=true
 
 # Apply antigen setup
 antigen apply
+
+#######################################
+###     Aliases 
+#######################################
+
+alias vi="vim"
+
+#######################################
+###     Bindings 
+#######################################
 
 # bind UP and DOWN arrow keys to history search
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
-# Aliases
-export EDITOR="nvim"
+#######################################
+###     Environment 
+#######################################
 
-alias vi="nvim"
-alias vim="nvim"
-alias cat="bat"
+export PATH=$HOME/.rd/bin:$PATH
+export EDITOR="vim"
 
-# start with a space to be ignored in history
-alias zedit=" $EDITOR ~/.zshrc"
-alias viedit=" $EDITOR ~/.config/nvim/init.vim"
+# iterm 2 integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Functions
-# Allow switching between different JDKs
-jdk() {
-        version=$1
-        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-}
-
-# Load env vars
 source ~/.env
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/magnus/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
