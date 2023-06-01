@@ -3,7 +3,7 @@
 #######################################
 
 # Load the oh-my-zsh's library.
-source ~/dotfiles/antigen/antigen.zsh
+source ~/code/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
  
 # Bundles from oh-my-zsh
@@ -12,8 +12,7 @@ antigen bundle gitfast # faster completion for git
 antigen bundle npm # completion and aliases
 antigen bundle mvn # completion and aliases
 antigen bundle fzf # enabled fzf's key bindings and auto-completion
-antigen bundle nvm # sources nvm and adds completion
-antigen bundle docker # completion and aliases
+antigen bundle nvm # sources nvm and adds completiontigen bundle docker # completion and aliases
 antigen bundle docker-compose # completion and aliases
 antigen bundle history-substring-search # fish shell history search feature
 
@@ -57,3 +56,7 @@ export EDITOR="vim"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 source ~/.env
+
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
