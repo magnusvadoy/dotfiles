@@ -20,7 +20,6 @@ antigen bundle history-substring-search # fish shell history search feature
 antigen bundle zsh-users/zsh-completions # additonal completions
 antigen bundle zsh-users/zsh-autosuggestions # autosuggestions based on history
 antigen bundle zsh-users/zsh-syntax-highlighting # fish shell like syntax highlighting 
-antigen bundle reegnz/jq-zsh-plugin # interactive jq expression builder (alt + j)
 antigen bundle agkozak/zsh-z # jump quickly to recent directories
 
 # Theme
@@ -35,6 +34,7 @@ antigen apply
 #######################################
 
 alias vi="vim"
+alias vim="nvim"
 
 #######################################
 ###     Bindings 
@@ -51,12 +51,4 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export PATH=$HOME/.rd/bin:$PATH
 export EDITOR="vim"
-
-# iterm 2 integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 source ~/.env
-
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
