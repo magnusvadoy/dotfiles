@@ -1,0 +1,7 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Magnus Furnes Vadøy
+	email = magnus.f.vadoy@gmail.com
+[push]
+	autoSetupRemote = true

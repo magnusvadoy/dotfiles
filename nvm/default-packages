@@ -1,2 +1,4 @@
 yarn
 pnpm
+@sanity/cli
+groq-cli

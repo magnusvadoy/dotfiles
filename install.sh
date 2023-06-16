@@ -27,6 +27,12 @@ if [ ! -f "$DIR/gitignore" ]; then
 fi
 ln -s "$DIR/gitignore" ~/.gitignore
 
+if [ ! -f "$DIR/gitconfig" ]; then
+    echo "Error: $DIR/gitconfig not found."
+    exit 1
+fi
+ln -s "$DIR/gitconfig" ~/.gitconfig
+
 if [ ! -f "$DIR/nvm/default-packages" ]; then
     echo "Error: $DIR/nvm/default-packages not found."
     exit 1
