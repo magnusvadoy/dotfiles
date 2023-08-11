@@ -2,6 +2,9 @@
 ###     ANTIGEN 
 #######################################
 
+# Configure Completions
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # Load the oh-my-zsh's library.
 source ~/code/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
@@ -11,14 +14,13 @@ antigen bundle git # adds some useful aliases and functions
 antigen bundle gitfast # faster completion for git
 antigen bundle npm # completion and aliases
 antigen bundle mvn # completion and aliases
-antigen bundle fzf # enabled fzf's key bindings and auto-completion
-antigen bundle docker # completion and aliases
 antigen bundle docker-compose # completion and aliases
+antigen bundle fzf # enabled fzf's key bindings and auto-completion
 antigen bundle history-substring-search # fish shell history search feature
 
 # Bundles from other repos
 antigen bundle zsh-users/zsh-completions # additonal completions
-antigen bundle zsh-users/zsh-autosuggestions # autosuggestions based on history
+antigen bundle zsh-users/zsh-autosuggestions # fisk like autosuggestions based on history
 antigen bundle zsh-users/zsh-syntax-highlighting # fish shell like syntax highlighting 
 antigen bundle agkozak/zsh-z # jump quickly to recent directories
 antigen bundle lukechilds/zsh-nvm # installs and sources nvm
@@ -59,9 +61,12 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 ###     Environment 
 #######################################
 
-export EDITOR="vim"
+export EDITOR="code -w"
+export PATH="$PATH:/Users/magnus/.dotnet/tools"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-source ~/.env
+autoload bashcompinit && bashcompinit
+source $(brew --prefix)/etc/bash_completion.d/az
 
+source ~/.env
