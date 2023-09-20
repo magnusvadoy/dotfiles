@@ -89,3 +89,7 @@ autoload bashcompinit && bashcompinit
 source $(brew --prefix)/etc/bash_completion.d/az
 
 source ~/.env
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

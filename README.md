@@ -10,5 +10,4 @@ The following tools needs to be installed:
 - nvim
 - tmux
 - fzf
-- nvm
 - jq
