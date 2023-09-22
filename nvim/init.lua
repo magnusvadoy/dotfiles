@@ -279,7 +279,7 @@ vim.keymap.set('n', '<leader><space>', '<cmd>Telescope buffers<cr>')
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
 vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
 vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>')
-vim.keymap.set('n', '<leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
+vim.keymap.set('n', '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 
 require('telescope').load_extension('fzf')
 
@@ -288,21 +288,7 @@ require('telescope').load_extension('fzf')
 -- nvim-tree (File explorer)
 ---
 -- See :help nvim-tree-setup
-require('nvim-tree').setup({
-	hijack_cursor = false,
-	on_attach = function(bufnr)
-		local bufmap = function(lhs, rhs, desc)
-			vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
-		end
-
-		-- :help nvim-tree.api
-		local api = require('nvim-tree.api')
-
-		bufmap('L', api.node.open.edit, 'Expand folder or go to file')
-		bufmap('H', api.node.navigate.parent_close, 'Close parent folder')
-		bufmap('gh', api.tree.toggle_hidden_filter, 'Toggle hidden files')
-	end
-})
+require('nvim-tree').setup({})
 
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
 
