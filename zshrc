@@ -61,7 +61,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 ###     Environment 
 #######################################
 
-export EDITOR="code -w"
+export EDITOR="nvim"
 export PATH="$PATH:/Users/magnus/.dotnet/tools"
 
 # Dotnet autocompletions
