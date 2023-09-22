@@ -120,6 +120,16 @@ lazy.setup({
 	{ 'moll/vim-bbye' },
 	{ 'nvim-lua/plenary.nvim' },
 	{ 'akinsho/toggleterm.nvim' },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+		}
+	},
 
 	-- LSP support
 	{ 'neovim/nvim-lspconfig' },
