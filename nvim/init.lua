@@ -65,7 +65,8 @@ vim.keymap.set({ 'n', 'x' }, 'gp', '"+p') -- paste
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
 
 -- Replace the current word
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>r",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- ========================================================================== --
 -- ==                               COMMANDS                               == --
@@ -133,16 +134,20 @@ lazy.setup({
   { 'kyazdani42/nvim-tree.lua' },
 
   -- Fuzzy finder
-  { 'nvim-telescope/telescope.nvim',              branch = '0.1.x' },
-  { 'nvim-telescope/telescope-fzf-native.nvim',   build = 'make' },
+  { 'nvim-telescope/telescope.nvim',            branch = '0.1.x' },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
   -- Git
   { 'lewis6991/gitsigns.nvim' },
 
   -- Code manipulation
-  { 'nvim-treesitter/nvim-treesitter' },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+  },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
-  { 'tpope/vim-surround' },
   { 'numToStr/Comment.nvim' },
   {
     'windwp/nvim-autopairs',
@@ -262,6 +267,14 @@ vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
 vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>')
 vim.keymap.set('n', '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 
+require('telescope').setup({
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
+})
+
 require('telescope').load_extension('fzf')
 
 
@@ -305,12 +318,17 @@ require('nvim-treesitter.configs').setup({
     'javascript',
     'typescript',
     'tsx',
+    'svelte',
     'lua',
     'html',
     'css',
+    'scss',
     'json',
     'go',
     'c_sharp'
+  },
+  context_commentstring = {
+    enable = true,
   },
 })
 
