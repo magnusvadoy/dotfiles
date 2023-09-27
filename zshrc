@@ -1,12 +1,27 @@
 #######################################
+###     HOMEBREW & MAC OS 
+#######################################
+
+if type brew &>/dev/null; then
+  # Configure Completions
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  # Configure PATH
+  export PATH="/usr/local/bin:$PATH"
+
+  # iterm2 shell integration
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+  # for iterm2 tmux integration
+  alias tmux="tmux -CC"
+fi
+
+#######################################
 ###     ANTIGEN 
 #######################################
 
-# Configure Completions
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
 # Load the oh-my-zsh's library.
-source ~/code/dotfiles/antigen/antigen.zsh
+source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
  
 # Bundles from oh-my-zsh
@@ -45,8 +60,6 @@ antigen apply
 
 alias vi="vim"
 alias vim="nvim"
-alias tmux="tmux -CC"
-alias newtmux="/opt/homebrew/bin/tmux -CC new -A -s main"
 
 #######################################
 ###     Bindings 
@@ -62,34 +75,5 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 #######################################
 
 export EDITOR="nvim"
-export PATH="$PATH:/Users/magnus/.dotnet/tools"
-
-# Dotnet autocompletions
-_dotnet_zsh_complete()
-{
-  local completions=("$(dotnet complete "$words")")
-
-  # If the completion list is empty, just continue with filename selection
-  if [ -z "$completions" ]
-  then
-    _arguments '*::arguments: _normal'
-    return
-  fi
-
-  # This is not a variable assignment, don't remove spaces!
-  _values = "${(ps:\n:)completions}"
-}
-
-compdef _dotnet_zsh_complete dotnet
-
-# iterm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-autoload bashcompinit && bashcompinit
-source $(brew --prefix)/etc/bash_completion.d/az
-
 source ~/.env
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
