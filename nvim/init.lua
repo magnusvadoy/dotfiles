@@ -33,6 +33,10 @@ vim.opt.signcolumn = 'yes'
 -- Space as leader key
 vim.g.mapleader = ' '
 
+-- disable netrw since we will be using nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
@@ -138,8 +142,13 @@ lazy.setup({
   -- Code manipulation
   { 'nvim-treesitter/nvim-treesitter' },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
-  { 'numToStr/Comment.nvim' },
   { 'tpope/vim-surround' },
+  { 'numToStr/Comment.nvim' },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  },
 
   -- LSP support
   { 'neovim/nvim-lspconfig' },
@@ -210,60 +219,8 @@ require('lualine').setup({
 ---
 -- bufferline
 ---
--- See :help bufferline-settings
-require('bufferline').setup({
-  options = {
-    mode = 'buffers',
-    offsets = {
-      { filetype = 'NvimTree' }
-    },
-  },
-  -- :help bufferline-highlights
-  highlights = {
-    buffer_selected = {
-      italic = false
-    },
-    indicator_selected = {
-      fg = { attribute = 'fg', highlight = 'Function' },
-      italic = false
-    }
-  }
-})
 
-
----
--- Treesitter
----
--- See :help nvim-treesitter-modules
-require('nvim-treesitter.configs').setup({
-  highlight = {
-    enable = true,
-  },
-  -- :help nvim-treesitter-textobjects-modules
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      }
-    },
-  },
-  ensure_installed = {
-    'javascript',
-    'typescript',
-    'tsx',
-    'lua',
-    'html',
-    'css',
-    'json',
-    'go',
-    'c_sharp'
-  },
-})
+require('bufferline').setup({})
 
 
 ---
@@ -312,9 +269,50 @@ require('telescope').load_extension('fzf')
 -- nvim-tree (File explorer)
 ---
 -- See :help nvim-tree-setup
-require('nvim-tree').setup({})
+require('nvim-tree').setup({
+  actions = {
+    open_file = {
+      quit_on_open = true
+    }
+  }
+})
 
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
+
+
+---
+-- Treesitter
+---
+-- See :help nvim-treesitter-modules
+require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true,
+  },
+  -- :help nvim-treesitter-textobjects-modules
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      }
+    },
+  },
+  ensure_installed = {
+    'javascript',
+    'typescript',
+    'tsx',
+    'lua',
+    'html',
+    'css',
+    'json',
+    'go',
+    'c_sharp'
+  },
+})
 
 
 ---
