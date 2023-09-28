@@ -14,6 +14,7 @@ vim.opt.mouse = 'a'
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.smartcase = true
+vim.opt.ignorecase = true
 
 -- Tabs
 vim.opt.tabstop = 2
@@ -125,13 +126,16 @@ lazy.opts = {}
 lazy.setup({
   -- Theming
   { 'folke/tokyonight.nvim' },
-  { 'kyazdani42/nvim-web-devicons' },
+  { 'nvim-tree/nvim-web-devicons' },
   { 'nvim-lualine/lualine.nvim' },
   { 'akinsho/bufferline.nvim' },
   { 'lukas-reineke/indent-blankline.nvim' },
 
   -- File explorer
-  { 'kyazdani42/nvim-tree.lua' },
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
 
   -- Fuzzy finder
   { 'nvim-telescope/telescope.nvim',            branch = '0.1.x' },
