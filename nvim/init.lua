@@ -137,7 +137,7 @@ lazy.setup({
   { 'nvim-telescope/telescope.nvim',            branch = '0.1.x' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
-  -- Git
+  -- Git integration
   { 'lewis6991/gitsigns.nvim' },
 
   -- Code manipulation
@@ -148,12 +148,9 @@ lazy.setup({
     },
   },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
-  { 'numToStr/Comment.nvim' },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
-  },
+  { 'echasnovski/mini.pairs',                     version = false },
+  { 'echasnovski/mini.surround',                  version = false },
+  { 'echasnovski/mini.comment',                   version = false },
 
   -- LSP support
   { 'neovim/nvim-lspconfig' },
@@ -229,9 +226,27 @@ require('bufferline').setup({})
 
 
 ---
+-- comments
+---
+require('mini.comment').setup({})
+
+
+---
+-- auto pairs
+---
+require('mini.pairs').setup({})
+
+
+---
+-- surround actions
+---
+require('mini.surround').setup({})
+
+
+---
 -- Comment.nvim
 ---
-require('Comment').setup({})
+-- require('Comment').setup({})
 
 
 ---
