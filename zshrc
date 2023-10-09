@@ -7,7 +7,7 @@ if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
   # Configure PATH
-  export PATH="/usr/local/bin:$PATH"
+  export PATH="/usr/local/bin:/Users/magnus/go/bin:$PATH"
 
   # iterm2 shell integration
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -77,3 +77,5 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 export EDITOR="nvim"
 source ~/.env
 
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
