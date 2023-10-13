@@ -38,6 +38,9 @@ vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Enable 24-bit colours
+vim.opt.termguicolors = true
+
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
 -- ========================================================================== --
@@ -121,17 +124,31 @@ lazy.path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 lazy.opts = {}
 
 lazy.setup({
-	-- Theming
+	-- Theming & UI
 	{ "folke/tokyonight.nvim" },
 	{ "f-person/auto-dark-mode.nvim" },
-	{ "nvim-tree/nvim-web-devicons" },
-	{ "nvim-lualine/lualine.nvim" },
-	{ "akinsho/bufferline.nvim" },
-	{ "lukas-reineke/indent-blankline.nvim" },
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	{ "nvim-lualine/lualine.nvim", event = "VeryLazy" },
+	{ "akinsho/bufferline.nvim", opts = {} },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {
+			indent = {
+				char = "│",
+				tab_char = "│",
+			},
+			scope = { enabled = true },
+		},
+	},
 
 	-- File explorer
 	{
 		"nvim-tree/nvim-tree.lua",
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
@@ -142,41 +159,58 @@ lazy.setup({
 	-- Git integration
 	{ "lewis6991/gitsigns.nvim" },
 
-	-- Code manipulation
+	-- Coding
 	{
 		"nvim-treesitter/nvim-treesitter",
+		version = false,
+		build = ":TSUpdate",
+		event = "VeryLazy",
 		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+			"JoosepAlviste/nvim-ts-context-commentstring", -- useful for embedded languages
+		},
+		keys = {
+			{ "<c-space>", desc = "Increment selection" },
+			{ "<bs>", desc = "Decrement selection", mode = "x" },
 		},
 	},
-	{ "nvim-treesitter/nvim-treesitter-textobjects" },
-	{ "echasnovski/mini.pairs", version = false },
-	{ "echasnovski/mini.surround", version = false },
-	{ "echasnovski/mini.comment", version = false },
 	{
-		"stevearc/conform.nvim",
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		opts = {},
 	},
+	{ "echasnovski/mini.surround", version = false, opts = {} },
+	{ "echasnovski/mini.comment", version = false, opts = {} },
+	{ "stevearc/conform.nvim", dependencies = { "mason.nvim" }, lazy = true, cmd = "ConformInfo" },
 
-	-- LSP support
+	-- LSP
 	{ "neovim/nvim-lspconfig" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 
-	-- Snippets
+	-- Autocomplete & snippets
 	{
 		"L3MON4D3/LuaSnip",
+		version = "v2.*",
+		build = "make install_jsregexp",
 		dependencies = { "rafamadriz/friendly-snippets" },
 	},
-
-	-- Autocomplete
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-cmdline" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-nvim-lua" },
-	{ "saadparwaiz1/cmp_luasnip" },
+	{
+		"hrsh7th/nvim-cmp",
+		version = false,
+		event = "InsertEnter",
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-cmdline" },
+			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "onsails/lspkind.nvim" },
+		},
+	},
 
 	-- Utilities
 	{ "moll/vim-bbye" },
@@ -199,8 +233,6 @@ lazy.setup({
 ---
 -- Colorscheme
 ---
-vim.opt.termguicolors = true
-
 require("auto-dark-mode").setup({
 	update_interval = 1000,
 	set_dark_mode = function()
@@ -234,43 +266,18 @@ require("lualine").setup({
 })
 
 ---
--- bufferline
----
-
-require("bufferline").setup({})
-
----
--- indent-blankline
----
-require("ibl").setup()
-
----
--- comments
----
-require("mini.comment").setup({})
-
----
--- auto pairs
----
-require("mini.pairs").setup({})
-
----
--- surround actions
----
-require("mini.surround").setup({})
-
----
 -- conform.nvim
 ---
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = { "prettierd" },
-		typescript = { "prettierd" },
-		jsx = { "prettierd" },
-		css = { "prettierd" },
-		json = { "prettierd" },
-		markdown = { "prettierd" },
+		javascript = { "prettierd", "prettier" },
+		typescript = { "prettierd", "prettier" },
+		jsx = { "prettierd", "prettier" },
+		css = { "prettierd", "prettier" },
+		json = { "prettierd", "prettier" },
+		markdown = { "prettierd", "prettier" },
+		html = { "prettierd", "prettier" },
 	},
 })
 
@@ -346,8 +353,48 @@ require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
 	},
+	indent = {
+		enable = true,
+	},
+	ensure_installed = {
+		"go",
+		"lua",
+		"typescript",
+		"javascript",
+		"jsdoc",
+		"json",
+		"jsonc",
+		"tsx",
+		"svelte",
+		"html",
+		"css",
+		"scss",
+		"c_sharp",
+		"bash",
+		"yaml",
+		"toml",
+		"markdown",
+		"regex",
+		"diff",
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<C-space>",
+			node_incremental = "<C-space>",
+			scope_incremental = false,
+			node_decremental = "<bs>",
+		},
+	},
 	-- :help nvim-treesitter-textobjects-modules
 	textobjects = {
+		move = {
+			enable = true,
+			goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+			goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+			goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+			goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+		},
 		select = {
 			enable = true,
 			lookahead = true,
@@ -358,19 +405,6 @@ require("nvim-treesitter.configs").setup({
 				["ic"] = "@class.inner",
 			},
 		},
-	},
-	ensure_installed = {
-		"javascript",
-		"typescript",
-		"tsx",
-		"svelte",
-		"lua",
-		"html",
-		"css",
-		"scss",
-		"json",
-		"go",
-		"c_sharp",
 	},
 	context_commentstring = {
 		enable = true,
@@ -386,45 +420,64 @@ require("luasnip.loaders.from_vscode").lazy_load()
 ---
 -- nvim-cmp (autocomplete)
 ---
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+local has_words_before = function()
+	unpack = unpack or table.unpack
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local luasnip = require("luasnip")
-
+local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 -- See :help cmp-config
 cmp.setup({
+	experimental = {
+		ghost_text = {
+			hl_group = "CmpGhostText",
+		},
+	},
+	completion = { completeopt = "menu,menuone,noinsert" },
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
 		end,
 	},
 	sources = {
-		{ name = "path" },
 		{ name = "nvim_lsp" },
-		{ name = "buffer" },
-		{ name = "luasnip" },
 		{ name = "nvim_lua" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "nvim_lsp_signature_help" },
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
-		fields = { "abbr", "kind", "menu" },
-		format = function(entry, item)
-			local menu_icon = {
-				buffer = "[Buf]",
-				nvim_lsp = "[Lsp]",
-				nvim_lua = "[Lua]",
-				luasnip = "[Snip]",
-				path = "[Path]",
-			}
+		format = lspkind.cmp_format({
+			mode = "symbol_text", -- show only symbol annotations
+			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
-			item.menu = menu_icon[entry.source.name]
-			return item
-		end,
+			-- The function below will be called before any actual modifications from lspkind
+			-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+			before = function(entry, vim_item)
+				local menu_icon = {
+					buffer = "[Buf]",
+					nvim_lsp = "[Lsp]",
+					nvim_lua = "[Lua]",
+					luasnip = "[Snip]",
+					path = "[Path]",
+				}
+				vim_item.menu = menu_icon[entry.source.name]
+				return vim_item
+			end,
+		}),
 	},
 	-- See :help cmp-mapping
 	mapping = {
@@ -434,44 +487,30 @@ cmp.setup({
 		["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
 		["<C-n>"] = cmp.mapping.select_next_item(select_opts),
 
-		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-d>"] = cmp.mapping.scroll_docs(4),
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
 
 		["<C-e>"] = cmp.mapping.abort(),
-		["<C-y>"] = cmp.mapping.confirm({ select = true }),
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
-
-		["<C-f>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(1) then
-				luasnip.jump(1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<C-b>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-y>"] = cmp.mapping.confirm({ select = false }),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			local col = vim.fn.col(".") - 1
-
 			if cmp.visible() then
-				cmp.select_next_item(select_opts)
-			elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-				fallback()
-			else
+				cmp.select_next_item()
+			-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+			-- that way you will only jump inside the snippet region
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif has_words_before() then
 				cmp.complete()
+			else
+				fallback()
 			end
 		end, { "i", "s" }),
-
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
-				cmp.select_prev_item(select_opts)
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
 			else
 				fallback()
 			end
@@ -501,6 +540,9 @@ cmp.setup.cmdline(":", {
 		},
 	}),
 })
+
+-- autopairs integration
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 ---
 -- LSP config
@@ -540,7 +582,6 @@ vim.diagnostic.config({
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 ---
@@ -558,16 +599,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- You can search each function in the help page.
 		-- For example :help vim.lsp.buf.hover()
 
-		bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+		-- bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+		bufmap("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
 		bufmap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-		bufmap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
-		bufmap("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-		bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
+		bufmap("n", "gi", "<cmd>Telescope lsp_implementations<cr>")
+		bufmap("n", "go", "<cmd>Telescope lsp_type_definitions<cr>")
+		bufmap("n", "gr", "<cmd>Telescope lsp_references<cr>")
 		bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
 		bufmap("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-		bufmap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-		bufmap({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
-		bufmap("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+		bufmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
+		bufmap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 		bufmap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
 		bufmap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 		bufmap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
