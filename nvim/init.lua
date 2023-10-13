@@ -46,7 +46,7 @@ vim.opt.termguicolors = true
 -- ========================================================================== --
 
 -- Select whole file
-vim.keymap.set("n", "<leader>a", ":keepjumps normal! ggVG<cr>")
+vim.keymap.set("n", "<leader>sa", ":keepjumps normal! ggVG<cr>", { desc = "[S]elect [A]ll" })
 
 -- Move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -61,14 +61,14 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y') -- copy
-vim.keymap.set({ "n", "x" }, "gp", '"+p') -- paste
+vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "[Y]ank" }) -- copy
+vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "[P]aste" }) -- paste
 
 -- Leader + w to save
-vim.keymap.set("n", "<leader>w", "<cmd>write<cr>")
+vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "[W]rite file" })
 
 -- Replace the current word
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[R]ename [W]ord" })
 
 -- ========================================================================== --
 -- ==                               COMMANDS                               == --
@@ -132,7 +132,7 @@ lazy.setup({
 		opts = {},
 	},
 	{ "nvim-lualine/lualine.nvim", event = "VeryLazy" },
-	{ "akinsho/bufferline.nvim", opts = {} },
+	{ "akinsho/bufferline.nvim", event = "VeryLazy", opts = {} },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -169,6 +169,7 @@ lazy.setup({
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-context",
 			"JoosepAlviste/nvim-ts-context-commentstring", -- useful for embedded languages
+			"windwp/nvim-ts-autotag", -- autoclose and autorename html tags
 		},
 		keys = {
 			{ "<c-space>", desc = "Increment selection" },
@@ -176,12 +177,12 @@ lazy.setup({
 		},
 	},
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
 		opts = {},
 	},
-	{ "echasnovski/mini.surround", version = false, opts = {} },
-	{ "echasnovski/mini.comment", version = false, opts = {} },
+	{ "echasnovski/mini.surround", event = "VeryLazy", opts = {} },
+	{ "echasnovski/mini.comment", event = "VeryLazy", opts = {} },
 	{ "stevearc/conform.nvim", dependencies = { "mason.nvim" }, lazy = true, cmd = "ConformInfo" },
 
 	-- LSP
@@ -247,14 +248,12 @@ require("auto-dark-mode").setup({
 
 -- vim-bbye
 ---
-vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>")
+vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose buffer" })
 
 ---
 -- lualine.nvim (statusline)
 ---
-vim.opt.showmode = false
 
--- See :help lualine.txt
 require("lualine").setup({
 	options = {
 		theme = "tokyonight",
@@ -314,22 +313,50 @@ require("gitsigns").setup({
 -- Telescope
 ---
 -- See :help telescope.builtin
-vim.keymap.set("n", "<leader>?", "<cmd>Telescope oldfiles<cr>")
-vim.keymap.set("n", "<leader><space>", "<cmd>Telescope buffers<cr>")
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>")
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
 
-require("telescope").setup({
-	pickers = {
-		find_files = {
-			hidden = true,
-		},
-	},
-})
+local utils = require("telescope.utils")
+local builtin = require("telescope.builtin")
 
+vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+vim.keymap.set("n", "<leader>/", function()
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer" })
+vim.keymap.set("n", "<leader>cd", builtin.diagnostics, { desc = "[C]ode [D]iagnostics" })
+
+-- Use git_files if in git repo, otherwise fall back to find_files
+_G.project_files = function()
+	local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
+	if ret == 0 then
+		builtin.git_files()
+	else
+		builtin.find_files()
+	end
+end
+
+vim.keymap.set("n", "<leader>ff", "<cmd>lua project_files()<cr>", { desc = "[F]ind [F]iles" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
+vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
+vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
+
+require("telescope").setup({})
 require("telescope").load_extension("fzf")
+
+---
+-- Telescope
+---
+require("which-key").register({
+	["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
+	["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+	["<leader>b"] = { name = "[B]uffer", _ = "which_key_ignore" },
+	["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+	["<leader>s"] = { name = "[S]elect", _ = "which_key_ignore" },
+	-- ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+})
 
 ---
 -- nvim-tree (File explorer)
@@ -343,7 +370,7 @@ require("nvim-tree").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "[E] Toggle file explorer" })
 
 ---
 -- Treesitter
@@ -406,7 +433,12 @@ require("nvim-treesitter.configs").setup({
 			},
 		},
 	},
+	-- nvim-ts-context-commentstring
 	context_commentstring = {
+		enable = true,
+	},
+	-- nvim-ts-autotag
+	autotag = {
 		enable = true,
 	},
 })
@@ -428,10 +460,10 @@ local has_words_before = function()
 end
 
 local cmp = require("cmp")
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
 -- See :help cmp-config
 cmp.setup({
@@ -541,9 +573,6 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
--- autopairs integration
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
 ---
 -- LSP config
 ---
@@ -590,28 +619,35 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = group,
 	desc = "LSP actions",
-	callback = function()
-		local bufmap = function(mode, lhs, rhs)
-			local opts = { buffer = true }
-			vim.keymap.set(mode, lhs, rhs, opts)
+	callback = function(_, bufnr)
+		local nmap = function(keys, func, desc)
+			vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 		end
 
-		-- You can search each function in the help page.
-		-- For example :help vim.lsp.buf.hover()
+		nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+		nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-		-- bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-		bufmap("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
-		bufmap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-		bufmap("n", "gi", "<cmd>Telescope lsp_implementations<cr>")
-		bufmap("n", "go", "<cmd>Telescope lsp_type_definitions<cr>")
-		bufmap("n", "gr", "<cmd>Telescope lsp_references<cr>")
-		bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-		bufmap("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-		bufmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
-		bufmap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-		bufmap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-		bufmap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-		bufmap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+		nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+		nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
+		nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+		nmap("go", vim.lsp.buf.type_definition, "Type Definition")
+		nmap("<leader>cs", builtin.lsp_document_symbols, "[C]ode [S]ymbols")
+
+		nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+		nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+		nmap("gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
+		nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+		nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+
+		-- Lesser used LSP functionality
+		-- nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+		-- nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+		-- nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+		-- nmap("<leader>wl", function()
+		-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		-- end, "[W]orkspace [L]ist Folders")
 	end,
 })
 
