@@ -240,6 +240,11 @@ require("lualine").setup({
 require("bufferline").setup({})
 
 ---
+-- indent-blankline
+---
+require("ibl").setup()
+
+---
 -- comments
 ---
 require("mini.comment").setup({})
@@ -263,10 +268,8 @@ require("conform").setup({
 		javascript = { "prettierd" },
 		typescript = { "prettierd" },
 		jsx = { "prettierd" },
-		html = { "prettierd" },
 		css = { "prettierd" },
 		json = { "prettierd" },
-		yaml = { "prettierd" },
 		markdown = { "prettierd" },
 	},
 })
@@ -555,13 +558,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- You can search each function in the help page.
 		-- For example :help vim.lsp.buf.hover()
 
-		bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
 		bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 		bufmap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
 		bufmap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
 		bufmap("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
 		bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-		bufmap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+		bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+		bufmap("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
 		bufmap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
 		bufmap({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
 		bufmap("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
