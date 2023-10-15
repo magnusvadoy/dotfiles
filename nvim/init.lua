@@ -158,6 +158,7 @@ lazy.setup({
 
 	-- Git integration
 	{ "lewis6991/gitsigns.nvim" },
+	{ "sindrets/diffview.nvim" },
 
 	-- Coding
 	{
@@ -248,7 +249,7 @@ require("auto-dark-mode").setup({
 
 -- vim-bbye
 ---
-vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose buffer" })
+vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose" })
 
 ---
 -- lualine.nvim (statusline)
@@ -310,6 +311,20 @@ require("gitsigns").setup({
 })
 
 ---
+-- Gitsigns
+---
+
+_G.diffview_toggle = function()
+	if next(require("diffview.lib").views) == nil then
+		vim.cmd("DiffviewOpen")
+	else
+		vim.cmd("DiffviewClose")
+	end
+end
+
+vim.keymap.set("n", "<leader>gd", "<cmd>lua diffview_toggle()<cr>", { desc = "[G]it [D]iffview" })
+
+---
 -- Telescope
 ---
 -- See :help telescope.builtin
@@ -342,6 +357,9 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
+vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[G]it [S]tatus" })
+vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[G]it [B]ranches" })
+vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[G]it [C]ommits" })
 
 require("telescope").setup({})
 require("telescope").load_extension("fzf")
@@ -355,6 +373,7 @@ require("which-key").register({
 	["<leader>b"] = { name = "[B]uffer", _ = "which_key_ignore" },
 	["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
 	["<leader>s"] = { name = "[S]elect", _ = "which_key_ignore" },
+	["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
 	-- ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
 })
 
