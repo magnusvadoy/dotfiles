@@ -136,6 +136,7 @@ lazy.setup({
 	{ "akinsho/bufferline.nvim", event = "VeryLazy", opts = {} },
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		event = "VeryLazy",
 		main = "ibl",
 		opts = {
 			indent = {
@@ -145,11 +146,12 @@ lazy.setup({
 			scope = { enabled = true },
 		},
 	},
+	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 
 	-- File explorer
 	{
 		"nvim-tree/nvim-tree.lua",
-		event = "VeryLazy",
+		lazy = true,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
@@ -180,10 +182,6 @@ lazy.setup({
 			"JoosepAlviste/nvim-ts-context-commentstring", -- useful for embedded languages
 			"windwp/nvim-ts-autotag", -- autoclose and autorename html tags
 		},
-		keys = {
-			{ "<c-space>", desc = "Increment selection" },
-			{ "<bs>", desc = "Decrement selection", mode = "x" },
-		},
 	},
 	{
 		"echasnovski/mini.pairs",
@@ -193,11 +191,6 @@ lazy.setup({
 	{ "echasnovski/mini.surround", event = "VeryLazy", opts = {} },
 	{ "echasnovski/mini.comment", event = "VeryLazy", opts = {} },
 	{ "stevearc/conform.nvim", dependencies = { "mason.nvim" }, lazy = true, cmd = "ConformInfo" },
-
-	-- LSP
-	{ "neovim/nvim-lspconfig" },
-	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
 
 	-- Autocomplete & snippets
 	{
@@ -218,9 +211,20 @@ lazy.setup({
 			{ "hrsh7th/cmp-cmdline" },
 			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "saadparwaiz1/cmp_luasnip" },
-			{ "onsails/lspkind.nvim" },
 		},
 	},
+
+	-- LSP
+	{ "neovim/nvim-lspconfig" },
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+
+	-- Debug
+	{ "mfussenegger/nvim-dap" },
+	{ "rcarriga/nvim-dap-ui" },
+	{ "jay-babu/mason-nvim-dap.nvim" },
+	{ "leoluz/nvim-dap-go" },
+	{ "mxsdev/nvim-dap-vscode-js" },
 
 	-- Utilities
 	{ "moll/vim-bbye" },
@@ -245,7 +249,7 @@ lazy.setup({
 ---
 
 require("auto-dark-mode").setup({
-	update_interval = 500,
+	update_interval = 1000,
 	set_dark_mode = function()
 		vim.api.nvim_set_option("background", "dark")
 		require("catppuccin").setup({
@@ -262,6 +266,41 @@ require("auto-dark-mode").setup({
 	end,
 })
 
+---
+-- Icons
+---
+
+local icons = {
+	Text = "󰉿",
+	Method = "m",
+	Function = "󰊕",
+	Constructor = "",
+	Field = "",
+	Variable = "󰆧",
+	Class = "󰌗",
+	Interface = "",
+	Module = "",
+	Property = "",
+	Unit = "",
+	Value = "󰎠",
+	Enum = "",
+	Keyword = "󰌋",
+	Snippet = "",
+	Color = "󰏘",
+	File = "󰈙",
+	Reference = "",
+	Folder = "󰉋",
+	EnumMember = "",
+	Constant = "󰇽",
+	Struct = "",
+	Event = "",
+	Operator = "󰆕",
+	TypeParameter = "󰊄",
+	Codeium = "󰚩",
+	Copilot = "",
+}
+
+---
 -- vim-bbye
 ---
 
@@ -274,7 +313,7 @@ vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose" })
 require("lualine").setup({
 	options = {
 		-- theme = "tokyonight",
-		icons_enabled = false,
+		icons_enabled = true,
 		disabled_filetypes = {
 			statusline = { "NvimTree" },
 		},
@@ -510,7 +549,7 @@ end
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local lspkind = require("lspkind")
+-- local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 -- See :help cmp-config
@@ -533,29 +572,23 @@ cmp.setup({
 		{ name = "nvim_lsp_signature_help" },
 	},
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		-- completion = cmp.config.window.bordered(),
+		-- documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol_text", -- show only symbol annotations
-			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-
-			-- The function below will be called before any actual modifications from lspkind
-			-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-			before = function(entry, vim_item)
-				local menu_icon = {
-					buffer = "[Buf]",
-					nvim_lsp = "[Lsp]",
-					nvim_lua = "[Lua]",
-					luasnip = "[Snip]",
-					path = "[Path]",
-				}
-				vim_item.menu = menu_icon[entry.source.name]
-				return vim_item
-			end,
-		}),
+		fields = { "kind", "abbr", "menu" },
+		format = function(entry, vim_item)
+			vim_item.kind = icons[vim_item.kind]
+			vim_item.menu = ({
+				nvim_lsp = "",
+				nvim_lua = "",
+				luasnip = "",
+				buffer = "",
+				path = "",
+				emoji = "",
+			})[entry.source.name]
+			return vim_item
+		end,
 	},
 	-- See :help cmp-mapping
 	mapping = {
@@ -701,9 +734,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- LSP servers
 ---
 -- See :help mason-settings
-require("mason").setup({
-	ui = { border = "rounded" },
-})
+require("mason").setup({})
 
 -- See :help mason-lspconfig-settings
 require("mason-lspconfig").setup({
@@ -744,3 +775,53 @@ require("mason-lspconfig").setup({
 		end,
 	},
 })
+
+---
+-- DAP
+---
+
+-- servers
+require("mason-nvim-dap").setup({
+	ensure_installed = { "delve", "js-debug-adapter" },
+})
+
+-- ui
+local dap = require("dap")
+
+local dap_ui_status_ok, dapui = pcall(require, "dapui")
+if not dap_ui_status_ok then
+	return
+end
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+	dapui.open()
+end
+
+dap.listeners.before.event_terminated["dapui_config"] = function()
+	dapui.close()
+end
+
+dap.listeners.before.event_exited["dapui_config"] = function()
+	dapui.close()
+end
+
+dapui.setup()
+
+vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "error", linehl = "", numhl = "" })
+vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
+-- bindings
+vim.keymap.set("n", "<F5>", dap.continue)
+vim.keymap.set("n", "<F10>", dap.step_over)
+vim.keymap.set("n", "<F11>", dap.step_into)
+vim.keymap.set("n", "<F12>", dap.step_out)
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+vim.keymap.set("n", "<leader>dB", function()
+	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+end, { desc = "Breakpoint Condition" })
+
+-- Go
+require("dap-go").setup()
+
+-- javascript
+-- require("dap-vscode-js").setup()
