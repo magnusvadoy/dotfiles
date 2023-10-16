@@ -126,6 +126,7 @@ lazy.opts = {}
 lazy.setup({
 	-- Theming & UI
 	{ "folke/tokyonight.nvim" },
+	{ "catppuccin/nvim" },
 	{ "f-person/auto-dark-mode.nvim" },
 	{
 		"stevearc/dressing.nvim",
@@ -161,6 +162,13 @@ lazy.setup({
 	{ "sindrets/diffview.nvim" },
 
 	-- Coding
+	{
+		"danymat/neogen",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = true,
+		-- Uncomment next line if you want to follow only stable versions
+		-- version = "*"
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
@@ -235,20 +243,28 @@ lazy.setup({
 ---
 -- Colorscheme
 ---
+
 require("auto-dark-mode").setup({
-	update_interval = 1000,
+	update_interval = 500,
 	set_dark_mode = function()
 		vim.api.nvim_set_option("background", "dark")
-		vim.cmd("colorscheme tokyonight")
+		require("catppuccin").setup({
+			flavour = "mocha",
+		})
+		vim.cmd("colorscheme catppuccin")
 	end,
 	set_light_mode = function()
 		vim.api.nvim_set_option("background", "light")
-		vim.cmd("colorscheme tokyonight-day")
+		require("catppuccin").setup({
+			flavour = "latte",
+		})
+		vim.cmd("colorscheme catppuccin")
 	end,
 })
 
 -- vim-bbye
 ---
+
 vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose" })
 
 ---
@@ -257,8 +273,8 @@ vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose" })
 
 require("lualine").setup({
 	options = {
-		theme = "tokyonight",
-		icons_enabled = true,
+		-- theme = "tokyonight",
+		icons_enabled = false,
 		disabled_filetypes = {
 			statusline = { "NvimTree" },
 		},
@@ -268,6 +284,7 @@ require("lualine").setup({
 ---
 -- conform.nvim
 ---
+
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -365,7 +382,7 @@ require("telescope").setup({})
 require("telescope").load_extension("fzf")
 
 ---
--- Telescope
+-- which-key
 ---
 require("which-key").register({
 	["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
@@ -390,6 +407,19 @@ require("nvim-tree").setup({
 })
 
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "[E] Toggle file explorer" })
+
+---
+-- annotations (neogen)
+---
+
+require("neogen").setup({ snippet_engine = "luasnip" })
+
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>cn",
+	":lua require('neogen').generate()<CR>",
+	{ noremap = false, silent = true, desc = "[C]ode A[n]notations" }
+)
 
 ---
 -- Treesitter
@@ -482,14 +512,11 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
 -- See :help cmp-config
 cmp.setup({
 	experimental = {
-		ghost_text = {
-			hl_group = "CmpGhostText",
-		},
+		ghost_text = true,
 	},
 	completion = { completeopt = "menu,menuone,noinsert" },
 	snippet = {
