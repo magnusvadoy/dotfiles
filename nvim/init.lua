@@ -349,7 +349,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Gitsigns
 ---
 -- See :help gitsigns-usage
-require("gitsigns").setup({
+
+local gitsigns = require("gitsigns")
+
+gitsigns.setup({
 	signs = {
 		add = { text = "▎" },
 		change = { text = "▎" },
@@ -366,6 +369,16 @@ require("gitsigns").setup({
 	},
 })
 
+vim.keymap.set("n", "<leader>gn", gitsigns.next_hunk, { desc = "Next hunk" })
+vim.keymap.set("n", "<leader>gp", gitsigns.prev_hunk, { desc = "Previous hunk" })
+vim.keymap.set("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage hunk" })
+vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
+vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo stage hunk" })
+vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer" })
+vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
+vim.keymap.set("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff" })
+vim.keymap.set("n", "<leader>gtd", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
+
 ---
 -- Gitsigns
 ---
@@ -378,7 +391,9 @@ _G.diffview_toggle = function()
 	end
 end
 
-vim.keymap.set("n", "<leader>gd", "<cmd>lua diffview_toggle()<cr>", { desc = "[G]it [D]iffview" })
+vim.keymap.set("n", "<leader>gD", function()
+	diffview_toggle()
+end, { desc = "Diffview" })
 
 ---
 -- Telescope
@@ -413,9 +428,10 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
-vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[G]it [S]tatus" })
-vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[G]it [B]ranches" })
-vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[G]it [C]ommits" })
+
+vim.keymap.set("n", "<leader>ga", builtin.git_status, { desc = "Status" })
+vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Branches" })
+vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Commits" })
 
 require("telescope").setup({})
 require("telescope").load_extension("fzf")
@@ -445,7 +461,7 @@ require("nvim-tree").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "[E] Toggle file explorer" })
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File explorer" })
 
 ---
 -- annotations (neogen)
@@ -746,6 +762,7 @@ require("mason-lspconfig").setup({
 		"gopls",
 		"csharp_ls",
 		"lua_ls",
+		"svelte",
 	},
 	-- See :help mason-lspconfig.setup_handlers()
 	handlers = {
