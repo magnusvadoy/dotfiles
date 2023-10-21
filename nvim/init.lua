@@ -23,7 +23,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- Line Wraps
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Keep 8 lines of context
 vim.opt.scrolloff = 8
@@ -38,6 +38,9 @@ vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Don't show mode in
+vim.opt.showmode = false
+
 -- Enable 24-bit colours
 vim.opt.termguicolors = true
 
@@ -46,7 +49,7 @@ vim.opt.termguicolors = true
 -- ========================================================================== --
 
 -- Select whole file
-vim.keymap.set("n", "<leader>sa", ":keepjumps normal! ggVG<cr>", { desc = "[S]elect [A]ll" })
+vim.keymap.set("n", "<leader>sa", ":keepjumps normal! ggVG<cr>", { desc = "Select All" })
 
 -- Move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -61,14 +64,14 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "[Y]ank" }) -- copy
-vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "[P]aste" }) -- paste
+vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank" }) -- copy
+vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste" }) -- paste
 
 -- Leader + w to save
-vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "[W]rite file" })
+vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Write file" })
 
 -- Replace the current word
-vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[R]ename [W]ord" })
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename Word" })
 
 -- ========================================================================== --
 -- ==                               COMMANDS                               == --
@@ -143,10 +146,11 @@ lazy.setup({
 				char = "│",
 				tab_char = "│",
 			},
-			scope = { enabled = true },
+			scope = { enabled = false },
 		},
 	},
 	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
+	{ "echasnovski/mini.indentscope", opts = {} },
 
 	-- File explorer
 	{
@@ -161,7 +165,7 @@ lazy.setup({
 
 	-- Git integration
 	{ "lewis6991/gitsigns.nvim" },
-	{ "sindrets/diffview.nvim" },
+	{ "tpope/vim-fugitive" },
 
 	-- Coding
 	{
@@ -191,6 +195,7 @@ lazy.setup({
 	{ "echasnovski/mini.surround", event = "VeryLazy", opts = {} },
 	{ "echasnovski/mini.comment", event = "VeryLazy", opts = {} },
 	{ "stevearc/conform.nvim", dependencies = { "mason.nvim" }, lazy = true, cmd = "ConformInfo" },
+	{ "ThePrimeagen/refactoring.nvim" },
 
 	-- Autocomplete & snippets
 	{
@@ -218,13 +223,13 @@ lazy.setup({
 	{ "neovim/nvim-lspconfig" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
+	{ "folke/neodev.nvim" },
 
 	-- Debug
 	{ "mfussenegger/nvim-dap" },
 	{ "rcarriga/nvim-dap-ui" },
 	{ "jay-babu/mason-nvim-dap.nvim" },
 	{ "leoluz/nvim-dap-go" },
-	{ "mxsdev/nvim-dap-vscode-js" },
 
 	-- Utilities
 	{ "moll/vim-bbye" },
@@ -238,6 +243,7 @@ lazy.setup({
 		end,
 		opts = {},
 	},
+	{ "akinsho/toggleterm.nvim" },
 })
 
 -- ========================================================================== --
@@ -245,8 +251,22 @@ lazy.setup({
 -- ========================================================================== --
 
 ---
--- Colorscheme
+-- Colorscheme & statusline (lualine)
 ---
+
+local function configure_lualine()
+	require("lualine").setup({
+		options = {
+			theme = "tokyonight",
+			icons_enabled = true,
+			component_separators = "|",
+			section_separators = "",
+			disabled_filetypes = {
+				statusline = { "NvimTree" },
+			},
+		},
+	})
+end
 
 require("auto-dark-mode").setup({
 	update_interval = 1000,
@@ -256,6 +276,7 @@ require("auto-dark-mode").setup({
 			flavour = "mocha",
 		})
 		vim.cmd("colorscheme catppuccin")
+		configure_lualine()
 	end,
 	set_light_mode = function()
 		vim.api.nvim_set_option("background", "light")
@@ -263,6 +284,15 @@ require("auto-dark-mode").setup({
 			flavour = "latte",
 		})
 		vim.cmd("colorscheme catppuccin")
+		require("lualine").setup({
+			options = {
+				icons_enabled = true,
+				disabled_filetypes = {
+					statusline = { "NvimTree" },
+				},
+			},
+		})
+		configure_lualine()
 	end,
 })
 
@@ -304,24 +334,12 @@ local icons = {
 -- vim-bbye
 ---
 
-vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "[C]lose" })
+vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "Close" })
+vim.keymap.set("n", "<leader>n", "<cmd>bn<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>p", "<cmd>bp<cr>", { desc = "Previous buffer" })
 
 ---
--- lualine.nvim (statusline)
----
-
-require("lualine").setup({
-	options = {
-		-- theme = "tokyonight",
-		icons_enabled = true,
-		disabled_filetypes = {
-			statusline = { "NvimTree" },
-		},
-	},
-})
-
----
--- conform.nvim
+-- formatter (conform.nvim)
 ---
 
 require("conform").setup({
@@ -345,6 +363,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+---
+-- refactoring
+---
+
+require("refactoring").setup()
+
+vim.keymap.set("x", "<leader>re", ":Refactor extract")
+vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file")
+vim.keymap.set("x", "<leader>rv", ":Refactor extract_var")
+vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
+vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+vim.keymap.set({ "n", "x" }, "<leader>rr", function()
+	require("refactoring").select_refactor()
+end)
 ---
 -- Gitsigns
 ---
@@ -373,27 +407,12 @@ vim.keymap.set("n", "<leader>gn", gitsigns.next_hunk, { desc = "Next hunk" })
 vim.keymap.set("n", "<leader>gp", gitsigns.prev_hunk, { desc = "Previous hunk" })
 vim.keymap.set("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage hunk" })
 vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
+vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview hunk" })
 vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo stage hunk" })
 vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer" })
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
 vim.keymap.set("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff" })
 vim.keymap.set("n", "<leader>gtd", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
-
----
--- Gitsigns
----
-
-_G.diffview_toggle = function()
-	if next(require("diffview.lib").views) == nil then
-		vim.cmd("DiffviewOpen")
-	else
-		vim.cmd("DiffviewClose")
-	end
-end
-
-vim.keymap.set("n", "<leader>gD", function()
-	diffview_toggle()
-end, { desc = "Diffview" })
 
 ---
 -- Telescope
@@ -403,15 +422,15 @@ end, { desc = "Diffview" })
 local utils = require("telescope.utils")
 local builtin = require("telescope.builtin")
 
-vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "Recently opened files" })
+vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "Find buffer" })
 vim.keymap.set("n", "<leader>/", function()
 	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 		winblend = 10,
 		previewer = false,
 	}))
-end, { desc = "[/] Fuzzily search in current buffer" })
-vim.keymap.set("n", "<leader>cd", builtin.diagnostics, { desc = "[C]ode [D]iagnostics" })
+end, { desc = "Fuzzy search in current buffer" })
+vim.keymap.set("n", "<leader>cd", builtin.diagnostics, { desc = "Code Diagnostics" })
 
 -- Use git_files if in git repo, otherwise fall back to find_files
 _G.project_files = function()
@@ -423,11 +442,11 @@ _G.project_files = function()
 	end
 end
 
-vim.keymap.set("n", "<leader>ff", "<cmd>lua project_files()<cr>", { desc = "[F]ind [F]iles" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
-vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
-vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
+vim.keymap.set("n", "<leader>ff", project_files, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help" })
+vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
+vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find Resume" })
 
 vim.keymap.set("n", "<leader>ga", builtin.git_status, { desc = "Status" })
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Branches" })
@@ -440,13 +459,23 @@ require("telescope").load_extension("fzf")
 -- which-key
 ---
 require("which-key").register({
-	["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
-	["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-	["<leader>b"] = { name = "[B]uffer", _ = "which_key_ignore" },
-	["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-	["<leader>s"] = { name = "[S]elect", _ = "which_key_ignore" },
-	["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-	-- ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+	["<leader>f"] = { name = "Find", _ = "which_key_ignore" },
+	["<leader>r"] = { name = "Refactor", _ = "which_key_ignore" },
+	["<leader>b"] = { name = "Buffer", _ = "which_key_ignore" },
+	["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
+	["<leader>s"] = { name = "Select", _ = "which_key_ignore" },
+	["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
+	["<leader>d"] = { name = "Debug", _ = "which_key_ignore" },
+})
+
+---
+-- toggleterm
+---
+
+require("toggleterm").setup({
+	open_mapping = "<C-g>",
+	direction = "float",
+	shade_terminals = true,
 })
 
 ---
@@ -473,7 +502,7 @@ vim.api.nvim_set_keymap(
 	"n",
 	"<leader>cn",
 	":lua require('neogen').generate()<CR>",
-	{ noremap = false, silent = true, desc = "[C]ode A[n]notations" }
+	{ noremap = false, silent = true, desc = "Code Annotations" }
 )
 
 ---
@@ -672,6 +701,7 @@ cmp.setup.cmdline(":", {
 -- LSP config
 ---
 -- See :help lspconfig-global-defaults
+require("neodev").setup()
 local lspconfig = require("lspconfig")
 local lsp_defaults = lspconfig.util.default_config
 
@@ -719,15 +749,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 		end
 
-		nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-		nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+		nmap("<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
+		nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
-		nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-		nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-		nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
-		nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+		nmap("gd", vim.lsp.buf.definition, "Goto Definition")
+		nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
+		nmap("gr", builtin.lsp_references, "Goto References")
+		nmap("gI", builtin.lsp_implementations, "Goto Implementation")
 		nmap("go", vim.lsp.buf.type_definition, "Type Definition")
-		nmap("<leader>cs", builtin.lsp_document_symbols, "[C]ode [S]ymbols")
+		nmap("<leader>cs", builtin.lsp_document_symbols, "Code Symbols")
 
 		nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 		nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
@@ -797,12 +827,6 @@ require("mason-lspconfig").setup({
 -- DAP
 ---
 
--- servers
-require("mason-nvim-dap").setup({
-	ensure_installed = { "delve", "js-debug-adapter" },
-})
-
--- ui
 local dap = require("dap")
 
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
@@ -824,6 +848,12 @@ end
 
 dapui.setup()
 
+-- servers
+require("mason-nvim-dap").setup({
+	ensure_installed = { "delve", "js-debug-adapter" },
+	automatic_installation = false,
+})
+
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "error", linehl = "", numhl = "" })
 vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
@@ -839,6 +869,3 @@ end, { desc = "Breakpoint Condition" })
 
 -- Go
 require("dap-go").setup()
-
--- javascript
--- require("dap-vscode-js").setup()

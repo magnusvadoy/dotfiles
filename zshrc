@@ -7,7 +7,7 @@ if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
   # Configure PATH
-  export PATH="/usr/local/bin:/Users/magnus/go/bin:$PATH"
+  export PATH="/usr/local/bin:/Users/magnus/go/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
   # iterm2 shell integration
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
