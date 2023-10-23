@@ -22,16 +22,27 @@ local function scheme_for_appearance(appearance)
 	end
 end
 
-config.color_scheme = scheme_for_appearance(get_appearance())
+local color_scheme = scheme_for_appearance(get_appearance())
+local colors = wezterm.get_builtin_color_schemes()[color_scheme]
+
+config.color_scheme = color_scheme
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" })
 config.font_size = 15
 config.default_cursor_style = "BlinkingBlock"
 config.window_padding = {
-	left = "0cell",
-	right = "0cell",
-	top = "0cell",
-	bottom = "0cell",
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 2,
 }
+config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
+config.tab_max_width = 32
+config.colors = {
+	tab_bar = {
+		background = colors.background,
+	},
+}
 
 return config

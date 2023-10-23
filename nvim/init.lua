@@ -166,6 +166,8 @@ lazy.setup({
 	-- Git integration
 	{ "lewis6991/gitsigns.nvim" },
 	{ "tpope/vim-fugitive" },
+	{ "rhysd/git-messenger.vim" },
+	{ "rhysd/committia.vim" },
 
 	-- Coding
 	{
@@ -413,6 +415,7 @@ vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer"
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
 vim.keymap.set("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff" })
 vim.keymap.set("n", "<leader>gtd", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Fugitive" })
 
 ---
 -- Telescope
