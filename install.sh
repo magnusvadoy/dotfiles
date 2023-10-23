@@ -18,7 +18,9 @@ ln -s "$DIR/zshrc" ~/.zshrc
 ln -s "$DIR/tmux.conf" ~/.tmux.conf
 ln -s "$DIR/gitignore" ~/.gitignore
 ln -s "$DIR/gitconfig" ~/.gitconfig
+ln -s "$DIR/wezterm.lua" ~/.wezterm.lua
 
 # source zsh to install nvm, then copy default packages over
 source ~/.zshrc
+
 ln -s "$DIR/nvm/default-packages" ~/.nvm/default-packages

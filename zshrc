@@ -11,9 +11,6 @@ if type brew &>/dev/null; then
 
   # iterm2 shell integration
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-  # for iterm2 tmux integration
-  alias tmux="tmux -CC"
 fi
 
 #######################################
