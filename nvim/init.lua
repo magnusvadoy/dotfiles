@@ -127,16 +127,15 @@ lazy.path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 lazy.opts = {}
 
 lazy.setup({
-  -- Theming & UI
+  -- Colorscheme & icons
   { "folke/tokyonight.nvim" },
   { "catppuccin/nvim" },
   { "f-person/auto-dark-mode.nvim" },
-  {
-    "stevearc/dressing.nvim",
-    opts = {},
-  },
-  { "nvim-lualine/lualine.nvim", event = "VeryLazy" },
-  { "akinsho/bufferline.nvim",   event = "VeryLazy", opts = {} },
+  { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
+
+  -- Editor
+  { "nvim-lualine/lualine.nvim",   event = "VeryLazy" },
+  { "akinsho/bufferline.nvim",     event = "VeryLazy", opts = {} },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "VeryLazy",
@@ -149,21 +148,17 @@ lazy.setup({
       scope = { enabled = false },
     },
   },
-  { "nvim-tree/nvim-web-devicons",  event = "VeryLazy" },
-  { "echasnovski/mini.indentscope", opts = {} },
-
-  -- File explorer
+  { "stevearc/dressing.nvim",                   opts = {} },
   {
     "nvim-tree/nvim-tree.lua",
     lazy = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-
-  -- Fuzzy finder
   { "nvim-telescope/telescope.nvim",            branch = "0.1.x" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  { "akinsho/toggleterm.nvim" },
 
-  -- Git integration
+  -- Git
   { "lewis6991/gitsigns.nvim" },
   { "tpope/vim-fugitive" },
   { "rhysd/git-messenger.vim" },
@@ -187,16 +182,19 @@ lazy.setup({
     event = "VeryLazy",
     opts = {},
   },
-  { "echasnovski/mini.surround",    event = "VeryLazy", opts = {} },
-  { "echasnovski/mini.comment",     event = "VeryLazy", opts = {} },
-  -- { "stevearc/conform.nvim", dependencies = { "mason.nvim" }, lazy = true, cmd = "ConformInfo" },
-  --
-  { "ThePrimeagen/refactoring.nvim" },
+  { "echasnovski/mini.surround",     event = "VeryLazy", opts = {} },
+  { "echasnovski/mini.comment",      event = "VeryLazy", opts = {} },
+  { "echasnovski/mini.indentscope",  event = "VeryLazy", opts = {} },
+  { "ThePrimeagen/refactoring.nvim", event = "VeryLazy" },
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = true,
   },
+  { "nvimtools/none-ls.nvim" },
+  { "folke/todo-comments.nvim", opts = {} },
+
+  -- Go
   {
     "olexsmir/gopher.nvim",
     ft = "go",
@@ -207,7 +205,6 @@ lazy.setup({
       vim.cmd([[silent! GoInstallDeps]])
     end,
   },
-  { "nvimtools/none-ls.nvim" },
 
   -- Autocomplete & snippets
   {
@@ -255,7 +252,6 @@ lazy.setup({
     end,
     opts = {},
   },
-  { "akinsho/toggleterm.nvim" },
 })
 
 -- ========================================================================== --
@@ -458,6 +454,7 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find Resume" })
+vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find Todo" })
 
 vim.keymap.set("n", "<leader>ga", builtin.git_status, { desc = "Status" })
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Branches" })
