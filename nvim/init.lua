@@ -157,6 +157,13 @@ lazy.setup({
   { "nvim-telescope/telescope.nvim",            branch = "0.1.x" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { "akinsho/toggleterm.nvim" },
+  {
+    "rmagatti/auto-session",
+    opts = {
+      log_level = "error",
+      auto_session_suppress_dirs = { "~/", "~/code", "~/Downloads", "/" },
+    },
+  },
 
   -- Git
   { "lewis6991/gitsigns.nvim" },
@@ -266,10 +273,7 @@ lazy.setup({
 local function configure_lualine()
   require("lualine").setup({
     options = {
-      theme = "tokyonight",
-      icons_enabled = true,
-      component_separators = "|",
-      section_separators = "",
+      theme = "catppuccin",
       disabled_filetypes = {
         statusline = { "NvimTree" },
       },
@@ -277,19 +281,14 @@ local function configure_lualine()
   })
 end
 
-local integrations = {
+local theme_integrations = {
   cmp = true,
   gitsigns = true,
   nvimtree = true,
   treesitter = true,
   treesitter_context = true,
   which_key = true,
-  native_lsp = {
-    enabled = true,
-  },
-  mini = {
-    enabled = true,
-  },
+  mason = true,
   telescope = {
     enabled = true,
     style = "nvchad",
@@ -302,7 +301,7 @@ require("auto-dark-mode").setup({
     vim.api.nvim_set_option("background", "dark")
     require("catppuccin").setup({
       flavour = "mocha",
-      integrations = integrations,
+      integrations = theme_integrations,
     })
     vim.cmd("colorscheme catppuccin")
     configure_lualine()
@@ -311,7 +310,7 @@ require("auto-dark-mode").setup({
     vim.api.nvim_set_option("background", "light")
     require("catppuccin").setup({
       flavour = "latte",
-      integrations = integrations,
+      integrations = theme_integrations,
     })
     vim.cmd("colorscheme catppuccin")
     configure_lualine()
