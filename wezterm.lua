@@ -26,7 +26,7 @@ local color_scheme = scheme_for_appearance(get_appearance())
 local colors = wezterm.get_builtin_color_schemes()[color_scheme]
 
 config.color_scheme = color_scheme
-config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" })
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 15
 config.default_cursor_style = "BlinkingBlock"
 config.window_padding = {

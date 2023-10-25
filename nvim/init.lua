@@ -225,6 +225,7 @@ lazy.setup({
       { "hrsh7th/cmp-cmdline" },
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "saadparwaiz1/cmp_luasnip" },
+      { "onsails/lspkind.nvim" },
     },
   },
 
@@ -259,7 +260,7 @@ lazy.setup({
 -- ========================================================================== --
 
 ---
--- Colorscheme & statusline (lualine)
+-- Colorscheme (catppuccin) & statusline (lualine)
 ---
 
 local function configure_lualine()
@@ -276,12 +277,32 @@ local function configure_lualine()
   })
 end
 
+local integrations = {
+  cmp = true,
+  gitsigns = true,
+  nvimtree = true,
+  treesitter = true,
+  treesitter_context = true,
+  which_key = true,
+  native_lsp = {
+    enabled = true,
+  },
+  mini = {
+    enabled = true,
+  },
+  telescope = {
+    enabled = true,
+    style = "nvchad",
+  },
+}
+
 require("auto-dark-mode").setup({
   update_interval = 1000,
   set_dark_mode = function()
     vim.api.nvim_set_option("background", "dark")
     require("catppuccin").setup({
       flavour = "mocha",
+      integrations = integrations,
     })
     vim.cmd("colorscheme catppuccin")
     configure_lualine()
@@ -290,53 +311,12 @@ require("auto-dark-mode").setup({
     vim.api.nvim_set_option("background", "light")
     require("catppuccin").setup({
       flavour = "latte",
+      integrations = integrations,
     })
     vim.cmd("colorscheme catppuccin")
-    require("lualine").setup({
-      options = {
-        icons_enabled = true,
-        disabled_filetypes = {
-          statusline = { "NvimTree" },
-        },
-      },
-    })
     configure_lualine()
   end,
 })
-
----
--- Icons
----
-
-local icons = {
-  Text = "󰉿",
-  Method = "m",
-  Function = "󰊕",
-  Constructor = "",
-  Field = "",
-  Variable = "󰆧",
-  Class = "󰌗",
-  Interface = "",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "󰎠",
-  Enum = "",
-  Keyword = "󰌋",
-  Snippet = "",
-  Color = "󰏘",
-  File = "󰈙",
-  Reference = "",
-  Folder = "󰉋",
-  EnumMember = "",
-  Constant = "󰇽",
-  Struct = "",
-  Event = "",
-  Operator = "󰆕",
-  TypeParameter = "󰊄",
-  Codeium = "󰚩",
-  Copilot = "",
-}
 
 ---
 -- vim-bbye
@@ -426,6 +406,7 @@ vim.keymap.set("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Fugitive" })
 ---
 -- See :help telescope.builtin
 
+local telescope = require("telescope")
 local utils = require("telescope.utils")
 local builtin = require("telescope.builtin")
 
@@ -460,8 +441,17 @@ vim.keymap.set("n", "<leader>ga", builtin.git_status, { desc = "Status" })
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Branches" })
 vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Commits" })
 
-require("telescope").setup({})
-require("telescope").load_extension("fzf")
+telescope.setup({
+  defaults = {
+    layout_config = {
+      horizontal = {
+        preview_width = 0.5,
+      },
+    },
+  },
+})
+
+telescope.load_extension("fzf")
 
 ---
 -- which-key
@@ -597,6 +587,7 @@ end
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 -- See :help cmp-config
@@ -604,7 +595,6 @@ cmp.setup({
   experimental = {
     ghost_text = true,
   },
-  completion = { completeopt = "menu,menuone,noinsert" },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -618,30 +608,32 @@ cmp.setup({
     { name = "path" },
     { name = "nvim_lsp_signature_help" },
   },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
+  -- window = {
+  --   completion = cmp.config.window.bordered(),
+  --   documentation = cmp.config.window.bordered(),
+  -- },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      vim_item.kind = icons[vim_item.kind]
-      vim_item.menu = ({
-        nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
-        buffer = "",
-        path = "",
-        emoji = "",
-      })[entry.source.name]
-      return vim_item
-    end,
+    format = lspkind.cmp_format({
+      mode = "symbol",    -- show only symbol annotations
+      maxwidth = 50,      -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+
+      before = function(entry, vim_item)
+        local menu = {
+          nvim_lsp = "[Lsp]",
+          nvim_lua = "[Lua]",
+          luasnip = "[Snp]",
+          buffer = "[Buf]",
+          path = "[Pwd]",
+        }
+        vim_item.menu = menu[entry.source.name]
+        return vim_item
+      end,
+    }),
   },
   -- See :help cmp-mapping
   mapping = {
-    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
-
     ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
     ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
 
@@ -649,8 +641,8 @@ cmp.setup({
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
 
     ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    ["<C-y>"] = cmp.mapping.confirm({ select = false }),
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -747,7 +739,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap("<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
+    nmap("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
     nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
     nmap("gd", vim.lsp.buf.definition, "Goto Definition")
