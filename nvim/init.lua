@@ -38,7 +38,7 @@ vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Don't show mode in
+-- Don't show mode
 vim.opt.showmode = false
 
 -- Enable 24-bit colours
@@ -74,9 +74,9 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Write file" })
 vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename Word" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close" })
-vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>j", "<cmd>bn<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>k", "<cmd>bp<cr>", { desc = "Previous buffer" })
 
 -- ========================================================================== --
 -- ==                               COMMANDS                               == --
@@ -140,6 +140,22 @@ lazy.setup({
 
   -- Editor
   { "nvim-lualine/lualine.nvim",   event = "VeryLazy" },
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        offsets = {
+          {
+            filetype = "NvimTree",
+            text = "File Explorer",
+            text_align = "center",
+            seperator = true,
+          },
+        },
+      },
+    },
+  },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "VeryLazy",
@@ -296,7 +312,9 @@ local function configure_lualine()
       section_separators = { left = "", right = "" },
     },
     sections = {
-      lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+      lualine_a = {
+        { "mode", separator = { left = "" }, right_padding = 2 },
+      },
       lualine_b = { "filename", "branch", "diff", "diagnostics" },
       lualine_c = { lsp_progress },
       lualine_x = {},
@@ -308,18 +326,6 @@ local function configure_lualine()
       lualine_b = {},
       lualine_c = {},
       lualine_x = {},
-      lualine_y = {},
-      lualine_z = {},
-    },
-    tabline = {
-      lualine_a = {
-        {
-          "buffers",
-          separator = { left = "", right = "" },
-          right_padding = 2,
-          symbols = { alternate_file = "" },
-        },
-      },
       lualine_y = {},
       lualine_z = {},
     },

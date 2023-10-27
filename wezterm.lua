@@ -30,9 +30,9 @@ config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 15
 config.default_cursor_style = "BlinkingBlock"
 config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
+  left = 2,
+  right = 2,
+  top = 2,
   bottom = 2,
 }
 config.window_background_opacity = 1.0
