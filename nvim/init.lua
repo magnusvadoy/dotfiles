@@ -11,7 +11,7 @@ vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 
 -- Search
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
@@ -72,6 +72,11 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Write file" })
 
 -- Replace the current word
 vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename Word" })
+
+-- Buffers
+vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close" })
+vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous buffer" })
 
 -- ========================================================================== --
 -- ==                               COMMANDS                               == --
@@ -135,7 +140,6 @@ lazy.setup({
 
   -- Editor
   { "nvim-lualine/lualine.nvim",   event = "VeryLazy" },
-  { "akinsho/bufferline.nvim",     event = "VeryLazy", opts = {} },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "VeryLazy",
@@ -249,7 +253,6 @@ lazy.setup({
   { "leoluz/nvim-dap-go" },
 
   -- Utilities
-  { "moll/vim-bbye" },
   { "nvim-lua/plenary.nvim" },
   {
     "folke/which-key.nvim",
@@ -270,13 +273,60 @@ lazy.setup({
 -- Colorscheme (catppuccin) & statusline (lualine)
 ---
 
+local function lsp_progress()
+  local messages = vim.lsp.util.get_progress_messages()
+  if #messages == 0 then
+    return ""
+  end
+  local status = {}
+  for _, msg in pairs(messages) do
+    table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
+  end
+  local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+  local ms = vim.loop.hrtime() / 1000000
+  local frame = math.floor(ms / 120) % #spinners
+  return table.concat(status, " | ") .. " " .. spinners[frame + 1]
+end
+
 local function configure_lualine()
   require("lualine").setup({
     options = {
       theme = "catppuccin",
-      disabled_filetypes = {
-        statusline = { "NvimTree" },
+      component_separators = "|",
+      section_separators = { left = "", right = "" },
+    },
+    sections = {
+      lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+      lualine_b = { "filename", "branch", "diff", "diagnostics" },
+      lualine_c = { lsp_progress },
+      lualine_x = {},
+      lualine_y = { "filetype", "progress" },
+      lualine_z = { { "location", separator = { right = "" }, left_padding = 2 } },
+    },
+    inactive_sections = {
+      lualine_a = { "filename" },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    },
+    tabline = {
+      lualine_a = {
+        {
+          "buffers",
+          separator = { left = "", right = "" },
+          right_padding = 2,
+          symbols = { alternate_file = "" },
+        },
       },
+      lualine_y = {},
+      lualine_z = {},
+    },
+    extensions = {
+      "fugitive",
+      "nvim-tree",
+      "nvim-dap-ui",
     },
   })
 end
@@ -316,14 +366,6 @@ require("auto-dark-mode").setup({
     configure_lualine()
   end,
 })
-
----
--- vim-bbye
----
-
-vim.keymap.set("n", "<leader>bc", "<cmd>Bdelete<cr>", { desc = "Close" })
-vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous buffer" })
 
 ---
 -- refactoring (refactoring.nvim)
