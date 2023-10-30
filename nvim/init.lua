@@ -184,10 +184,28 @@ lazy.setup({
       auto_session_suppress_dirs = { "~/", "~/code", "~/Downloads", "/" },
     },
   },
+  {
+    "ggandor/leap.nvim",
+    enabled = true,
+    keys = {
+      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+    },
+    config = function(_, opts)
+      local leap = require("leap")
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+      leap.add_default_mappings(true)
+      vim.keymap.del({ "x", "o" }, "x")
+      vim.keymap.del({ "x", "o" }, "X")
+    end,
+  },
 
   -- Git
-  { "lewis6991/gitsigns.nvim" },
   { "tpope/vim-fugitive" },
+  { "lewis6991/gitsigns.nvim" },
   { "rhysd/git-messenger.vim" },
   { "rhysd/committia.vim" },
 
@@ -209,7 +227,20 @@ lazy.setup({
     event = "VeryLazy",
     opts = {},
   },
-  { "echasnovski/mini.surround",     event = "VeryLazy", opts = {} },
+  {
+    "echasnovski/mini.surround",
+    opts = {
+      mappings = {
+        add = "gza",
+        delete = "gzd",
+        find = "gzf",
+        find_left = "gzF",
+        highlight = "gzh",
+        replace = "gzr",
+        update_n_lines = "gzn",
+      },
+    },
+  },
   { "echasnovski/mini.comment",      event = "VeryLazy", opts = {} },
   { "echasnovski/mini.indentscope",  event = "VeryLazy", opts = {} },
   { "ThePrimeagen/refactoring.nvim", event = "VeryLazy" },
@@ -511,6 +542,7 @@ require("which-key").register({
   ["<leader>s"] = { name = "Select", _ = "which_key_ignore" },
   ["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
   ["<leader>d"] = { name = "Debug", _ = "which_key_ignore" },
+  ["gz"] = { name = "Surrounding", _ = "which_key_ignore" },
 })
 
 ---
