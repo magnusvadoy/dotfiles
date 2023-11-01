@@ -5,3 +5,5 @@
 	email = magnus.f.vadoy@gmail.com
 [push]
 	autoSetupRemote = true
+[url "git@bitbucket.org:"]
+  insteadOf = https://bitbucket.org/

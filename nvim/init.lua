@@ -67,8 +67,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank" })  -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste" }) -- paste
 
--- Leader + w to save
-vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Write file" })
+-- Ctrl + s to save
+vim.keymap.set("n", "<C-s>", "<cmd>write<cr>", { desc = "Write file" })
 
 -- Replace the current word
 vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename Word" })
@@ -219,7 +219,7 @@ lazy.setup({
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
       "JoosepAlviste/nvim-ts-context-commentstring", -- useful for embedded languages
-      "windwp/nvim-ts-autotag",                   -- autoclose and autorename html tags
+      "windwp/nvim-ts-autotag",                      -- autoclose and autorename html tags
     },
   },
   {
@@ -694,8 +694,8 @@ cmp.setup({
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = lspkind.cmp_format({
-      mode = "symbol",    -- show only symbol annotations
-      maxwidth = 50,      -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      mode = "symbol",       -- show only symbol annotations
+      maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
       before = function(entry, vim_item)
@@ -857,7 +857,6 @@ require("mason-lspconfig").setup({
     "gopls",
     "lua_ls",
     "tsserver",
-    "eslint",
     "html",
     "cssls",
   },

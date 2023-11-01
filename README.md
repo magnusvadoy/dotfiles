@@ -1,6 +1,6 @@
 # Dotfiles
 
-Dotfiles for neovim, tmux and git. Run install.sh to setup folders and symlink files.
+Dotfiles for neovim, wezterm and tmux. Run install.sh to setup folders, symlink files, and install necessary packages and casks.
 
 ## Requirements
 
@@ -11,3 +11,6 @@ The following tools needs to be installed:
 - nvim
 - tmux
 - fzf
+- go
+- rg
+- fd
