@@ -60,3 +60,7 @@ brew install $brew_packages
 
 # Install Homebrew casks
 brew install --cask $brew_casks
+
+# Install font
+brew tap homebrew/cask-fonts
+brew install font-jetbrains-mono-nerd-font
