@@ -9,8 +9,8 @@ if type brew &>/dev/null; then
   # Configure PATH
   export PATH="/usr/local/bin:/Users/magnus/go/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
-  # iterm2 shell integration
-  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+  # source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+  # source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
 #######################################
@@ -55,8 +55,101 @@ antigen apply
 ###     Aliases 
 #######################################
 
-alias vi="vim"
 alias vim="nvim"
+alias vi="vim"
+alias k="kubectl"
+alias cat="bat"
+alias jq="yq"
+
+#######################################
+###     Functions 
+#######################################
+
+function descpod() {
+    if echo $1 | grep -q "ai-" > /dev/null; then
+        tmpnamespace=$1
+    else 
+        tmpnamespace="ai-$1"
+    fi
+
+    tmppodname=$2
+    if echo $2 | grep -q "ai-" > /dev/null; then
+        :
+    else
+        if echo $2 | grep -q 'api\-\|proj\-\|etl\-\|ci\-\|tools\-\|fallback\-\|bitbucket\-' > /dev/null; then
+            :
+        else
+            tmppodname="api-$tmppodname"
+        fi
+        tmppodname="ai-$tmppodname"
+    fi
+    tmppodlist=($(kubectl get pods -n $tmpnamespace -o=name | grep $tmppodname | sed -e "s/^pod\/\($tmppodname-[a-z0-9]*-[a-z0-9]*\).*$/\1/"))
+
+    echo 'Write a number to select a pod'
+    select tmppod in "${tmppodlist[@]}"; do
+        tmppod=$(echo $tmppod | sed -e "s/^\($tmppodname-[a-z0-9]*-[a-z0-9]*\).*$/\1/")
+        kubectl describe pod "$tmppod" -n $tmpnamespace
+        break
+    done
+}
+
+function prevlogs() {
+    if echo $1 | grep -q "ai-" > /dev/null; then
+        tmpnamespace=$1
+    else 
+        tmpnamespace="ai-$1"
+    fi
+
+    tmppodname=$2
+    if echo $2 | grep -q "ai-" > /dev/null; then
+        :
+    else
+        if echo $2 | grep -q 'api\-\|proj\-\|etl\-\|ci\-\|tools\-\|fallback\-\|bitbucket\-' > /dev/null; then
+            :
+        else
+            tmppodname="api-$tmppodname"
+        fi
+        tmppodname="ai-$tmppodname"
+    fi
+    tmppodlist=($(kubectl get pods -n $tmpnamespace -o=name | grep $tmppodname | sed -e "s/^pod\/\($tmppodname-[a-z0-9]*-[a-z0-9]*\).*$/\1/"))
+
+    echo 'Write a number to select a pod'
+    tail=$3
+    if [ -z "$tail" ]; then
+        tail=20
+    fi
+    select tmppod in "${tmppodlist[@]}"; do
+        tmppod=$(echo $tmppod | sed -e "s/^\($tmppodname-[a-z0-9]*-[a-z0-9]*\).*$/\1/")
+        kubectl logs "$tmppod" -n $tmpnamespace --previous --tail=$tail
+        break
+    done
+}
+
+function kafkafetch() {
+    if [ $# -ge 1 ]; then
+        env=$1
+    else 
+        env="dev"
+    fi
+
+    # Check environment to set username and password
+    if [ $env = "dev" ]; then
+        user=$TEST_KAFKA_GCP_USERNAME
+        pass=$(security find-generic-password -a "$USER" -s "test_kafka_aiven_password" -w)
+    elif [ $env = "stage" ]; then
+        user=$STAGE_KAFKA_GCP_USERNAME
+        pass=$(security find-generic-password -a "$USER" -s "stage_kafka_aiven_password" -w)
+    elif [ $env = "prod" ]; then
+        user=$PROD_KAFKA_GCP_USERNAME
+        pass=$(security find-generic-password -a "$USER" -s "prod_kafka_aiven_password" -w)
+    else
+        echo "Please provide a valid environment as the first argument"
+        return
+    fi
+
+    #Path to fetch script
+    ~/Documents/tv2/ai-tools-docker-compose/kafka/fetch.sh -p "$pass" -u "$user" "${@:2}"
+}
 
 #######################################
 ###     Bindings 
@@ -73,3 +166,9 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export EDITOR="nvim"
 source ~/.env
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mavad725/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mavad725/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mavad725/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mavad725/google-cloud-sdk/completion.zsh.inc'; fi

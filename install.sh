@@ -11,7 +11,7 @@ declare -A symlinks=(
     ["zshrc"]="$HOME_DIR/.zshrc"
     ["gitignore"]="$HOME_DIR/.gitignore"
     ["gitconfig"]="$HOME_DIR/.gitconfig"
-    ["wezterm.lua"]="$HOME_DIR/wezterm.lua"
+    ["wezterm.lua"]="$HOME_DIR/.wezterm.lua"
     ["tmux.conf"]="$TMUX_PLUGIN_DIR/.tmux.conf"
     ["nvim"]="$CONFIG_DIR/nvim"
 )
@@ -24,6 +24,11 @@ brew_packages=(
     "tmux"
     "fzf"
     "go"
+    "rg"
+    "fd"
+    "bat"
+    "yq"
+    "tree"
 )
 
 # necessary casks to install
@@ -33,6 +38,10 @@ brew_casks=(
     "alt-tab"
     "rectangle"
     "scroll-reverser"
+    "obsidian"
+    "google-cloud-sdk"
+    "spotify"
+    "caffeine"
 )
 
 # Create required directories
@@ -49,7 +58,7 @@ for source_file in "${(@k)symlinks}"; do
 done
 
 # Source zsh to install nvm, then copy default packages over
-source "$ZSH_DIR/.zshrc"
+source "$HOME_DIR/.zshrc"
 ln -s "$DIR/nvm/default-packages" "$HOME_DIR/.nvm/default-packages"
 
 # Install LTS version of Node using nvm
