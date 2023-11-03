@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 # Define the home directory and target directories
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 HOME_DIR="$HOME"
 TMUX_PLUGIN_DIR="$HOME_DIR/.tmux/plugins"
 ZSH_DIR="$HOME_DIR/.zsh"
@@ -29,6 +30,7 @@ brew_packages=(
     "bat"
     "yq"
     "tree"
+    "lazygit"
 )
 
 # necessary casks to install
