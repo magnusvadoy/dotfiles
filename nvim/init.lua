@@ -1,108 +1,9 @@
 ---@diagnostic disable: missing-fields
 -- Based on : https://github.com/VonHeikemen/nvim-starter/tree/04-lsp-installer
--- ========================================================================== --
--- ==                           EDITOR SETTINGS                            == --
--- ========================================================================== --
 
--- Line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
-
--- Mouse mode
-vim.opt.mouse = "a"
-
--- Search
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.smartcase = true
-vim.opt.ignorecase = true
-
--- Tabs
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-
--- Line Wraps
-vim.opt.wrap = true
-
--- Keep 8 lines of context
-vim.opt.scrolloff = 8
-
--- Display signs
-vim.opt.signcolumn = "yes"
-
--- Space as leader key
-vim.g.mapleader = " "
-
--- disable netrw since we will be using nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- Don't show mode
-vim.opt.showmode = false
-
--- Enable 24-bit colours
-vim.opt.termguicolors = true
-
--- Highlight where the cursor is
-vim.opt.cursorline = true
-
--- ========================================================================== --
--- ==                             KEYBINDINGS                              == --
--- ========================================================================== --
-
--- Select whole file
-vim.keymap.set("n", "<leader>sa", ":keepjumps normal! ggVG<cr>", { desc = "Select All" })
-
--- Move blocks of code
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
--- Keeps cursor in place while jumping
-vim.keymap.set("n", "<C-d", "<C-d>zz")
-vim.keymap.set("n", "<C-u", "<C-u>zz")
-
--- Keep cursor in place while cycling search term
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
--- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank" })  -- copy
-vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste" }) -- paste
-
--- Ctrl + s to save
-vim.keymap.set("n", "<C-s>", "<cmd>write<cr>", { desc = "Write file" })
-
--- Replace the current word
-vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename Word" })
-
--- Buffers
-vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close buffer" })
-vim.keymap.set("n", "<leader>j", "<cmd>bn<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>k", "<cmd>bp<cr>", { desc = "Previous buffer" })
-
--- ========================================================================== --
--- ==                               COMMANDS                               == --
--- ========================================================================== --
-
-vim.api.nvim_create_user_command("ReloadConfig", "source $MYVIMRC", {})
-
-local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight on yank",
-  group = group,
-  callback = function()
-    vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "man" },
-  group = group,
-  command = "nnoremap <buffer> q <cmd>quit<cr>",
-})
+require("user.settings")
+require("user.mappings")
+require("user.commands")
 
 -- ========================================================================== --
 -- ==                               PLUGINS                                == --
@@ -137,13 +38,9 @@ lazy.opts = {}
 
 lazy.setup({
   -- Colorscheme & icons
-  { "folke/tokyonight.nvim" },
-  { "catppuccin/nvim" },
-  { "f-person/auto-dark-mode.nvim" },
-  { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
+  { "nvim-tree/nvim-web-devicons" },
 
   -- Editor
-  { "nvim-lualine/lualine.nvim" },
   {
     "akinsho/bufferline.nvim",
     opts = {
@@ -162,6 +59,7 @@ lazy.setup({
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       indent = {
         char = "│",
@@ -170,14 +68,13 @@ lazy.setup({
       scope = { enabled = false },
     },
   },
-  { "stevearc/dressing.nvim",                   opts = {} },
+  { "stevearc/dressing.nvim",     opts = {} },
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   { "nvim-telescope/telescope.nvim",            branch = "0.1.x" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  { "akinsho/toggleterm.nvim" },
   {
     "rmagatti/auto-session",
     opts = {
@@ -242,9 +139,13 @@ lazy.setup({
       },
     },
   },
-  { "echasnovski/mini.comment",      event = "VeryLazy", opts = {} },
-  { "echasnovski/mini.indentscope",  event = "VeryLazy", opts = {} },
-  { "ThePrimeagen/refactoring.nvim", event = "VeryLazy" },
+  { "echasnovski/mini.comment",     opts = {} },
+  {
+    "echasnovski/mini.indentscope",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+  },
+  { "ThePrimeagen/refactoring.nvim" },
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
@@ -259,18 +160,6 @@ lazy.setup({
       require("copilot").setup({})
     end,
     cmd = "Copilot",
-  },
-
-  -- Go
-  {
-    "olexsmir/gopher.nvim",
-    ft = "go",
-    config = function(_, opts)
-      require("gopher").setup(opts)
-    end,
-    build = function()
-      vim.cmd([[silent! GoInstallDeps]])
-    end,
   },
 
   -- Autocomplete & snippets
@@ -293,17 +182,16 @@ lazy.setup({
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "saadparwaiz1/cmp_luasnip" },
       { "onsails/lspkind.nvim" },
-      { "zbirenbaum/copilot-cmp" },
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup({
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+          })
+        end,
+      },
     },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
   },
 
   -- LSP
@@ -312,7 +200,7 @@ lazy.setup({
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      { "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
       "folke/neodev.nvim",
     },
   },
@@ -334,72 +222,20 @@ lazy.setup({
     end,
     opts = {},
   },
+  {
+    "kwkarlwang/bufresize.nvim",
+    opts = {},
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    opts = {},
+  },
+  { import = "plugins" },
 })
 
 -- ========================================================================== --
 -- ==                         PLUGIN CONFIGURATION                         == --
 -- ========================================================================== --
-
----
--- Colorscheme (catppuccin) & statusline (lualine)
----
-
-local function configure_lualine()
-  require("lualine").setup({
-    options = {
-      theme = "tokyonight",
-      component_separators = "|",
-      section_separators = { left = "", right = "" },
-    },
-    sections = {
-      lualine_a = {
-        { "mode", separator = { left = "" }, right_padding = 2 },
-      },
-      lualine_b = { "filename", "branch", "diff", "diagnostics" },
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = { "filetype", "progress" },
-      lualine_z = { { "location", separator = { right = "" }, left_padding = 2 } },
-    },
-    inactive_sections = {
-      lualine_a = { "filename" },
-      lualine_b = {},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {},
-    },
-    extensions = {
-      "fugitive",
-      "nvim-tree",
-      "nvim-dap-ui",
-    },
-  })
-end
-
-require("auto-dark-mode").setup({
-  update_interval = 1000,
-  set_dark_mode = function()
-    vim.api.nvim_set_option("background", "dark")
-    vim.cmd("colorscheme tokyonight-night")
-    configure_lualine()
-  end,
-  set_light_mode = function()
-    vim.api.nvim_set_option("background", "light")
-    vim.cmd("colorscheme tokyonight-day")
-    configure_lualine()
-  end,
-})
-
----
--- refactoring (refactoring.nvim)
----
-
-require("refactoring").setup({})
-
-vim.keymap.set({ "n", "x" }, "<leader>rr", function()
-  require("refactoring").select_refactor({})
-end)
 
 ---
 -- null-ls (formatters & linters)
@@ -473,8 +309,6 @@ local telescope = require("telescope")
 local utils = require("telescope.utils")
 local builtin = require("telescope.builtin")
 
-vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "Recently opened files" })
-vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "Find buffer" })
 vim.keymap.set("n", "<leader>/", function()
   builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
     winblend = 10,
@@ -489,6 +323,8 @@ vim.keymap.set("n", "<leader>ff", function()
     builtin.find_files()
   end
 end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "Recently opened files" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffer" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find Resume" })
@@ -526,14 +362,28 @@ require("which-key").register({
 })
 
 ---
--- toggleterm
+-- smart-splits
 ---
 
-require("toggleterm").setup({
-  open_mapping = "<C-g>",
-  direction = "float",
-  shade_terminals = true,
-})
+-- resizing splits
+-- these keymaps will also accept a range,
+-- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
+vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
+vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
+vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
+
+-- moving between splits
+vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+
+-- swapping buffers between windows
+vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
+vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
+vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
+vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 
 ---
 -- nvim-tree (File explorer)
