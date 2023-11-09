@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 -- Based on : https://github.com/VonHeikemen/nvim-starter/tree/04-lsp-installer
 -- ========================================================================== --
 -- ==                           EDITOR SETTINGS                            == --
@@ -43,6 +44,9 @@ vim.opt.showmode = false
 
 -- Enable 24-bit colours
 vim.opt.termguicolors = true
+
+-- Highlight where the cursor is
+vim.opt.cursorline = true
 
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
@@ -139,16 +143,15 @@ lazy.setup({
   { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 
   -- Editor
-  { "nvim-lualine/lualine.nvim",   event = "VeryLazy" },
+  { "nvim-lualine/lualine.nvim" },
   {
     "akinsho/bufferline.nvim",
-    event = "VeryLazy",
     opts = {
       options = {
         offsets = {
           {
             filetype = "NvimTree",
-            text = "File Explorer",
+            text = "Explorer",
             text_align = "center",
             seperator = true,
           },
@@ -158,7 +161,6 @@ lazy.setup({
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
     main = "ibl",
     opts = {
       indent = {
@@ -171,7 +173,6 @@ lazy.setup({
   { "stevearc/dressing.nvim",                   opts = {} },
   {
     "nvim-tree/nvim-tree.lua",
-    lazy = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   { "nvim-telescope/telescope.nvim",            branch = "0.1.x" },
@@ -212,9 +213,9 @@ lazy.setup({
   -- Coding
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
     build = ":TSUpdate",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TSUpdateSync" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
@@ -306,10 +307,15 @@ lazy.setup({
   },
 
   -- LSP
-  { "neovim/nvim-lspconfig" },
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
-  { "folke/neodev.nvim" },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      "folke/neodev.nvim",
+    },
+  },
 
   -- Debug
   { "mfussenegger/nvim-dap" },
@@ -338,25 +344,10 @@ lazy.setup({
 -- Colorscheme (catppuccin) & statusline (lualine)
 ---
 
-local function lsp_progress()
-  local messages = vim.lsp.util.get_progress_messages()
-  if #messages == 0 then
-    return ""
-  end
-  local status = {}
-  for _, msg in pairs(messages) do
-    table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
-  end
-  local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-  local ms = vim.loop.hrtime() / 1000000
-  local frame = math.floor(ms / 120) % #spinners
-  return table.concat(status, " | ") .. " " .. spinners[frame + 1]
-end
-
 local function configure_lualine()
   require("lualine").setup({
     options = {
-      theme = "catppuccin",
+      theme = "tokyonight",
       component_separators = "|",
       section_separators = { left = "", right = "" },
     },
@@ -365,7 +356,7 @@ local function configure_lualine()
         { "mode", separator = { left = "" }, right_padding = 2 },
       },
       lualine_b = { "filename", "branch", "diff", "diagnostics" },
-      lualine_c = { lsp_progress },
+      lualine_c = {},
       lualine_x = {},
       lualine_y = { "filetype", "progress" },
       lualine_z = { { "location", separator = { right = "" }, left_padding = 2 } },
@@ -386,38 +377,16 @@ local function configure_lualine()
   })
 end
 
-local theme_integrations = {
-  cmp = true,
-  gitsigns = true,
-  nvimtree = true,
-  treesitter = true,
-  treesitter_context = true,
-  which_key = true,
-  mason = true,
-  telescope = {
-    enabled = true,
-    style = "nvchad",
-  },
-}
-
 require("auto-dark-mode").setup({
   update_interval = 1000,
   set_dark_mode = function()
     vim.api.nvim_set_option("background", "dark")
-    require("catppuccin").setup({
-      flavour = "mocha",
-      integrations = theme_integrations,
-    })
-    vim.cmd("colorscheme catppuccin")
+    vim.cmd("colorscheme tokyonight-night")
     configure_lualine()
   end,
   set_light_mode = function()
     vim.api.nvim_set_option("background", "light")
-    require("catppuccin").setup({
-      flavour = "latte",
-      integrations = theme_integrations,
-    })
-    vim.cmd("colorscheme catppuccin")
+    vim.cmd("colorscheme tokyonight-day")
     configure_lualine()
   end,
 })
@@ -443,7 +412,7 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.gofumpt,
     null_ls.builtins.formatting.goimports_reviser,
-    null_ls.builtins.formatting.golines,
+    -- null_ls.builtins.formatting.golines,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettierd,
   },
@@ -494,8 +463,6 @@ vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo stage
 vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer" })
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
 vim.keymap.set("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff" })
-vim.keymap.set("n", "<leader>gtd", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
-vim.keymap.set("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Fugitive" })
 
 ---
 -- Telescope
@@ -514,23 +481,18 @@ vim.keymap.set("n", "<leader>/", function()
     previewer = false,
   }))
 end, { desc = "Fuzzy search in current buffer" })
-vim.keymap.set("n", "<leader>cd", builtin.diagnostics, { desc = "Code Diagnostics" })
-
--- Use git_files if in git repo, otherwise fall back to find_files
-_G.project_files = function()
+vim.keymap.set("n", "<leader>ff", function()
   local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
   if ret == 0 then
     builtin.git_files()
   else
     builtin.find_files()
   end
-end
-
-vim.keymap.set("n", "<leader>ff", project_files, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help" })
+end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find Resume" })
+vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find Diagnostics" })
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find Todo" })
 
 vim.keymap.set("n", "<leader>ga", builtin.git_status, { desc = "Status" })
@@ -578,10 +540,9 @@ require("toggleterm").setup({
 ---
 -- See :help nvim-tree-setup
 require("nvim-tree").setup({
-  actions = {
-    open_file = {
-      quit_on_open = true,
-    },
+  view = { adaptive_size = true },
+  update_focused_file = {
+    enable = true,
   },
 })
 
@@ -605,14 +566,15 @@ vim.api.nvim_set_keymap(
 ---
 -- See :help nvim-treesitter-modules
 require("nvim-treesitter.configs").setup({
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
+  auto_install = false,
+  sync_install = false,
+  ignore_install = {},
   ensure_installed = {
     "go",
+    "gomod",
+    "gowork",
+    "gosum",
+    "python",
     "lua",
     "typescript",
     "javascript",
@@ -630,7 +592,10 @@ require("nvim-treesitter.configs").setup({
     "markdown",
     "regex",
     "diff",
+    "jsonnet",
   },
+  highlight = { enable = true },
+  indent = { enable = true },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -640,6 +605,10 @@ require("nvim-treesitter.configs").setup({
       node_decremental = "<bs>",
     },
   },
+  -- nvim-ts-context-commentstring
+  context_commentstring = { enable = true },
+  -- nvim-ts-autotag
+  autotag = { enable = true },
   -- :help nvim-treesitter-textobjects-modules
   textobjects = {
     move = {
@@ -659,14 +628,6 @@ require("nvim-treesitter.configs").setup({
         ["ic"] = "@class.inner",
       },
     },
-  },
-  -- nvim-ts-context-commentstring
-  context_commentstring = {
-    enable = true,
-  },
-  -- nvim-ts-autotag
-  autotag = {
-    enable = true,
   },
 })
 
@@ -881,6 +842,7 @@ require("mason-lspconfig").setup({
     "tsserver",
     "html",
     "cssls",
+    "jsonnet_ls",
   },
   -- See :help mason-lspconfig.setup_handlers()
   handlers = {

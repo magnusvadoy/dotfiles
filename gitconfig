@@ -2,7 +2,7 @@
 [user]
 # Please adapt and uncomment the following lines:
 	name = Magnus Furnes Vadøy
-	email = magnus.f.vadoy@gmail.com
+	email = magnus.vadoy@tv2.no
 [push]
 	autoSetupRemote = true
 [url "git@bitbucket.org:"]

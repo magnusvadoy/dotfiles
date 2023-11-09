@@ -23,14 +23,17 @@ brew_packages=(
     "zsh"
     "nvim"
     "tmux"
-    "fzf"
     "go"
+    "nodejs"
+    "fzf"
     "rg"
     "fd"
     "bat"
     "yq"
     "tree"
     "lazygit"
+    "grpcurl"
+    "kubectx"
 )
 
 # necessary casks to install

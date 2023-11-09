@@ -1,19 +1,4 @@
 #######################################
-###     HOMEBREW & MAC OS 
-#######################################
-
-if type brew &>/dev/null; then
-  # Configure Completions
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  # Configure PATH
-  export PATH="/usr/local/bin:/Users/magnus/go/bin:/opt/homebrew/opt/libpq/bin:$PATH"
-
-  # source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-  # source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-fi
-
-#######################################
 ###     ANTIGEN 
 #######################################
 
@@ -24,9 +9,8 @@ antigen use oh-my-zsh
 # Bundles from oh-my-zsh
 antigen bundle git # adds some useful aliases and functions
 antigen bundle gitfast # faster completion for git
-antigen bundle npm # completion and aliases
-antigen bundle mvn # completion and aliases
-antigen bundle docker-compose # completion and aliases
+antigen bundle kubectl # adds some useful aliases and functions
+antigen bundle kubectx # adds kubectx_prompt_info()
 antigen bundle fzf # enabled fzf's key bindings and auto-completion
 antigen bundle history-substring-search # fish shell history search feature
 
@@ -35,7 +19,6 @@ antigen bundle zsh-users/zsh-completions # additonal completions
 antigen bundle zsh-users/zsh-autosuggestions # fisk like autosuggestions based on history
 antigen bundle zsh-users/zsh-syntax-highlighting # fish shell like syntax highlighting 
 antigen bundle agkozak/zsh-z # jump quickly to recent directories
-antigen bundle lukechilds/zsh-nvm # installs and sources nvm
 
 # Theme: https://github.com/yardnsm/blox-zsh-theme
 antigen bundle yardnsm/blox-zsh-theme
@@ -57,7 +40,6 @@ antigen apply
 
 alias vim="nvim"
 alias vi="vim"
-alias k="kubectl"
 alias cat="bat"
 alias jq="yq"
 
@@ -165,7 +147,21 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 #######################################
 
 export EDITOR="nvim"
-source ~/.env
+
+# Mac specific things
+if type brew &>/dev/null; then
+  # Configure Completions
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  # Configure PATH
+  export PATH="/usr/local/bin:/Users/magnus/go/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+
+  [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+fi
+
+#######################################
+###     MISC 
+#######################################
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mavad725/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mavad725/google-cloud-sdk/path.zsh.inc'; fi
