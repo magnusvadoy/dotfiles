@@ -37,39 +37,10 @@ lazy.path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 lazy.opts = {}
 
 lazy.setup({
-  -- Colorscheme & icons
-  { "nvim-tree/nvim-web-devicons" },
-
   -- Editor
-  {
-    "akinsho/bufferline.nvim",
-    opts = {
-      options = {
-        offsets = {
-          {
-            filetype = "NvimTree",
-            text = "Explorer",
-            text_align = "center",
-            seperator = true,
-          },
-        },
-      },
-    },
-  },
-  { "stevearc/dressing.nvim",     opts = {} },
-  {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
   { "nvim-telescope/telescope.nvim",            branch = "0.1.x" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  {
-    "rmagatti/auto-session",
-    opts = {
-      log_level = "error",
-      auto_session_suppress_dirs = { "~/", "~/code", "~/Downloads", "/" },
-    },
-  },
+  { "folke/todo-comments.nvim",                 opts = {} },
   {
     "ggandor/leap.nvim",
     enabled = true,
@@ -89,13 +60,7 @@ lazy.setup({
     end,
   },
 
-  -- Git
-  { "tpope/vim-fugitive" },
-  { "lewis6991/gitsigns.nvim" },
-  { "rhysd/git-messenger.vim" },
-  { "rhysd/committia.vim" },
-
-  -- Coding
+  -- Editing
   {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
@@ -122,49 +87,6 @@ lazy.setup({
     config = true,
   },
   { "nvimtools/none-ls.nvim" },
-  { "folke/todo-comments.nvim", opts = {} },
-
-  -- Autocomplete & snippets
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   version = false,
-  --   event = "InsertEnter",
-  --   dependencies = {
-  --     { "hrsh7th/cmp-nvim-lsp" },
-  --     { "hrsh7th/cmp-nvim-lua" },
-  --     { "hrsh7th/cmp-buffer" },
-  --     { "hrsh7th/cmp-path" },
-  --     { "hrsh7th/cmp-cmdline" },
-  --     { "hrsh7th/cmp-nvim-lsp-signature-help" },
-  --     { "saadparwaiz1/cmp_luasnip" },
-  --     { "onsails/lspkind.nvim" },
-  --     {
-  --       "zbirenbaum/copilot-cmp",
-  --       config = function()
-  --         require("copilot_cmp").setup({
-  --           suggestion = { enabled = false },
-  --           panel = { enabled = false },
-  --         })
-  --       end,
-  --       dependencies = {
-  --         {
-  --           "zbirenbaum/copilot.lua",
-  --           event = "InsertEnter",
-  --           config = function()
-  --             require("copilot").setup({})
-  --           end,
-  --           cmd = "Copilot",
-  --         },
-  --       },
-  --     },
-  --     {
-  --       "L3MON4D3/LuaSnip",
-  --       version = "v2.*",
-  --       build = "make install_jsregexp",
-  --       dependencies = { "rafamadriz/friendly-snippets" },
-  --     },
-  --   },
-  -- },
 
   -- LSP
   {
@@ -205,64 +127,30 @@ lazy.setup({
 -- null-ls (formatters & linters)
 ---
 
-local null_ls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.gofumpt,
-    null_ls.builtins.formatting.goimports_reviser,
-    -- null_ls.builtins.formatting.golines,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.prettierd,
-  },
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-    end
-  end,
-})
-
----
--- Gitsigns
----
--- See :help gitsigns-usage
-
-local gitsigns = require("gitsigns")
-
-gitsigns.setup({
-  signs = {
-    add = { text = "▎" },
-    change = { text = "▎" },
-    delete = { text = "➤" },
-    topdelete = { text = "➤" },
-    changedelete = { text = "▎" },
-  },
-  current_line_blame = true,
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-    delay = 500,
-    ignore_whitespace = false,
-  },
-})
-
-vim.keymap.set("n", "<leader>gn", gitsigns.next_hunk, { desc = "Next hunk" })
-vim.keymap.set("n", "<leader>gp", gitsigns.prev_hunk, { desc = "Previous hunk" })
-vim.keymap.set("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage hunk" })
-vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
-vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview hunk" })
-vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo stage hunk" })
-vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer" })
-vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
-vim.keymap.set("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff" })
+-- local null_ls = require("null-ls")
+-- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+--
+-- null_ls.setup({
+--   sources = {
+--     null_ls.builtins.formatting.gofumpt,
+--     null_ls.builtins.formatting.goimports_reviser,
+--     -- null_ls.builtins.formatting.golines,
+--     null_ls.builtins.formatting.stylua,
+--     null_ls.builtins.formatting.prettierd,
+--   },
+--   on_attach = function(client, bufnr)
+--     if client.supports_method("textDocument/formatting") then
+--       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+--       vim.api.nvim_create_autocmd("BufWritePre", {
+--         group = augroup,
+--         buffer = bufnr,
+--         callback = function()
+--           vim.lsp.buf.format({ async = false })
+--         end,
+--       })
+--     end
+--   end,
+-- })
 
 ---
 -- Telescope
@@ -325,19 +213,6 @@ require("which-key").register({
   ["<leader><leader>"] = { name = "Swap Buffer", _ = "which_key_ignore" },
   ["gz"] = { name = "Surrounding", _ = "which_key_ignore" },
 })
-
----
--- nvim-tree (File explorer)
----
--- See :help nvim-tree-setup
-require("nvim-tree").setup({
-  view = { adaptive_size = true },
-  update_focused_file = {
-    enable = true,
-  },
-})
-
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File explorer" })
 
 ---
 -- annotations (neogen)
