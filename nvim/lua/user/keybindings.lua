@@ -34,4 +34,7 @@ vim.keymap.set("n", "<leader>k", "<Cmd>bp<CR>", { desc = "Previous buffer" })
 
 -- Split windows
 vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split below" })
-vim.keymap.set("n", "<leader>+", "<C-W>v", { desc = "Split right" })
+vim.keymap.set("n", "<leader>=", "<C-W>v", { desc = "Split right" })
+
+-- Press esc in normal mode to cancel search highlighting
+vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>", { desc = "Clear search" })

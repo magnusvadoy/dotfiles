@@ -141,6 +141,8 @@ function kafkafetch() {
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 
 #######################################
 ###     Environment 

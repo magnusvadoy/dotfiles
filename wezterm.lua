@@ -90,13 +90,13 @@ c.keys = {
     action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
   },
   {
-    key = "+",
+    key = "=",
     mods = "ALT",
     action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
   },
   {
     key = "w",
-    mods = "ALT",
+    mods = "SHIFT|ALT",
     action = act.CloseCurrentPane({ confirm = true }),
   },
 

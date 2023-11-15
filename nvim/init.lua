@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 -- Based on : https://github.com/VonHeikemen/nvim-starter/tree/04-lsp-installer
 
 require("user.settings")
@@ -34,7 +33,10 @@ function lazy.setup(plugins)
 end
 
 lazy.path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-lazy.opts = {}
+lazy.opts = {
+  change_detection = { notify = false },
+  checker = { enabled = true, notify = false },
+}
 
 lazy.setup({
   -- Editor
@@ -59,34 +61,6 @@ lazy.setup({
       vim.keymap.del({ "x", "o" }, "X")
     end,
   },
-
-  -- Editing
-  {
-    "echasnovski/mini.pairs",
-    event = "VeryLazy",
-    opts = {},
-  },
-  {
-    "echasnovski/mini.surround",
-    opts = {
-      mappings = {
-        add = "gza",
-        delete = "gzd",
-        find = "gzf",
-        find_left = "gzF",
-        highlight = "gzh",
-        replace = "gzr",
-        update_n_lines = "gzn",
-      },
-    },
-  },
-  { "echasnovski/mini.comment", opts = {} },
-  {
-    "danymat/neogen",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true,
-  },
-  { "nvimtools/none-ls.nvim" },
 
   -- LSP
   {
@@ -122,35 +96,6 @@ lazy.setup({
 -- ========================================================================== --
 -- ==                         PLUGIN CONFIGURATION                         == --
 -- ========================================================================== --
-
----
--- null-ls (formatters & linters)
----
-
--- local null_ls = require("null-ls")
--- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
---
--- null_ls.setup({
---   sources = {
---     null_ls.builtins.formatting.gofumpt,
---     null_ls.builtins.formatting.goimports_reviser,
---     -- null_ls.builtins.formatting.golines,
---     null_ls.builtins.formatting.stylua,
---     null_ls.builtins.formatting.prettierd,
---   },
---   on_attach = function(client, bufnr)
---     if client.supports_method("textDocument/formatting") then
---       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
---       vim.api.nvim_create_autocmd("BufWritePre", {
---         group = augroup,
---         buffer = bufnr,
---         callback = function()
---           vim.lsp.buf.format({ async = false })
---         end,
---       })
---     end
---   end,
--- })
 
 ---
 -- Telescope
@@ -215,19 +160,6 @@ require("which-key").register({
 })
 
 ---
--- annotations (neogen)
----
-
-require("neogen").setup({ snippet_engine = "luasnip" })
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>cn",
-  ":lua require('neogen').generate()<CR>",
-  { noremap = false, silent = true, desc = "Code Annotations" }
-)
-
----
 -- LSP config
 ---
 -- See :help lspconfig-global-defaults
@@ -277,28 +209,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     nmap("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
     nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-
     nmap("gd", vim.lsp.buf.definition, "Goto Definition")
     nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
-    nmap("gr", builtin.lsp_references, "Goto References")
-    nmap("gI", builtin.lsp_implementations, "Goto Implementation")
-    nmap("go", vim.lsp.buf.type_definition, "Type Definition")
-    nmap("<leader>cs", builtin.lsp_document_symbols, "Code Symbols")
-
+    nmap("gr", vim.lsp.buf.references, "Goto References")
+    nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
+    nmap("<leader>D", vim.lsp.buf.type_definition, "Type Definition")
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-    nmap("gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
     nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
     nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
-
-    -- Lesser used LSP functionality
-    -- nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    -- nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-    -- nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-    -- nmap("<leader>wl", function()
-    -- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    -- end, "[W]orkspace [L]ist Folders")
   end,
 })
 
@@ -317,6 +235,7 @@ require("mason-lspconfig").setup({
     "html",
     "cssls",
     "jsonnet_ls",
+    "bufls",
   },
   -- See :help mason-lspconfig.setup_handlers()
   handlers = {
