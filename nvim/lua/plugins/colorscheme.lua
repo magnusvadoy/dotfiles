@@ -1,7 +1,18 @@
 return {
   {
     "f-person/auto-dark-mode.nvim",
-    dependencies = { "folke/tokyonight.nvim" },
+    dependencies = {
+      "folke/tokyonight.nvim",
+      opts = {
+        italics = {
+          comments = false,
+          keywords = false,
+          functions = false,
+          strings = false,
+          variables = false,
+        },
+      },
+    },
     lazy = false,
     priority = 1000,
     opts = {

@@ -2,8 +2,6 @@
 -- ==                               COMMANDS                               == --
 -- ========================================================================== --
 
-vim.api.nvim_create_user_command("ReloadConfig", "source $MYVIMRC", {})
-
 local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -18,4 +16,18 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "man" },
   group = group,
   command = "nnoremap <buffer> q <cmd>quit<cr>",
+})
+
+-- Only show cursorline in active windows
+vim.api.nvim_create_autocmd("WinEnter", {
+  group = group,
+  callback = function()
+    vim.opt_local.cursorline = true
+  end,
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = group,
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
 })
