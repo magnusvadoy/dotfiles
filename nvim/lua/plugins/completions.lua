@@ -7,11 +7,20 @@ return {
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
 
+      -- local has_words_before = function()
+      --   unpack = unpack or table.unpack
+      --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      --   return col ~= 0
+      --       and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      -- end
+
       local has_words_before = function()
-        unpack = unpack or table.unpack
+        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+          return false
+        end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0
-            and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
       end
 
       local cmp = require("cmp")
@@ -43,24 +52,10 @@ return {
         --   documentation = cmp.config.window.bordered(),
         -- },
         formatting = {
-          fields = { "kind", "abbr", "menu" },
           format = lspkind.cmp_format({
-            mode = "symbol",       -- show only symbol annotations
-            maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-
-            before = function(entry, vim_item)
-              local menu = {
-                nvim_lsp = "Lsp",
-                nvim_lua = "Lua",
-                luasnip = "Snippet",
-                buffer = "Buffer",
-                path = "Path",
-                copilot = "Copilot",
-              }
-              vim_item.menu = menu[entry.source.name]
-              return vim_item
-            end,
+            mode = "symbol_text",
+            preset = "codicons",
+            symbol_map = { Copilot = "" },
           }),
         },
         -- See :help cmp-mapping
@@ -77,27 +72,23 @@ return {
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
 
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-              -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-              -- that way you will only jump inside the snippet region
+            if cmp.visible() and has_words_before() then
+              cmp.select_next_item(select_opts)
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end),
           ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
+            if cmp.visible() and has_words_before() then
+              cmp.select_prev_item(select_opts)
             elseif luasnip.jumpable(-1) then
               luasnip.jump(-1)
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end),
         },
       })
 
