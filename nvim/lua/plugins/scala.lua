@@ -1,5 +1,6 @@
 return {
   "scalameta/nvim-metals",
+  ft = "scala",
   dependencies = "nvim-lua/plenary.nvim",
   config = function()
     local metals_config = require("metals").bare_config()
