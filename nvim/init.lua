@@ -215,8 +215,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
     nmap("<leader>D", vim.lsp.buf.type_definition, "Type Definition")
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-    nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+    nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Previous Diagnostic")
+    nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic")
   end,
 })
 

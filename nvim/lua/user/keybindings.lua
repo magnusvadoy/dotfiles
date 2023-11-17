@@ -27,14 +27,13 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank" })  -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste" }) -- paste
 
--- Buffers
-vim.keymap.set("n", "<leader>bc", "<Cmd>bdelete<CR>", { desc = "Close buffer" })
-vim.keymap.set("n", "<leader>j", "<Cmd>bn<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>k", "<Cmd>bp<CR>", { desc = "Previous buffer" })
-
--- Split windows
-vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split below" })
-vim.keymap.set("n", "<leader>=", "<C-W>v", { desc = "Split right" })
-
 -- Press esc in normal mode to cancel search highlighting
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>", { desc = "Clear search" })
+
+-- Navigate quick fix list
+vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
+vim.keymap.set("n", "[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix" })
+
+-- Navigate location list
+vim.keymap.set("n", "]l", "<Cmd>lnext<CR>", { desc = "Next location" })
+vim.keymap.set("n", "[l", "<Cmd>lprev<CR>", { desc = "Previous location" })

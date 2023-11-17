@@ -45,3 +45,8 @@ vim.opt.termguicolors = true
 
 -- Highlight where the cursor is
 vim.opt.cursorline = true
+
+-- persistent undo
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undofile = true
