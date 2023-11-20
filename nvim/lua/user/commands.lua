@@ -31,3 +31,10 @@ vim.api.nvim_create_autocmd("WinLeave", {
     vim.opt_local.cursorline = false
   end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "TelescopePrompt" },
+  group = group,
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
+})

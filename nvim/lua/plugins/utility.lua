@@ -1,5 +1,4 @@
 return {
-  { "nvim-lua/plenary.nvim" },
   {
     "folke/flash.nvim",
     event = "VeryLazy",

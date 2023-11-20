@@ -33,10 +33,6 @@ vim.opt.signcolumn = "yes"
 -- Space as leader key
 vim.g.mapleader = " "
 
--- disable netrw since we will be using nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- Don't show mode
 vim.opt.showmode = false
 
