@@ -63,8 +63,12 @@ local color_scheme = scheme_for_appearance(get_appearance())
 local colors = w.get_builtin_color_schemes()[color_scheme]
 
 c.color_scheme = color_scheme
-c.font = w.font("JetBrainsMono Nerd Font", { weight = "Regular" })
-c.font_size = 15
+c.font = w.font({
+  family = "JetBrainsMono Nerd Font",
+  weight = "Regular",
+  harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+})
+c.font_size = 16
 c.default_cursor_style = "BlinkingBlock"
 c.window_padding = {
   left = 2,

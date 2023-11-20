@@ -27,13 +27,21 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank" })  -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste" }) -- paste
 
--- Press esc in normal mode to cancel search highlighting
-vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>", { desc = "Clear search" })
+-- Toggle Quickfix
+vim.keymap.set("n", "<C-q>", function()
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      vim.cmd("cclose")
+    else
+      vim.cmd("copen")
+    end
+  end
+end, { desc = "Toggle Quickfix" })
 
 -- Navigate quick fix list
 vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
 vim.keymap.set("n", "[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix" })
 
 -- Navigate location list
-vim.keymap.set("n", "]l", "<Cmd>lnext<CR>", { desc = "Next location" })
-vim.keymap.set("n", "[l", "<Cmd>lprev<CR>", { desc = "Previous location" })
+vim.keymap.set("n", "]l", "<Cmd>lnext<CR>zz", { desc = "Next location" })
+vim.keymap.set("n", "[l", "<Cmd>lprev<CR>zz", { desc = "Previous location" })

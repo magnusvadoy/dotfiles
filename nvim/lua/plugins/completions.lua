@@ -74,7 +74,7 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
               cmp.select_next_item(select_opts)
-            elseif luasnip.expand_or_jumpable() then
+            elseif luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             else
               fallback()
@@ -127,17 +127,17 @@ return {
       {
         "zbirenbaum/copilot-cmp",
         config = function()
-          require("copilot_cmp").setup({
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-          })
+          require("copilot_cmp").setup({})
         end,
         dependencies = {
           {
             "zbirenbaum/copilot.lua",
             event = "InsertEnter",
             config = function()
-              require("copilot").setup({})
+              require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+              })
             end,
             cmd = "Copilot",
           },

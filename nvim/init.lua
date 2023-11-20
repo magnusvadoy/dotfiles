@@ -43,24 +43,6 @@ lazy.setup({
   { "nvim-telescope/telescope.nvim",            branch = "0.1.x" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { "folke/todo-comments.nvim",                 opts = {} },
-  {
-    "ggandor/leap.nvim",
-    enabled = true,
-    keys = {
-      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
-      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
-    },
-    config = function(_, opts)
-      local leap = require("leap")
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
-      end
-      leap.add_default_mappings(true)
-      vim.keymap.del({ "x", "o" }, "x")
-      vim.keymap.del({ "x", "o" }, "X")
-    end,
-  },
 
   -- LSP
   {
@@ -79,17 +61,6 @@ lazy.setup({
   { "jay-babu/mason-nvim-dap.nvim" },
   { "leoluz/nvim-dap-go" },
 
-  -- Utilities
-  { "nvim-lua/plenary.nvim" },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = {},
-  },
   { import = "plugins" },
 })
 
@@ -121,7 +92,7 @@ vim.keymap.set("n", "<leader>ff", function()
   end
 end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "Recently opened files" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffer" })
+vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "Find Buffer" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Find Resume" })
@@ -143,21 +114,6 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
-
----
--- which-key
----
-require("which-key").register({
-  ["<leader>f"] = { name = "Find", _ = "which_key_ignore" },
-  ["<leader>r"] = { name = "Refactor", _ = "which_key_ignore" },
-  ["<leader>b"] = { name = "Buffer", _ = "which_key_ignore" },
-  ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
-  ["<leader>s"] = { name = "Select", _ = "which_key_ignore" },
-  ["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
-  ["<leader>d"] = { name = "Debug", _ = "which_key_ignore" },
-  ["<leader><leader>"] = { name = "Swap Buffer", _ = "which_key_ignore" },
-  ["gz"] = { name = "Surrounding", _ = "which_key_ignore" },
-})
 
 ---
 -- LSP config
@@ -207,8 +163,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
+    nmap("<leader>ca", vim.lsp.buf.code_action, "Action")
+    nmap("<leader>cf", vim.lsp.buf.format, "Format")
     nmap("gd", vim.lsp.buf.definition, "Goto Definition")
     nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
     nmap("gr", vim.lsp.buf.references, "Goto References")
