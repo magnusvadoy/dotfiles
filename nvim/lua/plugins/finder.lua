@@ -4,7 +4,7 @@ return {
     branch = "0.1.x",
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "folke/todo-comments.nvim" },
+      { "folke/todo-comments.nvim",                 dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
       { "nvim-lua/plenary.nvim" },
     },
     config = function()

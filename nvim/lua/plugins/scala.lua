@@ -1,6 +1,5 @@
 return {
   "scalameta/nvim-metals",
-  ft = "scala",
   dependencies = "nvim-lua/plenary.nvim",
   config = function()
     local metals_config = require("metals").bare_config()
@@ -58,10 +57,10 @@ return {
       -- want basic Java support but it may also conflict if you are using
       -- something like nvim-jdtls which also works on a java filetype autocmd.
       pattern = { "scala", "sbt", "java" },
+      group = nvim_metals_group,
       callback = function()
         require("metals").initialize_or_attach(metals_config)
       end,
-      group = nvim_metals_group,
     })
   end,
 }
