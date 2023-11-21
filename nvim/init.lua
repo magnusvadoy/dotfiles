@@ -105,6 +105,7 @@ vim.diagnostic.config({
 -- LSP Keybindings
 ---
 vim.api.nvim_create_autocmd("LspAttach", {
+  ---@diagnostic disable-next-line: undefined-global
   group = group,
   desc = "LSP actions",
   callback = function(_, bufnr)
@@ -114,13 +115,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
     nmap("<leader>ca", vim.lsp.buf.code_action, "Action")
-    nmap("<leader>cf", vim.lsp.buf.format, "Format")
+    nmap("<leader>cf", vim.lsp.buf.format, "LSP: Format")
+    nmap("<leader>cl", "<Cmd>LspInfo<CR>", "LSP: Info")
+
+    nmap("<leader>cr", "<Cmd>LspRestart<CR>", "LSP: Restart")
     nmap("gd", vim.lsp.buf.definition, "Goto Definition")
     nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
     nmap("gr", vim.lsp.buf.references, "Goto References")
     nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
-    nmap("<leader>D", vim.lsp.buf.type_definition, "Type Definition")
+    nmap("gt", vim.lsp.buf.type_definition, "Type Definition")
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+
     nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Previous Diagnostic")
     nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic")
   end,
@@ -141,22 +146,12 @@ require("mason-lspconfig").setup({
     "html",
     "cssls",
     "jsonnet_ls",
-    "bufls",
   },
   -- See :help mason-lspconfig.setup_handlers()
   handlers = {
     function(server)
       -- See :help lspconfig-setup
       lspconfig[server].setup({})
-    end,
-    ["tsserver"] = function()
-      lspconfig.tsserver.setup({
-        settings = {
-          completions = {
-            completeFunctionCalls = true,
-          },
-        },
-      })
     end,
     ["lua_ls"] = function()
       lspconfig.lua_ls.setup({
@@ -208,13 +203,13 @@ vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
 -- bindings
 vim.keymap.set("n", "<F5>", dap.continue)
+vim.keymap.set("n", "<F17>", dap.terminate) -- shift + F5
+vim.keymap.set("n", "<S-F5>", dap.restart)  -- command + shift + F5
+vim.keymap.set("n", "<F6>", dap.pause)
 vim.keymap.set("n", "<F10>", dap.step_over)
 vim.keymap.set("n", "<F11>", dap.step_into)
 vim.keymap.set("n", "<F12>", dap.step_out)
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-vim.keymap.set("n", "<leader>dB", function()
-  dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-end, { desc = "Breakpoint Condition" })
 
 -- Go
 require("dap-go").setup()
