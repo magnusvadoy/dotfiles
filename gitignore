@@ -300,3 +300,7 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
+
+# metals
+.metals/
+.bloop/

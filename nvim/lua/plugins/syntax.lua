@@ -7,8 +7,15 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
-      "JoosepAlviste/nvim-ts-context-commentstring", -- useful for embedded languages
-      "windwp/nvim-ts-autotag",                   -- autoclose and autorename html tags
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        config = function()
+          ---@diagnostic disable-next-line: missing-fields
+          require("ts_context_commentstring").setup({})
+          vim.g.skip_ts_context_commentstring_module = true
+        end,
+      },
+      "windwp/nvim-ts-autotag", -- autoclose and autorename html tags
     },
     opts = {
       auto_install = false,
