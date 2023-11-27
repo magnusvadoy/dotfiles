@@ -10,12 +10,11 @@ return {
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
         config = function()
-          ---@diagnostic disable-next-line: missing-fields
           require("ts_context_commentstring").setup({})
           vim.g.skip_ts_context_commentstring_module = true
         end,
       },
-      "windwp/nvim-ts-autotag", -- autoclose and autorename html tags
+      "windwp/nvim-ts-autotag",
     },
     opts = {
       auto_install = false,
@@ -59,8 +58,6 @@ return {
           node_decremental = "<BS>", -- visual mode
         },
       },
-      -- nvim-ts-context-commentstring
-      context_commentstring = { enable = true },
       -- nvim-ts-autotag
       autotag = { enable = true },
       -- :help nvim-treesitter-textobjects-modules

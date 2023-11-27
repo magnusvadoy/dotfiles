@@ -41,7 +41,6 @@ antigen apply
 alias vim="nvim"
 alias vi="vim"
 alias cat="bat"
-alias jq="yq"
 
 #######################################
 ###     Functions 
@@ -156,7 +155,7 @@ if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
   # Configure PATH
-  export PATH="/usr/local/bin:/Users/magnus/go/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+  export PATH="/usr/local/bin:/Users/mavad725/go/bin:$PATH"
 
   [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 fi

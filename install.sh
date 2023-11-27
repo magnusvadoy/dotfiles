@@ -12,9 +12,9 @@ declare -A symlinks=(
     ["zshrc"]="$HOME_DIR/.zshrc"
     ["gitignore"]="$HOME_DIR/.gitignore"
     ["gitconfig"]="$HOME_DIR/.gitconfig"
-    ["wezterm.lua"]="$HOME_DIR/.wezterm.lua"
-    ["tmux.conf"]="$TMUX_PLUGIN_DIR/.tmux.conf"
     ["nvim"]="$CONFIG_DIR/nvim"
+    ["wezterm"]="$CONFIG_DIR/wezterm"
+    ["tmux"]="$CONFIG_DIR/tmux"
 )
 
 # necessary packages to install
@@ -33,7 +33,6 @@ brew_packages=(
     "tree"
     "lazygit"
     "grpcurl"
-    "kubectx"
 )
 
 # necessary casks to install
@@ -44,7 +43,6 @@ brew_casks=(
     "rectangle"
     "scroll-reverser"
     "obsidian"
-    "google-cloud-sdk"
     "spotify"
     "caffeine"
 )

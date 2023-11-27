@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 -- Based on : https://github.com/VonHeikemen/nvim-starter/tree/04-lsp-installer
 
 require("user.settings")
@@ -145,23 +146,14 @@ require("mason-lspconfig").setup({
     "html",
     "cssls",
     "jsonnet_ls",
+    "bashls",
+    "yamlls",
   },
   -- See :help mason-lspconfig.setup_handlers()
   handlers = {
     function(server)
       -- See :help lspconfig-setup
       lspconfig[server].setup({})
-    end,
-    ["lua_ls"] = function()
-      lspconfig.lua_ls.setup({
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-          },
-        },
-      })
     end,
   },
 })
