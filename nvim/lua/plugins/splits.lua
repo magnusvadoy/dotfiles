@@ -1,5 +1,4 @@
 return {
-  { "kwkarlwang/bufresize.nvim" },
   {
     "mrjones2014/smart-splits.nvim",
     config = function()
