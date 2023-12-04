@@ -6,10 +6,11 @@ return {
     cmd = { "TSUpdateSync" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/nvim-treesitter-context",
+      { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 3 } },
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
         config = function()
+          ---@diagnostic disable-next-line: missing-fields
           require("ts_context_commentstring").setup({})
           vim.g.skip_ts_context_commentstring_module = true
         end,

@@ -115,9 +115,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "Action")
-    nmap("<leader>cf", vim.lsp.buf.format, "LSP: Format")
-    nmap("<leader>cl", "<Cmd>LspRestart<CR>", "LSP: Restart")
+    nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    nmap("<leader>cf", vim.lsp.buf.format, "Format Code")
 
     nmap("gd", vim.lsp.buf.definition, "Goto Definition")
     nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
