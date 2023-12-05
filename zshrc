@@ -148,6 +148,7 @@ bindkey "^[[1;3D" backward-word
 #######################################
 
 export EDITOR="nvim"
+export GOPATH=$HOME/go
 
 # Mac specific things
 if type brew &>/dev/null; then
