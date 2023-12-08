@@ -19,6 +19,7 @@ antigen bundle zsh-users/zsh-completions # additonal completions
 antigen bundle zsh-users/zsh-autosuggestions # fisk like autosuggestions based on history
 antigen bundle zsh-users/zsh-syntax-highlighting # fish shell like syntax highlighting 
 antigen bundle agkozak/zsh-z # jump quickly to recent directories
+antigen bundle jeffreytse/zsh-vi-mode # vi mode
 
 # Theme: https://github.com/yardnsm/blox-zsh-theme
 antigen bundle yardnsm/blox-zsh-theme

@@ -68,7 +68,7 @@ c.font = w.font({
   weight = "Regular",
   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
-c.font_size = 16
+c.font_size = 15
 c.default_cursor_style = "BlinkingBlock"
 c.window_padding = {
   left = 2,
