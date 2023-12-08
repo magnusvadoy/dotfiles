@@ -4,15 +4,42 @@ return {
     "hrsh7th/nvim-cmp",
     version = false,
     event = "InsertEnter",
+    dependencies = {
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-emoji"},
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "saadparwaiz1/cmp_luasnip" },
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup({})
+        end,
+        dependencies = {
+          {
+            "zbirenbaum/copilot.lua",
+            config = function()
+              require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+              })
+            end,
+          },
+        },
+      },
+      {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
+      { "onsails/lspkind.nvim" },
+    },
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-
-      -- local has_words_before = function()
-      --   unpack = unpack or table.unpack
-      --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      --   return col ~= 0
-      --       and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      -- end
 
       local has_words_before = function()
         if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -42,15 +69,16 @@ return {
           { name = "nvim_lsp" },
           { name = "nvim_lua" },
           { name = "luasnip" },
-          { name = "buffer" },
+          { name = "buffer", max_item_count = 5 },
           { name = "path" },
           { name = "nvim_lsp_signature_help" },
           { name = "copilot" },
+          { name = "emoji" },
         },
-        -- window = {
-        --   completion = cmp.config.window.bordered(),
-        --   documentation = cmp.config.window.bordered(),
-        -- },
+        window = {
+          -- completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
+        },
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
@@ -115,38 +143,5 @@ return {
         }),
       })
     end,
-    dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-cmdline" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help" },
-      { "saadparwaiz1/cmp_luasnip" },
-      { "onsails/lspkind.nvim" },
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup({})
-        end,
-        dependencies = {
-          {
-            "zbirenbaum/copilot.lua",
-            config = function()
-              require("copilot").setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-              })
-            end,
-          },
-        },
-      },
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" },
-      },
-    },
   },
 }
