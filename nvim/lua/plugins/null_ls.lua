@@ -8,14 +8,11 @@ return {
       null_ls.setup({
         sources = {
           null_ls.builtins.diagnostics.golangci_lint,
-          -- null_ls.builtins.formatting.gofumpt,
           null_ls.builtins.formatting.goimports_reviser.with({
             extra_args = {
-              -- "--base-formatter=gofumpt",
-              -- goimports-reviser -rm-unused -company-prefixes=bitbucket.org/tv2norge -imports-order=std,project,company,general
               "-rm-unused",
-              "-company-prefixes=bitbucket.org/tv2norge",
-              "-imports-order=std,company,general",
+              "-project-name=bitbucket.org/tv2norge",
+              "-imports-order=std,project,company,general",
             },
           }),
           null_ls.builtins.formatting.prettierd,
