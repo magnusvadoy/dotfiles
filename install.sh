@@ -17,6 +17,19 @@ declare -A symlinks=(
     ["tmux"]="$CONFIG_DIR/tmux"
 )
 
+# Create required directories
+mkdir -p "$TMUX_PLUGIN_DIR" "$ZSH_DIR" "$CONFIG_DIR"
+
+# Clone necessary repos
+git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
+git clone https://github.com/zsh-users/antigen.git "$ZSH_DIR/antigen"
+
+# Create symlinks
+for source_file in "${(@k)symlinks}"; do
+    target_file="${symlinks[$source_file]}"
+    ln -s "$DIR/$source_file" "$target_file"
+done
+
 # necessary packages to install
 brew_packages=(
     "git"
@@ -45,28 +58,8 @@ brew_casks=(
     "obsidian"
     "spotify"
     "caffeine"
+    "google-cloud-sdk"
 )
-
-# Create required directories
-mkdir -p "$TMUX_PLUGIN_DIR" "$ZSH_DIR" "$CONFIG_DIR"
-
-# Clone necessary repos
-git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
-git clone https://github.com/zsh-users/antigen.git "$ZSH_DIR/antigen"
-
-# Create symlinks
-for source_file in "${(@k)symlinks}"; do
-    target_file="${symlinks[$source_file]}"
-    ln -s "$DIR/$source_file" "$target_file"
-done
-
-# Source zsh to install nvm, then copy default packages over
-source "$HOME_DIR/.zshrc"
-ln -s "$DIR/nvm/default-packages" "$HOME_DIR/.nvm/default-packages"
-
-# Install LTS version of Node using nvm
-nvm install --lts
-
 # Install Homebrew packages
 brew install $brew_packages
 
