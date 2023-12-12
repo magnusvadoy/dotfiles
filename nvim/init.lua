@@ -40,23 +40,16 @@ lazy.opts = {
 }
 
 lazy.setup({
-  -- LSP
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      { "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
+      { "j-hui/fidget.nvim",    tag = "legacy",      event = "LspAttach", opts = {} },
       "folke/neodev.nvim",
+      "b0o/SchemaStore.nvim",
     },
   },
-
-  -- Debug
-  { "mfussenegger/nvim-dap" },
-  { "rcarriga/nvim-dap-ui" },
-  { "jay-babu/mason-nvim-dap.nvim" },
-  { "leoluz/nvim-dap-go" },
-
   { import = "plugins" },
 })
 
@@ -142,12 +135,12 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "gopls",
     "lua_ls",
+    "yamlls",
+    "jsonls",
+    "jsonnet_ls",
     "tsserver",
     "html",
     "cssls",
-    "jsonnet_ls",
-    "bashls",
-    "yamlls",
   },
   -- See :help mason-lspconfig.setup_handlers()
   handlers = {
@@ -155,52 +148,31 @@ require("mason-lspconfig").setup({
       -- See :help lspconfig-setup
       lspconfig[server].setup({})
     end,
+    ["jsonls"] = function()
+      lspconfig.jsonls.setup({
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
+    end,
+    ["yamlls"] = function()
+      lspconfig.yamlls.setup({
+        settings = {
+          yaml = {
+            schemaStore = {
+              -- You must disable built-in schemaStore support if you want to use
+              -- this plugin and its advanced options like `ignore`.
+              enable = false,
+              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+              url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
+          },
+        },
+      })
+    end,
   },
 })
-
----
--- DAP
----
-
-local dap = require("dap")
-
-local dap_ui_status_ok, dapui = pcall(require, "dapui")
-if not dap_ui_status_ok then
-  return
-end
-
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
-
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
-
-dapui.setup()
-
--- servers
-require("mason-nvim-dap").setup({
-  ensure_installed = { "delve" },
-  automatic_installation = false,
-})
-
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "error", linehl = "", numhl = "" })
-vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-
--- bindings
-vim.keymap.set("n", "<F5>", dap.continue)
-vim.keymap.set("n", "<F17>", dap.terminate) -- shift + F5
-vim.keymap.set("n", "<S-F5>", dap.restart)  -- command + shift + F5
-vim.keymap.set("n", "<F6>", dap.pause)
-vim.keymap.set("n", "<F10>", dap.step_over)
-vim.keymap.set("n", "<F11>", dap.step_into)
-vim.keymap.set("n", "<F12>", dap.step_out)
-vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-
--- Go
-require("dap-go").setup()

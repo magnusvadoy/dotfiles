@@ -10,7 +10,6 @@ return {
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-cmdline" },
-      { "hrsh7th/cmp-emoji"},
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "saadparwaiz1/cmp_luasnip" },
       {
@@ -69,11 +68,10 @@ return {
           { name = "nvim_lsp" },
           { name = "nvim_lua" },
           { name = "luasnip" },
-          { name = "buffer", max_item_count = 5 },
+          { name = "buffer",                 max_item_count = 5 },
           { name = "path" },
           { name = "nvim_lsp_signature_help" },
           { name = "copilot" },
-          { name = "emoji" },
         },
         window = {
           -- completion = cmp.config.window.bordered(),
@@ -118,6 +116,15 @@ return {
             end
           end),
         },
+      })
+
+      -- Set configuration for specific filetype.
+      cmp.setup.filetype("gitcommit", {
+        sources = cmp.config.sources({
+          { name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+        }, {
+          { name = "buffer" },
+        }),
       })
 
       -- `/` cmdline setup.
