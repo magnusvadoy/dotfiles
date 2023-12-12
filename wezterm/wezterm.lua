@@ -63,23 +63,25 @@ local color_scheme = scheme_for_appearance(get_appearance())
 local colors = w.get_builtin_color_schemes()[color_scheme]
 
 c.color_scheme = color_scheme
-c.font = w.font({
-  family = "JetBrainsMono Nerd Font",
-  weight = "Regular",
-  harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+c.font = w.font_with_fallback({
+  {
+    family = "JetBrainsMono Nerd Font",
+    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+    weight = "Regular",
+  },
+  "Apple Color Emoji",
 })
 c.font_size = 15
-c.default_cursor_style = "BlinkingBlock"
 c.window_padding = {
-  left = 2,
-  right = 2,
-  top = 2,
-  bottom = 2,
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
 }
 c.window_background_opacity = 1.0
 c.use_fancy_tab_bar = false
 c.hide_tab_bar_if_only_one_tab = true
-c.tab_bar_at_bottom = true
+c.tab_bar_at_bottom = false
 c.tab_max_width = 32
 c.colors = {
   tab_bar = {

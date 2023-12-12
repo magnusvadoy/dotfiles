@@ -49,7 +49,7 @@ antigen apply
 
 alias vim="nvim"
 alias vi="vim"
-alias cat="bat"
+alias cat="bat --paging=never"
 
 #######################################
 ###     Bindings 
@@ -66,4 +66,4 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export EDITOR="nvim"
 export GOPATH=$HOME/go
-export PATH="$GOPATH:$PATH"
+export PATH="$GOPATH/bin:$PATH"

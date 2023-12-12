@@ -15,6 +15,8 @@ return {
               "-imports-order=std,project,company,general",
             },
           }),
+          null_ls.builtins.diagnostics.protolint,
+          null_ls.builtins.formatting.protolint,
           null_ls.builtins.formatting.prettierd,
           null_ls.builtins.formatting.stylua,
         },

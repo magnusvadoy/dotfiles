@@ -15,6 +15,7 @@ declare -A symlinks=(
     ["nvim"]="$CONFIG_DIR/nvim"
     ["wezterm"]="$CONFIG_DIR/wezterm"
     ["tmux"]="$CONFIG_DIR/tmux"
+    ["bat"]="$CONFIG_DIR/bat"
 )
 
 # Create required directories
@@ -42,10 +43,13 @@ brew_packages=(
     "rg"
     "fd"
     "bat"
+    "delta"
     "yq"
     "tree"
     "lazygit"
     "grpcurl"
+    "kubectx"
+    "k9s"
 )
 
 # necessary casks to install
