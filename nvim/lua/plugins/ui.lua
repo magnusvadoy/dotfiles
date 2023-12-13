@@ -9,8 +9,6 @@ return {
       { "]b",         "<Cmd>BufferLineCycleNext<CR>",   desc = "Next buffer" },
       { "<leader>bp", "<Cmd>BufferLinePick<CR>",        desc = "Buffer pick" },
       { "<leader>bc", "<Cmd>BufferLinePickClose<CR>",   desc = "Pick close" },
-      { "<leader>b[", "<Cmd>BufferLineMovePrev<CR>",    desc = "Move prev" },
-      { "<leader>b]", "<Cmd>BufferLineMoveNext<CR>",    desc = "Move next" },
       { "<leader>bD", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close others" },
       { "<leader>bL", "<Cmd>BufferLineCloseLeft<CR>",   desc = "Close to the left" },
       { "<leader>bR", "<Cmd>BufferLineCloseRight<CR>",  desc = "Close to the right" },
