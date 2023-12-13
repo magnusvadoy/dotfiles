@@ -50,6 +50,8 @@ antigen apply
 alias vim="nvim"
 alias vi="vim"
 alias cat="bat --paging=never"
+alias dot="z dot && vim"
+alias dc="docker-compose"
 
 #######################################
 ###     Bindings 
