@@ -59,6 +59,18 @@ local function split_nav(resize_or_move, key)
   }
 end
 
+local function get_current_working_dir(tab)
+  return string.gsub(tab.active_pane.current_working_dir, "(.*[/\\])(.*)", "%2")
+end
+
+-- set tab title to current working directory
+w.on("format-tab-title", function(tab)
+  local title = string.format(" %s %s ", "❯", get_current_working_dir(tab))
+  return {
+    { Text = title },
+  }
+end)
+
 local color_scheme = scheme_for_appearance(get_appearance())
 local colors = w.get_builtin_color_schemes()[color_scheme]
 
