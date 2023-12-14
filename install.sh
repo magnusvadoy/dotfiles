@@ -43,7 +43,7 @@ brew_packages=(
     "rg"
     "fd"
     "bat"
-    "delta"
+    "git-delta"
     "yq"
     "tree"
     "lazygit"
