@@ -45,7 +45,7 @@ lazy.setup({
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      { "j-hui/fidget.nvim",    tag = "legacy",      event = "LspAttach", opts = {} },
+      { "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
       "folke/neodev.nvim",
       "b0o/SchemaStore.nvim",
     },
@@ -138,6 +138,7 @@ require("mason-lspconfig").setup({
     "yamlls",
     "jsonls",
     "jsonnet_ls",
+    "bufls",
     "tsserver",
     "html",
     "cssls",
