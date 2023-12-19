@@ -62,7 +62,9 @@ brew_casks=(
     "obsidian"
     "spotify"
     "caffeine"
+    "clipy"
     "google-cloud-sdk"
+    "postman"
 )
 # Install Homebrew packages
 brew install $brew_packages
