@@ -98,29 +98,28 @@ vim.diagnostic.config({
 ---
 -- LSP Keybindings
 ---
+local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
-  ---@diagnostic disable-next-line: undefined-global
   group = group,
   desc = "LSP actions",
   callback = function(_, bufnr)
-    local nmap = function(keys, func, desc)
-      vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+    local map = function(mode, keys, func, desc)
+      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
     end
 
-    nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-    vim.keymap.set("v", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
-    nmap("<leader>cf", vim.lsp.buf.format, "Format Code")
-
-    nmap("gd", vim.lsp.buf.definition, "Goto Definition")
-    nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
-    nmap("gr", vim.lsp.buf.references, "Goto References")
-    nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
-    nmap("gt", vim.lsp.buf.type_definition, "Type Definition")
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-
-    nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Previous Diagnostic")
-    nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic")
+    map("n", "<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
+    map("n", "<leader>cf", vim.lsp.buf.format, "Format Code")
+    map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+    map("v", "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+    map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+    map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
+    map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
+    map("n", "gr", vim.lsp.buf.references, "Goto References")
+    map("n", "gi", vim.lsp.buf.implementation, "Goto Implementation")
+    map("n", "go", vim.lsp.buf.type_definition, "Goto Type Definition")
+    map("n", "gl", vim.diagnostic.open_float, "Show Line Diagnostics")
+    map("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+    map("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
   end,
 })
 

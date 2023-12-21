@@ -1,6 +1,8 @@
 return {
   "scalameta/nvim-metals",
   dependencies = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
+  ft = { "scala", "sbt", "java" },
+  event = { "CmdlineEnter" },
   config = function()
     local metals_config = require("metals").bare_config()
 
