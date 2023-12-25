@@ -18,10 +18,7 @@ return {
       end
 
       map("n", "<leader>/", function()
-        builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-          winblend = 10,
-          previewer = false,
-        }))
+        builtin.current_buffer_fuzzy_find()
       end, "Fuzzy search in current buffer")
       map("n", "<leader>ff", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
@@ -33,11 +30,11 @@ return {
       end, "Find Files")
       map("n", "<leader>?", builtin.oldfiles, "Recently opened files")
       map("n", "<leader><space>", function()
-        builtin.buffers(require("telescope.themes").get_dropdown({
-          previewer = false,
+        builtin.buffers({
+          -- previewer = false,
           ignore_current_buffer = true,
           sort_mru = true,
-        }))
+        })
       end, "Find Buffer")
       map("n", "<leader>fw", builtin.grep_string, "Find Current Word")
       map("n", "<leader>fg", builtin.live_grep, "Find Grep")
@@ -59,7 +56,6 @@ return {
             "dist/",
             "node_modules/",
           },
-
         }),
       })
 

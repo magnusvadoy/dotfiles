@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 return {
   {
     "akinsho/bufferline.nvim",
@@ -19,6 +20,12 @@ return {
         options = {
           separator_style = "slant",
           style_preset = bufferline.style_preset.no_italic,
+          diagnostics = "nvim_lsp",
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            ---@diagnostic disable-next-line: undefined-field
+            local icon = level:match("error") and " " or " "
+            return icon .. count
+          end,
           offsets = {
             {
               filetype = "NvimTree",
