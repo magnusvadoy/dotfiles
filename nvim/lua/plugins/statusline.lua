@@ -28,16 +28,17 @@ return {
     opts = {
       options = {
         theme = "tokyonight",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        globalstatus = true,
+        component_separators = "|",
+        section_separators = "",
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = { { "mode", icons_enabled = true, icon = "" } },
         lualine_b = { branch_stat, diff_stat, diagnostics_stat },
-        lualine_c = { { "filename" }, { "searchcount", icon = "󰍉" } },
+        lualine_c = { { "filename", path = 1 }, { "searchcount", icon = "󰍉" } },
         lualine_x = {},
         lualine_y = { "filetype" },
-        lualine_z = { "location" },
+        lualine_z = { "location", "progress" },
       },
       inactive_sections = {
         lualine_a = {},

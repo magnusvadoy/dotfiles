@@ -1,35 +1,15 @@
-#!/bin/zsh
+#!/bin/sh
 
-# Define the home directory and target directories
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-HOME_DIR="$HOME"
-TMUX_PLUGIN_DIR="$HOME_DIR/.tmux/plugins"
-ZSH_DIR="$HOME_DIR/.zsh"
 CONFIG_DIR="$HOME_DIR/.config"
-
-# Define an array of symlinks
-declare -A symlinks=(
-    ["zshrc"]="$HOME_DIR/.zshrc"
-    ["gitignore"]="$HOME_DIR/.gitignore"
-    ["gitconfig"]="$HOME_DIR/.gitconfig"
-    ["nvim"]="$CONFIG_DIR/nvim"
-    ["wezterm"]="$CONFIG_DIR/wezterm"
-    ["tmux"]="$CONFIG_DIR/tmux"
-    ["bat"]="$CONFIG_DIR/bat"
-)
+TMUX_PLUGIN_DIR="$HOME_DIR/.tmux/plugins"
+ANTIGEN_DIR="$HOME_DIR/.zsh"
 
 # Create required directories
-mkdir -p "$TMUX_PLUGIN_DIR" "$ZSH_DIR" "$CONFIG_DIR"
+mkdir -p "$TMUX_PLUGIN_DIR" "$ANTIGEN_DIR" "$CONFIG_DIR"
 
 # Clone necessary repos
 git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
 git clone https://github.com/zsh-users/antigen.git "$ZSH_DIR/antigen"
-
-# Create symlinks
-for source_file in "${(@k)symlinks}"; do
-    target_file="${symlinks[$source_file]}"
-    ln -s "$DIR/$source_file" "$target_file"
-done
 
 # necessary packages to install
 brew_packages=(
@@ -66,6 +46,7 @@ brew_casks=(
     "google-cloud-sdk"
     "postman"
 )
+
 # Install Homebrew packages
 brew install $brew_packages
 

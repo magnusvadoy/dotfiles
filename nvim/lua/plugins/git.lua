@@ -1,5 +1,5 @@
 return {
-  { "tpope/vim-fugitive", cmd = "Git" },
+  { "tpope/vim-fugitive", event = { "InsertEnter", "CmdlineEnter" } },
   { "rhysd/committia.vim" },
   {
     "lewis6991/gitsigns.nvim",

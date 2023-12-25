@@ -33,8 +33,9 @@ vim.opt.signcolumn = "yes"
 -- Space as leader key
 vim.g.mapleader = " "
 
--- Don't show mode
-vim.opt.showmode = false
+-- Statusline
+vim.opt.showmode = false -- Hide the default mode text (e.g. -- INSERT -- below the statusline)
+-- vim.opt.ch = 0           -- Hide command line when not typing a command
 
 -- Enable 24-bit colours
 vim.opt.termguicolors = true
