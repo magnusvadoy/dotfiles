@@ -1,6 +1,6 @@
 [user]
-	name = Magnus Furnes Vadøy
-	email = magnus.f.vadoy@gmail.com
+  name = Magnus Furnes Vadøy
+  email = magnus.f.vadoy@gmail.com
 [include]
   path = ~/.gitconfig_work
 [core]
