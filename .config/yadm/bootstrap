@@ -1,0 +1,33 @@
+#!/bin/sh
+
+install_brew() {
+  # Proudly borrowed from:
+  # https://github.com/duckfullstop/dotfiles/blob/f734eea399a7ccd1c25b57242997e79f230abc4d/.config/yadm/bootstrap
+
+  # install Homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  fi
+
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating Homebrew bundle"
+    brew bundle --global
+  fi
+}
+
+configure_zsh_and_tmux() {
+  CONFIG_DIR="$HOME/.config"
+  TMUX_PLUGIN_DIR="$HOME/.tmux/plugins"
+  ANTIGEN_DIR="$HOME/.zsh"
+
+  # Create required directories
+  mkdir -p "$TMUX_PLUGIN_DIR" "$ANTIGEN_DIR" "$CONFIG_DIR"
+
+  # Clone necessary repos
+  git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
+  git clone https://github.com/zsh-users/antigen.git "$ZSH_DIR/antigen"
+}
+
+install_brew
+configure_zsh_and_tmux
