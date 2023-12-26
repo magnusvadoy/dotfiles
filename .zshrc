@@ -30,16 +30,8 @@ antigen bundle agkozak/zsh-z # jump quickly to recent directories
 antigen bundle jeffreytse/zsh-vi-mode # vi mode
 antigen bundle wfxr/forgit # git commands with fzf
 
-# Theme: https://github.com/yardnsm/blox-zsh-theme
-antigen bundle yardnsm/blox-zsh-theme
-BLOX_CONF__ONELINE=false
-BLOX_CONF__BLOCK_SEPARATOR=' '
-BLOX_BLOCK__CWD_TRUNC=3
-
-BLOX_SEG__UPPER_LEFT=( host cwd git exec_time )
-BLOX_SEG__UPPER_RIGHT=( bgjobs nodejs time )
-BLOX_SEG__LOWER_LEFT=( symbol )
-BLOX_SEG__LOWER_RIGHT=( )
+# Theme
+antigen theme spaceship-prompt/spaceship-prompt
 
 # Apply antigen setup
 antigen apply
@@ -76,4 +68,13 @@ export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
 export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude '.git' --color=always"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type directory '' $HOME"
-export FZF_DEFAULT_OPTS="--ansi --layout reverse --preview-window 'right:60%' --preview 'bat --color=always --line-range :300 {}'"
+export FZF_DEFAULT_OPTS="
+--ansi 
+--prompt ' '
+--pointer ''
+--marker '┃'
+--layout reverse 
+--preview-window 'right:60%' 
+--preview 'bat --color=always --line-range :300 {}'
+--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down
+"

@@ -1,6 +1,5 @@
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-
 brew "git"
 brew "zsh"
 brew "nvim"
@@ -19,7 +18,6 @@ brew "lazygit"
 brew "grpcurl"
 brew "kubectx"
 brew "k9s"
-
 cask "wezterm"
 cask "docker"
 cask "alt-tab"
@@ -31,5 +29,4 @@ cask "caffeine"
 cask "clipy"
 cask "google-cloud-sdk"
 cask "postman"
-
-brew "font-jetbrains-mono-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
