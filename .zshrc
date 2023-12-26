@@ -70,7 +70,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export EDITOR="nvim"
 export GOPATH=$HOME/go
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude '.git' --color=always"
