@@ -80,7 +80,7 @@ export FZF_DEFAULT_OPTS="
 "
 
 # eza
-export eza_params=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group' '--color-scale')
+export eza_params=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group')
 
 alias ls='eza $eza_params'
 alias l='eza --git-ignore $eza_params'
