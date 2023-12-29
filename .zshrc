@@ -19,8 +19,6 @@ antigen use oh-my-zsh
 antigen bundle git # git aliases
 antigen bundle gitfast # faster completion for git
 antigen bundle kubectl # adds some useful aliases and functions
-antigen bundle fzf # enabled fzf's key bindings and auto-completion
-antigen bundle history-substring-search # fish shell history search feature
 
 # Bundles from other repos
 antigen bundle zsh-users/zsh-completions # additonal completions
@@ -37,37 +35,28 @@ antigen theme spaceship-prompt/spaceship-prompt
 antigen apply
 
 #######################################
-###     Aliases 
+###     Config 
 #######################################
 
-alias vim="nvim"
-alias vi="vim"
-alias cat="bat --paging=never"
-alias dc="docker compose"
+### Aliases ###
 alias ...="../.."
 alias ....="../../.."
+alias cat="bat --paging=never"
+alias dc="docker compose"
 
-#######################################
-###     Bindings 
-#######################################
-
-# bind UP and DOWN arrow keys to history search
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-
-#######################################
-###     Environment 
-#######################################
-
+### Editor ###
+alias vim="nvim"
 export EDITOR="nvim"
+
+### PATH ###
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
 
-# FZF
+### FZF ###
 export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude '.git' --color=always"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type directory '' $HOME"
+export FZF_CTRL_R_OPTS="--preview 'echo {}'"
 export FZF_DEFAULT_OPTS="
 --ansi 
 --prompt ' '
@@ -79,14 +68,20 @@ export FZF_DEFAULT_OPTS="
 --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down
 "
 
-# eza
-export eza_params=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group')
+### EZA ###
+export EZA_PARAMS=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group')
 
-alias ls='eza $eza_params'
-alias l='eza --git-ignore $eza_params'
-alias ll='eza --all --header --long $eza_params'
-alias llm='eza --all --header --long --sort=modified $eza_params'
+alias ls='eza $EZA_PARAMS'
+alias l='eza --git-ignore $EZA_PARAMS'
+alias ll='eza --all --header --long $EZA_PARAMS'
+alias llm='eza --all --header --long --sort=modified $EZA_PARAMS'
 alias la='eza -lbhHigUmuSa'
 alias lx='eza -lbhHigUmuSa@'
-alias lt='eza --tree $eza_params'
-alias tree='eza --tree $eza_params'
+alias lt='eza --tree $EZA_PARAMS'
+alias tree='eza --tree $EZA_PARAMS'
+
+### Zsh Vi Mode ###
+# The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}

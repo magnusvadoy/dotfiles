@@ -27,6 +27,9 @@ configure_zsh_and_tmux() {
   # Clone necessary repos
   git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
   git clone https://github.com/zsh-users/antigen.git "$ANTIGEN_DIR/antigen"
+
+  # Setup FZF
+  $(brew --prefix)/opt/fzf/install
 }
 
 install_brew
