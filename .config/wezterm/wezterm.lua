@@ -155,13 +155,9 @@ local color_scheme = scheme_for_appearance(get_appearance())
 local colors = wezterm.get_builtin_color_schemes()[color_scheme]
 
 config.color_scheme = color_scheme
-config.font = wezterm.font_with_fallback({
-  {
-    family = "JetBrainsMono Nerd Font",
-    harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
-    weight = "Regular",
-  },
-  "Apple Color Emoji",
+config.font = wezterm.font("JetBrainsMono Nerd Font", {
+  harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+  weight = "Regular",
 })
 config.font_size = 15
 config.window_padding = {

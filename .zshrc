@@ -28,7 +28,7 @@ antigen bundle agkozak/zsh-z # jump quickly to recent directories
 antigen bundle jeffreytse/zsh-vi-mode # vi mode
 antigen bundle wfxr/forgit # git commands with fzf
 
-# Theme
+# Spaceship prompt
 antigen theme spaceship-prompt/spaceship-prompt
 
 # Apply antigen setup
