@@ -64,9 +64,10 @@ local process_icons = {
   ["docker"] = wezterm.nerdfonts.linux_docker,
   ["docker-compose"] = wezterm.nerdfonts.linux_docker,
   ["kubectl"] = wezterm.nerdfonts.md_kubernetes,
+  ["k9s"] = wezterm.nerdfonts.md_kubernetes,
   ["psql"] = wezterm.nerdfonts.dev_database,
   ["usql"] = wezterm.nerdfonts.dev_database,
-  ["nvim"] = wezterm.nerdfonts.custom_vim,
+  ["nvim"] = wezterm.nerdfonts.dev_vim,
   ["make"] = wezterm.nerdfonts.seti_makefile,
   ["vim"] = wezterm.nerdfonts.dev_vim,
   ["node"] = wezterm.nerdfonts.dev_nodejs_small,
@@ -157,7 +158,7 @@ config.color_scheme = color_scheme
 config.font = wezterm.font_with_fallback({
   {
     family = "JetBrainsMono Nerd Font",
-    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+    harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
     weight = "Regular",
   },
   "Apple Color Emoji",
