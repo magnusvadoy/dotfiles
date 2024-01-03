@@ -156,9 +156,9 @@ local colors = wezterm.get_builtin_color_schemes()[color_scheme]
 
 config.color_scheme = color_scheme
 config.font = wezterm.font("JetBrainsMono Nerd Font", {
-  harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
   weight = "Regular",
 })
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.font_size = 15
 config.window_padding = {
   left = 0,
@@ -174,6 +174,10 @@ config.tab_max_width = 32
 config.colors = {
   tab_bar = {
     background = "#16161e",
+    active_tab = {
+      bg_color = colors.background,
+      fg_color = colors.foreground,
+    },
     new_tab = {
       bg_color = "#16161e",
       fg_color = colors.foreground,

@@ -19,7 +19,7 @@ return {
 
       map("n", "<leader>/", function()
         builtin.current_buffer_fuzzy_find()
-      end, "Fuzzy search in current buffer")
+      end, "Search current buffer")
       map("n", "<leader>ff", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
         if ret == 0 then
@@ -27,26 +27,25 @@ return {
         else
           builtin.find_files()
         end
-      end, "Find Files")
+      end, "Find file")
       map("n", "<leader>?", builtin.oldfiles, "Recently opened files")
       map("n", "<leader><space>", function()
         builtin.buffers({
-          -- previewer = false,
           ignore_current_buffer = true,
           sort_mru = true,
         })
-      end, "Find Buffer")
-      map("n", "<leader>fw", builtin.grep_string, "Find Current Word")
-      map("n", "<leader>fg", builtin.live_grep, "Find Grep")
-      map("n", "<leader>fr", builtin.resume, "Find Resume")
-      map("n", "<leader>fd", builtin.diagnostics, "Find Diagnostics")
-      map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", "Find Todo")
-      map("n", "<leader>fh", builtin.help_tags, "Find Help")
-      map("n", "<leader>fs", builtin.lsp_document_symbols, "Find Symbols (document)")
-      map("n", "<leader>fS", builtin.lsp_workspace_symbols, "Find Symbols (workspace)")
+      end, "Find buffer")
+      map("n", "<leader>fc", builtin.command_history, "Find command history")
+      map("n", "<leader>fw", builtin.grep_string, "Find current word")
+      map("n", "<leader>fg", builtin.live_grep, "Find grep")
+      map("n", "<leader>fr", builtin.resume, "Find resume")
+      map("n", "<leader>fd", builtin.diagnostics, "Find diagnostics")
+      map("n", "<leader>fh", builtin.help_tags, "Find help")
+      map("n", "<leader>fs", builtin.spell_suggest, "Find spelling")
       map("n", "<leader>ga", builtin.git_status, "Status")
       map("n", "<leader>gb", builtin.git_branches, "Branches")
       map("n", "<leader>gc", builtin.git_commits, "Commits")
+      map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", "Find todo")
 
       telescope.setup({
         defaults = themes.get_ivy({
@@ -57,6 +56,14 @@ return {
             "node_modules/",
           },
         }),
+        extensions = {
+          fzf = {
+            fuzzy = true,             -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          },
+        },
       })
 
       telescope.load_extension("fzf")

@@ -39,8 +39,6 @@ antigen apply
 #######################################
 
 ### Aliases ###
-alias ...="../.."
-alias ....="../../.."
 alias cat="bat --paging=never"
 alias dc="docker compose"
 

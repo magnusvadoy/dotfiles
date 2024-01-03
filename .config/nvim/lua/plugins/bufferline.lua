@@ -18,7 +18,6 @@ return {
       local bufferline = require("bufferline")
       bufferline.setup({
         options = {
-          separator_style = "slant",
           style_preset = bufferline.style_preset.no_italic,
           diagnostics = "nvim_lsp",
           diagnostics_indicator = function(count, level, diagnostics_dict, context)

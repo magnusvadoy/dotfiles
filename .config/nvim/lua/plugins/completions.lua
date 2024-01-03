@@ -86,6 +86,8 @@ return {
         },
         -- See :help cmp-mapping
         mapping = {
+          ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+          ["<Down>"] = cmp.mapping.select_next_item(select_opts),
           ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
           ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
 
