@@ -27,6 +27,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting # fish shell like syntax highli
 antigen bundle agkozak/zsh-z # jump quickly to recent directories
 antigen bundle jeffreytse/zsh-vi-mode # vi mode
 antigen bundle wfxr/forgit # git commands with fzf
+antigen bundle MichaelAquilina/zsh-auto-notify # auto notify when long running commands finish
+
 
 # Spaceship prompt
 antigen theme spaceship-prompt/spaceship-prompt
@@ -83,3 +85,7 @@ alias tree='eza --tree $EZA_PARAMS'
 function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
+
+### Auto Notify ###
+# Set threshold for notifications to 20seconds
+export AUTO_NOTIFY_THRESHOLD=20
