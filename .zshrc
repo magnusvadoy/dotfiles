@@ -27,8 +27,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting # fish shell like syntax highli
 antigen bundle agkozak/zsh-z # jump quickly to recent directories
 antigen bundle jeffreytse/zsh-vi-mode # vi mode
 antigen bundle wfxr/forgit # git commands with fzf
-antigen bundle MichaelAquilina/zsh-auto-notify # auto notify when long running commands finish
-
+antigen bundle MichaelAquilina/zsh-you-should-use # reminder to use aliases
 
 # Spaceship prompt
 antigen theme spaceship-prompt/spaceship-prompt
@@ -40,6 +39,14 @@ antigen apply
 ###     Config 
 #######################################
 
+### History ###
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=10000
+
+setopt HIST_IGNORE_ALL_DUPS # ignore duplicate commands
+setopt SHARE_HISTORY # share history between sessions
+
 ### Aliases ###
 alias cat="bat --paging=never"
 alias dc="docker compose"
@@ -50,7 +57,9 @@ export EDITOR="nvim"
 
 ### PATH ###
 export GOPATH=$HOME/go
-export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
+PATH+=":$GOPATH/bin"
+PATH+=":$HOME/.local/bin"
+PATH+=":$HOME/.cargo/bin"
 
 ### FZF ###
 export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude '.git' --color=always"
@@ -60,12 +69,15 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}'"
 export FZF_DEFAULT_OPTS="
 --ansi 
 --prompt ' '
---pointer ''
---marker '┃'
+--pointer ' '
+--marker ' '
 --layout reverse 
 --preview-window 'right:60%' 
 --preview 'bat --color=always --line-range :300 {}'
---bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down
+--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,ctrl-f:preview-page-down,ctrl-b:preview-page-up
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
 "
 
 ### EZA ###
@@ -89,3 +101,5 @@ function zvm_after_init() {
 ### Auto Notify ###
 # Set threshold for notifications to 20seconds
 export AUTO_NOTIFY_THRESHOLD=20
+AUTO_NOTIFY_IGNORE+=("docker")
+AUTO_NOTIFY_IGNORE+=("kubectl")

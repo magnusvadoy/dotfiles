@@ -1,4 +1,3 @@
----@diagnostic disable: unused-local
 local wezterm = require("wezterm")
 local act = wezterm.action
 local config = {}
@@ -16,9 +15,9 @@ end
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
-    return "tokyonight"
+    return "Catppuccin Mocha"
   else
-    return "tokyonight-day"
+    return "Catppuccin Latte"
   end
 end
 
@@ -109,6 +108,7 @@ local function get_process(tab)
   return process_icons[process_name] or string.format("[%s]", process_name)
 end
 
+---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, tabs, panes, conf, hover, max_width)
   local has_unseen_output = false
   if not tab.is_active then
@@ -171,19 +171,6 @@ config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = false
 config.tab_max_width = 32
-config.colors = {
-  tab_bar = {
-    background = "#16161e",
-    active_tab = {
-      bg_color = colors.background,
-      fg_color = colors.foreground,
-    },
-    new_tab = {
-      bg_color = "#16161e",
-      fg_color = colors.foreground,
-    },
-  },
-}
 
 config.keys = {
   {

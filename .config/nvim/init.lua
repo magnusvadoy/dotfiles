@@ -107,10 +107,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
     end
 
-    map("n", "<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
-    map("n", "<leader>cf", vim.lsp.buf.format, "Format Code")
-    map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
-    map("v", "<leader>ca", vim.lsp.buf.code_action, "Code Actions")
+    map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+    map("n", "<leader>cf", vim.lsp.buf.format, "Format code")
+    map("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+    map("v", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+    map("n", "<leader>cl", vim.lsp.codelens.run, "Run codelens")
+    map("n", "<leader>cL", vim.lsp.codelens.refresh, "Refresh codelens")
     map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
     map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
     map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
@@ -147,6 +149,37 @@ require("mason-lspconfig").setup({
     function(server)
       -- See :help lspconfig-setup
       lspconfig[server].setup({})
+    end,
+    ["gopls"] = function()
+      lspconfig.gopls.setup({
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            codelenses = {
+              generate = true,
+              regenerate_cgo = true,
+              tidy = true,
+              upgrade_dependency = true,
+              vendor = true,
+              test = true,
+            },
+            staticcheck = true,
+          },
+        },
+      })
+    end,
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
+      })
     end,
     ["jsonls"] = function()
       lspconfig.jsonls.setup({

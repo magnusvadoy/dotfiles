@@ -1,6 +1,6 @@
 return {
-  { "tpope/vim-fugitive", event = { "InsertEnter", "CmdlineEnter" } },
   { "rhysd/committia.vim" },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },

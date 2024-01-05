@@ -30,6 +30,9 @@ configure_zsh_and_tmux() {
 
   # Setup FZF
   $(brew --prefix)/opt/fzf/install
+  
+  # Setup BAT
+  bat cache --build
 }
 
 install_brew

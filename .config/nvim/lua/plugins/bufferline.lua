@@ -6,8 +6,8 @@ return {
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
     keys = {
-      { "[b",         "<Cmd>BufferLineCyclePrev<CR>",   desc = "Prev buffer" },
-      { "]b",         "<Cmd>BufferLineCycleNext<CR>",   desc = "Next buffer" },
+      -- { "[b",         "<Cmd>BufferLineCyclePrev<CR>",   desc = "Prev buffer" },
+      -- { "]b",         "<Cmd>BufferLineCycleNext<CR>",   desc = "Next buffer" },
       { "<leader>bp", "<Cmd>BufferLinePick<CR>",        desc = "Pick buffer" },
       { "<leader>bc", "<Cmd>BufferLinePickClose<CR>",   desc = "Close buffer" },
       { "<leader>bD", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
@@ -17,7 +17,9 @@ return {
     config = function()
       local bufferline = require("bufferline")
       bufferline.setup({
+        highlights = require("catppuccin.groups.integrations.bufferline").get(),
         options = {
+          separator_style = "slant",
           style_preset = bufferline.style_preset.no_italic,
           diagnostics = "nvim_lsp",
           diagnostics_indicator = function(count, level, diagnostics_dict, context)

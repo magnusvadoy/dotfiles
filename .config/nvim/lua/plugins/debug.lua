@@ -9,11 +9,9 @@ end
 return {
   "mfussenegger/nvim-dap", -- debug adapter protocol
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    {
-      "rcarriga/nvim-dap-ui", -- UI for nvim-dap
-      opts = {},
-    },
+    { "nvim-treesitter/nvim-treesitter" },
+    { "rcarriga/nvim-dap-ui" },
+    { "theHamsta/nvim-dap-virtual-text" },
     {
       "jay-babu/mason-nvim-dap.nvim", -- bridges mason.nvim and nvim-dap
       opts = {
@@ -27,11 +25,29 @@ return {
       build = ":TSInstall dap_repl",
       opts = {},
     },
+    { "ofirgall/goto-breakpoints.nvim" },
     { "leoluz/nvim-dap-go" }, -- Go support
   },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
+    local breakpoint = require("goto-breakpoints")
+    require("nvim-dap-virtual-text").setup({})
+
+    -------------------------------------------------------------------------------------------
+    -- DAP UI
+    -------------------------------------------------------------------------------------------
+    dapui.setup()
+
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+      dapui.close()
+    end
 
     -------------------------------------------------------------------------------------------
     -- Configurations for each languages
@@ -54,32 +70,36 @@ return {
     --   ]
     -- }
 
-    require("dap-go").setup()
+    dap.configurations.scala = {
+      {
+        type = "scala",
+        request = "launch",
+        name = "RunOrTest",
+        metals = {
+          runType = "runOrTestFile",
+          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+        },
+      },
+      {
+        type = "scala",
+        request = "launch",
+        name = "Test Target",
+        metals = {
+          runType = "testTarget",
+        },
+      },
+    }
 
-    -------------------------------------------------------------------------------------------
-    -- Automatically open when a debug session is created
-    -------------------------------------------------------------------------------------------
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-      dapui.close()
-    end
+    require("dap-go").setup()
 
     -------------------------------------------------------------------------------------------
     -- Set up signs and colors
     -------------------------------------------------------------------------------------------
-    vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-    vim.fn.sign_define(
-      "DapBreakpointCondition",
-      { text = "🔶", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
-    )
-    vim.fn.sign_define("DapLogPoint", { text = "📜", texthl = "DapLogPoint", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapStopped", { text = "👀", texthl = "", linehl = "debugPC", numhl = "" })
-    vim.fn.sign_define("DapBreakpointRejected", { text = "🚫", texthl = "", linehl = "", numhl = "" })
+    local sign = vim.fn.sign_define
+
+    sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+    sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+    sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
     -------------------------------------------------------------------------------------------
     -- Set up keymaps
@@ -87,18 +107,12 @@ return {
     map("n", "<leader>du", function()
       dapui.toggle()
     end, "Toggle UI")
-    map("n", "<leader>dk", function()
-      require("dap.ui.widgets").hover()
-    end, "Check variable value on hover")
     map("n", "<leader>dc", function()
       if vim.fn.filereadable(".vscode/launch.json") then
         require("dap.ext.vscode").load_launchjs()
       end
       dap.continue()
     end, "Start/Continue debugging")
-    map("n", "<leader>dl", function()
-      dap.run_last()
-    end, "Run the last debug adapter entry")
     map("n", "<leader>db", function()
       dap.toggle_breakpoint()
     end, "Toggle breakpoint")
@@ -114,8 +128,21 @@ return {
     map("n", "<leader>di", function()
       dap.step_into()
     end, "Step into")
-    map("n", "<leader>dt", function()
+    map("n", "<leader>dr", function()
+      dap.repl.open()
+    end, "Open REPL")
+    map("n", "<leader>dl", function()
+      dap.run_last()
+    end, "Run last session")
+    map("n", "<leader>dR", function()
+      dap.restart()
+    end, "Restart session")
+    map("n", "<leader>dq", function()
       dap.terminate()
-    end, "Terminate debugging")
+    end, "Terminate session")
+
+    -- Go to breakpoints
+    map("n", "]b", breakpoint.next, "Go to next breakpoint")
+    map("n", "[b", breakpoint.prev, "Go to previous breakpoint")
   end,
 }
