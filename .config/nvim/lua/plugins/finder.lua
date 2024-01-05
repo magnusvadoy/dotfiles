@@ -3,8 +3,10 @@ return {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "folke/todo-comments.nvim",                 dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+      { "nvim-telescope/telescope-fzf-native.nvim",     build = "make" },
+      { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
+      { "nvim-telescope/telescope-file-browser.nvim" },
+      { "folke/todo-comments.nvim",                     dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
       { "nvim-lua/plenary.nvim" },
     },
     config = function()
@@ -12,6 +14,7 @@ return {
       local utils = require("telescope.utils")
       local builtin = require("telescope.builtin")
       local themes = require("telescope.themes")
+      local lga_actions = require("telescope-live-grep-args.actions")
 
       local map = function(mode, keys, func, desc)
         vim.keymap.set(mode, keys, func, { desc = "Telescope: " .. desc })
@@ -37,7 +40,7 @@ return {
       end, "Find buffer")
       map("n", "<leader>fc", builtin.command_history, "Find command history")
       map("n", "<leader>fw", builtin.grep_string, "Find current word")
-      map("n", "<leader>fg", builtin.live_grep, "Find grep")
+      map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Find grep")
       map("n", "<leader>fr", builtin.resume, "Find resume")
       map("n", "<leader>fd", builtin.diagnostics, "Find diagnostics")
       map("n", "<leader>fh", builtin.help_tags, "Find help")
@@ -45,7 +48,8 @@ return {
       map("n", "<leader>ga", builtin.git_status, "Status")
       map("n", "<leader>gb", builtin.git_branches, "Branches")
       map("n", "<leader>gc", builtin.git_commits, "Commits")
-      map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", "Find todo")
+      map("n", "<leader>ft", "<CMD>TodoTelescope<CR>", "Find todo")
+      map("n", "<leader>e", "<CMD>Telescope file_browser<CR>", "File Explorer")
 
       telescope.setup({
         defaults = themes.get_ivy({
@@ -63,10 +67,23 @@ return {
             override_file_sorter = true, -- override the file sorter
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
           },
+          file_browser = {
+            hijack_netrw = true,
+            initial_mode = "normal",
+          },
+          live_grep_args = {
+            mappings = {
+              i = {
+                ["<C-k>"] = lga_actions.quote_prompt(),
+              },
+            },
+          },
         },
       })
 
       telescope.load_extension("fzf")
+      telescope.load_extension("live_grep_args")
+      telescope.load_extension("file_browser")
       telescope.load_extension("todo-comments")
     end,
   },

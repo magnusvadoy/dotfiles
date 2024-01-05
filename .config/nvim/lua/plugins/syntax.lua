@@ -47,6 +47,7 @@ return {
         "jsonnet",
         "proto",
         "scala",
+        "vimdoc",
       },
       highlight = { enable = true },
       indent = { enable = true },
@@ -54,9 +55,9 @@ return {
         enable = true,
         keymaps = {
           init_selection = "<CR>", -- normal mode
-          node_incremental = "<Tab>", -- visual mode
           scope_incremental = "<CR>", -- visual mode
-          node_decremental = "<BS>", -- visual mode
+          node_incremental = "<Tab>", -- visual mode
+          node_decremental = "<S-Tab>", -- visual mode
         },
       },
       -- nvim-ts-autotag

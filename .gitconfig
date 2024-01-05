@@ -1,36 +1,48 @@
 [user]
   name = Magnus Furnes Vadøy
   email = magnus.f.vadoy@gmail.com
+
 [include]
   path = ~/.gitconfig_work
+
 [core]
   excludesfile = ~/.gitignore_global
   pager = delta --syntax-theme Catppuccin-mocha
   # avoid problems when changing a case of a filename
   ignorecase = false
+
 [delta]
   navigate = true    # use n and N to move between diff sections
   line-numbers = true
+
 [interactive]
   diffFilter = delta --color-only --syntax-theme Catppuccin-mocha
+
 [merge]
   conflictstyle = diff3
+
 [diff]
   colorMoved = default
+
 [status]
   # Show untracked files, directories and files in untracked directorie
   showUntrackedFiles = all
+
 [push]
 	autoSetupRemote = true
+
 [pull]
   # Keep local commits on top of the tree
   rebase = true
+
 [rebase]
   # Stash and pop uncommitted changes on rebase
   autoStash = true
+
 [fetch]
   prune = true
   pruneTags = true
+
 [alias]
   amend = commit --amend
   amend-no-edit = commit --amend --no-edit
