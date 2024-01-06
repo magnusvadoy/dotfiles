@@ -1,5 +1,12 @@
+# Custom prompt
+SPACESHIP_CHAR_SYMBOL="❯ "
+
 # Display time
 SPACESHIP_TIME_SHOW=true
+
+# Custom Git prefix
+SPACESHIP_GIT_SHOW=true
+SPACESHIP_GIT_PREFIX=""
 
 # Do not truncate path in repos
 SPACESHIP_DIR_TRUNC_REPO=false
@@ -8,7 +15,7 @@ SPACESHIP_DIR_TRUNC_REPO=false
 SPACESHIP_GCLOUD_SHOW=false
 
 # Show kubectl context
-SPACESHIP_KUBECTL_SHOW=true
+SPACESHIP_KUBECTL_SHOW=false
 SPACESHIP_KUBECTL_SYMBOL="󱃾 "
 
 # Custom symbol for golang
@@ -18,12 +25,11 @@ SPACESHIP_GOLANG_SHOW=true
 SPACESHIP_JOBS_SHOW=true
 SPACESHIP_JOBS_SYMBOL="󱈵 "
 
-# disable docker
+# Disable docker
 SPACESHIP_DOCKER_SHOW=false
 
 # prompt order
 SPACESHIP_PROMPT_ORDER=(
-  time           # Time stamps section
   user           # Username section
   dir            # Current directory section
   host           # Hostname section
@@ -83,4 +89,5 @@ SPACESHIP_PROMPT_ORDER=(
 # right prompt order
 SPACESHIP_RPROMPT_ORDER=(
   kubectl        # Kubectl context section
+  time           # Time stamps section
 )
