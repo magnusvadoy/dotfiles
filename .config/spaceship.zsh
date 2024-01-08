@@ -20,6 +20,7 @@ SPACESHIP_KUBECTL_SYMBOL="󱃾 "
 
 # Custom symbol for golang
 SPACESHIP_GOLANG_SHOW=true
+SPACESHIP_GOLANG_SYMBOL=" "
 
 # Custom symbol for jobs
 SPACESHIP_JOBS_SHOW=true

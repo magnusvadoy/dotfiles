@@ -57,9 +57,11 @@ export EDITOR="nvim"
 
 ### PATH ###
 export GOPATH=$HOME/go
+export JAVA_HOME="/opt/homebrew/Cellar/openjdk@11/11.0.21/libexec/openjdk.jdk/Contents/Home/"
 PATH+=":$GOPATH/bin"
 PATH+=":$HOME/.local/bin"
 PATH+=":$HOME/.cargo/bin"
+PATH+=":$HOME/Library/Application Support/Coursier/bin"
 
 ### FZF ###
 export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude '.git' --color=always"

@@ -16,7 +16,7 @@ install_brew() {
   fi
 }
 
-configure_zsh_and_tmux() {
+configure() {
   CONFIG_DIR="$HOME/.config"
   TMUX_PLUGIN_DIR="$HOME/.tmux/plugins"
   ANTIGEN_DIR="$HOME/.zsh"
@@ -33,7 +33,14 @@ configure_zsh_and_tmux() {
   
   # Setup BAT
   bat cache --build
+
+  # Symlink JDK
+  sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+  sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+
+  # Setup Coursier
+  cs setup
 }
 
 install_brew
-configure_zsh_and_tmux
+configure

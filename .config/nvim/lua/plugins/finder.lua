@@ -68,8 +68,8 @@ return {
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
           },
           file_browser = {
-            hijack_netrw = true,
             initial_mode = "normal",
+            hijack_netrw = true,
           },
           live_grep_args = {
             mappings = {
