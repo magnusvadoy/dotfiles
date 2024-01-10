@@ -1,6 +1,3 @@
-# Custom prompt
-SPACESHIP_CHAR_SYMBOL="❯ "
-
 # Display time
 SPACESHIP_TIME_SHOW=true
 

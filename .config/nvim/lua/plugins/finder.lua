@@ -5,8 +5,8 @@ return {
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim",     build = "make" },
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
-      { "nvim-telescope/telescope-file-browser.nvim" },
       { "folke/todo-comments.nvim",                     dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+      { "rmagatti/auto-session" },
       { "nvim-lua/plenary.nvim" },
     },
     config = function()
@@ -15,6 +15,7 @@ return {
       local builtin = require("telescope.builtin")
       local themes = require("telescope.themes")
       local lga_actions = require("telescope-live-grep-args.actions")
+      local session_lens = require("auto-session.session-lens")
 
       local map = function(mode, keys, func, desc)
         vim.keymap.set(mode, keys, func, { desc = "Telescope: " .. desc })
@@ -44,12 +45,11 @@ return {
       map("n", "<leader>fr", builtin.resume, "Find resume")
       map("n", "<leader>fd", builtin.diagnostics, "Find diagnostics")
       map("n", "<leader>fh", builtin.help_tags, "Find help")
-      map("n", "<leader>fs", builtin.spell_suggest, "Find spelling")
+      map("n", "<leader>fs", session_lens.search_session, "Find session")
       map("n", "<leader>ga", builtin.git_status, "Status")
       map("n", "<leader>gb", builtin.git_branches, "Branches")
       map("n", "<leader>gc", builtin.git_commits, "Commits")
       map("n", "<leader>ft", "<CMD>TodoTelescope<CR>", "Find todo")
-      map("n", "<leader>e", "<CMD>Telescope file_browser<CR>", "File Explorer")
 
       telescope.setup({
         defaults = themes.get_ivy({
@@ -67,10 +67,6 @@ return {
             override_file_sorter = true, -- override the file sorter
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
           },
-          file_browser = {
-            initial_mode = "normal",
-            hijack_netrw = true,
-          },
           live_grep_args = {
             mappings = {
               i = {
@@ -83,7 +79,6 @@ return {
 
       telescope.load_extension("fzf")
       telescope.load_extension("live_grep_args")
-      telescope.load_extension("file_browser")
       telescope.load_extension("todo-comments")
     end,
   },

@@ -60,111 +60,100 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "williamboman/mason.nvim", opts = {} },
-			{
-				"williamboman/mason-lspconfig.nvim",
-				config = function()
-					local lspconfig = require("lspconfig")
-					require("mason-lspconfig").setup({
-						ensure_installed = {
-							"gopls",
-							"lua_ls",
-							"yamlls",
-							"jsonls",
-							"jsonnet_ls",
-							"bufls",
-							"tsserver",
-							"html",
-							"cssls",
-						},
-						-- See :help mason-lspconfig.setup_handlers()
-						handlers = {
-							function(server)
-								-- See :help lspconfig-setup
-								lspconfig[server].setup({})
-							end,
-							["gopls"] = function()
-								lspconfig.gopls.setup({
-									settings = {
-										gopls = {
-											analyses = {
-												unusedparams = true,
-											},
-											codelenses = {
-												generate = true,
-												regenerate_cgo = true,
-												tidy = true,
-												upgrade_dependency = true,
-												vendor = true,
-												test = true,
-											},
-											staticcheck = true,
-										},
-									},
-								})
-							end,
-							["lua_ls"] = function()
-								lspconfig.lua_ls.setup({
-									settings = {
-										Lua = {
-											completion = {
-												callSnippet = "Replace",
-											},
-										},
-									},
-								})
-							end,
-							["jsonls"] = function()
-								lspconfig.jsonls.setup({
-									settings = {
-										json = {
-											schemas = require("schemastore").json.schemas(),
-											validate = { enable = true },
-										},
-									},
-								})
-							end,
-							["yamlls"] = function()
-								lspconfig.yamlls.setup({
-									settings = {
-										yaml = {
-											schemaStore = {
-												-- You must disable built-in schemaStore support if you want to use
-												-- this plugin and its advanced options like `ignore`.
-												enable = false,
-												-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-												url = "",
-											},
-											schemas = require("schemastore").yaml.schemas(),
-										},
-									},
-								})
-							end,
-						},
-					})
-				end,
-			},
-			{ "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
+			{ "b0o/SchemaStore.nvim" },
 			{ "folke/neodev.nvim", opts = {} },
-			"b0o/SchemaStore.nvim",
+			{ "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
-			local lsp_defaults = lspconfig.util.default_config
+			local mason = require("mason")
+			local mason_lspconfig = require("mason-lspconfig")
+			local schemastore = require("schemastore")
 
+			local lsp_defaults = lspconfig.util.default_config
 			lsp_defaults.capabilities =
 				vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+			mason.setup({})
+			mason_lspconfig.setup({
+				ensure_installed = {
+					"gopls",
+					"lua_ls",
+					"yamlls",
+					"jsonls",
+					"jsonnet_ls",
+					"bufls",
+					"tsserver",
+					"html",
+					"cssls",
+				},
+				-- See :help mason-lspconfig.setup_handlers()
+				handlers = {
+					function(server)
+						-- See :help lspconfig-setup
+						lspconfig[server].setup({})
+					end,
+					["gopls"] = function()
+						lspconfig.gopls.setup({
+							settings = {
+								gopls = {
+									analyses = {
+										unusedparams = true,
+									},
+									codelenses = {
+										generate = true,
+										regenerate_cgo = true,
+										tidy = true,
+										upgrade_dependency = true,
+										vendor = true,
+										test = true,
+									},
+									staticcheck = true,
+								},
+							},
+						})
+					end,
+					["jsonls"] = function()
+						lspconfig.jsonls.setup({
+							settings = {
+								json = {
+									schemas = schemastore.json.schemas(),
+									validate = { enable = true },
+								},
+							},
+						})
+					end,
+					["yamlls"] = function()
+						lspconfig.yamlls.setup({
+							settings = {
+								yaml = {
+									schemaStore = {
+										-- You must disable built-in schemaStore support if you want to use
+										-- this plugin and its advanced options like `ignore`.
+										enable = false,
+										-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+										url = "",
+									},
+									schemas = schemastore.yaml.schemas(),
+								},
+							},
+						})
+					end,
+				},
+			})
 		end,
 	},
 	{
 		"nvimtools/none-ls.nvim",
 		config = function()
 			local null_ls = require("null-ls")
+
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.goimports_reviser.with({
 						extra_args = {
-							"-rm-unused",
 							"-project-name=bitbucket.org/tv2norge",
 							"-imports-order=std,project,company,general",
 						},
