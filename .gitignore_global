@@ -1,3 +1,4 @@
+# # vi: ft=gitignore
 # Compiled source #
 ###################
 *.com
@@ -301,6 +302,8 @@ TSWLatexianTemp*
 # standalone packages
 *.sta
 
-# metals
+# scala/metals
 .metals/
 .bloop/
+.ammonite/
+metals.sbt
