@@ -1,5 +1,5 @@
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
+local augroup_formatting = vim.api.nvim_create_augroup("LspFormatting", {})
+local augroup_keybindings = vim.api.nvim_create_augroup("user_cmds", {})
 
 ---
 -- Diagnostic customization
@@ -31,7 +31,7 @@ vim.diagnostic.config({
 -- LSP Keybindings
 ---
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = group,
+	group = augroup_keybindings,
 	desc = "LSP actions",
 	callback = function(_, bufnr)
 		local map = function(mode, keys, func, desc)
@@ -164,9 +164,9 @@ return {
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+						vim.api.nvim_clear_autocmds({ group = augroup_formatting, buffer = bufnr })
 						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
+							group = augroup_formatting,
 							pattern = { "*.go", "*.lua" }, -- file types to auto format
 							callback = function()
 								vim.lsp.buf.format({ async = false })
