@@ -7,6 +7,7 @@ SPACESHIP_GIT_PREFIX=""
 
 # Do not truncate path in repos
 SPACESHIP_DIR_TRUNC_REPO=false
+SPACESHIP_DIR_TRUNC=0
 
 # Do not show gcloud config (its always the same)
 SPACESHIP_GCLOUD_SHOW=false

@@ -57,10 +57,10 @@ export EDITOR="nvim"
 
 ### PATH ###
 export GOPATH=$HOME/go
-export JAVA_HOME="/opt/homebrew/Cellar/openjdk@11/11.0.21/libexec/openjdk.jdk/Contents/Home/"
+export JAVA_HOME="`/usr/libexec/java_home -v '11'`"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 PATH+=":$GOPATH/bin"
 PATH+=":$HOME/.local/bin"
-PATH+=":$HOME/.cargo/bin"
 PATH+=":$HOME/Library/Application Support/Coursier/bin"
 
 ### FZF ###
@@ -99,9 +99,3 @@ alias tree='eza --tree $EZA_PARAMS'
 function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
-
-### Auto Notify ###
-# Set threshold for notifications to 20seconds
-export AUTO_NOTIFY_THRESHOLD=20
-AUTO_NOTIFY_IGNORE+=("docker")
-AUTO_NOTIFY_IGNORE+=("kubectl")

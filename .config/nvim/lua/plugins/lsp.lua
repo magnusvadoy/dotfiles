@@ -110,7 +110,6 @@ return {
 										vendor = true,
 										test = true,
 									},
-									staticcheck = true,
 								},
 							},
 						})
@@ -152,6 +151,7 @@ return {
 
 			null_ls.setup({
 				sources = {
+					null_ls.builtins.diagnostics.golangci_lint,
 					null_ls.builtins.formatting.goimports_reviser.with({
 						extra_args = {
 							"-project-name=bitbucket.org/tv2norge",
