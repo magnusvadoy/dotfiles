@@ -94,6 +94,9 @@ alias lx='eza -lbhHigUmuSa@'
 alias lt='eza --tree $EZA_PARAMS'
 alias tree='eza --tree $EZA_PARAMS'
 
+### Kubectl ###
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
 ### Zsh Vi Mode ###
 # The plugin will auto execute this zvm_after_init function
 function zvm_after_init() {
