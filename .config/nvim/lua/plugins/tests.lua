@@ -40,7 +40,7 @@ return {
 				"<cmd>lua require('neotest').output.open({ enter = true, short = false })<cr>",
 				"Output"
 			)
-			map("n", "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary")
+			map("n", "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle summary")
 			map(
 				"n",
 				"<leader>tn",
@@ -53,15 +53,15 @@ return {
 				"<cmd>lua require('neotest').jump.prev({status=\"failed\"})<cr>",
 				"Jump to previous failed test"
 			)
-			map("n", "<leader>tr", "<cmd>lua require('neotest').run.run()<cr>", "Run nearest test")
-			map("n", "<leader>tR", "<cmd>lua require('neotest').run.run(vim.fn.expand(\"%\"))<cr>", "Run current file")
+			map("n", "<leader>tr", "<cmd>lua require('neotest').run.run(vim.fn.expand(\"%\"))<cr>", "Run file")
+			map("n", "<leader>tR", "<cmd>lua require('neotest').run.run(vim.fn.getcwd())<cr>", "Run project")
 			map(
 				"n",
 				"<leader>td",
 				"<cmd>lua require('neotest').run.run({strategy = \"dap\"})<cr>",
-				"Debug the current file"
+				"Debug current file"
 			)
-			map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<cr>", "Watch")
+			map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<cr>", "Watch current test")
 		end,
 	},
 }
