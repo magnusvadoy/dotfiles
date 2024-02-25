@@ -90,7 +90,6 @@ return {
             gitsigns = true,
             nvimtree = true,
             treesitter = true,
-            treesitter_context = true,
             notify = false,
             dap = true,
             dap_ui = true,

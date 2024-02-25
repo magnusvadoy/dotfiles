@@ -1,42 +1,35 @@
 -- Based on : https://github.com/VonHeikemen/nvim-starter/tree/04-lsp-installer
-
-require("user.settings")
-require("user.keybindings")
-require("user.commands")
-
-if vim.g.neovide then
-  vim.o.guifont = "JetBrainsMono Nerd Font:h15"
-end
+require("user")
 
 local lazy = {}
 
 function lazy.install(path)
-  if not vim.loop.fs_stat(path) then
-    print("Installing lazy.nvim....")
-    vim.fn.system({
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable", -- latest stable release
-      path,
-    })
-  end
+	if not vim.loop.fs_stat(path) then
+		print("Installing lazy.nvim....")
+		vim.fn.system({
+			"git",
+			"clone",
+			"--filter=blob:none",
+			"https://github.com/folke/lazy.nvim.git",
+			"--branch=stable", -- latest stable release
+			path,
+		})
+	end
 end
 
 function lazy.setup(plugins)
-  -- You can "comment out" the line below after lazy.nvim is installed
-  lazy.install(lazy.path)
+	-- You can "comment out" the line below after lazy.nvim is installed
+	lazy.install(lazy.path)
 
-  vim.opt.rtp:prepend(lazy.path)
-  require("lazy").setup(plugins, lazy.opts)
+	vim.opt.rtp:prepend(lazy.path)
+	require("lazy").setup(plugins, lazy.opts)
 end
 
 lazy.path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 lazy.opts = {
-  change_detection = { notify = false },
-  checker = { enabled = true, notify = false },
+	change_detection = { notify = false },
+	checker = { enabled = true, notify = false },
 }
 lazy.setup({
-  { import = "plugins" },
+	{ import = "plugins" },
 })
