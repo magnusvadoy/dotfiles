@@ -1,43 +1,54 @@
 return {
   {
-    "mrjones2014/smart-splits.nvim",
-    config = function()
-      require("smart-splits").setup({})
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  },
+  {
+    "nvim-focus/focus.nvim",
+    version = "*",
+    opts = {
+      enable = true,      -- Enable module
+      commands = true,    -- Create Focus commands
+      autoresize = {
+        enable = true,    -- Enable or disable auto-resizing of splits
+        width = 0,        -- Force width for the focused window
+        height = 0,       -- Force height for the focused window
+        minwidth = 0,     -- Force minimum width for the unfocused window
+        minheight = 0,    -- Force minimum height for the unfocused window
+        height_quickfix = 10, -- Set the height of quickfix panel
+      },
+      split = {
+        bufnew = false, -- Create blank buffer for new split windows
+        tmux = false, -- Create tmux splits instead of neovim splits
+      },
+      ui = {
+        number = false,                -- Display line numbers in the focussed window only
+        relativenumber = false,        -- Display relative line numbers in the focussed window only
+        hybridnumber = false,          -- Display hybrid line numbers in the focussed window only
+        absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
 
-      -- resizing splits
-      -- these keymaps will also accept a range,
-      -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-      vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
-      vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
-      vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
-      vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
-
-      -- moving between splits
-      vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
-      vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
-      vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-      vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
-
-      -- swapping buffers between windows
-      -- vim.keymap.set(
-      --   "n",
-      --   "<leader><leader>h",
-      --   require("smart-splits").swap_buf_left,
-      --   { desc = "Swap Buffer Left" }
-      -- )
-      -- vim.keymap.set(
-      --   "n",
-      --   "<leader><leader>j",
-      --   require("smart-splits").swap_buf_down,
-      --   { desc = "Swap Buffer Down" }
-      -- )
-      -- vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up, { desc = "Swap Buffer Up" })
-      -- vim.keymap.set(
-      --   "n",
-      --   "<leader><leader>l",
-      --   require("smart-splits").swap_buf_right,
-      --   { desc = "Swap Buffer Right" }
-      -- )
-    end,
+        cursorline = true,             -- Display a cursorline in the focussed window only
+        cursorcolumn = false,          -- Display cursorcolumn in the focussed window only
+        colorcolumn = {
+          enable = false,              -- Display colorcolumn in the foccused window only
+          list = "+1",                 -- Set the comma-saperated list for the colorcolumn
+        },
+        signcolumn = true,             -- Display signcolumn in the focussed window only
+        winhighlight = false,          -- Auto highlighting for focussed/unfocussed windows
+      },
+    },
   },
 }

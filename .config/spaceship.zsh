@@ -1,5 +1,5 @@
 # Display time
-SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_SHOW=false
 
 # Custom Git prefix
 SPACESHIP_GIT_SHOW=true

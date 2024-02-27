@@ -25,18 +25,18 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" })    -- copy
+vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" }) -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- paste
 
 -- Toggle Quickfix
 vim.keymap.set("n", "<C-q>", function()
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      vim.cmd("cclose")
-    else
-      vim.cmd("copen")
-    end
-  end
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win["quickfix"] == 1 then
+			vim.cmd("cclose")
+		else
+			vim.cmd("copen")
+		end
+	end
 end, { desc = "Toggle Quickfix" })
 
 -- Navigate quick fix list
