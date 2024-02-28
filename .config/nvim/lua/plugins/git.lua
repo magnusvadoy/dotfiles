@@ -26,7 +26,7 @@ return {
 				changedelete = { text = "▏" },
 				untracked = { text = "▏" },
 			},
-			current_line_blame = true,
+			current_line_blame = false,
 			current_line_blame_opts = {
 				virt_text = true,
 				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -34,7 +34,7 @@ return {
 				ignore_whitespace = false,
 			},
 			preview_config = {
-				border = "solid",
+				border = "single",
 				style = "minimal",
 				relative = "cursor",
 				row = 0,
@@ -81,7 +81,17 @@ return {
 			"sindrets/diffview.nvim", -- optional - Diff integration
 			"nvim-telescope/telescope.nvim", -- optional
 		},
-		config = true,
-    cmd = "Neogit",
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit: Open" },
+		},
+		opts = {
+			kind = "split", -- opens neogit in a split
+			signs = {
+				section = { "", "" },
+				item = { "", "" },
+				hunk = { "", "" },
+			},
+		},
 	},
 }
