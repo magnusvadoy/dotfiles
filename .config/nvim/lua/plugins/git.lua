@@ -3,6 +3,9 @@ return {
 	{
 		"akinsho/git-conflict.nvim",
 		version = "*",
+		keys = {
+			{ "<leader>gc", "<cmd>GitConflictListQf<cr>", desc = "Show conflicts" },
+		},
 		opts = {
 			default_mappings = {
 				ours = "o",
@@ -51,7 +54,7 @@ return {
 				local gs = package.loaded.gitsigns
 
 				local function map(mode, lhs, rhs, desc)
-					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = "Git: " .. desc })
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
 				end
 
 				-- Navigation
@@ -74,7 +77,7 @@ return {
 				map("n", "<leader>gb", function()
 					gs.blame_line({ full = true })
 				end, "Show blame")
-				map("n", "<leader>gd", gs.diffthis, "View diff")
+				map("n", "<leader>gd", gs.diffthis, "Show diff")
 
 				-- Text object
 				map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")
@@ -90,7 +93,7 @@ return {
 		},
 		cmd = "Neogit",
 		keys = {
-			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit: Open" },
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Open Neogit" },
 		},
 		opts = {
 			kind = "split", -- opens neogit in a split
