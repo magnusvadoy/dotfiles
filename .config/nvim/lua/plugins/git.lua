@@ -26,7 +26,7 @@ return {
 				changedelete = { text = "▏" },
 				untracked = { text = "▏" },
 			},
-			current_line_blame = false,
+			current_line_blame = true,
 			current_line_blame_opts = {
 				virt_text = true,
 				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -73,5 +73,15 @@ return {
 				map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")
 			end,
 		},
+	},
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- required
+			"sindrets/diffview.nvim", -- optional - Diff integration
+			"nvim-telescope/telescope.nvim", -- optional
+		},
+		config = true,
+    cmd = "Neogit",
 	},
 }

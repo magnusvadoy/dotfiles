@@ -24,7 +24,6 @@ return {
 
 			---@diagnostic disable-next-line: missing-fields
 			neotest.setup({
-				-- your neotest config here
 				adapters = {
 					require("neotest-go"),
 				},
@@ -38,7 +37,13 @@ return {
 				"n",
 				"<leader>to",
 				"<cmd>lua require('neotest').output.open({ enter = true, short = false })<cr>",
-				"Output"
+				"Toggle output"
+			)
+			map(
+				"n",
+				"<leader>tO",
+				"<cmd>lua require('neotest').output_panel.toggle()<cr>",
+				"Toggle output panel"
 			)
 			map("n", "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle summary")
 			map(
@@ -54,13 +59,7 @@ return {
 				"Jump to previous failed test"
 			)
 			map("n", "<leader>tr", "<cmd>lua require('neotest').run.run(vim.fn.expand(\"%\"))<cr>", "Run file")
-			map("n", "<leader>tR", "<cmd>lua require('neotest').run.run(vim.fn.getcwd())<cr>", "Run project")
-			map(
-				"n",
-				"<leader>td",
-				"<cmd>lua require('neotest').run.run({strategy = \"dap\"})<cr>",
-				"Debug current file"
-			)
+			map("n","<leader>tR","<cmd>lua require('neotest').run.run(vim.fn.expand(\"%:p:h\"))<cr>", "Run project")
 			map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<cr>", "Watch current test")
 		end,
 	},
