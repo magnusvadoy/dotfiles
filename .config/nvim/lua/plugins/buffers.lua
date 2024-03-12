@@ -7,7 +7,8 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     keys = {
       { "<leader>bp", "<Cmd>BufferLinePick<CR>",        desc = "Pick buffer" },
-      { "<leader>bc", "<Cmd>BufferLinePickClose<CR>",   desc = "Close buffer" },
+      { "<leader>bc", "<Cmd>BufferLinePickClose<CR>",   desc = "Pick close buffer" },
+      { "<leader>bd", "<Cmd>bdelete<CR>",               desc = "Close buffer" },
       { "<leader>bD", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
       { "<leader>bL", "<Cmd>BufferLineCloseLeft<CR>",   desc = "Close buffers to the left" },
       { "<leader>bR", "<Cmd>BufferLineCloseRight<CR>",  desc = "Close buffers to the right" },
@@ -27,7 +28,7 @@ return {
           offsets = {
             {
               filetype = "NvimTree",
-              text = "Explorer",
+              text = "File Explorer",
               text_align = "center",
               seperator = true,
             },

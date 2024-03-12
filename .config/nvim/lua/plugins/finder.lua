@@ -54,17 +54,11 @@ return {
 					sort_mru = true,
 				})
 			end, "Find buffer")
-			map("n", "<leader>fc", builtin.command_history, "Find command")
 			map("n", "<leader>fw", builtin.grep_string, "Find current word")
 			map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Grep")
-			map("n", "<leader>fr", builtin.resume, "Resume last")
+			map("n", "<leader>fr", builtin.resume, "Resume search")
 			map("n", "<leader>fd", builtin.diagnostics, "Find diagnostics")
 			map("n", "<leader>fh", builtin.help_tags, "Find help")
-
-			-- Git
-			-- map("n", "<leader>ga", builtin.git_status, "Git Status")
-			-- map("n", "<leader>gb", builtin.git_branches, "Git Branches")
-			-- map("n", "<leader>gc", builtin.git_commits, "Git Commits")
 
 			-- Session
 			map("n", "<leader>fs", session_lens.search_session, "Find session")
