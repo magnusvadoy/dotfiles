@@ -1,5 +1,5 @@
 ######################################
-##     HOMEBREW
+##     macOS Related
 ######################################
 
 if type brew &>/dev/null
@@ -50,6 +50,7 @@ setopt SHARE_HISTORY # share history between sessions
 ### Aliases ###
 alias cat="bat --paging=never"
 alias dc="docker compose"
+alias grpc="grpcurl -plaintext"
 
 ### Editor ###
 alias vim="nvim"

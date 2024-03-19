@@ -1,3 +1,7 @@
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
 [font]
 size = 15
 
@@ -6,6 +10,7 @@ family = "JetBrainsMono Nerd Font"
 
 [window]
 decorations = "none"
+option_as_alt = "Both"
 
 [window.padding]
 x = 0
