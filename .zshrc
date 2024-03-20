@@ -43,7 +43,6 @@ antigen apply
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=10000
-
 setopt HIST_IGNORE_ALL_DUPS # ignore duplicate commands
 setopt SHARE_HISTORY # share history between sessions
 

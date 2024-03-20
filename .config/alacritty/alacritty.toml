@@ -4,14 +4,9 @@ import = [
 
 [font]
 size = 15
-
-[font.normal]
-family = "JetBrainsMono Nerd Font"
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [window]
-decorations = "none"
+decorations = "None"
 option_as_alt = "Both"
-
-[window.padding]
-x = 0
-y = 0
+padding = { x = 5, y = 0 }

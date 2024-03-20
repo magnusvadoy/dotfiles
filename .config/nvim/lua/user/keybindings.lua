@@ -16,10 +16,6 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- Move to start/end of line
-vim.keymap.set({ "n", "v" }, "H", "^", { desc = "Move to start of line" })
-vim.keymap.set({ "n", "v" }, "L", "$", { desc = "Move to end of line" })
-
 -- Keeps cursor in place while jumping
 vim.keymap.set("n", "<C-d", "<C-d>zz")
 vim.keymap.set("n", "<C-u", "<C-u>zz")

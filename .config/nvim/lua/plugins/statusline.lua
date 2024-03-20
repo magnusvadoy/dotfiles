@@ -31,13 +31,14 @@ return {
         globalstatus = true,
       },
       sections = {
-        lualine_a = { { "mode", icons_enabled = true, icon = "" } },
+        lualine_a = { { "mode", icons_enabled = true } },
         lualine_b = { branch_stat, diff_stat, diagnostics_stat },
         lualine_c = { { "filename", path = 1 }, { "searchcount", icon = "󰍉" } },
         lualine_x = {},
         lualine_y = { "filetype" },
         lualine_z = { "location", "progress" },
       },
+      -- not in use since globalstatus is enabled
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
