@@ -35,7 +35,6 @@ vim.g.mapleader = " "
 
 -- Statusline
 vim.opt.showmode = false -- Hide the default mode text (e.g. -- INSERT -- below the statusline)
--- vim.opt.ch = 0           -- Hide command line when not typing a command
 
 -- Enable 24-bit colours
 vim.opt.termguicolors = true
@@ -43,7 +42,7 @@ vim.opt.termguicolors = true
 -- Highlight where the cursor is
 vim.opt.cursorline = true
 
--- persistent undo
+-- Persistent undo
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
