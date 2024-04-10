@@ -40,19 +40,10 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 
-			local has_words_before = function()
-				if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-					return false
-				end
-				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0
-					and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-			end
-
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
-			local select_opts = { behavior = cmp.SelectBehavior.Select }
+			local select_opts = { behavior = cmp.SelectBehavior.Insert }
 
 			-- See :help cmp-config
 			cmp.setup({
@@ -65,13 +56,13 @@ return {
 					end,
 				},
 				sources = {
+					{ name = "nvim_lsp_signature_help" },
+					{ name = "copilot" },
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lua" },
 					{ name = "luasnip" },
-					{ name = "buffer", max_item_count = 5 },
 					{ name = "path" },
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "copilot" },
+					{ name = "buffer" },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -94,10 +85,10 @@ return {
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 
-					-- ["<C-space>"] = cmp.mapping.complete(),
+					["<C-space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
+					["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if luasnip.expand_or_locally_jumpable() then
