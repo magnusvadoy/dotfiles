@@ -196,8 +196,8 @@ return {
       },
     },
   },
-  {
-    "yorickpeterse/nvim-pqf",
-    opts = {},
-  },
+  -- {
+  --   "yorickpeterse/nvim-pqf",
+  --   opts = {},
+  -- },
 }

@@ -24,7 +24,7 @@ return {
             vim.api.nvim_clear_autocmds({ group = augroup_formatting, buffer = bufnr })
             vim.api.nvim_create_autocmd("BufWritePre", {
               group = augroup_formatting,
-              pattern = { "*.go", "*.lua" }, -- file types to auto format
+              pattern = { "*.go", "*.lua", "*.md", "*.proto" }, -- file types to auto format
               callback = function()
                 vim.lsp.buf.format({ async = false })
               end,

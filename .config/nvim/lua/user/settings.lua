@@ -16,19 +16,33 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 -- Tabs
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop = 2      -- Number of spaces tabs count for
 vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
+vim.opt.expandtab = true -- use spaces instead of tabs
 
 -- Line Wraps
 vim.opt.wrap = true
 
 -- Keep 8 lines of context
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+-- Grepping
+vim.opt.grepformat = "%f:%l:%c:%m"
+vim.opt.grepprg = "rg --vimgrep"
 
 -- Display signs
 vim.opt.signcolumn = "yes"
+
+-- Fill characters
+vim.opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
 
 -- Space as leader key
 vim.g.mapleader = " "
@@ -46,3 +60,21 @@ vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
+
+-- Lower than default (1000) to quickly trigger which-key
+vim.opt.timeoutlen = 300
+
+-- Maximum number of items in a popup
+vim.opt.pumheight = 10
+
+-- Splitting windows
+vim.opt.splitbelow = true -- Put new windows below current
+vim.opt.splitright = true -- Put new windows right of current
+
+-- Smooth scroll
+if vim.fn.has("nvim-0.10") == 1 then
+  vim.opt.smoothscroll = true
+end
+
+-- Hide * markup for bold and italic, but not markers with substitutions
+vim.opt.conceallevel = 2
