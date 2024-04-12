@@ -3,8 +3,7 @@
 -- ========================================================================== --
 
 -- Editing: save
-vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save buffer" })
-vim.keymap.set("n", "<leader>W", "<Cmd>wall<CR>", { desc = "Save all buffers" })
+vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save buffer" })
 
 -- Select whole file
 vim.keymap.set("n", "<leader>S", ":keepjumps normal! ggVG<CR>", { desc = "Select all" })
@@ -25,19 +24,8 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" })    -- copy
+vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" }) -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- paste
-
--- Toggle Quickfix
-vim.keymap.set("n", "<C-q>", function()
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      vim.cmd("cclose")
-    else
-      vim.cmd("copen")
-    end
-  end
-end, { desc = "Toggle Quickfix" })
 
 -- Navigate quick fix list
 vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
