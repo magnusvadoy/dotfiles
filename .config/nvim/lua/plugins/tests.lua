@@ -39,27 +39,12 @@ return {
 				"<cmd>lua require('neotest').output.open({ enter = true, short = false })<cr>",
 				"Toggle output"
 			)
-			map(
-				"n",
-				"<leader>tO",
-				"<cmd>lua require('neotest').output_panel.toggle()<cr>",
-				"Toggle output panel"
-			)
+			map("n", "<leader>tO", "<cmd>lua require('neotest').output_panel.toggle()<cr>", "Toggle output panel")
 			map("n", "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle summary")
-			map(
-				"n",
-				"<leader>tn",
-				"<cmd>lua require('neotest').jump.next({status=\"failed\"})<cr>",
-				"Jump to next failed test"
-			)
-			map(
-				"n",
-				"<leader>tp",
-				"<cmd>lua require('neotest').jump.prev({status=\"failed\"})<cr>",
-				"Jump to previous failed test"
-			)
+			map("n", "]T", "<cmd>lua require('neotest').jump.next({status=\"failed\"})<cr>", "Next failed test")
+			map("n", "[T", "<cmd>lua require('neotest').jump.prev({status=\"failed\"})<cr>", "Previous failed test")
 			map("n", "<leader>tr", "<cmd>lua require('neotest').run.run(vim.fn.expand(\"%\"))<cr>", "Run file")
-			map("n","<leader>tR","<cmd>lua require('neotest').run.run(vim.fn.expand(\"%:p:h\"))<cr>", "Run project")
+			map("n", "<leader>tR", "<cmd>lua require('neotest').run.run(vim.fn.expand(\"%:p:h\"))<cr>", "Run project")
 			map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<cr>", "Watch current test")
 		end,
 	},

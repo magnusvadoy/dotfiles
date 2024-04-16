@@ -16,7 +16,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 -- Tabs
-vim.opt.tabstop = 2      -- Number of spaces tabs count for
+vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true -- use spaces instead of tabs
 
@@ -36,12 +36,12 @@ vim.opt.signcolumn = "yes"
 
 -- Fill characters
 vim.opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
 }
 
 -- Space as leader key
@@ -73,7 +73,7 @@ vim.opt.splitright = true -- Put new windows right of current
 
 -- Smooth scroll
 if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.smoothscroll = true
+	vim.opt.smoothscroll = true
 end
 
 -- Hide * markup for bold and italic, but not markers with substitutions
