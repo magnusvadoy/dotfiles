@@ -28,9 +28,7 @@ antigen bundle agkozak/zsh-z # jump quickly to recent directories
 antigen bundle jeffreytse/zsh-vi-mode # vi mode
 antigen bundle wfxr/forgit # git commands with fzf
 antigen bundle MichaelAquilina/zsh-you-should-use # reminder to use aliases
-
-# Spaceship prompt
-antigen theme spaceship-prompt/spaceship-prompt
+antigen bundle agkozak/agkozak-zsh-prompt
 
 # Apply antigen setup
 antigen apply
@@ -38,6 +36,11 @@ antigen apply
 #######################################
 ###     Config 
 #######################################
+
+# Customize the prompt
+AGKOZAK_USER_HOST_DISPLAY=0
+AGKOZAK_MULTILINE=0
+AGKOZAK_PROMPT_CHAR="❯"
 
 ### History ###
 export HISTFILE=~/.zsh_history

@@ -72,30 +72,30 @@ return {
 				select = {
 					enable = true,
 					keymaps = {
-						["ac"] = { query = "@class.outer", desc = "Around class" },
-						["ic"] = { query = "@class.inner", desc = "Inner class" },
-						["af"] = { query = "@function.outer", desc = "Around function" },
-						["if"] = { query = "@function.inner", desc = "Inner function" },
+						["ac"] = { query = "@class.outer", desc = "LSP: Around class" },
+						["ic"] = { query = "@class.inner", desc = "LSP: Inner class" },
+						["af"] = { query = "@function.outer", desc = "LSP: Around function" },
+						["if"] = { query = "@function.inner", desc = "LSP: Inner function" },
 					},
 				},
 				move = {
 					enable = true,
 					goto_next_start = {
-						["]c"] = { query = "@class.outer", desc = "Next class" },
-						["]f"] = { query = "@function.outer", desc = "Next function" },
+						["]c"] = { query = "@class.outer", desc = "LSP: Next class" },
+						["]f"] = { query = "@function.outer", desc = "LSP: Next function" },
 					},
 					goto_previous_start = {
-						["[c"] = { query = "@class.outer", desc = "Prev class" },
-						["[f"] = { query = "@function.outer", desc = "Prev function" },
+						["[c"] = { query = "@class.outer", desc = "LSP: Prev class" },
+						["[f"] = { query = "@function.outer", desc = "LSP: Prev function" },
 					},
 				},
 				swap = {
 					enable = true,
 					swap_next = {
-						["<leader>cp"] = { query = "@parameter.inner", desc = "Swap with next parameter" },
+						["<leader>cp"] = { query = "@parameter.inner", desc = "LSP: Swap with next parameter" },
 					},
 					swap_previous = {
-						["<leader>cP"] = { query = "@parameter.inner", desc = "Swap with prev parameter" },
+						["<leader>cP"] = { query = "@parameter.inner", desc = "LSP: Swap with prev parameter" },
 					},
 				},
 			},
