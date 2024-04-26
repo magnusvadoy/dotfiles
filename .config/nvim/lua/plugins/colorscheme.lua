@@ -33,9 +33,30 @@ return {
 						notify = false,
 						dap = true,
 						dap_ui = true,
-						mini = {
+						mason = true,
+						markdown = true,
+						neogit = true,
+						neotest = true,
+						telescope = {
 							enabled = true,
-							indentscope_color = "",
+						},
+						native_lsp = {
+							enabled = true,
+							virtual_text = {
+								errors = { "italic" },
+								hints = { "italic" },
+								warnings = { "italic" },
+								information = { "italic" },
+							},
+							underlines = {
+								errors = { "underline" },
+								hints = { "underline" },
+								warnings = { "underline" },
+								information = { "underline" },
+							},
+							inlay_hints = {
+								background = true,
+							},
 						},
 					},
 				},
