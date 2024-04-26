@@ -8,8 +8,8 @@ vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save buffer" })
 -- Select whole file
 vim.keymap.set("n", "<leader>S", ":keepjumps normal! ggVG<CR>", { desc = "Select all" })
 
--- Replace the current word
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" })
+-- Rename current word
+vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" })
 
 -- Move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -24,7 +24,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" }) -- copy
+vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" })    -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- paste
 
 -- Navigate quick fix list

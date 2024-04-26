@@ -55,27 +55,30 @@ return {
 			},
 			highlight = { enable = true },
 			indent = { enable = true },
-
-			-- nvim-ts-autotag
 			autotag = { enable = true },
-
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
+					init_selection = "<CR>",
+					scope_incremental = "<CR>",
+					node_incremental = "<TAB>",
+					node_decremental = "<S-TAB>",
 				},
 			},
 			textobjects = {
 				select = {
 					enable = true,
 					keymaps = {
-						["ac"] = { query = "@class.outer", desc = "LSP: Around class" },
-						["ic"] = { query = "@class.inner", desc = "LSP: Inner class" },
-						["af"] = { query = "@function.outer", desc = "LSP: Around function" },
-						["if"] = { query = "@function.inner", desc = "LSP: Inner function" },
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+						["al"] = "@loop.outer",
+						["il"] = "@loop.inner",
+						["ib"] = "@block.inner",
+						["ab"] = "@block.outer",
+						["ir"] = "@parameter.inner",
+						["ar"] = "@parameter.outer",
 					},
 				},
 				move = {

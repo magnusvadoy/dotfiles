@@ -42,18 +42,13 @@ return {
       map("n", "<leader>ff", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
         if ret == 0 then
-          builtin.git_files({ show_untracked = true })
+          builtin.git_files()
         else
           builtin.find_files()
         end
       end, "Files")
       map("n", "<leader>?", builtin.oldfiles, "Recently opened files")
-      map("n", "<leader><space>", function()
-        builtin.buffers({
-          ignore_current_buffer = true,
-          sort_mru = true,
-        })
-      end, "Buffers")
+      map("n", "<leader><space>", builtin.buffers, "Find buffer")
       map("n", "<leader>fw", builtin.grep_string, "Current word")
       map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Grep")
       map("n", "<leader>fr", builtin.resume, "Resume search")
@@ -75,6 +70,21 @@ return {
             "node_modules/",
           },
         }),
+        pickers = {
+          oldfiles = {
+            cwd_only = true,
+          },
+          buffers = {
+            ignore_current_buffer = true,
+            sort_mru = true,
+          },
+          live_grep = {
+            only_sort_text = true, -- grep for content and not file name/path
+          },
+          git_files = {
+            show_untracked = true,
+          },
+        },
         extensions = {
           fzf = {
             fuzzy = true,             -- false will only do exact matching
