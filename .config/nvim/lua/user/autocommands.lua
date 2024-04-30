@@ -2,10 +2,21 @@
 -- ==                               AUTOCOMMANDS                           == --
 -- ========================================================================== --
 
--- highlight yanked text for 200ms using the "Visual" highlight group
-vim.cmd([[
-augroup highlight_yank
-autocmd!
-au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
-augroup END
-]])
+local autocmd = vim.api.nvim_create_autocmd
+
+-- Use 'q' to quit from common plugins
+autocmd("FileType", {
+	pattern = {
+		"help",
+		"man",
+		"lspinfo",
+		"qf",
+		"help",
+		"notify",
+		"startuptime",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+	end,
+})

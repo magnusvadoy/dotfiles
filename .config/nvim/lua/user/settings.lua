@@ -34,16 +34,6 @@ vim.opt.grepprg = "rg --vimgrep"
 -- Display signs
 vim.opt.signcolumn = "yes"
 
--- Fill characters
-vim.opt.fillchars = {
-	foldopen = "",
-	foldclose = "",
-	fold = " ",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
-}
-
 -- Space as leader key
 vim.g.mapleader = " "
 
@@ -78,3 +68,7 @@ end
 
 -- Hide * markup for bold and italic, but not markers with substitutions
 vim.opt.conceallevel = 2
+
+-- Spelling
+-- vim.opt.spell = true
+-- vim.opt.spelllang = "nb_no,en_us"
