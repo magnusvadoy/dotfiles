@@ -95,6 +95,7 @@ return {
           "jsonnet_ls",
           "dockerls",
           "bufls",
+          "markdown_oxide",
           "tsserver",
           "html",
           "cssls",

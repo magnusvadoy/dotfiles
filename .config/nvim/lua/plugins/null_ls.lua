@@ -17,7 +17,9 @@ return {
           }),
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.buf,
-          null_ls.builtins.formatting.prettierd,
+          null_ls.builtins.formatting.prettierd.with({
+            filetypes = { "html", "css", "json", "yaml", "javascript", "typescript" },
+          }),
           null_ls.builtins.formatting.stylua,
         },
         on_attach = function(client, bufnr)
