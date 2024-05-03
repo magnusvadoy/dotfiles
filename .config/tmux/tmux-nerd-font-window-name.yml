@@ -3,6 +3,5 @@ config:
   multi-pane-icon: "" # show when window has multiple panes (blank by default)
   show-name: false # show the window name with the icon (defaults to false)
   icon-position: "left" # show the icon to the "left" or "right" of the window name (defaults to left)
-
 icons:
-  k9s: "󱃾"
+  k9s: "\U000F10FE"

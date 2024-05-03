@@ -24,7 +24,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
-vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" })    -- copy
+vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" }) -- copy
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- paste
 
 -- Navigate quick fix list
