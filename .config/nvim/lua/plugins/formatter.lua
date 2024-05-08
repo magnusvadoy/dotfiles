@@ -34,7 +34,7 @@ return {
 					return
 				end
 
-				return { async = false, timeout_ms = 500, lsp_fallback = false }
+				return { async = false, timeout_ms = 500, lsp_fallback = true }
 			end,
 		},
 		config = function(_, opts)
