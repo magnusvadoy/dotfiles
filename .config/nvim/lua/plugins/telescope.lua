@@ -1,3 +1,19 @@
+-- Single <CR> to open one or multiple files
+local select_one_or_multi = function(prompt_bufnr)
+	local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+	local multi = picker:get_multi_selection()
+	if not vim.tbl_isempty(multi) then
+		require("telescope.actions").close(prompt_bufnr)
+		for _, j in pairs(multi) do
+			if j.path ~= nil then
+				vim.cmd(string.format("%s %s", "edit", j.path))
+			end
+		end
+	else
+		require("telescope.actions").select_default(prompt_bufnr)
+	end
+end
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -14,29 +30,6 @@ return {
 			local themes = require("telescope.themes")
 			local lga_actions = require("telescope-live-grep-args.actions")
 
-			local map = function(mode, keys, func, desc)
-				vim.keymap.set(mode, keys, func, { desc = desc })
-			end
-
-			map("n", "<leader>/", function()
-				builtin.current_buffer_fuzzy_find()
-			end, "Search current buffer")
-			map("n", "<leader>ff", function()
-				local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
-				if ret == 0 then
-					builtin.git_files()
-				else
-					builtin.find_files()
-				end
-			end, "Files")
-			map("n", "<leader>?", builtin.oldfiles, "Recently opened files")
-			map("n", "<leader><space>", builtin.buffers, "Find buffer")
-			map("n", "<leader>fw", builtin.grep_string, "Current word")
-			map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Grep")
-			map("n", "<leader>fr", builtin.resume, "Resume search")
-			map("n", "<leader>fd", builtin.diagnostics, "Diagnostics")
-			map("n", "<leader>fh", builtin.help_tags, "Help")
-
 			telescope.setup({
 				defaults = themes.get_ivy({
 					file_ignore_patterns = {
@@ -44,6 +37,11 @@ return {
 						"%.git/",
 						"dist/",
 						"node_modules/",
+					},
+					mappings = {
+						i = {
+							["<CR>"] = select_one_or_multi,
+						},
 					},
 				}),
 				pickers = {
@@ -80,6 +78,29 @@ return {
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("live_grep_args")
+
+			local map = function(mode, keys, func, desc)
+				vim.keymap.set(mode, keys, func, { desc = desc })
+			end
+
+			map("n", "<leader>/", function()
+				builtin.current_buffer_fuzzy_find()
+			end, "Search current buffer")
+			map("n", "<leader>ff", function()
+				local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
+				if ret == 0 then
+					builtin.git_files()
+				else
+					builtin.find_files()
+				end
+			end, "Files")
+			map("n", "<leader>?", builtin.oldfiles, "Recently opened files")
+			map("n", "<leader><space>", builtin.buffers, "Find buffer")
+			map("n", "<leader>fw", builtin.grep_string, "Current word")
+			map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Grep")
+			map("n", "<leader>fr", builtin.resume, "Resume search")
+			map("n", "<leader>fd", builtin.diagnostics, "Diagnostics")
+			map("n", "<leader>fh", builtin.help_tags, "Help")
 		end,
 	},
 }

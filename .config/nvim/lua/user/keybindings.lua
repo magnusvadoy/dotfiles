@@ -30,3 +30,6 @@ vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- 
 -- Navigate quick fix list
 vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
 vim.keymap.set("n", "[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix" })
+
+-- Close all buffers
+vim.keymap.set("n", "<leader>bc", "<Cmd>bufdo bd<CR>", { desc = "Close all buffers", silent = true, noremap = true })

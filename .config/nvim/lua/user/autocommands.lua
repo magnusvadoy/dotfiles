@@ -20,3 +20,19 @@ autocmd("FileType", {
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
+
+-- Highlight on yank
+autocmd("TextYankPost", {
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({ timeout = 150 })
+	end,
+})
+
+-- Open quickfix window automatically
+autocmd("QuickFixCmdPost", {
+	pattern = "*",
+	callback = function()
+		vim.cmd("copen")
+	end,
+})

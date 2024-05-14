@@ -8,5 +8,4 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [window]
 option_as_alt = "OnlyLeft"
-decorations = "None"
-# padding = { x = 5, y = 0 }
+# decorations = "None"
