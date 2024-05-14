@@ -7,6 +7,6 @@ size = 16
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [window]
-# decorations = "None"
 option_as_alt = "OnlyLeft"
-padding = { x = 5, y = 0 }
+decorations = "None"
+# padding = { x = 5, y = 0 }

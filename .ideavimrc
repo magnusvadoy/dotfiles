@@ -8,6 +8,9 @@ set number
 
 set clipboard+=unnamed
 
+set notimeout
+set which-key
+
 " GoTo keybindings
 map gd <Action>(GotoDeclaration)
 map gi <Action>(GotoImplementation)
@@ -22,3 +25,4 @@ map gt <Action>(GotoTest)
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-highlightedyank'
+
