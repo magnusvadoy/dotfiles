@@ -25,7 +25,7 @@ local function get_schema()
 	if schema.result[1].name == "none" then
 		return ""
 	end
-	return " " .. schema.result[1].name
+	return "󰈙 " .. schema.result[1].name
 end
 
 return {
