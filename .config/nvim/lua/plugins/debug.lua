@@ -26,7 +26,7 @@ return {
 			opts = {},
 		},
 		{ "ofirgall/goto-breakpoints.nvim" },
-		{ "leoluz/nvim-dap-go" }, -- Go support
+		-- { "leoluz/nvim-dap-go" }, -- Go support
 	},
 	config = function()
 		local dap = require("dap")
@@ -90,7 +90,7 @@ return {
 			},
 		}
 
-		require("dap-go").setup()
+		-- require("dap-go").setup()
 
 		-------------------------------------------------------------------------------------------
 		-- Set up signs and colors
