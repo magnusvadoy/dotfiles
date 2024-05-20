@@ -15,9 +15,8 @@ set which-key
 map gd <Action>(GotoDeclaration)
 map gi <Action>(GotoImplementation)
 map go <Action>(GotoTypeDeclaration)
-map gr <Action>(GotoReferences)
+map gr <Action>(ShowUsages)
 map gf <Action>(GotoFile)
-map gu <Action>(ShowUsages)
 map gc <Action>(GotoClass)
 map gt <Action>(GotoTest)
 
@@ -25,4 +24,3 @@ map gt <Action>(GotoTest)
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-highlightedyank'
-
