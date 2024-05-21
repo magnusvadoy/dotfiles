@@ -1,5 +1,4 @@
 return {
-	{ "rhysd/committia.vim" },
 	{
 		"akinsho/git-conflict.nvim",
 		version = "*",
@@ -71,26 +70,6 @@ return {
 				-- Text object
 				map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")
 			end,
-		},
-	},
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
-			"nvim-telescope/telescope.nvim", -- optional
-		},
-		cmd = "Neogit",
-		keys = {
-			{ "<leader>g<enter>", "<cmd>Neogit<cr>", desc = "Open Neogit" },
-		},
-		opts = {
-			kind = "split", -- opens neogit in a split
-			signs = {
-				section = { "", "" },
-				item = { "", "" },
-				hunk = { "", "" },
-			},
 		},
 	},
 }
