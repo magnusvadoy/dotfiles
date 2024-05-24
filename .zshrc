@@ -55,8 +55,9 @@ alias dc="docker compose"
 alias grpc="grpcurl -plaintext"
 
 ### Editor ###
-alias vim="nvim"
 export EDITOR="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
 
 ### PATH ###
 export GOPATH=$HOME/go
