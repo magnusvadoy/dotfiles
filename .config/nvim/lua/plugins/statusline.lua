@@ -34,11 +34,8 @@ return {
 		event = "BufReadPost",
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
-			{ "chrisgrieser/nvim-dr-lsp" },
 		},
 		config = function()
-			local drLsp = require("dr-lsp")
-
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
@@ -50,7 +47,7 @@ return {
 						{ "filename", path = 1 },
 						{ "searchcount", icon = "󰍉" },
 					},
-					lualine_x = { drLsp.lspCount, drLsp.lspProgress },
+					lualine_x = {},
 					lualine_y = { get_schema, "filetype" },
 					lualine_z = { "progress", "location" },
 				},
