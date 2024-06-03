@@ -19,7 +19,7 @@ return {
 				todo_comments.jump_prev()
 			end, { desc = "Previous todo comment" })
 
-			vim.keymap.set("n", "<leader>ft", "<CMD>TodoTelescope<CR>", { desc = "Todos" })
+			vim.keymap.set("n", "<leader>ft", "<CMD>TodoTelescope<CR>", { desc = "Find Todo" })
 		end,
 	},
 }

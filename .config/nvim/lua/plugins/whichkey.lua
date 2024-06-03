@@ -24,9 +24,7 @@ return {
 				["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
 				["<leader>d"] = { name = "Debug", _ = "which_key_ignore" },
 				["<leader>t"] = { name = "Test", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "Ripgrep", _ = "which_key_ignore" },
-				["<leader>rg"] = { name = "Search", _ = "which_key_ignore" },
-				["<leader>rw"] = { name = "Current word", _ = "which_key_ignore" },
+				["<leader>s"] = { name = "Session", _ = "which_key_ignore" },
 			})
 		end,
 	},
