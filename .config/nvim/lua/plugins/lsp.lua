@@ -113,7 +113,6 @@ return {
 								gopls = {
 									analyses = {
 										unusedparams = true,
-										shadow = true,
 									},
 								},
 							},

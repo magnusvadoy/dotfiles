@@ -1,6 +1,7 @@
 return {
 	{
 		"Shatur/neovim-session-manager",
+		commit = "b552ee8667037be5d0291229279a35af25e515fb", -- Bug in latest version
 		config = function()
 			local path = require("plenary.path")
 			local config = require("session_manager.config")
