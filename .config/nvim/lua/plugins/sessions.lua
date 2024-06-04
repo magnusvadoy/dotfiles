@@ -33,7 +33,7 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"<leader>sL",
+				"<leader>ss",
 				"<cmd>SessionManager load_session<CR>",
 				{ desc = "Select and load session" }
 			)
