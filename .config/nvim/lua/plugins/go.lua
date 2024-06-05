@@ -5,7 +5,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		event = { "CmdlineEnter" },
 		ft = { "go", "gomod" },
 		opts = {
 			commands = {

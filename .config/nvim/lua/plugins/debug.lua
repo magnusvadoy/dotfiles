@@ -1,19 +1,35 @@
--- Debug adapter protocol
-
--- Wrapper function to set keymaps with default opts
-local map = function(mode, lhs, rhs, desc)
-	local opts = { noremap = true, silent = true, desc = desc }
-	vim.keymap.set(mode, lhs, rhs, opts)
-end
-
 return {
-	"mfussenegger/nvim-dap", -- debug adapter protocol
+	"mfussenegger/nvim-dap",
 	dependencies = {
-		{ "rcarriga/nvim-dap-ui" },
-		{ "nvim-neotest/nvim-nio" },
-		{ "theHamsta/nvim-dap-virtual-text" },
+		{
+			"rcarriga/nvim-dap-ui",
+			dependencies = { "nvim-neotest/nvim-nio" },
+      -- stylua: ignore
+      keys = {
+        { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Toggle Dap UI" },
+        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+      },
+			opts = {},
+			config = function(_, opts)
+				local dap = require("dap")
+				local dapui = require("dapui")
+				dapui.setup(opts)
+				dap.listeners.after.event_initialized["dapui_config"] = function()
+					dapui.open({})
+				end
+				dap.listeners.before.event_terminated["dapui_config"] = function()
+					dapui.close({})
+				end
+				dap.listeners.before.event_exited["dapui_config"] = function()
+					dapui.close({})
+				end
+			end,
+		},
+		{ "theHamsta/nvim-dap-virtual-text", opts = {} },
 		{
 			"jay-babu/mason-nvim-dap.nvim", -- bridges mason.nvim and nvim-dap
+			dependencies = "mason.nvim",
+			cmd = { "DapInstall", "DapUninstall" },
 			opts = {
 				ensure_installed = { "delve" },
 				automatic_installation = true,
@@ -26,123 +42,37 @@ return {
 			opts = {},
 		},
 		{ "ofirgall/goto-breakpoints.nvim" },
-		-- { "leoluz/nvim-dap-go" }, -- Go support
+		{ "leoluz/nvim-dap-go" },
 	},
 	config = function()
-		local dap = require("dap")
-		local dapui = require("dapui")
-		local breakpoint = require("goto-breakpoints")
-		require("nvim-dap-virtual-text").setup({})
+		require("dap-go").setup()
 
-		-------------------------------------------------------------------------------------------
-		-- DAP UI
-		-------------------------------------------------------------------------------------------
-		dapui.setup()
-
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open()
-		end
-		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close()
-		end
-		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close()
-		end
-
-		-------------------------------------------------------------------------------------------
-		-- Configurations for each languages
-		-------------------------------------------------------------------------------------------
-		-- NOTE: For per-project config, create .vscode/launch.json that looks something like this:
-		-- {
-		--   // Use IntelliSense to learn about possible attributes.
-		--   // Hover to view descriptions of existing attributes.
-		--   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-		--   "version": "0.2.0",
-		--   "configurations": [
-		--     {
-		--       "name": "NAME OF THE LAUNCH",
-		--       "type": "python",
-		--       "request": "launch",
-		--       "program": "${file}",
-		--       "console": "integratedTerminal",
-		--       "args": ["TOKEN1", "TOKEN2", ...]
-		--     }
-		--   ]
-		-- }
-
-		dap.configurations.scala = {
-			{
-				type = "scala",
-				request = "launch",
-				name = "RunOrTest",
-				metals = {
-					runType = "runOrTestFile",
-					--args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-				},
-			},
-			{
-				type = "scala",
-				request = "launch",
-				name = "Test Target",
-				metals = {
-					runType = "testTarget",
-				},
-			},
-		}
-
-		-- require("dap-go").setup()
-
-		-------------------------------------------------------------------------------------------
-		-- Set up signs and colors
-		-------------------------------------------------------------------------------------------
 		local sign = vim.fn.sign_define
-
 		sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
 		sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
 		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-
-		-------------------------------------------------------------------------------------------
-		-- Set up keymaps
-		-------------------------------------------------------------------------------------------
-		map("n", "<leader>du", function()
-			dapui.toggle()
-		end, "Toggle UI")
-		map("n", "<leader>dc", function()
-			if vim.fn.filereadable(".vscode/launch.json") then
-				require("dap.ext.vscode").load_launchjs()
-			end
-			dap.continue()
-		end, "Start/Continue debugging")
-		map("n", "<leader>db", function()
-			dap.toggle_breakpoint()
-		end, "Toggle breakpoint")
-		map("n", "<leader>dB", function()
-			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end, "Toggle breakpoint with condition")
-		map("n", "<leader>do", function()
-			dap.step_over()
-		end, "Step over")
-		map("n", "<leader>dO", function()
-			dap.step_out()
-		end, "Step out")
-		map("n", "<leader>di", function()
-			dap.step_into()
-		end, "Step into")
-		map("n", "<leader>dr", function()
-			dap.repl.open()
-		end, "Open REPL")
-		map("n", "<leader>dl", function()
-			dap.run_last()
-		end, "Run last session")
-		map("n", "<leader>dR", function()
-			dap.restart()
-		end, "Restart session")
-		map("n", "<leader>dq", function()
-			dap.terminate()
-		end, "Terminate session")
-
-		-- Go to breakpoints
-		map("n", "]b", breakpoint.next, "Go to next breakpoint")
-		map("n", "[b", breakpoint.prev, "Go to previous breakpoint")
 	end,
+    -- stylua: ignore
+  keys = {
+    { "]b", function() require("goto-breakpoints").next() end, desc = "Next breakpoint" },
+    { "[b", function() require("goto-breakpoints").prev() end, desc = "Previous breakpoint" },
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dc", function()
+      if vim.fn.filereadable(".vscode/launch.json") then
+        require("dap.ext.vscode").load_launchjs()
+      end
+      require("dap").continue()
+    end, desc = "Continue" },
+    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+  },
 }
