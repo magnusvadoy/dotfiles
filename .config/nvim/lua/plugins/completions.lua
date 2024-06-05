@@ -31,6 +31,7 @@ return {
 			},
 			{
 				"CopilotC-Nvim/CopilotChat.nvim",
+				event = "CmdlineEnter",
 				branch = "canary",
 				dependencies = {
 					{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
@@ -56,7 +57,6 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
-			local select_opts = { behavior = cmp.SelectBehavior.Replace }
 
 			-- See :help cmp-config
 			cmp.setup({
@@ -90,10 +90,10 @@ return {
 				},
 				-- See :help cmp-mapping
 				mapping = {
-					["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-					["<Down>"] = cmp.mapping.select_next_item(select_opts),
-					["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
-					["<C-n>"] = cmp.mapping.select_next_item(select_opts),
+					["<Up>"] = cmp.mapping.select_prev_item(),
+					["<Down>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
+					["<C-n>"] = cmp.mapping.select_next_item(),
 
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),

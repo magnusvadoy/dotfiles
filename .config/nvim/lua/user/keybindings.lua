@@ -3,13 +3,13 @@
 -- ========================================================================== --
 
 -- Editing: save
-vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save buffer" })
+vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 
 -- Select whole file
-vim.keymap.set("n", "<leader>S", ":keepjumps normal! ggVG<CR>", { desc = "Select all" })
+vim.keymap.set("n", "<C-a>", ":keepjumps normal! ggVG<CR>", { desc = "Select all" })
 
 -- Rename current word
-vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" })
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" })
 
 -- Move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -30,6 +30,3 @@ vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- 
 -- Navigate quick fix list
 vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
 vim.keymap.set("n", "[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix" })
-
--- Close all buffers
-vim.keymap.set("n", "<leader>bc", "<Cmd>bufdo bd<CR>", { desc = "Close all buffers", silent = true, noremap = true })
