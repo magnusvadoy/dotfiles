@@ -4,10 +4,12 @@ return {
 		opts = {
 			formatters_by_ft = {
 				go = { "goimportsreviser" },
+
 				proto = { "buf" },
+
 				lua = { "stylua" },
-				jsonnet = { "jsonnetfmt" },
 				yaml = { "yamlfmt" },
+
 				json = { "prettierd" },
 				markdown = { "prettierd" },
 				javascript = { "prettierd" },
