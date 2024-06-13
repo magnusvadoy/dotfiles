@@ -2,6 +2,7 @@ return {
 	{
 		"akinsho/git-conflict.nvim",
 		version = "*",
+		event = { "BufReadPre" },
 		opts = {
 			default_mappings = {
 				ours = "co",
@@ -24,7 +25,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-			current_line_blame = false,
+			current_line_blame = true,
 			current_line_blame_opts = {
 				virt_text = true,
 				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
