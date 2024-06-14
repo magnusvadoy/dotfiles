@@ -58,11 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
 		end, "Goto Type Definition")
 		map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
-
-		map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
 		map("n", "gl", vim.diagnostic.open_float, "Show Line Diagnostics")
-		map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
-		map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
 	end,
 })
 
