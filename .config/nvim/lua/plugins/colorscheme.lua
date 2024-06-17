@@ -2,9 +2,11 @@ return {
 	{
 		"f-person/auto-dark-mode.nvim",
 		dependencies = {
+			{ "sainnhe/gruvbox-material", lazy = false, priority = 1000 },
 			{
 				"catppuccin/nvim",
 				name = "catppuccin",
+				lazy = false,
 				priority = 1000,
 				opts = {
 					flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -65,11 +67,11 @@ return {
 		opts = {
 			update_interval = 1000,
 			set_dark_mode = function()
-				vim.cmd("colorscheme catppuccin")
+				vim.cmd("colorscheme gruvbox-material")
 				vim.api.nvim_set_option("background", "dark")
 			end,
 			set_light_mode = function()
-				vim.cmd("colorscheme catppuccin")
+				vim.cmd("colorscheme gruvbox-material")
 				vim.api.nvim_set_option("background", "light")
 			end,
 		},

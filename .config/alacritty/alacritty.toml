@@ -1,5 +1,5 @@
 import = [
-  "~/.config/alacritty/catppuccin-mocha.toml"
+  "~/.config/alacritty/gruvbox-material-dark-medium.toml"
 ]
 
 [font]
@@ -8,4 +8,4 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [window]
 option_as_alt = "OnlyLeft"
-padding = { x = 5, y = 0 }
+# padding = { x = 5, y = 0 }
