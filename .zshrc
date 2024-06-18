@@ -85,7 +85,6 @@ export FZF_DEFAULT_OPTS="
 
 ### EZA ###
 export EZA_PARAMS=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group')
-
 alias ls='eza $EZA_PARAMS'
 alias l='eza --git-ignore $EZA_PARAMS'
 alias ll='eza --all --header --long $EZA_PARAMS'
@@ -93,7 +92,6 @@ alias llm='eza --all --header --long --sort=modified $EZA_PARAMS'
 alias la='eza -lbhHigUmuSa'
 alias lx='eza -lbhHigUmuSa@'
 alias lt='eza --tree $EZA_PARAMS'
-alias tree='eza --tree $EZA_PARAMS'
 
 ### Kubectl ###
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
