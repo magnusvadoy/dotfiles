@@ -2,7 +2,7 @@ return {
 	{
 		"f-person/auto-dark-mode.nvim",
 		dependencies = {
-			{ "sainnhe/gruvbox-material", lazy = false, priority = 1000 },
+			{ "sainnhe/gruvbox-material", event = "VeryLazy" },
 			{
 				"catppuccin/nvim",
 				name = "catppuccin",
@@ -67,12 +67,12 @@ return {
 		opts = {
 			update_interval = 1000,
 			set_dark_mode = function()
+				vim.api.nvim_set_option_value("background", "dark", {})
 				vim.cmd("colorscheme gruvbox-material")
-				vim.api.nvim_set_option("background", "dark")
 			end,
 			set_light_mode = function()
+				vim.api.nvim_set_option_value("background", "light", {})
 				vim.cmd("colorscheme gruvbox-material")
-				vim.api.nvim_set_option("background", "light")
 			end,
 		},
 	},

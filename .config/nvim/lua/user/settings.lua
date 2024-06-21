@@ -22,6 +22,7 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 
 -- Line Wraps
 vim.opt.wrap = true
+vim.opt.smoothscroll = true -- scroll by screen line rather than by text line when 'wrap' is set
 
 -- Keep 8 lines of context
 vim.opt.scrolloff = 8
@@ -46,12 +47,12 @@ vim.opt.termguicolors = true
 -- Highlight where the cursor is
 vim.opt.cursorline = true
 
--- Persistent undo
+-- Disable swap and enable undofile
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
 
--- Lower than default (1000) to quickly trigger which-key
+-- Lower than default timeout (1000) to quickly trigger which-key
 vim.opt.timeoutlen = 300
 
 -- Maximum number of items in a popup
@@ -60,11 +61,6 @@ vim.opt.pumheight = 10
 -- Splitting windows
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
-
--- Smooth scroll
-if vim.fn.has("nvim-0.10") == 1 then
-	vim.opt.smoothscroll = true
-end
 
 -- Hide * markup for bold and italic, but not markers with substitutions
 vim.opt.conceallevel = 2

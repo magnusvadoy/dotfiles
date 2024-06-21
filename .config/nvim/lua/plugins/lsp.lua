@@ -1,7 +1,7 @@
 local augroup_keybindings = vim.api.nvim_create_augroup("UserCmds", {})
 
 ---
--- Diagnostic customization
+-- Diagnostics
 ---
 local sign = function(opts)
 	-- See :help sign_define()
@@ -21,9 +21,6 @@ sign({ name = "DiagnosticSignInfo", text = "»" })
 vim.diagnostic.config({
 	virtual_text = true,
 	severity_sort = true,
-	float = {
-		source = "always",
-	},
 })
 
 ---
@@ -45,17 +42,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>cl", vim.lsp.codelens.run, "Run Codelens")
 		map("n", "<leader>cL", vim.lsp.codelens.refresh, "Refresh Codelens")
 
+		local lsp_opts = { reuse_win = true }
 		map("n", "gd", function()
-			require("telescope.builtin").lsp_definitions({ reuse_win = true })
+			require("telescope.builtin").lsp_definitions(lsp_opts)
 		end, "Goto Definition")
 		map("n", "gr", function()
-			require("telescope.builtin").lsp_references({ reuse_win = true })
+			require("telescope.builtin").lsp_references(lsp_opts)
 		end, "Goto References")
 		map("n", "gi", function()
-			require("telescope.builtin").lsp_implementations({ reuse_win = true })
+			require("telescope.builtin").lsp_implementations(lsp_opts)
 		end, "Goto Implementation")
 		map("n", "go", function()
-			require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+			require("telescope.builtin").lsp_type_definitions(lsp_opts)
 		end, "Goto Type Definition")
 		map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
 		map("n", "gl", vim.diagnostic.open_float, "Show Line Diagnostics")

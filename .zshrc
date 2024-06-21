@@ -64,7 +64,7 @@ export GOPATH=$HOME/go
 export JAVA_HOME="`/usr/libexec/java_home -v '11'`"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 PATH+=":$GOPATH/bin"
-PATH+=":$HOME/.local/bin"
+PATH+=":$HOME/bin"
 PATH+=":$HOME/Library/Application Support/Coursier/bin"
 
 ### FZF ###
@@ -78,19 +78,16 @@ export FZF_DEFAULT_OPTS="
 --pointer ' '
 --marker ' '
 --layout reverse 
---preview-window 'right:60%' 
---preview 'bat --color=always --line-range :300 {}'
+--preview 'bat --color=always {}'
 --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,ctrl-f:preview-page-down,ctrl-b:preview-page-up
 "
 
 ### EZA ###
-export EZA_PARAMS=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group')
+export EZA_PARAMS=('--git' '--icons' 'group' '--time-style=long-iso')
 alias ls='eza $EZA_PARAMS'
 alias l='eza --git-ignore $EZA_PARAMS'
 alias ll='eza --all --header --long $EZA_PARAMS'
 alias llm='eza --all --header --long --sort=modified $EZA_PARAMS'
-alias la='eza -lbhHigUmuSa'
-alias lx='eza -lbhHigUmuSa@'
 alias lt='eza --tree $EZA_PARAMS'
 
 ### Kubectl ###
