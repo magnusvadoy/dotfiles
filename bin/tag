@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+  echo "Usage: tag [version]"
+  return
+fi
+
+git tag -a "$1" -m "version $1"

@@ -1,6 +1,3 @@
-# Add custom executables 
-set --prepend PATH '$HOME/bin'
-
 # Set PATH, MANPATH, etc., for Homebrew
 set -gx HOMEBREW_PREFIX /opt/homebrew
 set -gx HOMEBREW_CELLAR /opt/homebrew/Cellar
@@ -21,6 +18,9 @@ set -x JAVA_HOME (/usr/libexec/java_home -v 11)
 # Add Coursier bin to PATH
 set --append PATH $HOME/Library/Application\ Support/Coursier/bin
 
+# Add custom executables 
+set --append PATH $HOME/bin
+
 ###################################
 # Interactive mode configurations #
 ###################################
@@ -33,6 +33,10 @@ set -g fish_greeting
 set -x EDITOR nvim
 
 # Enable vi key bindings
+set fish_cursor_default     block      blink
+set fish_cursor_insert      line       blink
+set fish_cursor_replace_one underscore blink
+set fish_cursor_visual      block
 fish_vi_key_bindings
 
 # tide prompt
@@ -45,12 +49,15 @@ set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -x FZF_ALT_C_COMMAND 'fd --type directory '' $HOME'
 set -x FZF_CTRL_R_OPTS '--preview "echo {}"'
 set -x FZF_DEFAULT_OPTS '
+--cycle
 --ansi 
+--height "90%"
+--layout "reverse" 
 --prompt " "
 --pointer " "
 --marker " "
---layout reverse 
 --preview "bat --color=always {}"
+--preview-window "wrap"
 --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,ctrl-f:preview-page-down,ctrl-b:preview-page-up
 '
 
