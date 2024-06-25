@@ -1,8 +1,51 @@
 #!/bin/bash
 
-if [[ -z "$1" ]]; then
-  echo "Usage: tag [version]"
-  return
+version=$1
+append_head=false
+
+# Function to display the script usage
+print_usage() {
+  echo "Usage: tag [options] [version]"
+  echo "Options:"
+  echo "  -a, --append-head     Append the output of 'git rev-parse --short HEAD' to the version"
+}
+
+# Parse command line options
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    -a|--append-head)
+      append_head=true
+      ;;
+    *)
+      version=$1
+      ;;
+  esac
+  shift
+done
+
+# Check if a version is provided
+if [[ -z "$version" ]]; then
+  print_usage
+  exit 1
 fi
 
-git tag -a "$1" -m "version $1"
+# Append git HEAD to version if the flag is set
+if [ "$append_head" = true ]; then
+  git_head=$(git rev-parse --short HEAD 2>/dev/null)
+  if [[ -n "$git_head" ]]; then
+    version="$version-$git_head"
+  else
+    echo "Failed to get the git HEAD revision."
+    exit 1
+  fi
+fi
+
+# Tag the Git repository
+git tag -a "$version" -m "Version $version" 2>/dev/null
+
+if [[ $? -eq 0 ]]; then
+  echo "Tagged commit with version $version successfully."
+else
+  echo "Failed to tag commit. Check if you are inside a Git repository."
+  exit 1
+fi

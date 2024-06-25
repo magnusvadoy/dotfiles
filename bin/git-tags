@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Check if fzf and xclip are installed
+if ! command -v fzf >/dev/null; then
+  echo "Please make sure you have fzf installed."
+  exit 1
+fi
+
+# Get all Git tags and display them in fzf for selection
+selected_tag=$(git tag --sort=-v:refname | fzf --prompt="Select a tag: ")
+
+# If no tag is selected, exit
+if [[ -z "$selected_tag" ]]; then
+  exit 0
+fi
+
+# Copy the selected tag to the clipboard
+echo -n "$selected_tag" | pbcopy
+echo "Selected tag '$selected_tag' has been copied to the clipboard."
+
+# vi: ft=sh
