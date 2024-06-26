@@ -7,13 +7,13 @@ append_head=false
 print_usage() {
   echo "Usage: tag [options] [version]"
   echo "Options:"
-  echo "  -a, --append-head     Append the output of 'git rev-parse --short HEAD' to the version"
+  echo "  -a, --append-hash     Append the current commit hash to the version"
 }
 
 # Parse command line options
 while [[ "$#" -gt 0 ]]; do
   case $1 in
-    -a|--append-head)
+    -a|--append-hash)
       append_head=true
       ;;
     *)
@@ -29,13 +29,13 @@ if [[ -z "$version" ]]; then
   exit 1
 fi
 
-# Append git HEAD to version if the flag is set
+# Append git commit hash of HEAD to version if the flag is set
 if [ "$append_head" = true ]; then
   git_head=$(git rev-parse --short HEAD 2>/dev/null)
   if [[ -n "$git_head" ]]; then
     version="$version-$git_head"
   else
-    echo "Failed to get the git HEAD revision."
+    echo "Failed to get commit hash"
     exit 1
   fi
 fi
