@@ -21,7 +21,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true -- use spaces instead of tabs
 
 -- Line Wraps
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.smoothscroll = true -- scroll by screen line rather than by text line when 'wrap' is set
 
 -- Keep 8 lines of context

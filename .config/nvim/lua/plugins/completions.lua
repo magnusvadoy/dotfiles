@@ -5,6 +5,7 @@ return {
 		version = false,
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
+			{ "andersevenrud/cmp-tmux" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "hrsh7th/cmp-buffer" },
@@ -12,6 +13,12 @@ return {
 			{ "hrsh7th/cmp-cmdline" },
 			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "saadparwaiz1/cmp_luasnip" },
+			{
+				"L3MON4D3/LuaSnip",
+				version = "v2.*",
+				build = "make install_jsregexp",
+				dependencies = { "rafamadriz/friendly-snippets" },
+			},
 			{
 				"zbirenbaum/copilot-cmp",
 				config = function()
@@ -43,13 +50,7 @@ return {
 				},
 				-- See Commands section for default commands if you want to lazy load on them
 			},
-			{
-				"L3MON4D3/LuaSnip",
-				version = "v2.*",
-				build = "make install_jsregexp",
-				dependencies = { "rafamadriz/friendly-snippets" },
-			},
-			{ "onsails/lspkind.nvim" },
+			{ "onsails/lspkind.nvim" }, -- for icons
 		},
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
@@ -76,6 +77,7 @@ return {
 					{ name = "luasnip" },
 					{ name = "path" },
 					{ name = "buffer" },
+					{ name = "tmux" },
 				},
 				window = {
 					-- completion = cmp.config.window.bordered(),
@@ -119,15 +121,6 @@ return {
 						end
 					end, { "i", "s" }),
 				},
-			})
-
-			-- Set configuration for specific filetype.
-			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources({
-					{ name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-				}, {
-					{ name = "buffer" },
-				}),
 			})
 
 			-- `/` cmdline setup.
