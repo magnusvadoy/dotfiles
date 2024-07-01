@@ -1,3 +1,3 @@
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
-vim.opt_local.spelllang = "nb_no,en_us"
+vim.opt_local.spelllang = "en_us,nb_no"

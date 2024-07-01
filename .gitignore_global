@@ -120,6 +120,7 @@ acs-*.bib
 
 # elsarticle (documentclass of Elsevier journals)
 *.spl
+*.sug
 
 # endnotes
 *.ent

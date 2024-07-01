@@ -30,3 +30,7 @@ vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- 
 -- Navigate quick fix list
 vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
 vim.keymap.set("n", "[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix" })
+
+-- Better indenting
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })

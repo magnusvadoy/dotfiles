@@ -61,10 +61,3 @@ vim.opt.pumheight = 10
 -- Splitting windows
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
-
--- Hide * markup for bold and italic, but not markers with substitutions
-vim.opt.conceallevel = 2
-
--- Spelling
--- vim.opt.spell = true
--- vim.opt.spelllang = "nb_no,en_us"

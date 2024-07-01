@@ -1,6 +1,7 @@
 return {
 	{
 		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			formatters_by_ft = {
 				go = { "goimportsreviser" },
@@ -10,8 +11,8 @@ return {
 				lua = { "stylua" },
 				yaml = { "yamlfmt" },
 
-				json = { "prettierd" },
 				markdown = { "prettierd" },
+				json = { "prettierd" },
 				javascript = { "prettierd" },
 				typescript = { "prettierd" },
 				html = { "prettierd" },

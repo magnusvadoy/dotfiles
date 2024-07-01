@@ -77,8 +77,6 @@ return {
 						["il"] = "@loop.inner",
 						["ib"] = "@block.inner",
 						["ab"] = "@block.outer",
-						["ir"] = "@parameter.inner",
-						["ar"] = "@parameter.outer",
 					},
 				},
 				move = {
