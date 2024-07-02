@@ -71,6 +71,10 @@ alias ll 'eza --all --header --long $EZA_PARAMS'
 alias llm 'eza --all --header --long --sort=modified $EZA_PARAMS'
 alias lt 'eza --tree $EZA_PARAMS'
 
+# zoxide
+
+zoxide init fish | source
+
 # Aliases
 alias vim 'nvim'
 alias vimdiff 'nvim -d'
@@ -80,4 +84,5 @@ alias dc 'docker compose'
 alias cat 'bat --paging=never'
 alias grpc 'grpcurl -plaintext'
 
+# secrets
 source ~/.secrets.fish
