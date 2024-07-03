@@ -61,3 +61,7 @@ vim.opt.pumheight = 10
 -- Splitting windows
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
+
+-- Spelling
+vim.opt.spell = false
+vim.opt.spelllang = "en_us,nb_no"
