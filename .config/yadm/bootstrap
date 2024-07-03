@@ -1,43 +1,43 @@
 #!/bin/sh
 
 install_brew() {
-	# Proudly borrowed from:
-	# https://github.com/duckfullstop/dotfiles/blob/f734eea399a7ccd1c25b57242997e79f230abc4d/.config/yadm/bootstrap
+  # Proudly borrowed from:
+  # https://github.com/duckfullstop/dotfiles/blob/f734eea399a7ccd1c25b57242997e79f230abc4d/.config/yadm/bootstrap
 
-	# install Homebrew if it's missing
-	if ! command -v brew >/dev/null 2>&1; then
-		echo "Installing Homebrew"
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-	fi
+  # install Homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  fi
 
-	if [ -f "$HOME/.Brewfile" ]; then
-		echo "Updating Homebrew bundle"
-		brew bundle --global
-	fi
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating Homebrew bundle"
+    brew bundle --global
+  fi
 }
 
 configure() {
-	CONFIG_DIR="$HOME/.config"
-	TMUX_PLUGIN_DIR="$HOME/.tmux/plugins"
-	ANTIGEN_DIR="$HOME/.zsh"
+  CONFIG_DIR="$HOME/.config"
+  TMUX_PLUGIN_DIR="$HOME/.tmux/plugins"
+  ANTIGEN_DIR="$HOME/.zsh"
 
-	# Create required directories
-	mkdir -p "$TMUX_PLUGIN_DIR" "$ANTIGEN_DIR" "$CONFIG_DIR"
+  # Create required directories
+  mkdir -p "$TMUX_PLUGIN_DIR" "$ANTIGEN_DIR" "$CONFIG_DIR"
 
-	# Clone necessary repos
-	git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
-	git clone https://github.com/zsh-users/antigen.git "$ANTIGEN_DIR/antigen"
+  # Clone necessary repos
+  git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
+  git clone https://github.com/zsh-users/antigen.git "$ANTIGEN_DIR/antigen"
 
-	# Setup FZF
-	$(brew --prefix)/opt/fzf/install
+  # Setup FZF
+  $(brew --prefix)/opt/fzf/install
 
-	# Setup BAT
-	bat cache --build
+  # Setup BAT
+  bat cache --build
 
-	# Symlink JDK
-	sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-	sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-	sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+  # Symlink JDK
+  sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+  sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+  sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 }
 
 install_brew
