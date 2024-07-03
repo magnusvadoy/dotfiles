@@ -1,5 +1,3 @@
-local augroup_keybindings = vim.api.nvim_create_augroup("UserCmds", {})
-
 ---
 -- Diagnostics
 ---
@@ -26,6 +24,8 @@ vim.diagnostic.config({
 ---
 -- LSP Keybindings
 ---
+local augroup_keybindings = vim.api.nvim_create_augroup("UserCmds", {})
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = augroup_keybindings,
   desc = "LSP actions",
@@ -60,6 +60,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+local mason_conf = {
+  lsp_servers = {
+    "gopls",
+    "pyright",
+    "lua_ls",
+    "bufls",
+    "yamlls",
+    "jsonls",
+    "bashls",
+    "dockerls",
+    "markdown_oxide",
+  },
+  tools = {
+    -- Formatter
+    "goimports-reviser",
+    "stylua",
+    "yamlfmt",
+    "jsonnetfmt",
+    "shfmt",
+    "prettierd",
+    "isort",
+
+    -- Linter
+    "ruff",
+    "buf",
+
+    -- DAP
+    "delve",
+  },
+}
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -75,28 +106,32 @@ return {
       local mason_lspconfig = require("mason-lspconfig")
       local schemastore = require("schemastore")
       local yaml_companion = require("yaml-companion").setup()
+      require("neodev").setup()
 
       local lsp_defaults = lspconfig.util.default_config
       lsp_defaults.capabilities =
         vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
       mason.setup({})
+
+      -- ensure tools (except LSPs) are installed
+      local mr = require("mason-registry")
+      local function install_ensured()
+        for _, tool in ipairs(mason_conf.tools) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(install_ensured)
+      else
+        install_ensured()
+      end
+
       mason_lspconfig.setup({
-        ensure_installed = {
-          "gopls",
-          "pyright",
-          "lua_ls",
-          "yamlls",
-          "jsonls",
-          "jsonnet_ls",
-          "dockerls",
-          "bufls",
-          "bashls",
-          "markdown_oxide",
-          "tsserver",
-          "html",
-          "cssls",
-        },
+        ensure_installed = mason_conf.lsp_servers,
         -- See :help mason-lspconfig.setup_handlers()
         handlers = {
           function(server)

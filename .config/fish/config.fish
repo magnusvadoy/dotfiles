@@ -24,6 +24,9 @@ set -gx JAVA_HOME (/usr/libexec/java_home -v 11)
 # Add Coursier bin to PATH
 set --prepend PATH $HOME/Library/Application\ Support/Coursier/bin
 
+# Add Mason executables to PATH
+set --prepend PATH $HOME/.local/share/nvim/mason/bin
+
 # Add custom executables
 set --prepend PATH $HOME/bin
 

@@ -27,15 +27,6 @@ return {
     },
     { "theHamsta/nvim-dap-virtual-text", opts = {} },
     {
-      "jay-babu/mason-nvim-dap.nvim", -- bridges mason.nvim and nvim-dap
-      dependencies = "mason.nvim",
-      cmd = { "DapInstall", "DapUninstall" },
-      opts = {
-        ensure_installed = { "delve" },
-        automatic_installation = true,
-      },
-    },
-    {
       "LiadOz/nvim-dap-repl-highlights", -- syntax highlights to nvim-dap REPL
       dependencies = "nvim-treesitter/nvim-treesitter",
       build = ":TSInstall dap_repl",
