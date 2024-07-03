@@ -1,57 +1,57 @@
 return {
-	"mfussenegger/nvim-dap",
-	dependencies = {
-		{
-			"rcarriga/nvim-dap-ui",
-			dependencies = { "nvim-neotest/nvim-nio" },
+  "mfussenegger/nvim-dap",
+  dependencies = {
+    {
+      "rcarriga/nvim-dap-ui",
+      dependencies = { "nvim-neotest/nvim-nio" },
       -- stylua: ignore
       keys = {
         { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Toggle Dap UI" },
         { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
       },
-			opts = {},
-			config = function(_, opts)
-				local dap = require("dap")
-				local dapui = require("dapui")
-				dapui.setup(opts)
-				dap.listeners.after.event_initialized["dapui_config"] = function()
-					dapui.open({})
-				end
-				dap.listeners.before.event_terminated["dapui_config"] = function()
-					dapui.close({})
-				end
-				dap.listeners.before.event_exited["dapui_config"] = function()
-					dapui.close({})
-				end
-			end,
-		},
-		{ "theHamsta/nvim-dap-virtual-text", opts = {} },
-		{
-			"jay-babu/mason-nvim-dap.nvim", -- bridges mason.nvim and nvim-dap
-			dependencies = "mason.nvim",
-			cmd = { "DapInstall", "DapUninstall" },
-			opts = {
-				ensure_installed = { "delve" },
-				automatic_installation = true,
-			},
-		},
-		{
-			"LiadOz/nvim-dap-repl-highlights", -- syntax highlights to nvim-dap REPL
-			dependencies = "nvim-treesitter/nvim-treesitter",
-			build = ":TSInstall dap_repl",
-			opts = {},
-		},
-		{ "ofirgall/goto-breakpoints.nvim" },
-		{ "leoluz/nvim-dap-go" },
-	},
-	config = function()
-		require("dap-go").setup()
+      opts = {},
+      config = function(_, opts)
+        local dap = require("dap")
+        local dapui = require("dapui")
+        dapui.setup(opts)
+        dap.listeners.after.event_initialized["dapui_config"] = function()
+          dapui.open({})
+        end
+        dap.listeners.before.event_terminated["dapui_config"] = function()
+          dapui.close({})
+        end
+        dap.listeners.before.event_exited["dapui_config"] = function()
+          dapui.close({})
+        end
+      end,
+    },
+    { "theHamsta/nvim-dap-virtual-text", opts = {} },
+    {
+      "jay-babu/mason-nvim-dap.nvim", -- bridges mason.nvim and nvim-dap
+      dependencies = "mason.nvim",
+      cmd = { "DapInstall", "DapUninstall" },
+      opts = {
+        ensure_installed = { "delve" },
+        automatic_installation = true,
+      },
+    },
+    {
+      "LiadOz/nvim-dap-repl-highlights", -- syntax highlights to nvim-dap REPL
+      dependencies = "nvim-treesitter/nvim-treesitter",
+      build = ":TSInstall dap_repl",
+      opts = {},
+    },
+    { "ofirgall/goto-breakpoints.nvim" },
+    { "leoluz/nvim-dap-go" },
+  },
+  config = function()
+    require("dap-go").setup()
 
-		local sign = vim.fn.sign_define
-		sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-		sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-	end,
+    local sign = vim.fn.sign_define
+    sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+    sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+    sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+  end,
     -- stylua: ignore
   keys = {
     { "]b", function() require("goto-breakpoints").next() end, desc = "Next breakpoint" },

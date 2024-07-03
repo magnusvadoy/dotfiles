@@ -13,12 +13,12 @@ print_usage() {
 # Parse command line options
 while [[ "$#" -gt 0 ]]; do
   case $1 in
-    -a|--append-hash)
-      append_head=true
-      ;;
-    *)
-      version=$1
-      ;;
+  -a | --append-hash)
+    append_head=true
+    ;;
+  *)
+    version=$1
+    ;;
   esac
   shift
 done
