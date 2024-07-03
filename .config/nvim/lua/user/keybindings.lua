@@ -9,7 +9,12 @@ vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "<C-a>", ":keepjumps normal! ggVG<CR>", { desc = "Select all" })
 
 -- Rename current word
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" })
+vim.keymap.set(
+  "n",
+  "<leader>rw",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Word under cursor" }
+)
 
 -- Move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

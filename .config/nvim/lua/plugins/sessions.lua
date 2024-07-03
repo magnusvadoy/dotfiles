@@ -30,20 +30,15 @@ return {
         "n",
         "<leader>sl",
         "<cmd>SessionManager load_current_dir_session<CR>",
-        { desc = "Load last session for current dir" }
+        { desc = "Load last session" }
       )
-      vim.keymap.set("n", "<leader>ss", "<cmd>SessionManager load_session<CR>", { desc = "Select and load session" })
-      vim.keymap.set(
-        "n",
-        "<leader>sd",
-        "<cmd>SessionManager delete_session<CR>",
-        { desc = "Select and delete session" }
-      )
+      vim.keymap.set("n", "<leader>ss", "<cmd>SessionManager load_session<CR>", { desc = "Select session" })
+      vim.keymap.set("n", "<leader>sd", "<cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
       vim.keymap.set(
         "n",
         "<leader>sD",
         "<cmd>SessionManager delete_current_dir_session<CR>",
-        { desc = "Delete the session for current dir" }
+        { desc = "Delete current session" }
       )
     end,
   },

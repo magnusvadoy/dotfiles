@@ -18,12 +18,14 @@ return {
       local wk = require("which-key")
       wk.setup(opts)
       wk.register({
+        ["<leader>b"] = { name = "Buffers", _ = "which_key_ignore" },
         ["<leader>f"] = { name = "Find", _ = "which_key_ignore" },
         ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
         ["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
         ["<leader>d"] = { name = "Debug", _ = "which_key_ignore" },
         ["<leader>t"] = { name = "Test", _ = "which_key_ignore" },
-        ["<leader>s"] = { name = "Session", _ = "which_key_ignore" },
+        ["<leader>s"] = { name = "Sessions", _ = "which_key_ignore" },
+        ["<leader>r"] = { name = "Rename", _ = "which_key_ignore" },
       })
     end,
   },

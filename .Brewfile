@@ -35,6 +35,7 @@ brew "gnu-sed"
 brew "gh"
 brew "openssh"
 brew "rsync"
+brew "yazi"
 
 cask "docker"
 cask "alacritty"
