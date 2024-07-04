@@ -5,9 +5,6 @@
 -- Editing: save
 vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 
--- Select whole file
-vim.keymap.set("n", "<C-a>", ":keepjumps normal! ggVG<CR>", { desc = "Select all" })
-
 -- Rename current word
 vim.keymap.set(
   "n",

@@ -34,14 +34,14 @@ return {
     new_notes_location = "notes_subdir",
 
     daily_notes = {
-      folder = "00-Daily",
+      folder = "Daily Notes",
       date_format = "%Y-%m-%d-%A",
       alias_format = "%A, %-d %B %Y",
       template = "Daily Note",
     },
 
     templates = {
-      subdir = "90-System/91-Templates",
+      subdir = "System/Templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
     },
