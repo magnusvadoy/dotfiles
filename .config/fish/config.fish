@@ -75,13 +75,11 @@ alias llm 'eza --all --header --long --sort=modified $EZA_PARAMS'
 alias lt 'eza --tree $EZA_PARAMS'
 
 # zoxide
-
 zoxide init fish | source
 
 # Aliases
 alias vim 'nvim'
 alias vimdiff 'nvim -d'
-alias g 'git'
 alias d 'docker'
 alias dc 'docker compose'
 alias cat 'bat --paging=never'
