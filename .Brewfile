@@ -50,6 +50,7 @@ cask "google-cloud-sdk"
 cask "postman"
 cask "karabiner-elements"
 cask "hiddenbar"
+cask "1password"
 
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
