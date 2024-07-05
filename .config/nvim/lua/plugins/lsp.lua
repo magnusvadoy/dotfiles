@@ -85,6 +85,7 @@ local mason_conf = {
     -- Linter
     "ruff",
     "buf",
+    "markdownlint",
 
     -- DAP
     "delve",

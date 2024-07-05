@@ -65,3 +65,6 @@ vim.opt.splitright = true -- Put new windows right of current
 -- Spelling
 vim.opt.spell = false
 vim.opt.spelllang = "en_us,nb_no"
+
+-- conceallevel
+vim.opt.conceallevel = 2

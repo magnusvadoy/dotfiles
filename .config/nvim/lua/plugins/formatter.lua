@@ -11,7 +11,7 @@ return {
         sh = { "shfmt" },
         python = { "isort", "ruff_format" },
 
-        markdown = { "prettierd" },
+        markdown = { "markdownlint" },
         json = { "prettierd" },
         javascript = { "prettierd" },
         typescript = { "prettierd" },
