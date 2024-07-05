@@ -1,20 +1,25 @@
 #!/bin/bash
 
 version=$1
-append_head=false
+append_hash=false
+push_tag=false
 
 # Function to display the script usage
 print_usage() {
   echo "Usage: tag [options] [version]"
   echo "Options:"
   echo "  -a, --append-hash     Append the current commit hash to the version"
+  echo "  -p, --push            Push the newly created tag to the remote repository"
 }
 
 # Parse command line options
 while [[ "$#" -gt 0 ]]; do
   case $1 in
   -a | --append-hash)
-    append_head=true
+    append_hash=true
+    ;;
+  -p | --push)
+    push_tag=true
     ;;
   *)
     version=$1
@@ -30,7 +35,7 @@ if [[ -z "$version" ]]; then
 fi
 
 # Append git commit hash of HEAD to version if the flag is set
-if [ "$append_head" = true ]; then
+if [ "$append_hash" = true ]; then
   git_head=$(git rev-parse --short HEAD 2>/dev/null)
   if [[ -n "$git_head" ]]; then
     version="$version-$git_head"
@@ -45,6 +50,17 @@ git tag -a "$version" -m "Version $version" 2>/dev/null
 
 if [[ $? -eq 0 ]]; then
   echo "Tagged commit with version $version successfully."
+
+  # Push the tag if the flag is set
+  if [ "$push_tag" = true ]; then
+    git push origin "$version" 2>/dev/null
+    if [[ $? -eq 0 ]]; then
+      echo "Pushed tag $version to remote repository."
+    else
+      echo "Failed to push tag $version to remote repository."
+      exit 1
+    fi
+  fi
 else
   echo "Failed to tag commit. Check if you are inside a Git repository."
   exit 1
