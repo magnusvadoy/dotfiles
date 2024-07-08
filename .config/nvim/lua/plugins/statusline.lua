@@ -28,6 +28,13 @@ local function get_schema()
   return "󰈙 " .. schema.result[1].name
 end
 
+local function indent()
+  local indent_type = vim.api.nvim_get_option_value("expandtab", { scope = "local" }) and "Spaces" or "Tab Size"
+  local indent_size = vim.api.nvim_get_option_value("tabstop", { scope = "local" })
+
+  return ("%s: %s"):format(indent_type, indent_size)
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -47,9 +54,9 @@ return {
             { "filename", path = 1 },
             { "searchcount", icon = "󰍉" },
           },
-          lualine_x = {},
-          lualine_y = { get_schema, "filetype" },
-          lualine_z = { "progress", "location" },
+          lualine_x = { "encoding", indent, "fileformat", get_schema, "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
         },
         -- not in use since globalstatus is enabled
         inactive_sections = {
