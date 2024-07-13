@@ -85,15 +85,15 @@ return {
 
       map("n", "<leader>/", function()
         builtin.current_buffer_fuzzy_find()
-      end, "Search in buffer")
+      end, "Find in buffer")
       map("n", "<leader><space>", builtin.buffers, "Find buffer")
-      map("n", "<leader>fr", builtin.oldfiles, "Recent file")
-      map("n", "<leader>fd", builtin.diagnostics, "Diagnostic")
-      map("n", "<leader>fh", builtin.help_tags, "Help")
-      map("n", "<leader>f:", builtin.search_history, "Search History")
-      map("n", "<leader>f;", builtin.command_history, "Command History")
-      map("n", "<leader>fw", builtin.grep_string, "Word under cursor")
-      map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Strings")
+      map("n", "<leader>fr", builtin.oldfiles, "Find recent file")
+      map("n", "<leader>fd", builtin.diagnostics, "Find diagnostic")
+      map("n", "<leader>fh", builtin.help_tags, "Find help")
+      map("n", "<leader>f:", builtin.search_history, "Find search history")
+      map("n", "<leader>f;", builtin.command_history, "Find command history")
+      map("n", "<leader>fw", builtin.grep_string, "Find word under cursor")
+      map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Find string")
       map("n", "<leader>ff", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
         if ret == 0 then
@@ -101,8 +101,8 @@ return {
         else
           builtin.find_files()
         end
-      end, "File")
-      map("n", "<leader>fR", builtin.resume, "Resume")
+      end, "Find file")
+      map("n", "<leader>fR", builtin.resume, "Resume last operation")
     end,
   },
 }

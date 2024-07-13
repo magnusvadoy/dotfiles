@@ -19,7 +19,7 @@ return {
         dashboard.button("SPC f f", " " .. " Find file"),
         dashboard.button("SPC f r", " " .. " Recent files"),
         dashboard.button("SPC f g", " " .. " Find text"),
-        dashboard.button("SPC s l", " " .. " Open last session"),
+        dashboard.button("SPC q l", " " .. " Restore session"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
 

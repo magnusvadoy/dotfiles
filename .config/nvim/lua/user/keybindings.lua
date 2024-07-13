@@ -8,9 +8,9 @@ vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 -- Rename current word
 vim.keymap.set(
   "n",
-  "<leader>rw",
+  "<leader>R",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Word under cursor" }
+  { desc = "Rename word under cursor" }
 )
 
 -- Move blocks of code

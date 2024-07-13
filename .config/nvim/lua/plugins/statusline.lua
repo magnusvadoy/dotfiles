@@ -54,7 +54,7 @@ return {
             { "filename", path = 1 },
             { "searchcount", icon = "󰍉" },
           },
-          lualine_x = { "encoding", indent, "fileformat", get_schema, "filetype" },
+          lualine_x = { indent, get_schema, "filetype" },
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
