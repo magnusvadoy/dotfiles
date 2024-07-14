@@ -41,6 +41,15 @@ return {
     event = "BufReadPost",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
+      {
+        "SmiteshP/nvim-navic",
+        dependencies = { "neovim/nvim-lspconfig" },
+        opts = {
+          lsp = {
+            auto_attach = true,
+          },
+        },
+      },
     },
     config = function()
       require("lualine").setup({
@@ -66,6 +75,15 @@ return {
           lualine_x = { "location" },
           lualine_y = {},
           lualine_z = {},
+        },
+        winbar = {
+          lualine_c = {
+            {
+              "navic",
+              color_correction = nil,
+              navic_opts = nil,
+            },
+          },
         },
       })
     end,
