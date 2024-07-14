@@ -8,6 +8,7 @@ return {
         "<leader>bq",
         function()
           vim.cmd("bufdo Bdelete")
+          vim.cmd("SessionManager delete_current_dir_session")
           vim.cmd("Alpha")
         end,
         desc = "Close all buffers",
