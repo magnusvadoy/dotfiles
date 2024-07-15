@@ -61,11 +61,6 @@ return {
           lualine_b = { branch_stat, diff_stat, diagnostics_stat },
           lualine_c = {
             { "filename", path = 1 },
-            {
-              "navic",
-              color_correction = nil,
-              navic_opts = nil,
-            },
             { "searchcount", icon = "󰍉" },
           },
           lualine_x = { indent, get_schema, "filetype" },
@@ -80,6 +75,15 @@ return {
           lualine_x = { "location" },
           lualine_y = {},
           lualine_z = {},
+        },
+        winbar = {
+          lualine_c = {
+            {
+              "navic",
+              color_correction = nil,
+              navic_opts = nil,
+            },
+          },
         },
       })
     end,
