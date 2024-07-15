@@ -49,12 +49,19 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { branch_stat, diff_stat, diagnostics_stat },
+          lualine_b = {
+            branch_stat,
+            diff_stat,
+            diagnostics_stat,
+          },
           lualine_c = {
             { "filename", path = 1 },
-            { "searchcount", icon = "󰍉" },
           },
-          lualine_x = { indent, get_schema, "filetype" },
+          lualine_x = {
+            indent,
+            get_schema,
+            "filetype",
+          },
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
