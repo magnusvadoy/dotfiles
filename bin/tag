@@ -3,6 +3,7 @@
 version=$1
 append_hash=false
 push_tag=false
+copy_to_clipboard=false
 
 # Function to display the script usage
 print_usage() {
@@ -10,6 +11,7 @@ print_usage() {
   echo "Options:"
   echo "  -a, --append-hash     Append the current commit hash to the version"
   echo "  -p, --push            Push the newly created tag to the remote repository"
+  echo "  -c, --copy            Copy the tag to the clipboard"
 }
 
 # Parse command line options
@@ -20,6 +22,9 @@ while [[ "$#" -gt 0 ]]; do
     ;;
   -p | --push)
     push_tag=true
+    ;;
+  -c | --copy)
+    copy_to_clipboard=true
     ;;
   *)
     version=$1
@@ -47,7 +52,6 @@ fi
 
 # Tag the Git repository
 git tag -a "$version" -m "Version $version" 2>/dev/null
-
 if [[ $? -eq 0 ]]; then
   echo "Tagged commit with version $version successfully."
 
@@ -59,6 +63,19 @@ if [[ $? -eq 0 ]]; then
     else
       echo "Failed to push tag $version to remote repository."
       exit 1
+    fi
+  fi
+
+  # Copy the tag to clipboard if the flag is set
+  if [ "$copy_to_clipboard" = true ]; then
+    if command -v pbcopy &>/dev/null; then
+      echo -n "$version" | pbcopy
+      echo "Copied tag $version to clipboard."
+    elif command -v xclip &>/dev/null; then
+      echo -n "$version" | xclip -selection clipboard
+      echo "Copied tag $version to clipboard."
+    else
+      echo "Unable to copy to clipboard. Neither pbcopy nor xclip is available."
     fi
   fi
 else
