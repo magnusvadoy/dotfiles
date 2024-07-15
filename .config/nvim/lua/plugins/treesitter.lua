@@ -6,6 +6,7 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
+      { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 3 } },
       { "windwp/nvim-ts-autotag" },
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
