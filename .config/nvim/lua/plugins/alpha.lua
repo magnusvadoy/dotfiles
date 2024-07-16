@@ -15,11 +15,12 @@ return {
 
       dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
-        dashboard.button("e", " " .. " New file", ":ene <BAR> startinsert<CR>"),
-        dashboard.button("SPC f f", " " .. " Find file"),
-        dashboard.button("SPC f r", " " .. " Recent files"),
-        dashboard.button("SPC f g", " " .. " Find text"),
-        dashboard.button("SPC q l", " " .. " Restore session"),
+        dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<CR>"),
+        dashboard.button("f", " " .. " Find file", "<cmd>Telescope find_files<CR>"), -- TODO: Share this functionality with Telescope
+        dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles<CR>"),
+        dashboard.button("g", " " .. " Find text", "<cmd>Telescope live_grep<CR>"),
+        dashboard.button("s", " " .. " Restore session", "<cmd>SessionManager load_current_dir_session<CR>"),
+        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
 
