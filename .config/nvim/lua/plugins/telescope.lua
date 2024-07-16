@@ -84,8 +84,8 @@ return {
       end
 
       map("n", "<leader><space>", builtin.buffers, "Switch buffer")
-      map("n", "<leader>:", builtin.command_history, "Command history")
       map("n", "<leader>/", telescope.extensions.live_grep_args.live_grep_args, "Grep")
+      map("n", "<leader>fc", builtin.command_history, "Command history")
       map("n", "<leader>fb", builtin.current_buffer_fuzzy_find, "Buffer")
       map("n", "<leader>fr", builtin.oldfiles, "Recent files")
       map("n", "<leader>fd", builtin.diagnostics, "Diagnostics")
