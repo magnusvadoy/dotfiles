@@ -9,7 +9,6 @@ return {
         proto = { "buf" },
         yaml = { "yamlfmt" },
         sh = { "shfmt" },
-        python = { "isort", "ruff_format" },
         markdown = { "markdownlint" },
         json = { "prettierd" },
         javascript = { "prettierd" },
@@ -54,6 +53,7 @@ return {
       vim.g.disable_autoformat = false
 
       vim.api.nvim_create_user_command("ToggleAutoformat", function()
+        vim.notify("Toggling autoformat", vim.log.levels.INFO)
         vim.g.disable_autoformat = vim.g.disable_autoformat == false and true or false
       end, { desc = "Toggling autoformat" })
 

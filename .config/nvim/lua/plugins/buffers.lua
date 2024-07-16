@@ -3,15 +3,14 @@ return {
     "moll/vim-bbye",
     cmd = "Bdelete",
     keys = {
-      { "<leader>bc", "<Cmd>Bdelete<CR>", desc = "Close current buffer" },
+      { "<leader>bd", "<Cmd>Bdelete<CR>", desc = "Delete buffer" },
       {
-        "<leader>bq",
+        "<leader>bD",
         function()
           vim.cmd("bufdo Bdelete")
-          vim.cmd("SessionManager delete_current_dir_session")
           vim.cmd("Alpha")
         end,
-        desc = "Close all buffers",
+        desc = "Delete all buffers",
       },
     },
   },

@@ -80,12 +80,12 @@ local mason_conf = {
     "jsonnetfmt",
     "shfmt",
     "prettierd",
-    "isort",
 
     -- Linter
-    "ruff",
-    "buf",
+    "golangci-lint",
     "markdownlint",
+    "yamllint",
+    "buf",
 
     -- DAP
     "delve",

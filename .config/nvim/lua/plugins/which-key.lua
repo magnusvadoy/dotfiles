@@ -24,7 +24,7 @@ return {
         ["<leader>g"] = { name = "git", _ = "which_key_ignore" },
         ["<leader>d"] = { name = "debug", _ = "which_key_ignore" },
         ["<leader>t"] = { name = "test", _ = "which_key_ignore" },
-        ["<leader>q"] = { name = "session", _ = "which_key_ignore" },
+        ["<leader>q"] = { name = "quit/session", _ = "which_key_ignore" },
       })
     end,
   },
