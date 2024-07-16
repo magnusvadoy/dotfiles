@@ -83,17 +83,17 @@ return {
         vim.keymap.set(mode, keys, func, { desc = desc })
       end
 
-      map("n", "<leader>/", function()
-        builtin.current_buffer_fuzzy_find()
-      end, "Find in buffer")
-      map("n", "<leader><space>", builtin.buffers, "Find buffer")
-      map("n", "<leader>fr", builtin.oldfiles, "Find recent file")
-      map("n", "<leader>fd", builtin.diagnostics, "Find diagnostic")
-      map("n", "<leader>fh", builtin.help_tags, "Find help")
-      map("n", "<leader>f:", builtin.search_history, "Find search history")
-      map("n", "<leader>f;", builtin.command_history, "Find command history")
-      map("n", "<leader>fw", builtin.grep_string, "Find word under cursor")
-      map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Find string")
+      map("n", "<leader><space>", builtin.buffers, "Switch buffer")
+      map("n", "<leader>:", builtin.command_history, "Command history")
+      map("n", "<leader>/", telescope.extensions.live_grep_args.live_grep_args, "Grep")
+      map("n", "<leader>fb", builtin.current_buffer_fuzzy_find, "Buffer")
+      map("n", "<leader>fr", builtin.oldfiles, "Recent files")
+      map("n", "<leader>fd", builtin.diagnostics, "Diagnostics")
+      map("n", "<leader>fh", builtin.help_tags, "Help Pages")
+      map("n", "<leader>fj", builtin.jumplist, "Jumplist")
+      map("n", "<leader>fm", builtin.marks, "Marks")
+      map("n", "<leader>fo", builtin.vim_options, "Options")
+      map("n", "<leader>fw", builtin.grep_string, "Word under cursor")
       map("n", "<leader>ff", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
         if ret == 0 then
@@ -101,8 +101,8 @@ return {
         else
           builtin.find_files()
         end
-      end, "Find file")
-      map("n", "<leader>fR", builtin.resume, "Resume last operation")
+      end, "Files")
+      map("n", "<leader>fR", builtin.resume, "Resume last search")
     end,
   },
 }

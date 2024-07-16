@@ -3,7 +3,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      current_line_blame = false,
+      current_line_blame = true,
       current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -41,10 +41,13 @@ return {
         map("n", "<leader>gu", gs.undo_stage_hunk, "Unstage hunk")
         map("n", "<leader>gS", gs.stage_buffer, "Stage buffer")
         map("n", "<leader>gR", gs.reset_buffer, "Reset buffer")
+        map("n", "<leader>gd", gs.diffthis, "Show diff")
+        map("n", "<leader>gB", function()
+          vim.cmd("Gitsigns toggle_current_line_blame")
+        end, "Toggle line blame")
         map("n", "<leader>gb", function()
           gs.blame_line({ full = true })
-        end, "Show blame")
-        map("n", "<leader>gd", gs.diffthis, "Show diff")
+        end, "Show full blame")
 
         -- Text object
         map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")

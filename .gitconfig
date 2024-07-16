@@ -45,6 +45,6 @@
   pruneTags = true # Remove tags that no longer exist on the remote
 
 [alias]
-  amend = commit --amend
+  amend = commit -v --amend
   amend-no-edit = commit --amend --no-edit
   tags = "!git log --tags --simplify-by-decoration --pretty='format:%ai %an: %s %d' | sort"
