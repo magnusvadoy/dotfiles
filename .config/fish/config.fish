@@ -80,10 +80,12 @@ zoxide init fish | source
 # Aliases
 alias vim 'nvim'
 alias vimdiff 'nvim -d'
-alias d 'docker'
-alias dc 'docker compose'
 alias cat 'bat --paging=never'
-alias grpc 'grpcurl -plaintext'
+
+# Abbreviations
+abbr -a d 'docker'
+abbr -a dc 'docker compose'
+abbr -a grpc 'grpcurl -plaintext'
 
 # secrets
 source ~/.secrets.fish
