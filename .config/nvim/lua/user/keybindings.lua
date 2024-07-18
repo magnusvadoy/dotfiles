@@ -22,7 +22,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- Basic clipboard interaction
 vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" }) -- copy
-vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste from clipboard" }) -- paste
 
 -- Navigate quick fix list
 vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })

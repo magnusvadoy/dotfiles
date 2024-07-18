@@ -9,7 +9,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
+      { "<leader>r", "", desc = "refactor", mode = { "n", "v" } },
       {
         "<leader>rr",
         function()

@@ -18,8 +18,8 @@ return {
         dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<CR>"),
         dashboard.button("f", " " .. " Find file", "<cmd>Telescope find_files<CR>"), -- TODO: Share this functionality with Telescope
         dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles<CR>"),
-        dashboard.button("g", " " .. " Find text", "<cmd>Telescope live_grep<CR>"),
         dashboard.button("s", " " .. " Restore session", "<cmd>SessionManager load_current_dir_session<CR>"),
+        dashboard.button("/", " " .. " Find text", "<cmd>Telescope live_grep<CR>"),
         dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
