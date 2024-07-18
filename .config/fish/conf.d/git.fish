@@ -11,7 +11,6 @@ abbr -a gca\! 'git commit -v -a --amend'
 abbr -a gcm 'git commit -m'
 abbr -a gcam 'git commit -a -m'
 
-
 abbr -a gb 'git branch'
 abbr -a gba 'git branch -av'
 abbr -a gbd 'git branch -d'
