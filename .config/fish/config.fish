@@ -86,6 +86,8 @@ alias cat 'bat --paging=never'
 abbr -a d 'docker'
 abbr -a dc 'docker compose'
 abbr -a grpc 'grpcurl -plaintext'
+abbr -a ghcs 'gh copilot suggest'
+abbr -a ghce 'gh copilot explain'
 
 # secrets
 source ~/.secrets.fish
