@@ -31,8 +31,40 @@ end
 local function indent()
   local indent_type = vim.api.nvim_get_option_value("expandtab", { scope = "local" }) and "Spaces" or "Tab Size"
   local indent_size = vim.api.nvim_get_option_value("tabstop", { scope = "local" })
-
   return ("%s: %s"):format(indent_type, indent_size)
+end
+
+local function word_count()
+  local wc = vim.fn.wordcount()
+  if wc == nil then
+    return ""
+  end
+  if wc["visual_words"] then -- text is selected in visual mode
+    return wc["visual_words"] .. " Words/" .. wc["visual_chars"] .. " Chars (Vis)"
+  else -- all of the document
+    return wc["words"] .. " Words"
+  end
+end
+
+local get_lsp_clients = function()
+  return vim.lsp.get_clients({ buffer = 0 })
+end
+
+local function list_lsp_clients()
+  local clients = get_lsp_clients()
+  local list = {}
+  for _, client in ipairs(clients) do
+    table.insert(list, client.name)
+  end
+  return table.concat(list, "|")
+end
+
+local function is_macro_recording()
+  local reg = vim.fn.reg_recording()
+  if reg == "" then
+    return ""
+  end
+  return "Rec to " .. reg
 end
 
 return {
@@ -48,21 +80,49 @@ return {
           globalstatus = true,
         },
         sections = {
-          lualine_a = { "mode" },
+          lualine_a = {
+            "mode",
+          },
           lualine_b = {
             branch_stat,
             diff_stat,
             diagnostics_stat,
           },
           lualine_c = {
+            {
+              list_lsp_clients,
+            },
             { "filename", path = 1 },
           },
           lualine_x = {
+            {
+              is_macro_recording,
+              color = { fg = "red" },
+              cond = function()
+                return is_macro_recording() ~= ""
+              end,
+            },
             indent,
             get_schema,
             "filetype",
           },
-          lualine_y = { "progress" },
+          lualine_y = {
+            {
+              word_count,
+              cond = function()
+                local ft = vim.bo.filetype
+                local count = {
+                  latex = true,
+                  tex = true,
+                  text = true,
+                  markdown = true,
+                  vimwiki = true,
+                }
+                return count[ft] ~= nil
+              end,
+            },
+            "progress",
+          },
           lualine_z = { "location" },
         },
         -- not in use since globalstatus is enabled

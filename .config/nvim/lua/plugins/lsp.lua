@@ -86,6 +86,7 @@ local mason_conf = {
     "markdownlint",
     "yamllint",
     "buf",
+    "ruff",
 
     -- DAP
     "delve",

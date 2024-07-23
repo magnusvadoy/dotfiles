@@ -10,6 +10,7 @@ return {
         yaml = { "yamlfmt" },
         sh = { "shfmt" },
         markdown = { "markdownlint" },
+        python = { "ruff_format" },
         json = { "prettierd" },
         javascript = { "prettierd" },
         typescript = { "prettierd" },
