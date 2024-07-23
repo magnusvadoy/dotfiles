@@ -47,7 +47,8 @@ local function word_count()
 end
 
 local get_lsp_clients = function()
-  return vim.lsp.get_clients({ buffer = 0 })
+  local bufnr = vim.api.nvim_get_current_buf()
+  return vim.lsp.get_clients({ bufnr = bufnr })
 end
 
 local function list_lsp_clients()
