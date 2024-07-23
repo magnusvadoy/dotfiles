@@ -29,9 +29,9 @@ local function get_schema()
 end
 
 local function indent()
-  local indent_type = vim.api.nvim_get_option_value("expandtab", { scope = "local" }) and "Spaces" or "Tab Size"
+  local indent_type = vim.api.nvim_get_option_value("expandtab", { scope = "local" }) and "󱁐" or "󰌒"
   local indent_size = vim.api.nvim_get_option_value("tabstop", { scope = "local" })
-  return ("%s: %s"):format(indent_type, indent_size)
+  return ("%s %s"):format(indent_type, indent_size)
 end
 
 local function word_count()
