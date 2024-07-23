@@ -71,6 +71,7 @@ end
 return {
   {
     "nvim-lualine/lualine.nvim",
+    enabled = true,
     event = "BufReadPost",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
