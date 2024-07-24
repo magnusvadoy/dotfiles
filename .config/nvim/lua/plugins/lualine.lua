@@ -87,7 +87,7 @@ local copilot = {
     end
 
     if running then
-      return "  running"
+      return " "
     end
 
     return ""
@@ -212,10 +212,8 @@ return {
                 return is_macro_recording() ~= ""
               end,
             },
-            copilot,
             lsp,
-            linters,
-            formatters,
+            copilot,
             file_format,
             file_encoding,
             indent,
