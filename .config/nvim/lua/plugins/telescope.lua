@@ -90,6 +90,7 @@ return {
       map("n", "<leader>fr", builtin.oldfiles, "Recent files")
       map("n", "<leader>fd", builtin.diagnostics, "Diagnostics")
       map("n", "<leader>fh", builtin.help_tags, "Help Pages")
+      map("n", "<leader>fk", builtin.keymaps, "Keymaps")
       map("n", "<leader>fj", builtin.jumplist, "Jumplist")
       map("n", "<leader>fm", builtin.marks, "Marks")
       map("n", "<leader>fo", builtin.vim_options, "Options")

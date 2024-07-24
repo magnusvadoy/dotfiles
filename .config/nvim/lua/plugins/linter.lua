@@ -8,6 +8,7 @@ return {
       events = events,
       linters_by_ft = {
         go = { "golangcilint" },
+        fish = { "fish" },
       },
     },
     config = function(_, opts)
