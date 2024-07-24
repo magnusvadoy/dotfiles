@@ -22,7 +22,7 @@ return {
         goimports = {
           command = "goimports-reviser",
           args = {
-            "-project-name=bitbucket.org/tv2norge",
+            "--company-prefixes=bitbucket.org/tv2norge,golang.tv2.no",
             "-imports-order=std,project,company,general",
             "-format",
             "$FILENAME",
