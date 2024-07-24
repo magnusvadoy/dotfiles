@@ -110,7 +110,7 @@ local lsp = {
       return ""
     end
 
-    return (" %s"):format(table.concat(names, " "))
+    return (" %s"):format(table.concat(names, "|"))
   end,
   on_click = function()
     vim.cmd("LspInfo")

@@ -4,7 +4,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       formatters_by_ft = {
-        go = { "goimportsreviser" },
+        go = { "goimports" },
         lua = { "stylua" },
         proto = { "buf" },
         yaml = { "yamlfmt" },
@@ -19,7 +19,7 @@ return {
       },
       log_level = vim.log.levels.ERROR,
       formatters = {
-        goimportsreviser = {
+        goimports = {
           command = "goimports-reviser",
           args = {
             "-project-name=bitbucket.org/tv2norge",
