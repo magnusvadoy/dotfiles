@@ -22,7 +22,7 @@ vim.diagnostic.config({
 })
 
 ---
--- LSP Keybindings
+-- LSP Keymaps
 ---
 local augroup_keybindings = vim.api.nvim_create_augroup("UserCmds", {})
 

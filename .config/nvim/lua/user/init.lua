@@ -1,3 +1,3 @@
 require("user.settings")
-require("user.keybindings")
+require("user.keymaps")
 require("user.autocommands")
