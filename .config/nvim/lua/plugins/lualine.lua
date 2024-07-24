@@ -190,7 +190,6 @@ return {
         options = {
           globalstatus = true,
           component_separators = "",
-          section_separators = "",
         },
         sections = {
           lualine_a = {
@@ -212,13 +211,13 @@ return {
                 return is_macro_recording() ~= ""
               end,
             },
-            lsp,
-            copilot,
             file_format,
             file_encoding,
             indent,
           },
           lualine_y = {
+            copilot,
+            lsp,
             schema,
             filetype,
             word_count,
