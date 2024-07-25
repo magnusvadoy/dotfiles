@@ -213,6 +213,7 @@ return {
             },
             file_format,
             file_encoding,
+            word_count,
             indent,
           },
           lualine_y = {
@@ -220,7 +221,6 @@ return {
             lsp,
             schema,
             filetype,
-            word_count,
           },
           lualine_z = {
             "progress",
