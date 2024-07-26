@@ -77,14 +77,12 @@ local mason_conf = {
     "goimports-reviser",
     "stylua",
     "yamlfmt",
-    "jsonnetfmt",
     "shfmt",
     "prettierd",
 
     -- Linter
     "golangci-lint",
-    "markdownlint",
-    "yamllint",
+    "markdownlint-cli2",
     "buf",
     "ruff",
 

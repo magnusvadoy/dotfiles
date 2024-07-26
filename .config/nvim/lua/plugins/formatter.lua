@@ -1,3 +1,6 @@
+local slow_format_filetypes = {}
+local use_lsp_fallback = true
+
 return {
   {
     "stevearc/conform.nvim",
@@ -9,7 +12,7 @@ return {
         proto = { "buf" },
         yaml = { "yamlfmt" },
         sh = { "shfmt" },
-        markdown = { "markdownlint" },
+        markdown = { "markdownlint-cli2" },
         python = { "ruff_format" },
         json = { "prettierd" },
         javascript = { "prettierd" },
@@ -32,11 +35,26 @@ return {
       },
       format_on_save = function(bufnr)
         -- Disable with a global variable
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        if vim.g.disable_autoformat then
           return
         end
 
-        return { async = false, timeout_ms = 500, lsp_fallback = true }
+        -- Automatically run slow formatters async
+        if slow_format_filetypes[vim.bo[bufnr].filetype] then
+          return
+        end
+
+        return { timeout_ms = 200, lsp_fallback = use_lsp_fallback }, function(err)
+          if err and err:match("timeout$") then
+            slow_format_filetypes[vim.bo[bufnr].filetype] = true
+          end
+        end
+      end,
+      format_after_save = function(bufnr)
+        if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+          return
+        end
+        return { lsp_fallback = use_lsp_fallback }
       end,
     },
     config = function(_, opts)
