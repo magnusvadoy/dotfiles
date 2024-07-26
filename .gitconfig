@@ -30,7 +30,7 @@
 
 [push]
   # Push the current branch to the same branch on the remote
-	autoSetupRemote = true
+  autoSetupRemote = true
 
 [pull]
   # Keep local commits on top of the tree
@@ -47,4 +47,3 @@
 [alias]
   amend = commit -v --amend
   amend-no-edit = commit --amend --no-edit
-  tags = "!git log --tags --simplify-by-decoration --pretty='format:%ai %an: %s %d' | sort"
