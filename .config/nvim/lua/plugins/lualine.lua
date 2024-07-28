@@ -213,8 +213,8 @@ return {
             },
             file_format,
             file_encoding,
-            word_count,
             indent,
+            word_count,
           },
           lualine_y = {
             copilot,

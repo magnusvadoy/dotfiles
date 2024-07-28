@@ -66,8 +66,5 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.spell = false
 vim.opt.spelllang = "en"
 
--- conceallevel
-vim.opt.conceallevel = 2
-
 -- global status line
 vim.opt.laststatus = 3
