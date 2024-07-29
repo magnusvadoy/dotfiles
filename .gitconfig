@@ -47,3 +47,5 @@
 [alias]
   amend = commit -v --amend
   amend-no-edit = commit --amend --no-edit
+  reset-last-commit = reset HEAD~1
+  hard-reset-last-commit = reset --hard HEAD~1
