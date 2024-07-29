@@ -19,4 +19,9 @@ return {
       require("gopher").setup(opts)
     end,
   },
+  {
+    "maxandron/goplements.nvim",
+    ft = "go",
+    opts = {},
+  },
 }
