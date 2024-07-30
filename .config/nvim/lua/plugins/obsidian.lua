@@ -142,4 +142,19 @@ return {
       end,
     },
   },
+  config = function(_, opts)
+    require("obsidian").setup(opts)
+
+    -- Define keymaps
+    local map = function(mode, keys, func, desc)
+      vim.keymap.set(mode, keys, func, { desc = desc })
+    end
+
+    map("n", "<leader>o", "", "obsidian")
+    map("n", "<leader>on", "<cmd>ObsidianNew<CR>", "New note")
+    map("n", "<leader>of", "<cmd>ObsidianSearch<CR>", "Find note")
+    map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", "Open in Obsidian")
+    map("n", "<leader>ot", "<cmd>ObsidianToday<CR>", "Open todays note")
+    map("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>", "Paste image")
+  end,
 }

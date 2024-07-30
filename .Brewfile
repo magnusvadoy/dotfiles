@@ -33,6 +33,8 @@ brew "gh"
 brew "openssh"
 brew "rsync"
 brew "yazi"
+brew "pngpaste"
+brew "imagemagick"
 
 cask "docker"
 cask "kitty"

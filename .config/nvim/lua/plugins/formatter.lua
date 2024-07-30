@@ -77,7 +77,7 @@ return {
         vim.notify(status .. " autoformatting", vim.log.levels.INFO)
       end, { desc = "Toggling autoformat" })
 
-      vim.keymap.set("n", "<leader>F", "<cmd>ToggleAutoformat<cr>", { desc = "Toggle format on save" })
+      vim.keymap.set("n", "<leader>F", "<cmd>ToggleAutoformat<cr>", { desc = "Toggle autoformatting" })
     end,
   },
 }
