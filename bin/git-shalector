@@ -1,16 +1,24 @@
 #!/bin/bash
-
 # Fuzzy selector for git commit hash ("sha")
-# Needs to be put in your path and made executable for git to find it.
-# See https://www.atlassian.com/git/articles/extending-git for more info.
 # Usage:
-#    git shalector
+#    git shalector [-l|--long]
+
+use_long_hash=false
+
+# Parse command line arguments
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+  -l | --long) use_long_hash=true ;;
+  *)
+    echo "Unknown parameter passed: $1" >&2
+    exit 1
+    ;;
+  esac
+  shift
+done
 
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
   echo 'Not in a git repository.' >&2
-  exit 1
-elif [ $# -gt 0 ]; then
-  echo 'git-shalector does not take any arguments.' >&2
   exit 1
 elif ! command -v fzf >/dev/null 2>&1; then
   echo "You must have fzf (https://github.com/junegunn/fzf) installed." >&2
@@ -29,7 +37,12 @@ if [ -z "$selected_log_line" ]; then
 fi
 
 abbreviated_commit_hash=$(echo "$selected_log_line" | awk '{print $1}')
-commit_hash=$(git rev-parse --short "$abbreviated_commit_hash")
+
+if [ "$use_long_hash" = true ]; then
+  commit_hash=$(git rev-parse "$abbreviated_commit_hash")
+else
+  commit_hash=$(git rev-parse --short "$abbreviated_commit_hash")
+fi
 
 printf "%s" "$commit_hash" | pbcopy
 echo "Commit hash copied to clipboard ($commit_hash)"
