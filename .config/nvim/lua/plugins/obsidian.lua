@@ -155,7 +155,7 @@ return {
     map("n", "<leader>of", "<cmd>ObsidianSearch<CR>", "Search notes")
     map("n", "<leader>ot", "<cmd>ObsidianTags<CR>", "Search tags")
     map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", "Open in Obsidian")
-    map("n", "<leader>od", "<cmd>ObsidianToday<CR>", "Open today's note")
+    map("n", "<leader>od", "<cmd>ObsidianToday<CR>", "Open daily note")
     map("n", "<leader>oD", "<cmd>ObsidianDailies<CR>", "Open dailies")
     map("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>", "Paste image")
   end,
