@@ -308,6 +308,7 @@ TSWLatexianTemp*
 .bloop/
 .ammonite/
 metals.sbt
+.bsp
 
 # debug
 __debug_bin*
