@@ -1,0 +1,13 @@
+return {
+  "sindrets/diffview.nvim",
+  config = function()
+    require("diffview").setup({})
+  end,
+  cmd = { "DiffviewOpen" },
+  keys = {
+    { "<leader>gd", "<CMD>DiffviewOpen<CR>", "View diff" },
+    { "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", mode = "n", desc = "File history" },
+    { "<leader>gh", ":DiffviewFileHistory<CR>", mode = "x", desc = "Range file history" },
+    { "<leader>gl", "<cmd>DiffviewFileHistory<CR>", mode = "n", desc = "View full log" },
+  },
+}
