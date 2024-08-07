@@ -83,12 +83,6 @@ return {
             mode = "symbol_text",
             preset = "codicons",
             symbol_map = { Copilot = "" },
-            menu = {
-              buffer = "[Buf]",
-              tmux = "[Tmux]",
-              rg = "[Rg]",
-              calc = "[Calc]",
-            },
           }),
         },
         preselect = cmp.PreselectMode.None,

@@ -6,7 +6,6 @@ local sign = function(opts)
   vim.fn.sign_define(opts.name, {
     texthl = opts.name,
     text = opts.text,
-    numhl = "",
   })
 end
 
@@ -36,8 +35,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
     map("n", "<leader>cf", vim.lsp.buf.format, "Format code")
-    map("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
-    map("v", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
 
     map("n", "<leader>cl", vim.lsp.codelens.run, "Run Codelens")
     map("n", "<leader>cL", vim.lsp.codelens.refresh, "Refresh Codelens")
@@ -55,8 +53,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "go", function()
       require("telescope.builtin").lsp_type_definitions(lsp_opts)
     end, "Goto Type Definition")
+    map("n", "K", vim.lsp.buf.hover, "View information")
     map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
     map("n", "gl", vim.diagnostic.open_float, "Show Line Diagnostics")
+  end,
+})
+
+local function check_codelens_support(bufnr)
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  for _, c in ipairs(clients) do
+    if c.server_capabilities.codeLensProvider then
+      return true
+    end
+  end
+  return false
+end
+
+-- Refresh codelens on certain events
+vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
+  desc = "LSP codelens",
+  callback = function(_, bufnr)
+    if check_codelens_support() then
+      vim.lsp.codelens.refresh({ bufnr = bufnr })
+    end
   end,
 })
 
@@ -108,9 +127,14 @@ return {
       local yaml_companion = require("yaml-companion").setup()
       require("neodev").setup()
 
-      local lsp_defaults = lspconfig.util.default_config
-      lsp_defaults.capabilities =
-        vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local shared_capabilities =
+        require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local shared_opts = {
+        capabilities = shared_capabilities,
+        handlers = {
+          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
+        },
+      }
 
       mason.setup({})
 
@@ -136,7 +160,7 @@ return {
         handlers = {
           function(server)
             -- See :help lspconfig-setup
-            lspconfig[server].setup({})
+            lspconfig[server].setup(shared_opts)
           end,
           ["jsonls"] = function()
             lspconfig.jsonls.setup({
@@ -150,6 +174,17 @@ return {
           end,
           ["yamlls"] = function()
             lspconfig.yamlls.setup(yaml_companion)
+          end,
+          ["markdown_oxide"] = function()
+            lspconfig.markdown_oxide.setup({
+              capabilities = {
+                workspace = {
+                  didChangeWatchedFiles = {
+                    dynamicRegistration = true,
+                  },
+                },
+              },
+            })
           end,
         },
       })
