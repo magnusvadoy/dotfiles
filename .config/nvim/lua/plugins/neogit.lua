@@ -8,7 +8,7 @@ return {
     },
     opts = {},
     keys = {
-      { "<leader>gg", "<cmd>Neogit kind=split<CR>", desc = "Open Neogit" },
+      { "<leader>gg", "<cmd>Neogit<CR>", desc = "Open Neogit" },
     },
   },
 }
