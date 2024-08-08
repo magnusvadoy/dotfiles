@@ -132,7 +132,7 @@ return {
       local shared_opts = {
         capabilities = shared_capabilities,
         handlers = {
-          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
+          -- ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
         },
       }
 
