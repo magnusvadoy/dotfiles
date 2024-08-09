@@ -5,7 +5,7 @@ return {
   end,
   cmd = { "DiffviewOpen" },
   keys = {
-    { "<leader>gd", "<CMD>DiffviewOpen<CR>", "View diff" },
+    { "<leader>gd", "<CMD>DiffviewOpen<CR>", desc = "View diff" },
     { "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", mode = "n", desc = "File history" },
     { "<leader>gh", ":DiffviewFileHistory<CR>", mode = "x", desc = "Range file history" },
     { "<leader>gl", "<cmd>DiffviewFileHistory<CR>", mode = "n", desc = "View full log" },
