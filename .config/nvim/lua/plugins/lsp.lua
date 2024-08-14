@@ -70,14 +70,14 @@ local function check_codelens_support(bufnr)
 end
 
 -- Refresh codelens on certain events
-vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
-  desc = "LSP codelens",
-  callback = function(_, bufnr)
-    if check_codelens_support() then
-      vim.lsp.codelens.refresh({ bufnr = bufnr })
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
+--   desc = "LSP codelens",
+--   callback = function(_, bufnr)
+--     if check_codelens_support() then
+--       vim.lsp.codelens.refresh({ bufnr = bufnr })
+--     end
+--   end,
+-- })
 
 local mason_conf = {
   lsp_servers = {
