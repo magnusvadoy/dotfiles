@@ -4,6 +4,9 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "helix",
+      icons = {
+        rules = false,
+      },
     },
     config = function(_, opts)
       local wk = require("which-key")
