@@ -23,8 +23,8 @@ return {
         end,
       })
 
-      vim.api.nvim_create_user_command("DisableLinting", function()
-        vim.notify("Disable Linting", vim.log.levels.INFO)
+      vim.api.nvim_create_user_command("ToggleLinting", function()
+        vim.notify("Toggling linting", vim.log.levels.INFO)
         local ft = vim.filetype.match({ buf = 0 })
         if not ft then
           return
@@ -32,7 +32,8 @@ return {
         lint.linters_by_ft[ft] = {}
         vim.diagnostic.hide()
       end, { desc = "Disable linting for current filetype" })
-      vim.keymap.set("n", "<leader>L", "<cmd>DisableLinting<cr>", { desc = "Toggle Linting" })
+
+      vim.keymap.set("n", "<leader>L", "<cmd>ToggleLinting<cr>", { desc = "Toggle linting" })
     end,
   },
 }

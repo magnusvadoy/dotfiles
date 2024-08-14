@@ -28,11 +28,11 @@ return {
 
       vim.keymap.set(
         "n",
-        "<leader>ql",
+        "<leader>sl",
         "<cmd>SessionManager load_current_dir_session<CR>",
         { desc = "Load last session" }
       )
-      vim.keymap.set("n", "<leader>qs", "<cmd>SessionManager load_session<CR>", { desc = "Select session" })
+      vim.keymap.set("n", "<leader>ss", "<cmd>SessionManager load_session<CR>", { desc = "Select session" })
     end,
   },
 }
