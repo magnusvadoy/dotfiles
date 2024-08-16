@@ -30,9 +30,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP actions",
   callback = function(_, bufnr)
     local map = function(mode, keys, func, desc)
-      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
     end
 
+    map({ "n", "v" }, "<leader>c", "", "code")
     map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
     map("n", "<leader>cf", vim.lsp.buf.format, "Format code")
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code actions")
