@@ -51,7 +51,7 @@ fish_vi_key_bindings
 # fzf
 set -x FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude ".git"'
 set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
-set -x FZF_ALT_C_COMMAND 'fd --type directory '' $HOME'
+set -x FZF_ALT_C_COMMAND 'fd --type directory "" $HOME'
 set -x FZF_CTRL_R_OPTS '--preview "echo {}"'
 set -x FZF_DEFAULT_OPTS '
 --cycle

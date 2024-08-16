@@ -3,10 +3,10 @@
 -- ========================================================================== --
 
 -- Editing: save
-vim.keymap.set("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
+vim.keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<CMD>w<CR>", { desc = "Save file" })
 
 -- Rename current word
-vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" })
+vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word" })
 
 -- Buffers
 vim.keymap.set("n", "<leader>bd", "<CMD>bd<CR>", { desc = "Delete current buffer" })
