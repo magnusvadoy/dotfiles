@@ -8,7 +8,7 @@ return {
       keys = {
         { "<leader>d", "", desc = "debug", mode = {"n", "v"} },
         { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Toggle Dap UI" },
-        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+        { "<leader>de", function() require("dapui").eval() end, desc = "Evaluate", mode = {"n", "v"} },
       },
       opts = {},
       config = function(_, opts)
@@ -27,12 +27,6 @@ return {
       end,
     },
     { "theHamsta/nvim-dap-virtual-text", opts = {} },
-    {
-      "LiadOz/nvim-dap-repl-highlights", -- syntax highlights to nvim-dap REPL
-      dependencies = "nvim-treesitter/nvim-treesitter",
-      build = ":TSInstall dap_repl",
-      opts = {},
-    },
     { "ofirgall/goto-breakpoints.nvim" },
     { "leoluz/nvim-dap-go" },
   },
@@ -40,9 +34,9 @@ return {
     require("dap-go").setup()
 
     local sign = vim.fn.sign_define
-    sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-    sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-    sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+    sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint" })
+    sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition" })
+    sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint" })
   end,
     -- stylua: ignore
   keys = {
@@ -55,14 +49,12 @@ return {
         require("dap.ext.vscode").load_launchjs()
       end
       require("dap").continue()
-    end, desc = "Continue" },
+    end, desc = "Continue/Start" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
     { "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
     { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
-    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
     { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
   },
 }
