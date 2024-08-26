@@ -33,10 +33,17 @@ return {
   config = function()
     require("dap-go").setup()
 
+    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
     local sign = vim.fn.sign_define
-    sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint" })
-    sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition" })
-    sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint" })
+    sign(
+      "DapStopped",
+      { text = "󰁕 ", texthl = "DiagnosticWarn", linehl = "DapStoppedLine", numhl = "DapStoppedLine" }
+    )
+    sign("DapBreakpoint", { text = " ", texthl = "DiagnosticInfo" })
+    sign("DapBreakpointCondition", { text = " ", texthl = "DiagnosticInfo" })
+    sign("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError" })
+    sign("DapLogPoint", { text = ".>", texthl = "DiagnosticInfo" })
   end,
     -- stylua: ignore
   keys = {

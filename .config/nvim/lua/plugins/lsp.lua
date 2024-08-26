@@ -54,31 +54,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "go", function()
       require("telescope.builtin").lsp_type_definitions(lsp_opts)
     end, "Goto Type Definition")
+    map("n", "gs", function()
+      require("telescope.builtin").lsp_document_symbols()
+    end, "Goto Symbol")
     map("n", "K", vim.lsp.buf.hover, "View information")
     map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
     map("n", "gl", vim.diagnostic.open_float, "Show Line Diagnostics")
   end,
 })
-
-local function check_codelens_support(bufnr)
-  local clients = vim.lsp.get_clients({ bufnr = bufnr })
-  for _, c in ipairs(clients) do
-    if c.server_capabilities.codeLensProvider then
-      return true
-    end
-  end
-  return false
-end
-
--- Refresh codelens on certain events
--- vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
---   desc = "LSP codelens",
---   callback = function(_, bufnr)
---     if check_codelens_support() then
---       vim.lsp.codelens.refresh({ bufnr = bufnr })
---     end
---   end,
--- })
 
 local mason_conf = {
   lsp_servers = {
