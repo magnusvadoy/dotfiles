@@ -13,6 +13,7 @@ return {
       wk.setup(opts)
       wk.add({
         {
+          { "<leader>a", group = "ai", mode = { "n", "v" } },
           { "<leader>b", group = "buffers" },
           { "<leader>f", group = "find" },
           { "<leader>g", group = "git", mode = { "n", "v" } },

@@ -1,6 +1,7 @@
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    enabled = true,
     branch = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" },
@@ -31,9 +32,8 @@ return {
     end,
     cmd = "CopilotChat",
     keys = {
-      { "<leader>a", "", desc = "ai", mode = { "n", "v" } },
       {
-        "<leader>aa",
+        "<leader>ac",
         function()
           return require("CopilotChat").toggle()
         end,
