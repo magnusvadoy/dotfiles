@@ -47,8 +47,8 @@ return {
       },
       highlights = {
         diff = {
-          current = "DiffText",
           incoming = "DiffAdd",
+          current = "DiffChange",
         },
       },
       diff = {
