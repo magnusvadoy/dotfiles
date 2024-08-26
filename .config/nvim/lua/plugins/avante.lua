@@ -36,7 +36,7 @@ return {
           hint = "<leader>ah",
         },
       },
-      hints = { enabled = true },
+      hints = { enabled = false },
       windows = {
         wrap = true, -- similar to vim.o.wrap
         width = 30, -- default % based on available width
@@ -62,13 +62,7 @@ return {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
+      "MeanderingProgrammer/render-markdown.nvim",
     },
   },
 }
