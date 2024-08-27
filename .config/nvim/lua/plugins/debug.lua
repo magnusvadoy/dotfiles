@@ -27,7 +27,6 @@ return {
       end,
     },
     { "theHamsta/nvim-dap-virtual-text", opts = {} },
-    { "ofirgall/goto-breakpoints.nvim" },
     { "leoluz/nvim-dap-go" },
   },
   config = function()
@@ -45,10 +44,8 @@ return {
     sign("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError" })
     sign("DapLogPoint", { text = ".>", texthl = "DiagnosticInfo" })
   end,
-    -- stylua: ignore
+  -- stylua: ignore
   keys = {
-    { "]b", function() require("goto-breakpoints").next() end, desc = "Next breakpoint" },
-    { "[b", function() require("goto-breakpoints").prev() end, desc = "Previous breakpoint" },
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dc", function()
