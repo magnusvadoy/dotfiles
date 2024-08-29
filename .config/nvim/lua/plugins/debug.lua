@@ -46,8 +46,6 @@ return {
   end,
   -- stylua: ignore
   keys = {
-    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dc", function()
       if vim.fn.filereadable(".vscode/launch.json") then
         require("dap.ext.vscode").load_launchjs()
@@ -55,10 +53,15 @@ return {
       require("dap").continue()
     end, desc = "Continue/Start" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
     { "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
     { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
     { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dr", function() require("dap").restart() end, desc = "Restart" },
+    { "<leader>dR", function() require("dap").restart_frame() end, desc = "Restart Frame" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last Session" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
   },
 }

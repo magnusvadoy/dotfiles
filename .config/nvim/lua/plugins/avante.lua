@@ -1,8 +1,30 @@
 return {
   {
     "yetone/avante.nvim",
-    event = "VeryLazy",
-    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      "MeanderingProgrammer/render-markdown.nvim",
+    },
     opts = {
       provider = "claude",
       claude = {
@@ -12,14 +34,11 @@ return {
         max_tokens = 4096,
       },
       mappings = {
-        ask = "<leader>aa",
-        edit = "<leader>ae",
-        refresh = "<leader>ar",
         diff = {
           ours = "co",
           theirs = "ct",
-          none = "c0",
           both = "cb",
+          cursor = "cc",
           next = "]x",
           prev = "[x",
         },
@@ -30,10 +49,6 @@ return {
         submit = {
           normal = "<CR>",
           insert = "<C-s>",
-        },
-        toggle = {
-          debug = "<leader>ad",
-          hint = "<leader>ah",
         },
       },
       hints = { enabled = false },
@@ -57,12 +72,11 @@ return {
         list_opener = "copen",
       },
     },
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "MeanderingProgrammer/render-markdown.nvim",
+    -- stylua: ignore
+    keys = {
+      { "<leader>aa", function() require("avante.api").ask() end, desc = "Ask (Avante)", mode = { "n", "v" } },
+      { "<leader>ar", function() require("avante.api").refresh() end, desc = "Refresh (Avante)" },
+      { "<leader>ae", function() require("avante.api").edit() end, desc = "Edit (Avante)", mode = "v" },
     },
   },
 }
