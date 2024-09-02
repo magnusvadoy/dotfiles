@@ -28,7 +28,8 @@ local augroup_keybindings = vim.api.nvim_create_augroup("UserCmds", {})
 vim.api.nvim_create_autocmd("LspAttach", {
   group = augroup_keybindings,
   desc = "LSP actions",
-  callback = function(_, bufnr)
+  callback = function(args)
+    local bufnr = args.buf
     local map = function(mode, keys, func, desc)
       vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
     end
@@ -66,24 +67,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local mason_conf = {
   lsp_servers = {
     "gopls",
+    "templ",
     "pyright",
     "lua_ls",
     "bufls",
-    "yamlls",
     "jsonls",
+    "yamlls",
     "bashls",
     "dockerls",
     "markdown_oxide",
+    "tsserver",
+    "tailwindcss",
+    "html",
+    "htmx",
   },
   tools = {
-    -- Formatter
+    -- Formatters
     "goimports-reviser",
     "stylua",
     "yamlfmt",
     "shfmt",
     "prettierd",
 
-    -- Linter
+    -- Linters
     "golangci-lint",
     "markdownlint-cli2",
     "buf",
@@ -158,6 +164,18 @@ return {
           end,
           ["yamlls"] = function()
             lspconfig.yamlls.setup(yaml_companion)
+          end,
+          ["tailwindcss"] = function()
+            lspconfig.tailwindcss.setup({
+              filetypes = { "templ", "javascript", "typescript", "react" },
+              settings = {
+                tailwindCSS = {
+                  includeLanguages = {
+                    templ = "html",
+                  },
+                },
+              },
+            })
           end,
           ["markdown_oxide"] = function()
             lspconfig.markdown_oxide.setup({
