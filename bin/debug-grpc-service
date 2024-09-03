@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Check if service name is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <service-name>"
+    exit 1
+fi
+
+SERVICE_NAME=$1
+
+# Forward the service port to localhost
+kubectl port-forward service/$SERVICE_NAME 8085:8085 >/dev/null &
+
+# Store the port-forward process ID to terminate it later
+PF_PID=$!
+
+# Print information
+echo "Port-forwarding process ID: $PF_PID"
+echo "Waiting for port-forward to establish..."
+
+# Wait for port-forward to establish
+sleep 5
+
+# Run grpcui
+grpcui -plaintext localhost:8085
+
+# Kill the port-forward process
+kill $PF_PID
