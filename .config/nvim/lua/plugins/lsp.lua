@@ -76,7 +76,7 @@ local mason_conf = {
     "bashls",
     "dockerls",
     "markdown_oxide",
-    "tsserver",
+    "ts_ls",
     "tailwindcss",
     "html",
     "htmx",

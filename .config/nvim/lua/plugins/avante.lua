@@ -1,6 +1,7 @@
 return {
   {
     "yetone/avante.nvim",
+    enabled = false,
     dependencies = {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
