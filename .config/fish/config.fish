@@ -27,9 +27,6 @@ set --prepend PATH $HOME/Library/Application\ Support/Coursier/bin
 # Add Mason executables to PATH
 set --prepend PATH $HOME/.local/share/nvim/mason/bin
 
-# Add symlinks for python
-set --prepend PATH $(brew --prefix python)/libexec/bin
-
 # Add custom executables
 set --prepend PATH $HOME/bin
 
