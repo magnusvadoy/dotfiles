@@ -177,6 +177,12 @@ return {
               },
             })
           end,
+          ["htmx"] = function()
+            local merged_opts = vim.tbl_extend("force", shared_opts, {
+              filetypes = { "templ", "html" },
+            })
+            lspconfig.htmx.setup(merged_opts)
+          end,
           ["markdown_oxide"] = function()
             lspconfig.markdown_oxide.setup({
               capabilities = {
