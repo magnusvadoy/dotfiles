@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>cl", vim.lsp.codelens.run, "Run Codelens")
     map("n", "<leader>cL", vim.lsp.codelens.refresh, "Refresh Codelens")
 
-    local lsp_opts = { reuse_win = true }
+    local lsp_opts = {}
     map("n", "gd", function()
       require("telescope.builtin").lsp_definitions(lsp_opts)
     end, "Goto Definition")

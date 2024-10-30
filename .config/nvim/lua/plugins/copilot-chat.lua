@@ -33,7 +33,7 @@ return {
     cmd = "CopilotChat",
     keys = {
       {
-        "<leader>ac",
+        "<leader>aa",
         function()
           return require("CopilotChat").toggle()
         end,

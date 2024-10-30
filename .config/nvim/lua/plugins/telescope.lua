@@ -85,9 +85,9 @@ return {
 
       map("n", "<leader><space>", builtin.buffers, "Switch buffer")
       map("n", "<leader>/", builtin.current_buffer_fuzzy_find, "Find in buffer")
+      map("n", "<leader>?", builtin.oldfiles, "Recent files")
       map("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, "Text (Grep)")
       map("n", "<leader>fc", builtin.command_history, "Command history")
-      map("n", "<leader>fr", builtin.oldfiles, "Recent files")
       map("n", "<leader>fd", builtin.diagnostics, "Diagnostics")
       map("n", "<leader>fh", builtin.help_tags, "Help Pages")
       map("n", "<leader>fk", builtin.keymaps, "Keymaps")
@@ -95,6 +95,7 @@ return {
       map("n", "<leader>fm", builtin.marks, "Marks")
       map("n", "<leader>fo", builtin.vim_options, "Options")
       map("n", "<leader>fw", builtin.grep_string, "Word under cursor")
+      map("n", "<leader>fr", builtin.resume, "Resume last search")
       map("n", "<leader>ff", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
         if ret == 0 then
@@ -103,7 +104,6 @@ return {
           builtin.find_files()
         end
       end, "Files")
-      map("n", "<leader>fR", builtin.resume, "Resume last search")
     end,
   },
 }

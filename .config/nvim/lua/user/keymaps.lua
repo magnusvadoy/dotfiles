@@ -24,8 +24,12 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Yank to clipboard" })
 
 -- Navigate quick fix list
-vim.keymap.set("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
-vim.keymap.set("n", "[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix" })
+vim.keymap.set("n", "]q", "<CMD>cnext<CR>zz", { desc = "Next quickfix" })
+vim.keymap.set("n", "[q", "<CMD>cprev<CR>zz", { desc = "Previous quickfix" })
+
+-- Switch tabs
+vim.keymap.set("n", "]t", "<CMD>tabn<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "[t", "<CMD>tabp<CR>", { desc = "Previous tab" })
 
 -- Better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
