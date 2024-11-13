@@ -194,6 +194,10 @@ return {
               },
             })
           end,
+          -- mason and lspconfig are not in sync in what to call this
+          ["bufls"] = function()
+            lspconfig.buf_ls.setup(shared_opts)
+          end,
         },
       })
     end,

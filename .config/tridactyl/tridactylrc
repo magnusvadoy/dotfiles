@@ -40,7 +40,7 @@
 " " Binds {{{
 " 
 " " Comment toggler for Reddit, Hacker News and Lobste.rs
-bind ;c hint -Jc [class*="expand"],[class*="togg"],[class="comment_folder"]
+bind gc hint -Jc [class*="expand"],[class*="togg"],[class="comment_folder"]
 " 
 " " GitHub pull request checkout command to clipboard (only works if you're a collaborator or above)
 " bind yp composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank
@@ -105,8 +105,8 @@ bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
 autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
 " 
 " " Isolate Facebook in its own container
-set auconcreatecontainer true
-autocontain facebook\.com facebook" 
+" set auconcreatecontainer true
+" autocontain facebook\.com facebook" 
 
 " }}}
 "
