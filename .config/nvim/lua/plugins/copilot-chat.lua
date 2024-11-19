@@ -10,16 +10,11 @@ return {
     opts = {
       auto_insert_mode = true,
       show_help = true,
-      question_header = "  User",
+      question_header = "  User ",
       answer_header = "  Copilot ",
-      window = {
-        width = 0.4,
-      },
+      model = "claude-3.5-sonnet",
     },
     config = function(_, opts)
-      local chat = require("CopilotChat")
-      require("CopilotChat.integrations.cmp").setup()
-
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "copilot-chat",
         callback = function()
@@ -28,7 +23,8 @@ return {
         end,
       })
 
-      chat.setup(opts)
+      require("CopilotChat.integrations.cmp").setup()
+      require("CopilotChat").setup(opts)
     end,
     cmd = "CopilotChat",
     keys = {
