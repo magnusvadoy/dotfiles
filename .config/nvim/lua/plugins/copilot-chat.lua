@@ -4,8 +4,8 @@ return {
     enabled = true,
     branch = "canary",
     dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" },
+      "zbirenbaum/copilot.lua",
+      "nvim-lua/plenary.nvim",
     },
     opts = {
       auto_insert_mode = true,
@@ -13,6 +13,7 @@ return {
       question_header = "  User ",
       answer_header = "  Copilot ",
       model = "claude-3.5-sonnet",
+      chat_autocomplete = true,
     },
     config = function(_, opts)
       vim.api.nvim_create_autocmd("BufEnter", {
@@ -23,7 +24,6 @@ return {
         end,
       })
 
-      require("CopilotChat.integrations.cmp").setup()
       require("CopilotChat").setup(opts)
     end,
     cmd = "CopilotChat",
@@ -61,7 +61,7 @@ return {
           local actions = require("CopilotChat.actions")
           require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
         end,
-        desc = "Prompt Actions (CopilotChat)",
+        desc = "Actions (CopilotChat)",
         mode = { "n", "v" },
       },
     },

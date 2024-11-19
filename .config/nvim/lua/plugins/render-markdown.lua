@@ -1,6 +1,7 @@
 return {
   {
     "MeanderingProgrammer/markdown.nvim",
+    enabled = true,
     opts = {
       file_types = { "markdown", "Avante" },
     },
