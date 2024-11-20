@@ -1,11 +1,3 @@
-local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-    return false
-  end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-end
-
 ---@diagnostic disable: missing-fields
 return {
   {
@@ -55,11 +47,17 @@ return {
       { "onsails/lspkind.nvim" },
     },
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      local lspkind = require("lspkind")
+      local luasnip_present, luasnip = pcall(require, "luasnip")
+      local lspkind_present, lspkind = pcall(require, "lspkind")
+
+      if not luasnip_present or not lspkind_present then
+        return false
+      end
+
+      if not cmp then
+        return false
+      end
 
       -- See :help cmp-config
       cmp.setup({
@@ -73,14 +71,15 @@ return {
         },
         sources = {
           { name = "nvim_lsp_signature_help" },
+          { name = "nvim_lsp", group_index = 0 },
           { name = "copilot", group_index = 2 },
-          { name = "nvim_lsp" },
-          { name = "nvim_lua" },
           { name = "luasnip" },
           { name = "path" },
           { name = "calc" },
-          { name = "tmux", keyword_length = 3 },
-          { name = "rg", keyword_length = 3 },
+          {
+            { name = "rg", keyword_length = 3 },
+            { name = "tmux", keyword_length = 3 },
+          },
         },
         window = {
           -- completion = cmp.config.window.bordered(),
@@ -107,20 +106,20 @@ return {
             select = false,
           }),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() and has_words_before() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
             else
-              if luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
-              else
-                fallback()
-              end
+              fallback()
             end
-          end, { "i", "s", "c" }),
+          end, { "i", "s" }),
 
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
@@ -140,16 +139,12 @@ return {
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
+          { name = "cmdline" },
           { name = "path" },
-        }, {
-          {
-            name = "cmdline",
-            option = {
-              ignore_cmds = { "Man", "!" },
-            },
-          },
         }),
       })
+
+      require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
 }
