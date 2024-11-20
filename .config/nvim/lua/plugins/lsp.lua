@@ -106,8 +106,7 @@ return {
     dependencies = {
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
-      { "b0o/SchemaStore.nvim" },
-      { "folke/neodev.nvim" },
+      { "b0o/SchemaStore.nvim", version = false },
     },
     config = function()
       local lspconfig = require("lspconfig")
@@ -115,15 +114,21 @@ return {
       local mason_lspconfig = require("mason-lspconfig")
       local schemastore = require("schemastore")
       local yaml_companion = require("yaml-companion").setup()
-      require("neodev").setup()
 
-      local shared_capabilities =
-        require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      local has_blink, blink = pcall(require, "blink.cmp")
+
+      local default_capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        has_blink and blink.get_lsp_capabilities() or {}
+      )
+
       local shared_opts = {
-        capabilities = shared_capabilities,
-        handlers = {
-          -- ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
-        },
+        capabilities = default_capabilities,
+        handlers = {},
       }
 
       mason.setup({})
@@ -157,7 +162,47 @@ return {
               settings = {
                 json = {
                   schemas = schemastore.json.schemas(),
+                  format = { enable = true },
                   validate = { enable = true },
+                },
+              },
+            })
+          end,
+          ["gopls"] = function()
+            lspconfig.gopls.setup({
+              settings = {
+                gopls = {
+                  codelenses = {
+                    gc_details = false,
+                    generate = true,
+                    regenerate_cgo = true,
+                    run_govulncheck = true,
+                    test = true,
+                    tidy = true,
+                    upgrade_dependency = true,
+                    vendor = true,
+                  },
+                  hints = {
+                    assignVariableTypes = true,
+                    compositeLiteralFields = true,
+                    compositeLiteralTypes = true,
+                    constantValues = true,
+                    functionTypeParameters = true,
+                    parameterNames = true,
+                    rangeVariableTypes = true,
+                  },
+                  analyses = {
+                    fieldalignment = true,
+                    nilness = true,
+                    unusedparams = true,
+                    unusedwrite = true,
+                    useany = true,
+                  },
+                  usePlaceholders = true,
+                  completeUnimported = true,
+                  staticcheck = true,
+                  directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                  semanticTokens = false,
                 },
               },
             })

@@ -37,7 +37,7 @@ return {
         mode = { "n", "v" },
       },
       {
-        "<leader>ax",
+        "<leader>ac",
         function()
           return require("CopilotChat").reset()
         end,
@@ -61,7 +61,7 @@ return {
           local actions = require("CopilotChat.actions")
           require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
         end,
-        desc = "Actions (CopilotChat)",
+        desc = "Prompt Actions (CopilotChat)",
         mode = { "n", "v" },
       },
     },
