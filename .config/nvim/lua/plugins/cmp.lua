@@ -2,6 +2,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = true,
     version = false,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
@@ -63,8 +64,8 @@ return {
         },
         sources = {
           { name = "nvim_lsp_signature_help" },
-          { name = "nvim_lsp", group_index = 0 },
-          { name = "copilot", group_index = 2 },
+          { name = "nvim_lsp" },
+          { name = "copilot" },
           { name = "luasnip" },
           { name = "path" },
           { name = "calc" },
@@ -80,23 +81,29 @@ return {
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
-            preset = "codicons",
+            preset = "default",
             symbol_map = { Copilot = "" },
+            maxwidth = {
+              abbr = 40,
+              menu = 30,
+            },
           }),
         },
         preselect = cmp.PreselectMode.None,
         -- See :help cmp-mapping
         mapping = {
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
           ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
+
           ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = false,
           }),
+
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
