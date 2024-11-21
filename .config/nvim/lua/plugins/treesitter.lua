@@ -7,19 +7,27 @@ return {
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
       { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 3 } },
-      { "windwp/nvim-ts-autotag" },
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
+
         config = function()
-          ---@diagnostic disable-next-line: missing-fields
-          require("ts_context_commentstring").setup({})
-          vim.g.skip_ts_context_commentstring_module = true
+          local get_option = vim.filetype.get_option
+          vim.filetype.get_option = function(filetype, option)
+            return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+              or get_option(filetype, option)
+          end
+
+          require("ts_context_commentstring").setup({
+            enable_autocmd = false,
+          })
         end,
+      },
+      {
+        "windwp/nvim-ts-autotag",
+        opts = {},
       },
     },
     opts = {
-      auto_install = true,
-      sync_install = false,
       ignore_install = {},
       ensure_installed = {
         "go",
@@ -55,14 +63,13 @@ return {
       },
       highlight = { enable = true },
       indent = { enable = true },
-      autotag = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<CR>",
-          scope_incremental = "<CR>",
-          node_incremental = "<TAB>",
-          node_decremental = "<S-TAB>",
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
         },
       },
       textobjects = {
