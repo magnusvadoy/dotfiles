@@ -39,6 +39,14 @@
 "
 " " Binds {{{
 " 
+
+" " Set up keybinds for search
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
 " " Comment toggler for Reddit, Hacker News and Lobste.rs
 bind gc hint -Jc [class*="expand"],[class*="togg"],[class="comment_folder"]
 " 
@@ -101,8 +109,6 @@ bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
 " " URL redirects {{{
 " 
 
-" " New reddit is bad
-autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
 " 
 " " Isolate Facebook in its own container
 " set auconcreatecontainer true
