@@ -34,8 +34,12 @@ return {
         },
       },
       format_on_save = function(bufnr)
+        if vim.bo[bufnr].filetype == "yaml" then
+          vim.g.disable_format_on_save = true
+        end
+
         -- Disable with a global variable
-        if vim.g.disable_autoformat then
+        if vim.g.disable_format_on_save then
           return
         end
 
@@ -61,23 +65,24 @@ return {
       local conform = require("conform")
       conform.setup(opts)
 
+      -- 2 spaces instead of tab
       conform.formatters.shfmt = {
-        prepend_args = { "-i", "2" }, -- 2 spaces instead of tab
+        prepend_args = { "-i", "2" },
       }
 
       conform.formatters.stylua = {
-        prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" }, -- 2 spaces instead of tab
+        prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
       }
 
-      vim.g.disable_autoformat = false
+      vim.g.disable_format_on_save = false
 
-      vim.api.nvim_create_user_command("ToggleAutoformat", function()
-        vim.g.disable_autoformat = vim.g.disable_autoformat == false and true or false
-        local status = vim.g.disable_autoformat and "Disabled" or "Enabled"
-        vim.notify(status .. " autoformatting", vim.log.levels.INFO)
-      end, { desc = "Toggling autoformat" })
+      vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
+        vim.g.disable_format_on_save = vim.g.disable_format_on_save == false and true or false
+        local status = vim.g.disable_format_on_save and "Disabled" or "Enabled"
+        vim.notify(status .. " format on save", vim.log.levels.INFO)
+      end, { desc = "Toggle format on save" })
 
-      vim.keymap.set("n", "<leader>F", "<cmd>ToggleAutoformat<cr>", { desc = "Toggle autoformatting" })
+      vim.keymap.set("n", "<leader>F", "<cmd>ToggleFormatOnSave<cr>", { desc = "Toggle format on save" })
     end,
   },
 }

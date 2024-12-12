@@ -69,10 +69,8 @@ return {
           { name = "luasnip" },
           { name = "path" },
           { name = "calc" },
-          {
-            { name = "rg", keyword_length = 3 },
-            { name = "tmux", keyword_length = 3 },
-          },
+          { name = "rg", keyword_length = 3 },
+          { name = "tmux", keyword_length = 3 },
         },
         window = {
           -- completion = cmp.config.window.bordered(),
