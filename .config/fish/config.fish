@@ -81,6 +81,7 @@ zoxide init fish | source
 alias vim 'nvim'
 alias vimdiff 'nvim -d'
 alias cat 'bat --paging=never'
+alias kcat 'kcat -X security.protocol=sasl_ssl -X sasl.mechanism=PLAIN -X sasl.username=$KAFKA_SASL_USERNAME -X sasl.password=$KAFKA_SASL_PASSWORD'
 
 # Abbreviations
 abbr -a d 'docker'
