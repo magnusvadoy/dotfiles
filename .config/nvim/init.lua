@@ -19,7 +19,7 @@ end
 
 function lazy.setup(plugins)
   -- You can "comment out" the line below after lazy.nvim is installed
-  lazy.install(lazy.path)
+  -- lazy.install(lazy.path)
 
   vim.opt.rtp:prepend(lazy.path)
   require("lazy").setup(plugins, lazy.opts)
@@ -32,4 +32,5 @@ lazy.opts = {
 }
 lazy.setup({
   { import = "plugins" },
+  { import = "plugins/lang" },
 })

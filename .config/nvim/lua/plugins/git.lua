@@ -1,5 +1,30 @@
 return {
   {
+    "NeogitOrg/neogit",
+    enabled = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    opts = {},
+    keys = {
+      { "<leader>gg", "<cmd>Neogit<CR>", desc = "Open Neogit" },
+    },
+  },
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      require("diffview").setup({})
+    end,
+    cmd = { "DiffviewOpen" },
+    keys = {
+      { "<leader>gd", "<CMD>DiffviewOpen<CR>", desc = "View diff" },
+      { "<leader>gf", "<CMD>DiffviewFileHistory %<CR>", mode = "n", desc = "View file history" },
+      { "<leader>gf", "<CMD>DiffviewFileHistory<CR>", mode = "x", desc = "View file history" },
+    },
+  },
+  {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
@@ -41,16 +66,32 @@ return {
         map("n", "<leader>gu", gs.undo_stage_hunk, "Unstage hunk")
         map("n", "<leader>gS", gs.stage_buffer, "Stage buffer")
         map("n", "<leader>gR", gs.reset_buffer, "Reset buffer")
-        map("n", "<leader>gB", function()
-          vim.cmd("Gitsigns toggle_current_line_blame")
-        end, "Toggle line blame")
         map("n", "<leader>gb", function()
           gs.blame_line({ full = true })
         end, "View full blame")
+        map("n", "<leader>gB", function()
+          vim.cmd("Gitsigns toggle_current_line_blame")
+        end, "Toggle line blame")
 
         -- Text object
         map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")
       end,
+    },
+  },
+  {
+    "akinsho/git-conflict.nvim",
+    enabled = true,
+    version = "*",
+    event = { "BufReadPre" },
+    opts = {
+      default_mappings = false,
+      default_commands = true, -- disable commands created by this plugin
+      disable_diagnostics = true, -- This will disable the diagnostics in a buffer whilst it is conflicted
+      list_opener = "copen", -- command or function to open the conflicts list
+      highlights = { -- They must have background color, otherwise the default color will be used
+        incoming = "DiffAdd",
+        current = "DiffText",
+      },
     },
   },
 }

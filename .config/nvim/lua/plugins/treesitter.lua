@@ -97,15 +97,6 @@ return {
             ["[f"] = { query = "@function.outer", desc = "LSP: Prev function" },
           },
         },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>cp"] = { query = "@parameter.inner", desc = "LSP: Swap with next parameter" },
-          },
-          swap_previous = {
-            ["<leader>cP"] = { query = "@parameter.inner", desc = "LSP: Swap with prev parameter" },
-          },
-        },
       },
     },
     config = function(_, opts)

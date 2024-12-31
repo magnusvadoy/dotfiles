@@ -34,7 +34,7 @@ local diff = {
 
 local schema = {
   function()
-    local buffer_schema = require("yaml-companion").get_buf_schema(0)
+    local buffer_schema = require("lua.plugins.lang.yaml").get_buf_schema(0)
     if buffer_schema.result[1].name == "none" then
       return ""
     end
