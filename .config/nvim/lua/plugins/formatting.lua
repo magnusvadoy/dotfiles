@@ -82,7 +82,7 @@ return {
         vim.notify(status .. " format on save", vim.log.levels.INFO)
       end, { desc = "Toggle format on save" })
 
-      vim.keymap.set("n", "<leader>F", "<cmd>ToggleFormatOnSave<cr>", { desc = "Toggle format on save" })
+      vim.keymap.set("n", "<leader>TF", "<cmd>ToggleFormatOnSave<cr>", { desc = "Toggle format on save" })
     end,
   },
 }

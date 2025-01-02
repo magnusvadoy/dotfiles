@@ -13,7 +13,7 @@ return {
         require("telescope").extensions.yank_history.yank_history({})
       end,
       mode = { "n", "x" },
-      desc = "Open yank history",
+      desc = "Yank history",
     },
     -- stylua: ignore
     { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },

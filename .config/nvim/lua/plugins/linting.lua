@@ -33,7 +33,7 @@ return {
         vim.diagnostic.hide()
       end, { desc = "Disable linting for current filetype" })
 
-      vim.keymap.set("n", "<leader>L", "<cmd>ToggleLinting<cr>", { desc = "Toggle linting" })
+      vim.keymap.set("n", "<leader>TL", "<cmd>ToggleLinting<cr>", { desc = "Toggle linting" })
     end,
   },
 }

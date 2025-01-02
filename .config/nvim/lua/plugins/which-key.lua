@@ -18,7 +18,7 @@ return {
           { "<leader>f", group = "find" },
           { "<leader>g", group = "git", mode = { "n", "v" } },
           { "<leader>s", group = "session" },
-          { "<leader>u", group = "ui" },
+          { "<leader>T", group = "toggle" },
           {
             "<leader>b",
             group = "buffers",
