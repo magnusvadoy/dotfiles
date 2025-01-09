@@ -34,6 +34,7 @@ brew "rsync"
 brew "pngpaste"
 brew "imagemagick"
 brew "protobuf"
+brew "wget"
 
 cask "docker"
 cask "kitty"

@@ -314,3 +314,8 @@ metals.sbt
 
 # debug
 __debug_bin*
+
+# project files
+.idea/
+.settings/
+.project
