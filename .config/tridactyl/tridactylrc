@@ -40,69 +40,54 @@
 " " Binds {{{
 " 
 
-" " Set up keybinds for search
+" Set up keybinds for search
 bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
 bind ,<Space> nohlsearch
 
-" " Comment toggler for Reddit, Hacker News and Lobste.rs
+" Comment toggler for Reddit, Hacker News and Lobste.rs
 bind gc hint -Jc [class*="expand"],[class*="togg"],[class="comment_folder"]
-" 
-" " GitHub pull request checkout command to clipboard (only works if you're a collaborator or above)
-" bind yp composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank
-" 
-" " Git{Hub,Lab} git clone via SSH yank
+
+" GitHub pull request checkout command to clipboard (only works if you're a collaborator or above)
+bind yp composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank
+
+" Git{Hub,Lab} git clone via SSH yank
 bind gy composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
-" 
-" " As above but execute it and open terminal in folder
-" bind ,g js let uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); tri.native.run("cd ~/code/misc; git clone " + uri + "; cd \"$(basename \"" + uri + "\" .git)\"; st")
-" 
-" 
-" " make d take you to the left (I find it much less confusing)
+
+" Make `gi` on GitHub take you to the search box
+bindurl ^https://github.com gi hint -Vc .AppHeader-searchButton
+
+" make d take you to the left (I find it much less confusing)
 bind d composite tabprev; tabclose #
 bind D tabclose
-" 
-" " make t open the selection with tabopen
-" bind --mode=visual t composite js document.getSelection().toString() | fillcmdline tabopen
-" 
-" " I like wikiwand but I don't like the way it changes URLs
-" bindurl wikiwand.com yy composite js document.location.href.replace("wikiwand.com/en","wikipedia.org/wiki") | clipboard yank
-" 
-" 
-" " Only hint search results on Google and DDG
+
+" Only hint search results on Google and DDG
 bindurl www.google.com f hint -Jc #search a
 bindurl www.google.com F hint -Jbc #search a
 
 bindurl ^https://duckduckgo.com f hint -Jc [data-testid="result-title-a"]
 bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
 
-" " Make `gi` on GitHub take you to the search box
-" bindurl ^https://github.com gi hint -Vc .AppHeader-searchButton
-" 
-" " Allow Ctrl-a to select all in the commandline
-" unbind --mode=ex <C-a>
-" 
-" " Allow Ctrl-c to copy in the commandline
-" unbind --mode=ex <C-c>
-"
+" Allow Ctrl-a to select all in the commandline
+unbind --mode=ex <C-a>
+
+" Allow Ctrl-c to copy in the commandline
+unbind --mode=ex <C-c>
+
+" Open right click menu on links
+bind ;C composite hint_focus; !s xdotool key Menu
+
 " " Handy multiwindow/multitasking binds
 " bind gd tabdetach
 " bind gD composite tabduplicate; tabdetach
+
+" " Suspend / "discard" all tabs - handy for stretching out battery life
+" command discardall jsb browser.tabs.query({}).then(ts => browser.tabs.discard(ts.map(t=>t.id)))
 " 
 " " Stupid workaround to let hint -; be used with composite which steals semi-colons
 " command hint_focus hint -;
-" 
-" " Open right click menu on links
-" bind ;C composite hint_focus; !s xdotool key Menu
-" 
-" " Binds for new reader mode
-" bind gr reader
-" bind gR reader --tab
-"
-" " Suspend / "discard" all tabs - handy for stretching out battery life
-" command discardall jsb browser.tabs.query({}).then(ts => browser.tabs.discard(ts.map(t=>t.id)))
 " 
 " }}}
 "
@@ -128,10 +113,10 @@ set smoothscroll true
 " " set profile dir on Windows
 " jsb browser.runtime.getPlatformInfo().then(os=>{const profiledir = os.os=="win" ? "C:\\Users\\olie\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\gwm76nmk.default" : "auto"; tri.config.set("profiledir", profiledir)})
 " 
-" " Sane hinting mode
+" Sane hinting mode
 set hintfiltermode simple
 set hintnames short
-" 
+
 " " Defaults to 300ms but I'm a 'move fast and close the wrong tabs' kinda chap
 " set hintdelay 100
 " 
