@@ -1,8 +1,8 @@
 return {
-  -- add gruvbox
+  -- add gruvbox-material
   { "sainnhe/gruvbox-material" },
 
-  -- Configure LazyVim to load gruvbox
+  -- Configure LazyVim to load gruvbox-material
   {
     "LazyVim/LazyVim",
     opts = {
