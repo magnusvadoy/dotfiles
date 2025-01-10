@@ -19,7 +19,7 @@ set -gx GOPATH $HOME/go
 set --prepend PATH $GOPATH/bin
 
 # Set JAVA_HOME as default JDK
-set -gx JAVA_HOME (/usr/libexec/java_home -v 11)
+set -gx JAVA_HOME (/usr/libexec/java_home -v 23)
 
 # Add Coursier bin to PATH
 set --prepend PATH $HOME/Library/Application\ Support/Coursier/bin
@@ -42,10 +42,10 @@ set -g fish_greeting
 set -x EDITOR nvim
 
 # Enable vi key bindings
-set fish_cursor_default     block      blink
-set fish_cursor_insert      line       blink
+set fish_cursor_default block blink
+set fish_cursor_insert line blink
 set fish_cursor_replace_one underscore blink
-set fish_cursor_visual      block
+set fish_cursor_visual block
 fish_vi_key_bindings
 
 # fzf
@@ -67,7 +67,7 @@ set -x FZF_DEFAULT_OPTS '
 fzf --fish | source
 
 # eza 
-set -x EZA_PARAMS '--git' '--icons' '--group' '--time-style=long-iso'
+set -x EZA_PARAMS --git --icons --group '--time-style=long-iso'
 alias ls 'eza $EZA_PARAMS'
 alias l 'eza --git-ignore $EZA_PARAMS'
 alias ll 'eza --all --header --long $EZA_PARAMS'
@@ -78,13 +78,13 @@ alias lt 'eza --tree $EZA_PARAMS'
 zoxide init fish | source
 
 # Aliases
-alias vim 'nvim'
+alias vim nvim
 alias vimdiff 'nvim -d'
 alias cat 'bat --paging=never'
 alias kcat 'kcat -X security.protocol=sasl_ssl -X sasl.mechanism=PLAIN -X sasl.username=$KAFKA_SASL_USERNAME -X sasl.password=$KAFKA_SASL_PASSWORD'
 
 # Abbreviations
-abbr -a d 'docker'
+abbr -a d docker
 abbr -a dc 'docker compose'
 abbr -a grpc 'grpcurl -plaintext'
 abbr -a ghcs 'gh copilot suggest'
