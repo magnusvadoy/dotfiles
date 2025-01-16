@@ -19,7 +19,7 @@ set -gx GOPATH $HOME/go
 set --prepend PATH $GOPATH/bin
 
 # Set JAVA_HOME as default JDK
-set -gx JAVA_HOME (/usr/libexec/java_home -v 23)
+set -gx JAVA_HOME (/usr/libexec/java_home -v 11)
 
 # Add Coursier bin to PATH
 set --prepend PATH $HOME/Library/Application\ Support/Coursier/bin
