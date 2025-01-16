@@ -35,6 +35,7 @@ brew "pngpaste"
 brew "imagemagick"
 brew "protobuf"
 brew "wget"
+brew "semtag"
 
 cask "docker"
 cask "kitty"

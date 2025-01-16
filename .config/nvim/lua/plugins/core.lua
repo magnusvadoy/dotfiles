@@ -18,18 +18,18 @@ return {
     enabled = false,
   },
   {
+    "folke/trouble.nvim",
+    opts = {
+      focus = true,
+    },
+  },
+  {
     "mfussenegger/nvim-lint",
     optional = true,
     opts = {
       linters_by_ft = {
-        markdown = {},
+        markdown = {}, -- TODO: Fix linting rules
       },
-    },
-  },
-  {
-    "folke/trouble.nvim",
-    opts = {
-      focus = true,
     },
   },
 }

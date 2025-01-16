@@ -90,17 +90,6 @@ bind ;C composite hint_focus; !s xdotool key Menu
 " command hint_focus hint -;
 " 
 " }}}
-"
-" " URL redirects {{{
-" 
-
-" 
-" " Isolate Facebook in its own container
-" set auconcreatecontainer true
-" autocontain facebook\.com facebook" 
-
-" }}}
-"
 " " Misc settings {{{
 " 
 
