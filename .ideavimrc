@@ -1,1 +1,5 @@
 source ~/.ideavim-lazy
+
+Plug 'machakann/vim-highlightedyank'
+
+set clipboard+=unnamed
