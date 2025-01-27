@@ -43,4 +43,30 @@ return {
       },
     },
   },
+  {
+    "ibhagwan/fzf-lua",
+    keys = {
+      {
+        "<leader><space>",
+        "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
+        desc = "Switch Buffer",
+      },
+      { "<leader>,", false },
+    },
+  },
+  {
+    "snacks.nvim",
+    keys = {
+      { "<leader>.", false },
+      { "<leader>S", false },
+      { "<leader>n", false },
+      {
+        "<leader>N",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
+    },
+  },
 }
