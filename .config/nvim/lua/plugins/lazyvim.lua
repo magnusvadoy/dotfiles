@@ -29,22 +29,20 @@ return {
     optional = true,
     opts = {
       linters_by_ft = {
-        markdown = {}, -- TODO: Fix linting rules
-      },
-    },
-  },
-  {
-    "saghen/blink.cmp",
-    opts = {
-      completion = {
-        ghost_text = {
-          enabled = false, -- disable ghost_text as it is annoying
-        },
+        markdown = {}, -- TODO: Fix linting rules for markdown
       },
     },
   },
   {
     "ibhagwan/fzf-lua",
+    opts = {
+      winopts = {
+        preview = {
+          layout = "vertical",
+          vertical = "down:50%",
+        },
+      },
+    },
     keys = {
       {
         "<leader><space>",
