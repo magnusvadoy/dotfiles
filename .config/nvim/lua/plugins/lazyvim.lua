@@ -6,6 +6,9 @@ return {
       inlay_hints = {
         enabled = false, -- disable inlay_hints as they are annoying
       },
+      codelens = {
+        enabled = true,
+      },
     },
   },
   {
