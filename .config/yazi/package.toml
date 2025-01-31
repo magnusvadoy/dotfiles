@@ -1,5 +1,0 @@
-[plugin]
-deps = []
-
-[flavor]
-deps = [{ use = "bennyyip/gruvbox-dark", rev = "c204853" }]
