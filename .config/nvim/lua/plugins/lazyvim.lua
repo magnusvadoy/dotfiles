@@ -13,6 +13,7 @@ return {
   },
   {
     "LazyVim/LazyVim",
+    dependencies = { "sainnhe/gruvbox-material" },
     opts = {
       colorscheme = "gruvbox-material", -- change default colorscheme
     },
