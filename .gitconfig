@@ -8,10 +8,10 @@
 [core]
   excludesfile = ~/.gitignore_global
   ignorecase = false # avoid problems when changing a case of a filename
-  pager = delta --syntax-theme gruvbox-dark
+  pager = delta --syntax-theme gruvbox-material-dark
 
 [interactive]
-  diffFilter = delta --color-only --syntax-theme gruvbox-dark
+  diffFilter = delta --color-only --syntax-theme gruvbox-material-dark
 
 [delta]
   navigate = true # use n and N to move between diff sections
