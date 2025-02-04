@@ -3,5 +3,5 @@
 -- Add any additional options here
 
 if vim.g.neovide then
-  vim.o.guifont = "JetBrains Mono:h15"
+  vim.o.guifont = "JetBrains Mono:h16"
 end
