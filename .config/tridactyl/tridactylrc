@@ -1,6 +1,6 @@
 " vim: set filetype=tridactyl
 " Theme
-colorscheme gruvbox-material
+colorscheme gruvbox-material-dark-soft
 
 " Search URLs
 set searchurls.w http://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=%s
