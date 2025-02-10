@@ -38,37 +38,17 @@ return {
     },
   },
   {
-    "ibhagwan/fzf-lua",
+    "folke/snacks.nvim",
     opts = {
-      winopts = {
-        preview = {
-          layout = "vertical",
-          vertical = "down:50%",
+      picker = {
+        layout = {
+          preset = "vertical",
         },
       },
     },
     keys = {
-      {
-        "<leader><space>",
-        "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
-        desc = "Switch Buffer",
-      },
-      { "<leader>,", false },
-    },
-  },
-  {
-    "folke/snacks.nvim",
-    keys = {
       { "<leader>.", false },
       { "<leader>S", false },
-      { "<leader>n", false },
-      {
-        "<leader>N",
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = "Notification History",
-      },
     },
   },
   {
