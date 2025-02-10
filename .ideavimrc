@@ -2,4 +2,5 @@ source ~/.ideavim-lazy
 
 Plug 'machakann/vim-highlightedyank'
 
+set mini-ai
 set clipboard+=unnamed
