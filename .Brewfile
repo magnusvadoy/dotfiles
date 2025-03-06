@@ -37,6 +37,7 @@ brew "wget"
 brew "semtag"
 brew "kcat"
 brew "lazygit"
+brew "kubectx"
 
 cask "docker"
 cask "kitty"
