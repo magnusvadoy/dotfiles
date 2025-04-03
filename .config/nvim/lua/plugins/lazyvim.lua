@@ -88,12 +88,16 @@ return {
     opts = {
       sources = {
         default = {
+          "lsp",
+          "path",
+          "snippets",
           "ripgrep",
         },
         providers = {
           ripgrep = {
             module = "blink-ripgrep",
             name = "Ripgrep",
+            score_offset = -5,
           },
         },
       },
