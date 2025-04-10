@@ -4,7 +4,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       formatters_by_ft = {
-        go = { "goimports", "gofumpt" },
+        go = { "goimports" },
       },
       formatters = {
         goimports = {
@@ -13,7 +13,6 @@ return {
             "-company-prefixes=bitbucket.org/tv2norge,golang.tv2.no",
             "-project-name=bitbucket.org/tv2norge",
             "-imports-order=std,project,company,general",
-            "-rm-unused",
             "-format",
             "$FILENAME",
           },
