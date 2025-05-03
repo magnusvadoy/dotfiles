@@ -73,6 +73,14 @@ return {
       "mikavilpas/blink-ripgrep.nvim",
     },
     opts = {
+      completion = {
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = true,
+          },
+        },
+      },
       sources = {
         default = {
           "lsp",
@@ -83,8 +91,8 @@ return {
         providers = {
           ripgrep = {
             module = "blink-ripgrep",
-            name = "Ripgrep",
-            score_offset = -5,
+            name = "ripgrep",
+            score_offset = -3,
           },
         },
       },
