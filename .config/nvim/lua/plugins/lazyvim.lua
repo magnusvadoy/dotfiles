@@ -71,8 +71,25 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       "mikavilpas/blink-ripgrep.nvim",
+      "copilotlsp-nvim/copilot-lsp",
     },
     opts = {
+      keymap = {
+        preset = "enter",
+        ["<Tab>"] = {
+          function(cmp)
+            if vim.b[vim.api.nvim_get_current_buf()].nes_state then
+              cmp.hide()
+              return (
+                require("copilot-lsp.nes").apply_pending_nes()
+                and require("copilot-lsp.nes").walk_cursor_end_edit()
+              )
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+      },
       completion = {
         list = {
           selection = {
@@ -86,13 +103,26 @@ return {
           "lsp",
           "path",
           "snippets",
+          "buffer",
           "ripgrep",
         },
         providers = {
           ripgrep = {
             module = "blink-ripgrep",
-            name = "ripgrep",
-            score_offset = -3,
+            name = "Ripgrep",
+            opts = {
+              prefix_min_len = 5,
+              context_size = 5,
+            },
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                -- example: append a description to easily distinguish rg results
+                item.labelDetails = {
+                  description = "(rg)",
+                }
+              end
+              return items
+            end,
           },
         },
       },
