@@ -48,6 +48,14 @@ set fish_cursor_replace_one underscore blink
 set fish_cursor_visual block
 fish_vi_key_bindings
 
+function fish_user_key_bindings
+    # Add Ctrl+F to accept the whole suggestion
+    bind -M insert \cf accept-autosuggestion
+
+    # Add Alt+F to accept the first word of a suggestion
+    bind -M insert \ef forward-word
+end
+
 # fzf
 set -x FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude ".git"'
 set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
