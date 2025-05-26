@@ -49,11 +49,11 @@ set fish_cursor_visual block
 fish_vi_key_bindings
 
 function fish_user_key_bindings
-    # Add Ctrl+F to accept the whole suggestion
-    bind -M insert \cf accept-autosuggestion
+    # Add Ctrl+Y to accept the whole suggestion
+    bind -M insert \cy accept-autosuggestion
 
-    # Add Alt+F to accept the first word of a suggestion
-    bind -M insert \ef forward-word
+    # Add Alt+Y to accept the first word of a suggestion
+    bind -M insert \ey forward-word
 end
 
 # fzf
