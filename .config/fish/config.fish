@@ -85,6 +85,9 @@ alias lt 'eza --tree $EZA_PARAMS'
 # zoxide
 zoxide init fish | source
 
+# ripgrep
+set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgrep.conf
+
 # Aliases
 alias vim nvim
 alias vimdiff 'nvim -d'
