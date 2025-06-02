@@ -1,0 +1,2 @@
+update:
+  method: 'never' # brew keeps it up to date
