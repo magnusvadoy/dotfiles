@@ -8,19 +8,22 @@
 [core]
   excludesfile = ~/.gitignore_global
   ignorecase = false # avoid problems when changing a case of a filename
-  pager = delta --syntax-theme gruvbox-material-dark
+  editor = nvim
+  pager = delta
 
 [interactive]
-  diffFilter = delta --color-only --syntax-theme gruvbox-material-dark
+  diffFilter = delta --color-only
 
 [delta]
-  navigate = true # use n and N to move between diff sections
+  # use n and N to move between diff sections
+  navigate = true
+  syntax-theme = gruvbox-material-dark
 
 [merge]
   conflictstyle = zdiff3
 
 [status]
-  # Show untracked files, directories and files in untracked directorie
+  # Show untracked files, directories and files in untracked directories
   showUntrackedFiles = all
 
 [push]
