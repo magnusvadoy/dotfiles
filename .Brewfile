@@ -36,6 +36,7 @@ brew "kcat"
 brew "lazygit"
 brew "kubectx"
 brew "mise"
+brew "tfenv"
 
 cask "docker"
 cask "kitty"
