@@ -50,7 +50,7 @@ fish_vi_key_bindings
 
 function fish_user_key_bindings
     # Add Ctrl+Y to accept the whole suggestion
-    bind -M insert \cy accept-autosuggestion
+    bind -M insert \cy "commandline -f accept-autosuggestion; commandline -f execute"
 
     # Add Alt+Y to accept the first word of a suggestion
     bind -M insert \ey forward-word
