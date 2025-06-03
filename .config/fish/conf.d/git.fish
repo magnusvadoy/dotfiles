@@ -1,4 +1,4 @@
-abbr -a g 'git'
+abbr -a g git
 abbr -a gst 'git status'
 
 abbr -a gl 'git pull'
@@ -13,14 +13,8 @@ abbr -a gcam 'git commit -a -m'
 
 abbr -a gb 'git branch'
 abbr -a gba 'git branch -av'
-abbr -a gbd 'git branch -d'
-abbr -a gbD 'git branch -D'
-
-abbr -a gcp 'git cherry-pick'
 
 abbr -a gm 'git merge'
-abbr -a grh 'git reset HEAD'
-abbr -a grhh 'git reset HEAD --hard'
 
 abbr -a grs 'git restore'
 abbr -a grst 'git restore --staged'
