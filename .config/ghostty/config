@@ -1,0 +1,7 @@
+# Fonts
+font-family = "JetBrains Mono"
+font-size = 16
+
+# Misc
+macos-option-as-alt = "left"
+copy-on-select = true
