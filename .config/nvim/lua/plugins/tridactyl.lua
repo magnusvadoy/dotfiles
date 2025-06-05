@@ -1,4 +1,1 @@
-return {
-  "tridactyl/vim-tridactyl",
-  ft = "tridactyl",
-}
+return { "tridactyl/vim-tridactyl", ft = "tridactyl" }
