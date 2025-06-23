@@ -48,7 +48,7 @@ bind d composite tabprev; tabclose #
 bind D tabclose
 
 " Handy multiwindow/multitasking binds
-bind gd tabdetach
+bind gd tabduplicate
 bind gD composite tabduplicate; tabdetach
 
 " Disable on urls
