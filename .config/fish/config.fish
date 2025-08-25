@@ -91,6 +91,9 @@ task --completion fish | source
 # ripgrep
 set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgrep.conf
 
+# paimon
+set -x PAIMON_WAREHOUSE_PATH ~/code/data
+
 # Aliases
 alias vim nvim
 alias vimdiff 'nvim -d'
