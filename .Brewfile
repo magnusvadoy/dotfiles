@@ -41,6 +41,7 @@ brew "tfenv"
 brew "go-task"
 brew "libpq"
 brew "1password-cli"
+brew "sesh"
 
 cask "docker"
 cask "kitty"
