@@ -60,15 +60,14 @@ end
 set -x FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude ".git"'
 set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -x FZF_ALT_C_COMMAND 'fd --type directory "" $HOME'
-set -x FZF_CTRL_R_OPTS '--preview "echo {}"'
+set -x FZF_CTRL_R_OPTS ''
+
 set -x FZF_DEFAULT_OPTS '
 --cycle
---height "90%"
---layout "reverse" 
+--layout "reverse"
 --prompt " "
 --pointer " "
 --marker " "
---preview-window "wrap"
 --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,ctrl-f:preview-page-down,ctrl-b:preview-page-up
 '
 
