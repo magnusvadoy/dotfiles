@@ -72,16 +72,6 @@ return {
     },
   },
   {
-    "ibhagwan/fzf-lua",
-    opts = {
-      winopts = {
-        preview = {
-          layout = "vertical",
-        },
-      },
-    },
-  },
-  {
     "saghen/blink.cmp",
     dependencies = {
       "mikavilpas/blink-ripgrep.nvim",
