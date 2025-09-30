@@ -15,6 +15,18 @@ return {
           model = "claude-sonnet-4",
         },
       },
+      inline = {
+        adapter = {
+          name = "copilot",
+          model = "claude-sonnet-4",
+        },
+      },
+      cmd = {
+        adapter = {
+          name = "copilot",
+          model = "claude-sonnet-4",
+        },
+      },
     },
     memory = {
       opts = {
