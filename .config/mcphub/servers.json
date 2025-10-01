@@ -9,6 +9,14 @@
       ],
       "command": "docker"
     },
+    "filesystem": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "~/code"
+      ],
+      "command": "npx"
+    },
     "sequential-thinking": {
       "args": [
         "-y",
