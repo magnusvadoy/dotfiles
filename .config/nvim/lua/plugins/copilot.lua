@@ -20,9 +20,9 @@ return {
         nes = {
           enabled = true,
           keymap = {
-            accept_and_goto = "<C-CR>",
+            accept_and_goto = "<leader>p",
             accept = false,
-            dismiss = false,
+            dismiss = "<Esc>",
           },
         },
       })
