@@ -53,6 +53,7 @@ bind gD composite tabduplicate; tabdetach
 
 " Disable on urls
 blacklistadd https://mail.google.com
+blacklistadd https://github.com
 
 " Swap J and K keybinds (feels more correct with vertical tabs)
 bind J tabnext

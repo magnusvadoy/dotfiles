@@ -1,32 +1,42 @@
 {
   "mcpServers": {
-    "fetch": {
+    "duckduckgo": {
+      "command": "docker",
       "args": [
         "run",
         "-i",
         "--rm",
-        "mcp/fetch"
-      ],
-      "command": "docker"
+        "mcp/duckduckgo"
+      ]
     },
-    "filesystem": {
+    "memory": {
+      "command": "docker",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "~/code"
-      ],
-      "command": "npx"
+        "run",
+        "-i",
+        "-v",
+        "claude-memory:/app/dist",
+        "--rm",
+        "mcp/memory"
+      ]
     },
-    "sequential-thinking": {
+    "obsidian": {
+      "command": "docker",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
-      "autoApprove": [
-        "sequentialthinking"
-      ],
-      "command": "npx",
-      "disabled": false
+        "run",
+        "-i",
+        "--rm",
+        "mcp/obsidian"
+      ]
+    },
+    "playwright": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/playwright"
+      ]
     }
   }
 }

@@ -30,6 +30,9 @@ set --prepend PATH $HOME/.local/share/nvim/mason/bin
 # Add custom executables
 set --prepend PATH $HOME/bin
 
+# Anaconda
+set --prepend PATH /opt/homebrew/anaconda3/bin
+
 ###################################
 # Interactive mode configurations #
 ###################################

@@ -116,7 +116,11 @@ return {
             name = "Ripgrep",
             opts = {
               prefix_min_len = 5,
-              context_size = 5,
+              backend = {
+                ripgrep = {
+                  context_size = 5,
+                },
+              },
             },
             transform_items = function(_, items)
               for _, item in ipairs(items) do
