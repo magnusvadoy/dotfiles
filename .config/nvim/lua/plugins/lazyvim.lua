@@ -80,19 +80,6 @@ return {
     opts = {
       keymap = {
         preset = "enter",
-        ["<Tab>"] = {
-          function(cmp)
-            if vim.b[vim.api.nvim_get_current_buf()].nes_state then
-              cmp.hide()
-              return (
-                require("copilot-lsp.nes").apply_pending_nes()
-                and require("copilot-lsp.nes").walk_cursor_end_edit()
-              )
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
       },
       completion = {
         list = {
