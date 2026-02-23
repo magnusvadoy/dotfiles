@@ -1,6 +1,17 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "gruvbox",
+  "small_model": "github-copilot/gpt-5.2",
+  "default_agent": "build",
+  "tui": {
+    "scroll_acceleration": {
+      "enabled": true,
+    }
+  },
+  "permission": {
+    "webfetch": "allow",
+    "websearch": "allow",
+  },
   "mcp": {
     "context7": {
       "type": "remote",
