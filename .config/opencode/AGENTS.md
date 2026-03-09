@@ -7,3 +7,7 @@ When committing changes, use clear and descriptive commit messages that explain 
 Never automatically create tags. Don't push without asking.
 
 When creating PR's on GitHub, set them initially to draft.
+
+# Go
+
+When creating log fields, always prefix them with "ai.".
