@@ -19,6 +19,15 @@
       "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
       "installedAt": "2026-03-11T11:41:11.408Z",
       "updatedAt": "2026-03-11T11:41:11.408Z"
+    },
+    "test-driven-development": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/obra/superpowers.git",
+      "skillPath": "skills/test-driven-development/SKILL.md",
+      "skillFolderHash": "98904a7d8e0e04b9bd46220b9b17298f45fe0b72",
+      "installedAt": "2026-03-11T11:47:04.481Z",
+      "updatedAt": "2026-03-11T11:47:04.481Z"
     }
   },
   "dismissed": {
