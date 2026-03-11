@@ -317,3 +317,6 @@ __debug_bin*
 .idea/
 .settings/
 .project
+
+# Claude
+*.local.json
