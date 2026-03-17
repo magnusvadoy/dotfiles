@@ -6,6 +6,10 @@
   "permission": {
     "external_directory": {
       "~/code/**": "allow",
+      "~/go/pkg/mod/**": "allow",
+    },
+    "edit": {
+      "~/go/pkg/mod/**": "deny",
     },
     "webfetch": "allow",
     "websearch": "ask",
