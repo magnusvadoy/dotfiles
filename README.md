@@ -1,10 +1,12 @@
 # Dotfiles
 
-Dotfiles for Neovim, Fish, Alacritty and other CLI tools I use.
+My dotfiles centered around Neovim, tmux, fish and other CLI tools I use. I use [yadm](https://github.com/yadm-dev/yadm) to manage them.
 
 ![Screenshot](screenshot.png)
 
-Here's a quick set of commands you can run to get it ready on a fresh machine.
+## Getting started
+
+To get started on a fresh machine:
 
 ```
 mkdir ~/bin
