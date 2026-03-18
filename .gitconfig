@@ -45,5 +45,6 @@
 [alias]
   amend = commit -v --amend
   amend-no-edit = commit --amend --no-edit
+  squash = merge --squash
   reset-last-commit = reset HEAD~1
   hard-reset-last-commit = reset --hard HEAD~1
