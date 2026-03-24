@@ -21,6 +21,7 @@
 
 [merge]
   conflictstyle = zdiff3
+	tool = nvimdiff
 
 [status]
   # Show untracked files, directories and files in untracked directories
@@ -48,3 +49,6 @@
   squash = merge --squash
   reset-last-commit = reset HEAD~1
   hard-reset-last-commit = reset --hard HEAD~1
+
+[mergetool]
+	prompt = false
