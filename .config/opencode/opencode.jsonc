@@ -26,6 +26,5 @@
   },
   "plugin": [
     "opencode-scheduler",
-    "opencode-agent-memory"
   ]
 }
