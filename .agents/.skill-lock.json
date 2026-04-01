@@ -39,15 +39,6 @@
       "installedAt": "2026-03-19T13:39:19.405Z",
       "updatedAt": "2026-03-19T13:42:53.144Z"
     },
-    "vercel-react-best-practices": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
-      "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "69bf4a7eeeaa772290c1c5efd19da0865f903af8",
-      "installedAt": "2026-03-20T21:38:44.621Z",
-      "updatedAt": "2026-03-20T21:38:44.621Z"
-    },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
@@ -56,16 +47,6 @@
       "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
       "installedAt": "2026-03-21T10:36:23.100Z",
       "updatedAt": "2026-03-21T10:36:23.100Z"
-    },
-    "frontend-design": {
-      "source": "anthropics/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/anthropics/skills.git",
-      "skillPath": "skills/frontend-design/SKILL.md",
-      "skillFolderHash": "928950704df8a8b885c03de5da626331e6f29cf8",
-      "pluginName": "example-skills",
-      "installedAt": "2026-03-23T20:51:06.823Z",
-      "updatedAt": "2026-03-23T20:51:06.823Z"
     }
   },
   "dismissed": {
@@ -78,11 +59,11 @@
     "codex",
     "cursor",
     "deepagents",
+    "firebender",
     "gemini-cli",
     "github-copilot",
     "kimi-cli",
     "opencode",
-    "warp",
-    "claude-code"
+    "warp"
   ]
 }

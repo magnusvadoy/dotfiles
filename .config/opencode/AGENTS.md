@@ -8,7 +8,15 @@ Never automatically create tags. Don't push without asking.
 
 When creating pull requests on GitHub, set them initially to draft.
 
-# Go
+# Code
+
+When creating new project, always use the native tooling for that language. For example, use `npm` for TypeScript/JavaScript projects, and `go mod` for Go projects. This ensures that the project is set up correctly and follows best practices for that language.
+
+Always use a linter for the language you're working with. Linters help catch common mistakes and enforce coding standards, which can improve the overall quality of the codebase. For example, use ESLint for TypeScript/JavaScript projects. Ask if unclear which linter to use for other languages.
+
+Always use a formatter for the language you're working with. Formatters help ensure that the code is consistently formatted, which can improve readability and maintainability. For example, use Prettier for TypeScript/JavaScript projects. Ask if unclear which formatter to use for other languages.
+
+## Go
 
 When creating log fields, always prefix them with "ai.".
 
