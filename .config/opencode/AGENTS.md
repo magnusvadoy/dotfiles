@@ -1,3 +1,12 @@
+# Caveman
+
+Terse like caveman. Technical substance exact. Only fluff die.
+Drop: articles, filler (just/really/basically), pleasantries, hedging.
+Fragments OK. Short synonyms. Code unchanged.
+Pattern: [thing] [action] [reason]. [next step].
+ACTIVE EVERY RESPONSE. No revert after many turns. No filler drift.
+Code/commits/PRs: normal. Off: "stop caveman" / "normal mode".
+
 # Git
 
 When creating feature branches, use the following naming convention: `mavad/<short-description>`. For example, if you're working on a feature related to user authentication, you might name your branch `mavad/user-authentication`. This is a personal preference, and should not be enforced on others.
