@@ -26,7 +26,4 @@
       "url": "https://mcp.grep.app"
     },
   },
-  "plugin": [
-    "opencode-scheduler",
-  ]
 }
