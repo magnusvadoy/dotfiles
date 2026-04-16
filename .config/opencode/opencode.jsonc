@@ -2,7 +2,7 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "github-copilot/claude-sonnet-4.6",
   "small_model": "github-copilot/claude-haiku-4.5",
-  "default_agent": "build",
+  "default_agent": "caveman",
   "permission": {
     "external_directory": {
       "~/code/**": "allow",
@@ -24,7 +24,7 @@
       "enabled": false,
       "type": "remote",
       "url": "https://mcp.grep.app"
-    }
+    },
   },
   "plugin": [
     "opencode-scheduler",
