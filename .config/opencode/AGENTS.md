@@ -27,3 +27,41 @@ goimports-reviser -company-prefixes=bitbucket.org/tv2norge,golang.tv2.no -projec
 ```
 
 In other projects, default to gofmt.
+
+# Testing
+
+Always write tests for new functions and non-trivial logic. Tests are not optional.
+
+## Go
+
+- Use table-driven tests for all functions with multiple input cases
+- Use subtests (`t.Run`) to group related cases
+- Use `t.Helper()` in helper functions
+- Use `t.Cleanup()` for resource teardown — never defer in test body for shared resources
+- Run with race detector in CI: `go test -race ./...`
+- Target: 80%+ general code, 90%+ public APIs, 100% critical business logic
+
+## TypeScript / JavaScript
+
+- Use `describe`/`it` blocks — group by unit under test, name by behavior
+- Test behavior, not implementation — don't assert internal state
+- Mock at boundaries (HTTP, DB, time) — not inside business logic
+- Use `beforeEach`/`afterEach` for setup/teardown, not shared mutable state
+
+## General
+
+- Write the test before or alongside the code, not after
+- Test error paths, not just happy paths
+- Name tests: `TestFuncName_Scenario_ExpectedResult` (Go) or `"does X when Y"` (TS)
+- Delete flaky tests or fix them — never skip and ignore
+
+# Secrets Hygiene
+
+Never log secrets, tokens, passwords, or PII. Never commit them to source control.
+
+- Never hardcode credentials, API keys, or tokens in source code
+- Never commit `.env` files — add to `.gitignore` immediately
+- Use environment variables or a secrets manager (Vault, AWS Secrets Manager, etc.)
+- If a secret is accidentally committed: rotate it immediately, then clean git history
+- Error messages must not leak internal secrets, stack traces, or system paths to users
+- Log fields must not include tokens, passwords, or raw credentials — mask or omit
