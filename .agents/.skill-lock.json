@@ -56,6 +56,15 @@
       "skillFolderHash": "825e13085d1515fe67881b2123f3bf9b34c26154",
       "installedAt": "2026-04-14T14:15:16.493Z",
       "updatedAt": "2026-04-14T14:15:16.493Z"
+    },
+    "ripgrep": {
+      "source": "ratacat/claude-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ratacat/claude-skills.git",
+      "skillPath": "skills/ripgrep/SKILL.md",
+      "skillFolderHash": "1b6fe88f1b2cf6ad8f24adfd6e557c5b2daa3157",
+      "installedAt": "2026-04-21T08:56:13.866Z",
+      "updatedAt": "2026-04-21T08:56:13.866Z"
     }
   },
   "dismissed": {
@@ -73,6 +82,7 @@
     "github-copilot",
     "kimi-cli",
     "opencode",
-    "warp"
+    "warp",
+    "claude-code"
   ]
 }
