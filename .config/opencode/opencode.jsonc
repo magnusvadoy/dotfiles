@@ -26,4 +26,11 @@
       "url": "https://mcp.grep.app"
     },
   },
+  "plugin": [
+    "@cortexkit/opencode-magic-context",
+  ],
+  "compaction": {
+    "auto": false,
+    "prune": false
+  }
 }
