@@ -65,6 +65,15 @@
       "skillFolderHash": "1b6fe88f1b2cf6ad8f24adfd6e557c5b2daa3157",
       "installedAt": "2026-04-21T08:56:13.866Z",
       "updatedAt": "2026-04-21T08:56:13.866Z"
+    },
+    "yahoo-finance": {
+      "source": "gracefullight/stock-checker",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/gracefullight/stock-checker.git",
+      "skillPath": ".agents/skills/yahoo-finance/SKILL.md",
+      "skillFolderHash": "fa691be408b23cf54a6ab0286092dcaeb16170c2",
+      "installedAt": "2026-04-24T12:15:37.104Z",
+      "updatedAt": "2026-04-24T12:15:37.104Z"
     }
   },
   "dismissed": {
