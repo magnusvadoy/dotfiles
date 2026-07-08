@@ -3,5 +3,8 @@
   "theme": "gruvbox",
   "scroll_acceleration": {
     "enabled": true
-  }
+  },
+  "plugin": [
+    "@cortexkit/opencode-magic-context@latest"
+  ]
 }
