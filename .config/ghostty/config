@@ -1,7 +1,9 @@
 # Fonts
 font-family = "JetBrains Mono"
-font-size = 15
+font-size = 14
+
+# Theme
+theme = light:gruvbox-material-medium-light,dark:gruvbox-material-medium-dark
 
 # Misc
-macos-option-as-alt = "left"
-copy-on-select = true
+macos-option-as-alt = left
