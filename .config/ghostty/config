@@ -1,9 +1,10 @@
 # Fonts
 font-family = "JetBrains Mono"
-font-size = 14
-
-# Theme
-theme = light:gruvbox-material-medium-light,dark:gruvbox-material-medium-dark
+font-thicken = true
+font-size = 15
 
 # Misc
 macos-option-as-alt = left
+
+# Theme
+theme = light:Gruvbox Material Light,dark:Gruvbox Material Dark

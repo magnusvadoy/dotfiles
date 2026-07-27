@@ -31,8 +31,8 @@ set --prepend PATH $HOME/.local/share/nvim/mason/bin
 set --prepend PATH $HOME/bin
 set --prepend PATH $HOME/.local/bin
 
-# Anaconda
-set --prepend PATH /opt/homebrew/anaconda3/bin
+# Add Mason executables to PATH
+set --prepend PATH /Applications/Ghostty.app/Contents/MacOS
 
 ###################################
 # Interactive mode configurations #
