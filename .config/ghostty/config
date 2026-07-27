@@ -8,3 +8,6 @@ macos-option-as-alt = left
 
 # Theme
 theme = light:Gruvbox Material Light,dark:Gruvbox Material Dark
+
+# Cursor
+custom-shader = shaders/cursor_warp.glsl
