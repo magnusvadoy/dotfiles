@@ -1,0 +1,103 @@
+# agentoast configuration
+
+# Editor to open when running `agentoast config`
+# Falls back to $EDITOR environment variable, then vim
+# editor = "vim"
+
+# Toast popup notification
+[toast]
+# Display duration in milliseconds (default: 4000)
+# duration_ms = 4000
+
+# Keep toast visible until clicked (default: false)
+# persistent = false
+
+# Where toast notifications appear on the active screen.
+# Multiple positions show the same toast in each corner simultaneously.
+# Valid values: "top-left", "top-right", "bottom-left", "bottom-right"
+# positions = ["top-right"]
+
+# Which screens show toasts (default: "active")
+# "active" = only the screen the cursor is on, "all" = every attached screen
+# display = "active"
+
+# Notification settings
+[notification]
+show_non_agent_panes = false
+# Mute all notifications (default: false)
+# muted = false
+
+# Show only groups with notifications (default: false)
+# filter_notified_only = false
+
+# Show tmux panes without an AI coding agent (default: false)
+# show_non_agent_panes = false
+
+# Claude Code agent settings
+[notification.agents.claude_code]
+# Events that trigger notifications
+# Available: Stop, permission_prompt, idle_prompt, auth_success, elicitation_dialog, TeammateIdle, TaskCompleted
+# idle_prompt, TeammateIdle, TaskCompleted are excluded by default
+# events = ["Stop", "permission_prompt", "auth_success", "elicitation_dialog"]
+
+# Events that auto-focus the terminal (default: none)
+# These events set force_focus=true, causing silent terminal focus without toast (when not muted)
+# focus_events = []
+
+# Include last-assistant-message as notification body (default: true, truncated to 200 chars)
+# include_body = true
+
+# Codex agent settings
+[notification.agents.codex]
+# Events that trigger notifications
+# Available: agent-turn-complete
+# events = ["agent-turn-complete"]
+
+# Events that auto-focus the terminal (default: none)
+# focus_events = []
+
+# Include last-assistant-message as notification body (default: true, truncated to 200 chars)
+# include_body = true
+
+# OpenCode agent settings
+[notification.agents.opencode]
+# Events that trigger notifications
+# Available: session.status (idle only), session.error, permission.asked
+# events = ["session.status", "session.error", "permission.asked"]
+
+# Events that auto-focus the terminal (default: none)
+# focus_events = []
+
+# Copilot CLI agent settings
+[notification.agents.copilot_cli]
+# Events that trigger notifications
+# Available: agentStop, subagentStop, errorOccurred
+# events = ["agentStop"]
+
+# Events that auto-focus the terminal (default: none)
+# focus_events = []
+
+# Include error message as notification body (default: true, truncated to 200 chars)
+# include_body = true
+
+# Keyboard shortcuts
+[keybinding]
+# Shortcut to toggle the notification panel (default: super+ctrl+n)
+# Format: modifier+key (modifiers: ctrl, shift, alt/option, super/cmd)
+# Set to "" to disable
+# toggle_panel = "super+ctrl+n"
+
+# System settings
+# Override the auto-detected tmux binary path (useful when auto-detection fails)
+# [system]
+# tmux = "/custom/path/to/tmux"
+
+# Apps tab — surface frequently-used applications inside the main panel
+# Add apps from Settings → Apps. Each entry pins the app to the Apps tab so a
+# single click brings it to the front. Defaults to empty (Apps tab is empty).
+# [apps]
+# allowed_apps = [
+#   { bundle_id = "com.google.Chrome",          display_name = "Google Chrome" },
+#   { bundle_id = "com.tinyspeck.slackmacgap",  display_name = "Slack" },
+# ]
+
