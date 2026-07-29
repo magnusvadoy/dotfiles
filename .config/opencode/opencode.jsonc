@@ -7,9 +7,11 @@
     "external_directory": {
       "~/code/**": "allow",
       "~/go/pkg/mod/**": "allow",
+      "~/.m2/repository/**": "allow",
     },
     "edit": {
       "~/go/pkg/mod/**": "deny",
+      "~/.m2/repository/**": "deny",
     },
   },
 }

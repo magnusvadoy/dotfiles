@@ -1,33 +1,6 @@
 ---
 description: Architecture design agent. Evaluates structure, tradeoffs, and design decisions. Produces ADRs and design recommendations. Never modifies code.
 mode: subagent
-tools:
-  bash: true
-  read: true
-  write: false
-  edit: false
-  glob: true
-  grep: true
-permission:
-  bash:
-    "git log *": allow
-    "git diff *": allow
-    "rg *": allow
-    "wc *": allow
-    "head *": allow
-    "tail *": allow
-    "cat *": deny
-    "rm *": deny
-    "mv *": deny
-    "cp *": deny
-    "mkdir *": deny
-    "touch *": deny
-    "echo *": deny
-    "npm *": deny
-    "pnpm *": deny
-    "yarn *": deny
-    "node *": deny
-    "*": deny
 ---
 
 # Architect Agent

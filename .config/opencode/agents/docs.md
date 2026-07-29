@@ -1,34 +1,6 @@
 ---
 description: Documentation writer. Generates and updates READMEs, API docs, and inline comments. Write access limited to .md and .yaml files only.
 mode: subagent
-tools:
-  bash: true
-  read: true
-  write: true
-  edit: true
-  glob: true
-  grep: true
-permission:
-  bash:
-    "git log *": allow
-    "git diff *": allow
-    "rg *": allow
-    "wc *": allow
-    "head *": allow
-    "tail *": allow
-    "cat *": deny
-    "rm *": deny
-    "mv *": deny
-    "cp *": deny
-    "mkdir *": deny
-    "touch *": deny
-    "echo *": deny
-    "npm *": deny
-    "pnpm *": deny
-    "yarn *": deny
-    "node *": deny
-    "go *": deny
-    "*": deny
 ---
 
 # Docs Agent

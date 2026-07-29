@@ -21,6 +21,7 @@ These are common instructions for all agents, in all scenarios.
 - When creating new project, always use the native tooling for that language. For example, use `npm` for TypeScript/JavaScript projects, and `go mod` for Go projects. This ensures that the project is set up correctly and follows best practices for that language.
 - Always use a linter for the language you're working with. Ask if unclear which linter to use for other languages.
 - Always use a formatter for the language you're working with. Ask if unclear which formatter to use for other languages.
+- Always create tests for the functionality you are creating.
 
 ## Secrets Hygiene
 
