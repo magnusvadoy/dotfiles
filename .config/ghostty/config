@@ -10,4 +10,4 @@ macos-option-as-alt = left
 theme = light:Gruvbox Material Light,dark:Gruvbox Material Dark
 
 # Cursor
-custom-shader = shaders/cursor_warp.glsl
+# custom-shader = shaders/cursor_warp.glsl
