@@ -90,6 +90,7 @@ cask "brave-browser"
 cask "obsidian"
 cask "spotify"
 cask "discord"
+cask "telegram"
 
 # Fonts
 cask "font-jetbrains-mono"
