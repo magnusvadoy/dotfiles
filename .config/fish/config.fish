@@ -31,7 +31,7 @@ set --prepend PATH $HOME/.local/share/nvim/mason/bin
 set --prepend PATH $HOME/bin
 set --prepend PATH $HOME/.local/bin
 
-# Add Mason executables to PATH
+# Add Ghostty CLI to PATH
 set --prepend PATH /Applications/Ghostty.app/Contents/MacOS
 
 ###################################
@@ -88,9 +88,6 @@ alias lt 'eza --tree $EZA_PARAMS'
 # zoxide
 zoxide init fish | source
 
-# Taskfile
-task --completion fish | source
-
 # ripgrep
 set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgrep.conf
 
@@ -107,8 +104,6 @@ alias kcat 'kcat -X security.protocol=sasl_ssl -X sasl.mechanism=PLAIN -X sasl.u
 abbr -a d docker
 abbr -a dc 'docker compose'
 abbr -a grpc 'grpcurl -plaintext'
-abbr -a ghcs 'gh copilot suggest'
-abbr -a ghce 'gh copilot explain'
 
 # secrets
 source ~/.secrets.fish

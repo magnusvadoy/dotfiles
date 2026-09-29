@@ -10,7 +10,7 @@ To get started on a fresh machine:
 
 ```
 mkdir ~/bin
-curl -fLo ~/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm
+curl -fLo ~/bin/yadm https://github.com/yadm-dev/yadm/raw/master/yadm
 chmod a+x ~/bin/yadm
 ~/bin/yadm clone --bootstrap https://github.com/magnusvadoy/dotfiles.git
 rm -rf ~/bin/yadm

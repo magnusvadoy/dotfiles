@@ -1,7 +1,7 @@
 # Fonts
 font-family = "JetBrains Mono"
 font-thicken = true
-font-size = 15
+font-size = 16
 
 # Misc
 macos-option-as-alt = left

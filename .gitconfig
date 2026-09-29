@@ -2,7 +2,8 @@
   name = Magnus Furnes Vadøy
   email = magnus.f.vadoy@gmail.com
 
-[include]
+# Work identity and commit signing for everything under ~/code
+[includeIf "gitdir:~/code/"]
   path = ~/.gitconfig_work
 
 [core]
@@ -21,7 +22,7 @@
 
 [merge]
   conflictstyle = zdiff3
-	tool = nvimdiff
+  tool = nvimdiff
 
 [status]
   # Show untracked files, directories and files in untracked directories
@@ -30,6 +31,7 @@
 [push]
   # Push the current branch to the same branch on the remote
   autoSetupRemote = true
+  followTags = true # push annotated tags along with commits
 
 [pull]
   # Keep local commits on top of the tree
@@ -38,6 +40,7 @@
 [rebase]
   # Stash and pop uncommitted changes on rebase
   autoStash = true
+  updateRefs = true # move stacked branches along when rebasing
 
 [fetch]
   prune = true # Remove remote tracking branches that no longer exist on the remote
@@ -51,4 +54,19 @@
   hard-reset-last-commit = reset --hard HEAD~1
 
 [mergetool]
-	prompt = false
+  prompt = false
+
+[init]
+  defaultBranch = main
+
+[diff]
+  algorithm = histogram # better diffs when code is moved around
+
+[rerere]
+  enabled = true # remember how conflicts were resolved and reuse it
+
+[branch]
+  sort = -committerdate # most recently used branches first
+
+[tag]
+  sort = version:refname

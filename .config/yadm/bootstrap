@@ -1,9 +1,11 @@
 #!/bin/sh
+set -e
 
 install_brew_and_packages() {
   if ! command -v brew >/dev/null 2>&1; then
     echo "Installing Homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
   if [ -f "$HOME/.Brewfile" ]; then
@@ -12,30 +14,34 @@ install_brew_and_packages() {
   fi
 }
 
+clone_if_missing() {
+  [ -d "$2" ] || git clone "$1" "$2"
+}
+
 configure() {
-  CONFIG_DIR="$HOME/.config"
-  TMUX_PLUGIN_DIR="$HOME/.tmux/plugins"
-  ANTIGEN_DIR="$HOME/.zsh"
+  # Submodules (ghostty shaders)
+  yadm submodule update --init --recursive
 
-  # Create required directories
-  mkdir -p "$TMUX_PLUGIN_DIR" "$ANTIGEN_DIR" "$CONFIG_DIR"
+  # Language runtimes
+  mise install
 
-  # Clone necessary repos
-  git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_DIR/tpm"
-  git clone https://github.com/zsh-users/antigen.git "$ANTIGEN_DIR/antigen"
-
-  # Setup FZF
-  "$(brew --prefix)/opt/fzf/install"
+  # tmux plugin manager (plugins are installed with prefix + I)
+  clone_if_missing https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
 
   # Setup BAT
   bat cache --build
 
-  # Symlink JDK
+  # Make Homebrew's JDK visible to /usr/libexec/java_home
   sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-  sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 
-  # Setup Tide for fish
-  tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Compact --icons='Few icons' --transient=No
+  # Fish plugins and Tide prompt
+  fish -c 'type -q fisher; or begin; curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; end; fisher update'
+  fish -c "tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Compact --icons='Few icons' --transient=No"
+
+  # Use fish as login shell
+  FISH="$(brew --prefix)/bin/fish"
+  grep -qx "$FISH" /etc/shells || echo "$FISH" | sudo tee -a /etc/shells >/dev/null
+  [ "$SHELL" = "$FISH" ] || chsh -s "$FISH"
 }
 
 install_brew_and_packages
