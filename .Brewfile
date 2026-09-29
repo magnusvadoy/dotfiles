@@ -1,11 +1,6 @@
 tap "anomalyco/tap"
-tap "bufbuild/buf"
-tap "coursier/formulas"
-tap "derailed/k9s"
-tap "peonping/tap"
 tap "shuntaka9576/tap"
 tap "steipete/tap"
-tap "xo/xo"
 
 # Shell & core
 brew "fish"
@@ -70,6 +65,8 @@ brew "anomalyco/tap/opencode"
 # Terminal & dev apps
 cask "ghostty"
 cask "docker-desktop"
+cask "gcloud-cli"
+cask "intellij-idea"
 cask "bruno"
 cask "claude-code"
 cask "codexbar"

@@ -21,9 +21,6 @@ set --prepend PATH $GOPATH/bin
 # Set JAVA_HOME as default JDK
 set -gx JAVA_HOME (/usr/libexec/java_home -v 21)
 
-# Add Coursier bin to PATH
-set --prepend PATH $HOME/Library/Application\ Support/Coursier/bin
-
 # Add Mason executables to PATH
 set --prepend PATH $HOME/.local/share/nvim/mason/bin
 

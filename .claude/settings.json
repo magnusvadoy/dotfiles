@@ -1,0 +1,47 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agentoast hook claude"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agentoast hook claude"
+          }
+        ]
+      }
+    ]
+  },
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    }
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "outputStyle": "caveman",
+  "permissions": {
+    "additionalDirectories": [
+      "~/code",
+      "~/go/pkg/mod",
+      "~/.m2/repository"
+    ],
+    "deny": [
+      "Edit(~/go/pkg/mod/**)",
+      "Edit(~/.m2/repository/**)"
+    ]
+  }
+}
