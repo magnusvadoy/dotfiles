@@ -25,6 +25,9 @@ configure() {
   # Language runtimes
   mise install
 
+  # Claude Code (native installer, updates itself)
+  [ -x "$HOME/.local/bin/claude" ] || curl -fsSL https://claude.ai/install.sh | bash
+
   # tmux plugin manager (plugins are installed with prefix + I)
   clone_if_missing https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
 

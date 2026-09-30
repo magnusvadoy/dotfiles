@@ -1,4 +1,19 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "deny": [
+      "Edit(~/go/pkg/mod/**)",
+      "Edit(~/.m2/repository/**)"
+    ],
+    "additionalDirectories": [
+      "~/code",
+      "~/go/pkg/mod",
+      "~/.m2/repository"
+    ]
+  },
   "hooks": {
     "Stop": [
       {
@@ -23,25 +38,16 @@
       }
     ]
   },
+  "outputStyle": "caveman",
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
     }
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "outputStyle": "caveman",
-  "permissions": {
-    "additionalDirectories": [
-      "~/code",
-      "~/go/pkg/mod",
-      "~/.m2/repository"
-    ],
-    "deny": [
-      "Edit(~/go/pkg/mod/**)",
-      "Edit(~/.m2/repository/**)"
-    ]
+  "enabledPlugins": {
+    "jdtls-lsp@claude-plugins-official": true
   }
 }
