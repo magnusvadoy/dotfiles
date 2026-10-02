@@ -1,4 +1,3 @@
-tap "anomalyco/tap"
 tap "shuntaka9576/tap"
 tap "steipete/tap"
 
@@ -41,7 +40,6 @@ brew "pngpaste"
 
 # Languages & build (runtimes are managed by mise)
 brew "mise"
-brew "just"
 brew "semtag"
 
 # Data & APIs
@@ -59,14 +57,12 @@ brew "kubernetes-cli"
 brew "kubectx"
 brew "sops"
 
-# AI
-brew "anomalyco/tap/opencode"
-
 # Terminal & dev apps
 cask "ghostty"
 cask "docker-desktop"
 cask "intellij-idea"
 cask "bruno"
+cask "codex"
 cask "codexbar"
 cask "agentoast"
 cask "1password"
@@ -76,6 +72,7 @@ cask "1password-cli"
 cask "karabiner-elements"
 cask "rectangle"
 cask "scroll-reverser"
+cask "hiddenbar"
 cask "clipy"
 cask "caffeine"
 cask "appcleaner"

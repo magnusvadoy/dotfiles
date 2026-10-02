@@ -1,51 +1,41 @@
-# Set PATH, MANPATH, etc., for Homebrew
-set -gx HOMEBREW_PREFIX /opt/homebrew HOMEBREW_CELLAR /opt/homebrew/Cellar HOMEBREW_REPOSITORY /opt/homebrew
+# Homebrew environment
+set -gx HOMEBREW_PREFIX /opt/homebrew
+set -gx HOMEBREW_CELLAR /opt/homebrew/Cellar
+set -gx HOMEBREW_REPOSITORY /opt/homebrew
 
-# Set PATH for Homebrew
-set --prepend PATH /opt/homebrew/bin /opt/homebrew/sbin /opt/homebrew/opt/gnu-sed/libexec/gnubin
+set -gx GOPATH $HOME/go
 
-# Set MANPATH for Homebrew
+# Keep PATH entries unique when this configuration is sourced again.
+fish_add_path --global --path $HOME/.local/bin $HOME/bin \
+    $HOME/.local/share/nvim/mason/bin $GOPATH/bin \
+    /opt/homebrew/bin /opt/homebrew/sbin \
+    /opt/homebrew/opt/gnu-sed/libexec/gnubin \
+    /Applications/Ghostty.app/Contents/MacOS
+
 if not set -q MANPATH
-    set -gx MANPATH /opt/homebrew/share/man
+    set -gx MANPATH /opt/homebrew/share/man ''
 end
 
-# Set INFOPATH for Homebrew
 if not set -q INFOPATH
     set -gx INFOPATH /opt/homebrew/share/info
 end
 
-# Set PATH for Go
-set -gx GOPATH $HOME/go
-set --prepend PATH $GOPATH/bin
-
-# Add Mason executables to PATH
-set --prepend PATH $HOME/.local/share/nvim/mason/bin
-
-# Add custom executables
-set --prepend PATH $HOME/bin
-set --prepend PATH $HOME/.local/bin
-
-# Add Ghostty CLI to PATH
-set --prepend PATH /Applications/Ghostty.app/Contents/MacOS
+# Set the editor for interactive shells and commands launched through fish.
+set -gx EDITOR nvim
 
 ###################################
 # Interactive mode configurations #
 ###################################
-status is-interactive || exit
+status is-interactive || return
 
 # Suppress the default login message
 set -g fish_greeting
-
-# Set default editor
-set -x EDITOR nvim
 
 # Enable vi key bindings
 set fish_cursor_default block blink
 set fish_cursor_insert line blink
 set fish_cursor_replace_one underscore blink
 set fish_cursor_visual block
-fish_vi_key_bindings
-
 function fish_user_key_bindings
     # Add Ctrl+Y to accept the whole suggestion
     bind -M insert \cy "commandline -f accept-autosuggestion; commandline -f execute"
@@ -53,6 +43,9 @@ function fish_user_key_bindings
     # Add Alt+Y to accept the first word of a suggestion
     bind -M insert \ey forward-word
 end
+
+fish_vi_key_bindings
+fish_user_key_bindings
 
 # fzf
 set -x FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude ".git"'
@@ -69,7 +62,9 @@ set -x FZF_DEFAULT_OPTS '
 --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,ctrl-f:preview-page-down,ctrl-b:preview-page-up
 '
 
-fzf --fish | source
+if type -q fzf
+    fzf --fish | source
+end
 
 # eza 
 set -x EZA_PARAMS --git --icons --group '--time-style=long-iso'
@@ -80,7 +75,9 @@ alias llm 'eza --all --header --long --sort=modified $EZA_PARAMS'
 alias lt 'eza --tree $EZA_PARAMS'
 
 # zoxide
-zoxide init fish | source
+if type -q zoxide
+    zoxide init fish | source
+end
 
 # ripgrep
 set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgrep.conf
@@ -100,4 +97,6 @@ abbr -a dc 'docker compose'
 abbr -a grpc 'grpcurl -plaintext'
 
 # secrets
-source ~/.secrets.fish
+if test -r ~/.secrets.fish
+    source ~/.secrets.fish
+end
