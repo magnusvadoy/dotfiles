@@ -1,54 +1,6 @@
 {
     "profiles": [
         {
-            "complex_modifications": {
-                "rules": [
-                    {
-                        "description": "Go back in Safari and Finder using mouse",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "com.apple.Safari",
-                                            "com.apple.finder"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": { "pointing_button": "button4" },
-                                "to": {
-                                    "key_code": "open_bracket",
-                                    "modifiers": "right_command"
-                                },
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Go forward in Safari and Finder using mouse",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "com.apple.Safari",
-                                            "com.apple.finder"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": { "pointing_button": "button5" },
-                                "to": {
-                                    "key_code": "close_bracket",
-                                    "modifiers": "right_command"
-                                },
-                                "type": "basic"
-                            }
-                        ]
-                    }
-                ]
-            },
             "devices": [
                 {
                     "identifiers": {

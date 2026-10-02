@@ -65,7 +65,6 @@ brew "anomalyco/tap/opencode"
 # Terminal & dev apps
 cask "ghostty"
 cask "docker-desktop"
-cask "gcloud-cli"
 cask "intellij-idea"
 cask "bruno"
 cask "codexbar"

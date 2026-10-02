@@ -3,7 +3,7 @@
   email = magnus.f.vadoy@gmail.com
 
 # Work identity and commit signing for everything under ~/code
-[includeIf "gitdir:~/code/"]
+[includeIf "gitdir:~/code/work/"]
   path = ~/.gitconfig_work
 
 [core]

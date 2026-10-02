@@ -39,15 +39,6 @@
     ]
   },
   "outputStyle": "caveman",
-  "modelSettings": {
-    "claude-opus-5": {
-      "effortLevel": "high"
-    },
-    "claude-opus-5-5": {
-      "effortLevel": "xhigh"
-    }
-  },
-  "enabledPlugins": {
-    "jdtls-lsp@claude-plugins-official": true
-  }
+  "modelSettings": {},
+  "enabledPlugins": {}
 }

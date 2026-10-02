@@ -18,9 +18,6 @@ end
 set -gx GOPATH $HOME/go
 set --prepend PATH $GOPATH/bin
 
-# Set JAVA_HOME as default JDK
-set -gx JAVA_HOME (/usr/libexec/java_home -v 21)
-
 # Add Mason executables to PATH
 set --prepend PATH $HOME/.local/share/nvim/mason/bin
 
