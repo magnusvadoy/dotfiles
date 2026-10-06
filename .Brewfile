@@ -4,6 +4,7 @@ tap "steipete/tap"
 # Shell & core
 brew "fish"
 brew "bash"
+brew "zsh"
 brew "git"
 brew "gh"
 brew "yadm"

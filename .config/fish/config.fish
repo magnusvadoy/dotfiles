@@ -79,6 +79,9 @@ if type -q zoxide
     zoxide init fish | source
 end
 
+# direnv
+direnv hook fish | source
+
 # ripgrep
 set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgrep.conf
 

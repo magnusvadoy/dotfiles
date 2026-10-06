@@ -1,0 +1,106 @@
+# Loaded by ~/.zshrc.
+
+# Environment ---------------------------------------------------------------
+export HOMEBREW_PREFIX=/opt/homebrew
+export HOMEBREW_CELLAR=/opt/homebrew/Cellar
+export HOMEBREW_REPOSITORY=/opt/homebrew
+export GOPATH="$HOME/go"
+export EDITOR=nvim
+
+# Paths ---------------------------------------------------------------------
+typeset -U path PATH
+path=(
+    "$HOME/.local/bin"
+    "$HOME/bin"
+    "$HOME/.local/share/nvim/mason/bin"
+    "$GOPATH/bin"
+    /opt/homebrew/bin
+    /opt/homebrew/sbin
+    /opt/homebrew/opt/gnu-sed/libexec/gnubin
+    /Applications/Ghostty.app/Contents/MacOS
+    $path
+)
+export PATH
+(( ${+MANPATH} )) || export MANPATH=/opt/homebrew/share/man:
+(( ${+INFOPATH} )) || export INFOPATH=/opt/homebrew/share/info
+
+# The remaining setup is only needed for interactive shells.
+[[ -o interactive ]] || return
+
+# History and shell options -------------------------------------------------
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=50000
+export SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS SHARE_HISTORY HIST_REDUCE_BLANKS
+setopt EXTENDED_HISTORY
+setopt AUTO_CD INTERACTIVE_COMMENTS
+
+# Completion ----------------------------------------------------------------
+# Register completion directories before initializing the completion system.
+typeset -U fpath
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+compinit
+(( $+commands[kubectl] )) && source <(kubectl completion zsh)
+
+# Vi editing ----------------------------------------------------------------
+# Initialize vi mode before FZF and custom widgets register their bindings.
+bindkey -v
+KEYTIMEOUT=1
+
+# FZF -----------------------------------------------------------------------
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude ".git"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type directory "" "$HOME"'
+export FZF_CTRL_R_OPTS=''
+export FZF_DEFAULT_OPTS='
+--cycle
+--layout reverse
+--prompt " "
+--pointer " "
+--marker " "
+--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,ctrl-f:preview-page-down,ctrl-b:preview-page-up
+'
+(( $+commands[fzf] )) && source <(fzf --zsh)
+
+# Tool integrations ---------------------------------------------------------
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgrep.conf"
+
+# Aliases -------------------------------------------------------------------
+export EZA_PARAMS='--git --icons --group --time-style=long-iso'
+alias ls='eza ${=EZA_PARAMS}'
+alias l='eza --git-ignore ${=EZA_PARAMS}'
+alias ll='eza --all --header --long ${=EZA_PARAMS}'
+alias llm='eza --all --header --long --sort=modified ${=EZA_PARAMS}'
+alias lt='eza --tree ${=EZA_PARAMS}'
+
+alias vim=nvim
+alias vimdiff='nvim -d'
+alias cat='bat --paging=never'
+
+# Abbreviations and Git helpers ---------------------------------------------
+source "$HOME/.config/zsh/shortcuts.zsh"
+# Keep shortcuts usable as aliases as well as visibly expanding abbreviations.
+for _shortcut_name _shortcut_command in "${(@kv)FISH_ABBREVIATIONS}"; do
+    alias "$_shortcut_name=$_shortcut_command"
+done
+unset _shortcut_name _shortcut_command
+source "$HOME/.config/zsh/git.zsh"
+
+# Secrets -------------------------------------------------------------------
+# Prefer native secrets; fish exports can be imported without translating code.
+if [[ -r "$HOME/.secrets.zsh" ]]; then
+    source "$HOME/.secrets.zsh"
+fi
+
+# Interactive widgets -------------------------------------------------------
+# Load after vi mode, FZF, and abbreviations are configured.
+source "$HOME/.config/zsh/interactive.zsh"
+
+# Prompt --------------------------------------------------------------------
+# The widgets update the initial I indicator to N or V when the mode changes.
+PROMPT='%F{cyan}I%f %F{yellow}%~%f ❯ '
+RPROMPT=''
