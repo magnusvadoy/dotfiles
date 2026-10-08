@@ -16,6 +16,12 @@
   },
   "enabledPlugins": {},
   "outputStyle": "caveman",
-  "modelSettings": {},
-  "theme": "auto"
+  "syntaxHighlightingDisabled": false,
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "theme": "dark-ansi",
+  "model": "sonnet"
 }

@@ -92,7 +92,6 @@ unset _shortcut_name _shortcut_command
 source "$HOME/.config/zsh/git.zsh"
 
 # Secrets -------------------------------------------------------------------
-# Prefer native secrets; fish exports can be imported without translating code.
 if [[ -r "$HOME/.secrets.zsh" ]]; then
     source "$HOME/.secrets.zsh"
 fi

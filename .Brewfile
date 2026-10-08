@@ -15,13 +15,11 @@ brew "curl"
 brew "coreutils"
 brew "gnu-sed"
 brew "watch"
-brew "htop"
 brew "terminal-notifier"
 
 # Editor & terminal tools
 brew "neovim"
 brew "tree-sitter-cli"
-brew "neovide"
 brew "tmux"
 brew "gitmux"
 brew "sesh"
@@ -41,22 +39,19 @@ brew "pngpaste"
 
 # Languages & build (runtimes are managed by mise)
 brew "mise"
-brew "semtag"
 
 # Data & APIs
 brew "jq"
 brew "yq"
-brew "httpie"
 brew "grpcurl"
 brew "grpcui"
 brew "protobuf"
 brew "kcat"
-brew "libpq"
 
 # Cloud & Kubernetes
 brew "kubernetes-cli"
 brew "kubectx"
-brew "sops"
+brew "k9s"
 
 # Terminal & dev apps
 cask "ghostty"
@@ -64,7 +59,6 @@ cask "docker-desktop"
 cask "intellij-idea"
 cask "bruno"
 cask "codex"
-cask "codexbar"
 cask "agentoast"
 cask "1password"
 cask "1password-cli"
@@ -74,9 +68,6 @@ cask "karabiner-elements"
 cask "rectangle"
 cask "scroll-reverser"
 cask "hiddenbar"
-cask "clipy"
-cask "caffeine"
-cask "appcleaner"
 
 # Apps
 cask "brave-browser"

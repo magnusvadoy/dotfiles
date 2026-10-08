@@ -1,13 +1,10 @@
 # Fonts
 font-family = "JetBrains Mono"
 font-thicken = true
-font-size = 16
+font-size = 15
 
 # Misc
 macos-option-as-alt = left
 
 # Theme
 theme = light:Gruvbox Material Light,dark:Gruvbox Material Dark
-
-# Cursor
-# custom-shader = shaders/cursor_warp.glsl
