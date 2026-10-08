@@ -14,6 +14,7 @@ Completion paths are configured before `autoload -Uz compinit` and `compinit`.
 Kubectl completion is loaded afterward. Homebrew supplies other tool completions.
 
 FZF: Ctrl+R searches history, Ctrl+T selects files, Alt+C selects directories.
+Up/Down search history by command prefix and place the cursor at the end of the line.
 Vi insert mode: Space/Enter expand command abbreviations; Tab selects completions;
 Alt+Y moves forward one word. Escape enters vi command mode. The prompt starts with I, N, or V for insert, normal, or visual mode;
 `i` returns to insert mode, and `v` selects text in normal mode.

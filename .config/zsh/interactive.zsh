@@ -22,8 +22,11 @@ zle -N _fish_abbreviation_space
 zle -N accept-line _fish_abbreviation_enter
 bindkey -M viins ' ' _fish_abbreviation_space
 bindkey -M viins '^[y' forward-word
-bindkey -M viins '^[[A' history-beginning-search-backward
-bindkey -M viins '^[[B' history-beginning-search-forward
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey -M viins '^[[A' history-beginning-search-backward-end
+bindkey -M viins '^[[B' history-beginning-search-forward-end
 
 _fish_cursor() {
     case ${KEYMAP:-viins} in
