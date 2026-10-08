@@ -11,8 +11,7 @@ export EDITOR=nvim
 typeset -U path PATH
 path=(
     "$HOME/.local/bin"
-    "$HOME/bin"
-    "$HOME/.local/share/nvim/mason/bin"
+    "$HOME/.docker/bin"
     "$GOPATH/bin"
     /opt/homebrew/bin
     /opt/homebrew/sbin
@@ -81,6 +80,8 @@ alias vim=nvim
 alias vimdiff='nvim -d'
 alias cat='bat --paging=never'
 
+alias ...='cd ../..'
+
 # Abbreviations and Git helpers ---------------------------------------------
 source "$HOME/.config/zsh/shortcuts.zsh"
 # Keep shortcuts usable as aliases as well as visibly expanding abbreviations.
@@ -102,5 +103,26 @@ source "$HOME/.config/zsh/interactive.zsh"
 
 # Prompt --------------------------------------------------------------------
 # The widgets update the initial I indicator to N or V when the mode changes.
+_zsh_git_prompt=''
+_zsh_git_prompt_update() {
+    local branch changes
+    _zsh_git_prompt=''
+    if [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]]; then
+        branch=$(command git symbolic-ref --quiet --short HEAD 2>/dev/null) ||
+            branch=$(command git rev-parse --short HEAD 2>/dev/null) || return
+        # Escape percent signs so branch names remain literal prompt text.
+        branch=${branch//\%/%%}
+        if changes=$(command git --no-optional-locks status --porcelain --untracked-files=normal 2>/dev/null); then
+            if [[ -n $changes ]]; then
+                _zsh_git_prompt=" %F{yellow}[$branch *]%f"
+            else
+                _zsh_git_prompt=" %F{green}[$branch ✓]%f"
+            fi
+        fi
+    fi
+    PROMPT="%F{cyan}I%f %F{yellow}%~%f${_zsh_git_prompt} ❯ "
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _zsh_git_prompt_update
 PROMPT='%F{cyan}I%f %F{yellow}%~%f ❯ '
 RPROMPT=''

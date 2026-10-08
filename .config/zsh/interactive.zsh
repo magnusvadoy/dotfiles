@@ -1,10 +1,9 @@
-source "$HOME/.config/zsh/plugins/autosuggestions.zsh"
 source "$HOME/.config/zsh/plugins/autopair.zsh"
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 setopt NO_BANG_HIST
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*'
 zmodload zsh/complist
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'l:|=* r:|=*'
+bindkey -M viins '^I' menu-complete
 
 # Expand only command-position abbreviations; quoted arguments stay untouched.
 _fish_expand_abbreviation() {
@@ -19,12 +18,9 @@ _fish_expand_abbreviation() {
 }
 _fish_abbreviation_space() { _fish_expand_abbreviation; zle self-insert; }
 _fish_abbreviation_enter() { _fish_expand_abbreviation; zle .accept-line; }
-_fish_accept_execute() { zle autosuggest-accept; _fish_abbreviation_enter; }
 zle -N _fish_abbreviation_space
 zle -N accept-line _fish_abbreviation_enter
-zle -N _fish_accept_execute
 bindkey -M viins ' ' _fish_abbreviation_space
-bindkey -M viins '^Y' _fish_accept_execute
 bindkey -M viins '^[y' forward-word
 bindkey -M viins '^[[A' history-beginning-search-backward
 bindkey -M viins '^[[B' history-beginning-search-forward
@@ -44,7 +40,7 @@ _zsh_vi_mode_prompt() {
     elif [[ ${KEYMAP:-viins} == vicmd ]]; then
         mode=N color=green
     fi
-    local next_prompt="%F{$color}$mode%f %F{yellow}%~%f ❯ "
+    local next_prompt="%F{$color}$mode%f %F{yellow}%~%f${_zsh_git_prompt} ❯ "
     if [[ $PROMPT != $next_prompt ]]; then
         PROMPT=$next_prompt
         zle reset-prompt
