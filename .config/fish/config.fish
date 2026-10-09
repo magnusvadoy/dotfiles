@@ -6,8 +6,8 @@ set -gx HOMEBREW_REPOSITORY /opt/homebrew
 set -gx GOPATH $HOME/go
 
 # Keep PATH entries unique when this configuration is sourced again.
-fish_add_path --global --path $HOME/.local/bin $HOME/bin \
-    $HOME/.local/share/nvim/mason/bin $GOPATH/bin \
+fish_add_path --global --path $HOME/.local/bin $HOME/.docker/bin \
+    $GOPATH/bin \
     /opt/homebrew/bin /opt/homebrew/sbin \
     /opt/homebrew/opt/gnu-sed/libexec/gnubin \
     /Applications/Ghostty.app/Contents/MacOS
@@ -37,10 +37,7 @@ set fish_cursor_insert line blink
 set fish_cursor_replace_one underscore blink
 set fish_cursor_visual block
 function fish_user_key_bindings
-    # Add Ctrl+Y to accept the whole suggestion
-    bind -M insert \cy "commandline -f accept-autosuggestion; commandline -f execute"
-
-    # Add Alt+Y to accept the first word of a suggestion
+    # Move forward one word with Alt+Y
     bind -M insert \ey forward-word
 end
 
@@ -80,7 +77,9 @@ if type -q zoxide
 end
 
 # direnv
-direnv hook fish | source
+if type -q direnv
+    direnv hook fish | source
+end
 
 # ripgrep
 set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgrep.conf
