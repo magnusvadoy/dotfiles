@@ -39,3 +39,6 @@ coverage.out
 
 # Claude / local tool settings
 *.local.json
+
+# environment vars
+.envrc
