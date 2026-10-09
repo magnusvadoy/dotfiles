@@ -22,6 +22,5 @@
       "effortLevel": "medium"
     }
   },
-  "theme": "dark-ansi",
-  "model": "sonnet"
+  "theme": "dark-ansi"
 }

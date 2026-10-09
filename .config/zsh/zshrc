@@ -65,7 +65,10 @@ export FZF_DEFAULT_OPTS='
 # Tool integrations ---------------------------------------------------------
 (( $+commands[mise] )) && eval "$(mise activate zsh)"
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
-(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+if (( $+commands[direnv] )); then
+    eval "$(direnv hook zsh)"
+    eval "$(direnv export zsh)"
+fi
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgrep.conf"
 
 # Aliases -------------------------------------------------------------------
