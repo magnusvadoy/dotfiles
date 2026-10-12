@@ -11,6 +11,11 @@ __git.default_branch() {
     fi
 }
 gcom() { local branch; branch=$(__git.default_branch) || return; git checkout "$branch" "$@"; }
+gcb() {
+    local branch
+    branch=$(command git branch --format='%(refname:short)' | fzf --prompt='branch> ') || return
+    [[ -n $branch ]] && command git switch -- "$branch"
+}
 gbage() {
     git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))' "$@"
 }
