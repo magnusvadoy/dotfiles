@@ -36,6 +36,7 @@ brew "starship"
 brew "mpv"
 brew "imagemagick"
 brew "pngpaste"
+brew "forgit"
 
 # Languages & build (runtimes are managed by mise)
 brew "mise"

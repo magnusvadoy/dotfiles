@@ -22,5 +22,6 @@
       "effortLevel": "medium"
     }
   },
-  "theme": "dark-ansi"
+  "theme": "auto",
+  "model": "opus"
 }

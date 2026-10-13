@@ -93,6 +93,8 @@ for _shortcut_name _shortcut_command in "${(@kv)FISH_ABBREVIATIONS}"; do
 done
 unset _shortcut_name _shortcut_command
 source "$HOME/.config/zsh/git.zsh"
+[[ -r "$HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh" ]] &&
+    source "$HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh"
 
 # Secrets -------------------------------------------------------------------
 if [[ -r "$HOME/.secrets.zsh" ]]; then
