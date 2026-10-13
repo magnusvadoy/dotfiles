@@ -4,6 +4,7 @@ zmodload zsh/complist
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'l:|=* r:|=*'
 bindkey -M viins '^I' menu-complete
+bindkey -M viins '^[[Z' reverse-menu-complete
 
 # Expand only command-position abbreviations; quoted arguments stay untouched.
 _fish_expand_abbreviation() {
