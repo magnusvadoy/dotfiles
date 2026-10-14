@@ -4,22 +4,13 @@
     "pr": ""
   },
   "permissions": {
-    "deny": [
-      "Edit(~/go/pkg/mod/**)",
-      "Edit(~/.m2/repository/**)"
-    ],
-    "additionalDirectories": [
-      "~/code",
-      "~/go/pkg/mod",
-      "~/.m2/repository"
-    ]
+    "deny": ["Edit(~/go/pkg/mod/**)", "Edit(~/.m2/repository/**)"],
+    "additionalDirectories": ["~/code", "~/go/pkg/mod", "~/.m2/repository"]
   },
-  "model": "sonnet",
+  "model": "opus",
   "enabledPlugins": {
     "nono@nolabs-ai": true
   },
-  "outputStyle": "caveman",
-  "syntaxHighlightingDisabled": false,
   "modelSettings": {
     "claude-sonnet-5-5": {
       "effortLevel": "medium"
