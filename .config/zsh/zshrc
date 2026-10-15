@@ -131,12 +131,13 @@ _zsh_git_prompt_update() {
                     tracking+=" %F{blue}↓${behind}%f%F{$state_color}"
                 fi
             fi
-            _zsh_git_prompt=" %F{$state_color}[$branch${tracking} $status_mark]%f"
+            _zsh_git_prompt="%F{$state_color}[$branch${tracking} $status_mark]%f"
         fi
     fi
-    PROMPT="%F{cyan}I%f %F{yellow}%~%f${_zsh_git_prompt} ❯ "
+    PROMPT='%F{yellow}%1~%f ❯ '
+    RPROMPT="${_zsh_git_prompt:+${_zsh_git_prompt} }%F{cyan}[I]%f"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _zsh_git_prompt_update
-PROMPT='%F{cyan}I%f %F{yellow}%~%f ❯ '
-RPROMPT=''
+PROMPT='%F{yellow}%1~%f ❯ '
+RPROMPT='%F{cyan}[I]%f'

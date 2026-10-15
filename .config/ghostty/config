@@ -8,3 +8,6 @@ macos-option-as-alt = left
 
 # Theme
 theme = light:Gruvbox Material Light,dark:Gruvbox Material Dark
+
+# UI
+window-decoration = none

@@ -39,18 +39,24 @@ _fish_cursor() {
 }
 _zsh_vi_mode_prompt() {
     local mode=I color=cyan
-    if (( REGION_ACTIVE )); then
+    if [[ ${KEYMAP:-viins} == visual ]] || (( REGION_ACTIVE )); then
         mode=V color=magenta
     elif [[ ${KEYMAP:-viins} == vicmd ]]; then
         mode=N color=green
     fi
-    local next_prompt="%F{$color}$mode%f %F{yellow}%~%f${_zsh_git_prompt} ❯ "
+    local next_prompt='%F{yellow}%1~%f ❯ '
     if [[ $PROMPT != $next_prompt ]]; then
         PROMPT=$next_prompt
+        zle reset-prompt
+    fi
+    local next_rprompt="${_zsh_git_prompt:+${_zsh_git_prompt} }%F{$color}[$mode]%f"
+    if [[ $RPROMPT != $next_rprompt ]]; then
+        RPROMPT=$next_rprompt
         zle reset-prompt
     fi
 }
 autoload -Uz add-zle-hook-widget
 add-zle-hook-widget line-init _fish_cursor
 add-zle-hook-widget keymap-select _fish_cursor
+# Visual selection changes REGION_ACTIVE without switching away from vicmd.
 add-zle-hook-widget line-pre-redraw _zsh_vi_mode_prompt
