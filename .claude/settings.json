@@ -15,7 +15,9 @@
     ]
   },
   "model": "opus",
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "postman@claude-plugins-official": true
+  },
   "modelSettings": {
     "claude-sonnet-5-5": {
       "effortLevel": "medium"

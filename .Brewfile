@@ -57,7 +57,6 @@ brew "k9s"
 # Terminal & dev apps
 cask "ghostty"
 cask "docker-desktop"
-cask "intellij-idea"
 cask "bruno"
 cask "codex"
 cask "agentoast"
@@ -68,7 +67,6 @@ cask "1password-cli"
 cask "karabiner-elements"
 cask "rectangle"
 cask "scroll-reverser"
-cask "hiddenbar"
 
 # Apps
 cask "brave-browser"
