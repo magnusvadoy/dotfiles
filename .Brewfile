@@ -60,8 +60,8 @@ cask "docker-desktop"
 cask "bruno"
 cask "codex"
 cask "agentoast"
-cask "1password"
-cask "1password-cli"
+cask "bitwarden"
+cask "bitwarden-cli"
 
 # macOS utilities
 cask "karabiner-elements"

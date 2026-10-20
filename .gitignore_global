@@ -39,6 +39,7 @@ coverage.out
 
 # Claude / local tool settings
 *.local.json
+.claude/worktrees/
 
 # environment vars
 .envrc
