@@ -4,15 +4,8 @@
     "pr": ""
   },
   "permissions": {
-    "deny": [
-      "Edit(~/go/pkg/mod/**)",
-      "Edit(~/.m2/repository/**)"
-    ],
-    "additionalDirectories": [
-      "~/code",
-      "~/go/pkg/mod",
-      "~/.m2/repository"
-    ]
+    "deny": ["Edit(~/go/pkg/mod/**)", "Edit(~/.m2/repository/**)"],
+    "additionalDirectories": ["~/code", "~/go/pkg/mod", "~/.m2/repository"]
   },
   "model": "opus",
   "enabledPlugins": {
@@ -21,7 +14,86 @@
   "modelSettings": {
     "claude-sonnet-5-5": {
       "effortLevel": "medium"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
     }
   },
-  "theme": "auto"
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh idle"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh working"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion|ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh waiting"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh working"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh waiting"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh done"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/claude-state.sh clear"
+          }
+        ]
+      }
+    ]
+  },
+  "tui": "fullscreen",
+  "theme": "auto",
+  "editorMode": "normal"
 }

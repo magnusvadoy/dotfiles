@@ -1,11 +1,14 @@
 [tools]
 go = "latest"
 rust = "latest"
-node = "24"
+node = "24.21.0"
 python = "3.11"
 ruby = "3.2"
-java = "openjdk-21"
-terraform = "latest"
+java = "lts"
 maven = "latest"
+terraform = "latest"
 helm = "latest"
 helmfile = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
