@@ -55,7 +55,11 @@ notify_hammerspoon() {
 	local title=$1 subtitle=$2 message=$3 socket
 	[[ -x $hs ]] || return 1
 	socket=$(tmux display -p -t "$TMUX_PANE" '#{socket_path}' 2>/dev/null)
-	"$hs" -q -c "claude.notify($(lua_str "$title"), $(lua_str "$subtitle"), $(lua_str "$message"), \
+	# Hard limit on top of hs's own timeout, which doesn't cover every case (e.g. a reload),
+	# so a stuck Hammerspoon can never stall the Claude hook.
+	local limit=()
+	command -v timeout >/dev/null && limit=(timeout 3)
+	"${limit[@]}" "$hs" -q -t 2 -c "claude.notify($(lua_str "$title"), $(lua_str "$subtitle"), $(lua_str "$message"), \
 $(lua_str "$(command -v tmux)"), $(lua_str "$socket"), $(lua_str "$TMUX_PANE"))" >/dev/null 2>&1
 }
 
