@@ -8,17 +8,6 @@
     "additionalDirectories": ["~/code", "~/go/pkg/mod", "~/.m2/repository"]
   },
   "model": "opus",
-  "enabledPlugins": {
-    "postman@claude-plugins-official": true
-  },
-  "modelSettings": {
-    "claude-sonnet-5-5": {
-      "effortLevel": "medium"
-    },
-    "claude-opus-5-5": {
-      "effortLevel": "high"
-    }
-  },
   "hooks": {
     "SessionStart": [
       {
@@ -92,6 +81,17 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "postman@claude-plugins-official": false
+  },
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
   },
   "tui": "fullscreen",
   "theme": "auto",
