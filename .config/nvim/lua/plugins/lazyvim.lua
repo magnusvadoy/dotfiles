@@ -21,6 +21,10 @@ return {
     },
   },
   {
+    "folke/tokyonight.nvim", -- LazyVim's default colorscheme, unused
+    enabled = false,
+  },
+  {
     "akinsho/bufferline.nvim", -- disable bufferline
     enabled = false,
   },
@@ -38,10 +42,6 @@ return {
         markdown = {}, -- TODO: Fix linting rules for markdown
       },
     },
-  },
-  {
-    "lewis6991/gitsigns.nvim",
-    opts = { current_line_blame = true },
   },
   {
     "folke/snacks.nvim",
@@ -75,7 +75,6 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       "mikavilpas/blink-ripgrep.nvim",
-      "copilotlsp-nvim/copilot-lsp",
     },
     opts = {
       keymap = {

@@ -6,6 +6,7 @@ export HOMEBREW_CELLAR=/opt/homebrew/Cellar
 export HOMEBREW_REPOSITORY=/opt/homebrew
 export GOPATH="$HOME/go"
 export EDITOR=nvim
+export PAIMON_WAREHOUSE_PATH="$HOME/code/data"
 
 # Paths ---------------------------------------------------------------------
 typeset -U path PATH
@@ -29,7 +30,7 @@ export PATH
 # History and shell options -------------------------------------------------
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=50000
-export SAVEHIST=10000
+export SAVEHIST=$HISTSIZE
 setopt HIST_IGNORE_ALL_DUPS SHARE_HISTORY HIST_REDUCE_BLANKS
 setopt EXTENDED_HISTORY
 setopt AUTO_CD INTERACTIVE_COMMENTS
@@ -82,13 +83,15 @@ alias lt='eza --tree ${=EZA_PARAMS}'
 alias vim=nvim
 alias vimdiff='nvim -d'
 alias cat='bat --paging=never'
+# Kafka over SASL/SSL; credentials come from ~/.secrets.zsh.
+alias kcat='kcat -X security.protocol=sasl_ssl -X sasl.mechanism=PLAIN -X sasl.username=$KAFKA_SASL_USERNAME -X sasl.password=$KAFKA_SASL_PASSWORD'
 
 alias ...='cd ../..'
 
 # Abbreviations and Git helpers ---------------------------------------------
 source "$HOME/.config/zsh/shortcuts.zsh"
 # Keep shortcuts usable as aliases as well as visibly expanding abbreviations.
-for _shortcut_name _shortcut_command in "${(@kv)FISH_ABBREVIATIONS}"; do
+for _shortcut_name _shortcut_command in "${(@kv)ZSH_ABBREVIATIONS}"; do
     alias "$_shortcut_name=$_shortcut_command"
 done
 unset _shortcut_name _shortcut_command

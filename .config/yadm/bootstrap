@@ -34,14 +34,13 @@ configure() {
   # Setup BAT
   bat cache --build
 
-  # Fish plugins and Tide prompt
-  fish -c 'type -q fisher; or begin; curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; end; fisher update'
-  fish -c "tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Compact --icons='Few icons' --transient=No"
+  # Hammerspoon reads its config from ~/.config/hammerspoon (Claude agent notifications)
+  defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 
-  # Use fish as login shell
-  FISH="$(brew --prefix)/bin/fish"
-  grep -qx "$FISH" /etc/shells || echo "$FISH" | sudo tee -a /etc/shells >/dev/null
-  [ "$SHELL" = "$FISH" ] || chsh -s "$FISH"
+  # Use Homebrew's zsh as login shell
+  ZSH="$(brew --prefix)/bin/zsh"
+  grep -qx "$ZSH" /etc/shells || echo "$ZSH" | sudo tee -a /etc/shells >/dev/null
+  [ "$SHELL" = "$ZSH" ] || chsh -s "$ZSH"
 }
 
 install_brew_and_packages

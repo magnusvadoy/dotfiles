@@ -6,8 +6,9 @@ Files:
   secrets, and the yellow-directory prompt with a vi mode indicator.
 - interactive.zsh: vi bindings, abbreviation widgets, completion menus, pairing,
   and cursor changes.
-- shortcuts.zsh: 149 abbreviations, also registered as aliases.
-- git.zsh: custom Git helpers.
+- shortcuts.zsh: command abbreviations, also registered as aliases.
+- git.zsh: custom Git helpers (gcom, gbage, gbda, gwip, gunwip, git-update-all).
+- tests/: run `tests/test-git.zsh` after changing git.zsh.
 - plugins/: vendored plugins with upstream licenses
 
 Completion paths are configured before `autoload -Uz compinit` and `compinit`.

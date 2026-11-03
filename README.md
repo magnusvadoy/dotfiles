@@ -1,6 +1,6 @@
 # Dotfiles
 
-My dotfiles centered around Neovim, tmux, fish and other CLI tools I use. I use [yadm](https://github.com/yadm-dev/yadm) to manage them.
+My dotfiles centered around Neovim, tmux, zsh and other CLI tools I use. I use [yadm](https://github.com/yadm-dev/yadm) to manage them.
 
 ![Screenshot](screenshot.png)
 

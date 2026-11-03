@@ -1,5 +1,5 @@
-typeset -gA FISH_ABBREVIATIONS
-FISH_ABBREVIATIONS=(
+typeset -gA ZSH_ABBREVIATIONS
+ZSH_ABBREVIATIONS=(
   g git
   gst 'git status'
   gl 'git pull'
@@ -10,6 +10,16 @@ FISH_ABBREVIATIONS=(
   'gca!' 'git commit -v -a --amend'
   gcm 'git commit -m'
   gcam 'git commit -a -m'
+  gb 'git branch'
+  gba 'git branch -av'
+  gm 'git merge'
+  grs 'git restore'
+  grst 'git restore --staged'
+  gsta 'git stash'
+  gstl 'git stash list'
+  gstp 'git stash pop'
+  gstd 'git stash drop'
+  gsts 'git stash show --text'
   k kubectl
   kaf 'kubectl apply -f'
   keti 'kubectl exec -ti'
@@ -138,4 +148,5 @@ FISH_ABBREVIATIONS=(
   kgew 'kubectl get events --watch'
   d docker
   dc 'docker compose'
+  grpc 'grpcurl -plaintext'
 )

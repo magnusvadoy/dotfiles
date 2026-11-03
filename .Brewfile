@@ -1,8 +1,7 @@
+tap "anomalyco/tap"
 tap "shuntaka9576/tap"
-tap "steipete/tap"
 
 # Shell & core
-brew "fish"
 brew "bash"
 brew "zsh"
 brew "git"
@@ -29,10 +28,10 @@ brew "fd"
 brew "bat"
 brew "eza"
 brew "zoxide"
+brew "direnv"
 brew "yazi"
 brew "git-delta"
 brew "lazygit"
-brew "starship"
 brew "mpv"
 brew "imagemagick"
 brew "pngpaste"
@@ -41,6 +40,9 @@ brew "forgit"
 # Languages & build (runtimes are managed by mise)
 brew "mise"
 
+# AI agents
+brew "anomalyco/tap/opencode"
+
 # Data & APIs
 brew "jq"
 brew "yq"
@@ -48,6 +50,12 @@ brew "grpcurl"
 brew "grpcui"
 brew "protobuf"
 brew "kcat"
+
+# Password managers (1Password is the SSH agent and commit signer)
+cask "1password"
+cask "1password-cli"
+cask "bitwarden"
+brew "bitwarden-cli"
 
 # Cloud & Kubernetes
 brew "kubernetes-cli"
@@ -60,10 +68,9 @@ cask "docker-desktop"
 cask "bruno"
 cask "codex"
 cask "agentoast"
-cask "bitwarden"
-cask "bitwarden-cli"
 
 # macOS utilities
+cask "hammerspoon"
 cask "karabiner-elements"
 cask "rectangle"
 cask "scroll-reverser"

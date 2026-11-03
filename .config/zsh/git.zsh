@@ -29,3 +29,22 @@ git-update-all() {
   done
   return $result
 }
+
+# Delete local branches merged into HEAD, plus branches squash-merged into the default
+# branch. Never touches the current branch, the default branch, main, master or develop.
+gbda() {
+  local default_branch current branch merge_base squashed
+  default_branch=$(__git.default_branch) || return
+  current=$(command git branch --show-current)
+  for branch in ${(f)"$(command git for-each-ref refs/heads/ --format='%(refname:short)')"}; do
+    [[ $branch == (main|master|develop|$default_branch|$current) ]] && continue
+    if command git merge-base --is-ancestor "$branch" HEAD; then
+      command git branch -d "$branch"
+      continue
+    fi
+    # A squash merge leaves no ancestry, so compare the branch's combined diff instead.
+    merge_base=$(command git merge-base "$default_branch" "$branch") || continue
+    squashed=$(command git commit-tree "$(command git rev-parse "$branch^{tree}")" -p "$merge_base" -m _) || continue
+    [[ $(command git cherry "$default_branch" "$squashed") == -* ]] && command git branch -D "$branch"
+  done
+}
