@@ -4,8 +4,15 @@
     "pr": ""
   },
   "permissions": {
-    "deny": ["Edit(~/go/pkg/mod/**)", "Edit(~/.m2/repository/**)"],
-    "additionalDirectories": ["~/code", "~/go/pkg/mod", "~/.m2/repository"]
+    "deny": [
+      "Edit(~/go/pkg/mod/**)",
+      "Edit(~/.m2/repository/**)"
+    ],
+    "additionalDirectories": [
+      "~/code",
+      "~/go/pkg/mod",
+      "~/.m2/repository"
+    ]
   },
   "model": "opus",
   "hooks": {
