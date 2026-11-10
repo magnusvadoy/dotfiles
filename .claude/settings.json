@@ -101,6 +101,7 @@
     }
   },
   "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "editorMode": "normal"
 }
