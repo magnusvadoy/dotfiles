@@ -81,17 +81,19 @@
   },
   "lastSelectedAgents": [
     "amp",
-    "antigravity",
     "cline",
     "codex",
     "cursor",
-    "deepagents",
-    "firebender",
+    "droid",
+    "fx",
     "gemini-cli",
     "github-copilot",
-    "kimi-cli",
+    "kilo",
+    "kimi-code-cli",
     "opencode",
+    "pi",
     "warp",
+    "zed",
     "claude-code"
   ]
 }

@@ -1,4 +1,7 @@
 {
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
@@ -90,7 +93,17 @@
     ]
   },
   "enabledPlugins": {
-    "postman@claude-plugins-official": false
+    "postman@claude-plugins-official": false,
+    "caveman@caveman": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
   },
   "modelSettings": {
     "claude-sonnet-5-5": {
@@ -98,10 +111,14 @@
     },
     "claude-opus-5-5": {
       "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "high"
     }
   },
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
-  "editorMode": "normal"
+  "editorMode": "normal",
+  "switchModelsOnFlag": false
 }
