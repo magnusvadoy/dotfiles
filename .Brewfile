@@ -50,6 +50,7 @@ brew "grpcurl"
 brew "grpcui"
 brew "protobuf"
 brew "kcat"
+brew "libpq"
 
 # Password managers (1Password is the SSH agent and commit signer)
 cask "1password"
@@ -81,6 +82,10 @@ cask "obsidian"
 cask "spotify"
 cask "discord"
 cask "telegram"
+cask "microsoft-excel"
+cask "microsoft-teams"
+cask "microsoft-word"
+cask "microsoft-powerpoint"
 
 # Fonts
 cask "font-jetbrains-mono"

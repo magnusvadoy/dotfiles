@@ -95,7 +95,10 @@
   "enabledPlugins": {
     "postman@claude-plugins-official": false,
     "caveman@caveman": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "code-review-anthropics@anthropic-plugin-directory": true,
+    "code-simplifier@anthropic-plugin-directory": true,
+    "claude-code-setup@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
