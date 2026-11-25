@@ -6,7 +6,6 @@ export HOMEBREW_CELLAR=/opt/homebrew/Cellar
 export HOMEBREW_REPOSITORY=/opt/homebrew
 export GOPATH="$HOME/go"
 export EDITOR=nvim
-export PAIMON_WAREHOUSE_PATH="$HOME/code/data"
 
 # Paths ---------------------------------------------------------------------
 typeset -U path PATH
@@ -17,6 +16,7 @@ path=(
     /opt/homebrew/bin
     /opt/homebrew/sbin
     /opt/homebrew/opt/gnu-sed/libexec/gnubin
+    /opt/homebrew/opt/libpq/bin
     /Applications/Ghostty.app/Contents/MacOS
     $path
 )
