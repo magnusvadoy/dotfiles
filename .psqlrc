@@ -9,14 +9,6 @@
 -- Make NULLs visible instead of blank
 \pset null '∅'
 
--- Use nicer table borders
-\pset linestyle unicode
-\pset border 2
-
--- If a statement fails inside a transaction, roll back just that statement
--- instead of the whole transaction (interactive sessions only)
-\set ON_ERROR_ROLLBACK interactive
-
 -- Keep a separate history file for each database, and skip duplicates
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
