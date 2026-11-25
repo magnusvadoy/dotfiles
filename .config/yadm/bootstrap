@@ -34,9 +34,6 @@ configure() {
   # Setup BAT
   bat cache --build
 
-  # Hammerspoon reads its config from ~/.config/hammerspoon (Claude agent notifications)
-  defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-
   # Use Homebrew's zsh as login shell
   ZSH="$(brew --prefix)/bin/zsh"
   grep -qx "$ZSH" /etc/shells || echo "$ZSH" | sudo tee -a /etc/shells >/dev/null

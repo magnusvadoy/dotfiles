@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Shared helpers for the Claude agent tracking scripts. Source, don't execute.
 
 # ~/code/foo/.claude/worktrees/bar -> foo/bar, anything else -> its basename.

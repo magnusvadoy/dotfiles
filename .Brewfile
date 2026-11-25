@@ -39,6 +39,8 @@ brew "forgit"
 
 # Languages & build (runtimes are managed by mise)
 brew "mise"
+brew "shellcheck"
+brew "shfmt"
 
 # AI agents
 brew "anomalyco/tap/opencode"
@@ -71,7 +73,6 @@ cask "codex"
 cask "agentoast"
 
 # macOS utilities
-cask "hammerspoon"
 cask "karabiner-elements"
 cask "rectangle"
 cask "scroll-reverser"

@@ -5,9 +5,8 @@
 #
 # Usage: claude-state.sh <idle|working|waiting|done|clear>   (hook JSON on stdin)
 #
-# Notifications go through Hammerspoon so a click jumps to the pane, falling back to Ghostty.
-# CLAUDE_HS overrides the Hammerspoon CLI path; CLAUDE_NOTIFY_TTY overrides where Ghostty
-# notifications are written (default: the tmux client's tty).
+# Notifications go through Ghostty (OSC 777). CLAUDE_NOTIFY_TTY overrides where they are
+# written (default: the tty of the most recently active tmux client).
 
 set -uo pipefail
 
@@ -41,30 +40,8 @@ pane_in_view() {
 		awk -F'\t' -v s="$session" '$1 == s && $2 ~ /focused/ { found = 1 } END { exit !found }'
 }
 
-# Quote a value as a Lua string literal, dropping control characters.
-lua_str() {
-	local s
-	s=$(LC_ALL=C tr -d '\000-\037' <<<"$1")
-	s=${s//\\/\\\\}
-	printf '"%s"' "${s//\"/\\\"}"
-}
-
-# Native macOS notification through Hammerspoon (~/.config/hammerspoon/init.lua), where
-# clicking it jumps to this pane. Fails when Hammerspoon isn't running.
-notify_hammerspoon() {
-	local title=$1 subtitle=$2 message=$3 socket
-	[[ -x $hs ]] || return 1
-	socket=$(tmux display -p -t "$TMUX_PANE" '#{socket_path}' 2>/dev/null)
-	# Hard limit on top of hs's own timeout, which doesn't cover every case (e.g. a reload),
-	# so a stuck Hammerspoon can never stall the Claude hook.
-	local limit=()
-	command -v timeout >/dev/null && limit=(timeout 3)
-	"${limit[@]}" "$hs" -q -t 2 -c "claude.notify($(lua_str "$title"), $(lua_str "$subtitle"), $(lua_str "$message"), \
-$(lua_str "$(command -v tmux)"), $(lua_str "$socket"), $(lua_str "$TMUX_PANE"))" >/dev/null 2>&1
-}
-
-# Fallback: native notification through Ghostty (OSC 777), written straight to the terminal
-# of the most recently active tmux client. Clicking it only brings Ghostty to the front.
+# Native notification through Ghostty (OSC 777), written straight to the terminal of the
+# most recently active tmux client. Clicking it brings Ghostty to the front.
 notify_ghostty() {
 	local title="$1 · $2" message=$3 tty
 	tty=${CLAUDE_NOTIFY_TTY:-$(tmux list-clients -F $'#{client_activity}\t#{client_tty}' 2>/dev/null |
@@ -82,10 +59,8 @@ notify() {
 	IFS=$'\t' read -r target path < <(tmux display -p -t "$TMUX_PANE" \
 		$'#{session_name}:#{window_index}\t#{pane_current_path}' 2>/dev/null)
 	subtitle="$(project "$path") ($target)"
-	notify_hammerspoon "$title" "$subtitle" "$message" || notify_ghostty "$title" "$subtitle" "$message"
+	notify_ghostty "$title" "$subtitle" "$message"
 }
-
-hs=${CLAUDE_HS:-/Applications/Hammerspoon.app/Contents/Frameworks/hs/hs}
 
 current=$(tmux display -p -t "$TMUX_PANE" '#{@claude_state}' 2>/dev/null)
 if [[ $current != "$state" ]]; then
@@ -106,7 +81,7 @@ waiting)
 	;;
 done)
 	tmux set -pu -t "$TMUX_PANE" @claude_note 2>/dev/null
-	if [[ $current != done ]] && ! pane_in_view; then
+	if [[ $current != "done" ]] && ! pane_in_view; then
 		prompt=$(tmux display -p -t "$TMUX_PANE" '#{@claude_prompt}' 2>/dev/null)
 		notify "✓ Claude finished" "${prompt:-Done}"
 	fi
