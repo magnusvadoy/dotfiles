@@ -2,6 +2,9 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+-- Don't show document symbols (breadcrumbs) in the statusline
+vim.g.trouble_lualine = false
+
 if vim.g.neovide then
   vim.o.guifont = "JetBrains Mono:h16"
 end
